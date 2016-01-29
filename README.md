@@ -3,6 +3,8 @@ Mobile Kids ID Kit
 
 The intent of the app is to help parents keep up to date information on their kids, and to provide parents with relevant information to keep their kids safe and what to do if they can’t find their child.
 
+This app is created in collaboration with [Missing Children Minnesota](http://www.missingchildrenmn.net/).
+
 The majority of missing children are runaways (many of whom are trafficked), followed by parental abductions, with the high profile stranger abductions being least common. There’s another category of “lost, injured, otherwise missing” where the cause of the child being missing is unknown.
 
 I would think that having this information would also be relevant in terms of disaster preparedness, where I’m sure there’s always a scramble for parents to find and reconnect with their kids in the chaos.
