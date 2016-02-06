@@ -1,0 +1,22 @@
+﻿<ion-view view-title="Missing Children Minnesota">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="signIn(username, password)">
+                Sign-In
+            </button>
+            <p class="text-center">
+                <a href="#/forgotpassword">Forgot password</a>
+            </p>
+        </div>
+    </ion-content>
+</ion-view>
