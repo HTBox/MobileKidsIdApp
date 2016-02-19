@@ -1,0 +1,21 @@
+version: 1.0.0.{build}.{branch}
+
+nuget:
+  account_feed: true
+  
+init:
+ - git config --global core.autocrlf true
+ 
+services:
+  - mssql2014
+  
+install:
+ - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
+ 
+before_build:
+ - cmd: npm install
+
+build_script:
+ - cmd: cd  .\src\MCM.KidsIdApp
+ - cmd: .\node_modules\.bin\gulp
+ 

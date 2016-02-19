@@ -10,6 +10,9 @@
     "gulp-rename": "^1.2.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.11.0",
+    "taco-team-build": "latest",
     "bower": "^1.3.3",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
