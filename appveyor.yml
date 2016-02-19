@@ -4,7 +4,7 @@ nuget:
   account_feed: true
   
 environment:
-    CORDOVA_CACHE: C:\projects\mobilekidsidapp\cordova_cache
+    CORDOVA_CACHE: C:\projects\mobilekidsidapp
     ANDROID_HOME: C:\Program Files (x86)\Android\android-sdk
     JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0_55
 
