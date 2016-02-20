@@ -1,28 +1,34 @@
-﻿<ion-view view-title="Missing Children Minnesota">
-    <ion-content>
-        <div class="row">
-            <img src="http://placehold.it/125x150" />
-            <h1 class="col col-offset-10">
+﻿<ion-view view-title="">
+    <ion-content class="login-background">
+        <div class="row padding">
+            <img src="img/login-header-img.png" />
+            <h1 class="col col-offset-10 login-title">
                 Missing<br>
                 Children<br>
                 Minnesota
-           </h1>
+            </h1>
 
         </div>
-        <div class="row">
-            <div class="list col-90 padding">
-                <button class="button button-block button-royal" ng-click="signIn('')">
-                    <i class="icon ion-upload"></i>
-                    Login with Hotmail
-                </button>
-                <button class="button button-block button-royal" ng-click="signIn('google')">
-                    <i class="icon ion-upload"></i>
-                    Login with Google
-                </button>
-                <button class="button button-block button-royal" ng-click="signIn('')">
-                    <i class="icon ion-upload"></i>
-                    Login with Twitter
-                </button>
-            </div>
-        </div>
+        <div class="margin-top-10">
+            <div class="list col-offset-10 col-80 padding">
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('')">
+                        <i class="icon ion-social-windows padding-right"></i>
+                        Login with Hotmail
+                    </button>
+                </div>
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('google')">
+                        <i class="icon ion-social-google padding-right"></i>
+                        Login with Google
+                    </button>
+                </div>
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('')">
+                        <i class="icon ion-social-twitter padding-right"></i>
+                        Login with Twitter
+                    </button>
+                </div>
+                </div>
+        </div> 
     </ion-content>
