@@ -42,5 +42,4 @@
   <plugin name="cordova-plugin-camera" version="2.1.0" />
   <preference name="android-maxSdkVersion" value="15" />
   <preference name="android-targetSdkVersion" value="23" />
-  <plugin name="com.microsoft.azure-mobile-services" version="1.2.9" />
 </widget>
