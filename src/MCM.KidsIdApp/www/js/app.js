@@ -10,7 +10,6 @@ app.controller('loginController', function ($scope, $state) {
         var mobileService = new WindowsAzure.MobileServiceClient(
             "http://mobilekidsidapp.azurewebsites.net"
         );
-        console.log(mobileService);
         mobileService.login(service).done(
             function success(user) {
                 console.info("UserInfo: ", user);
