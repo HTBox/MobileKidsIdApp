@@ -22,11 +22,38 @@ app.controller('loginController', function ($scope, $state) {
 });
 
 app.controller('landingController', function ($scope, $state) {
-    // Setup scope for landing page
+  $scope.showinstructionindex = function () {
+    $state.go('instructionindex');
+  }
+  $scope.showchildprofilelist = function () {
+    $state.go('childprofilelist');
+  }
+  $scope.showabout = function () {
+    $state.go('about');
+  }
+  $scope.showsettings = function () {
+    $state.go('settings');
+  }
 });
 
 app.controller('forgotPasswordController', function ($scope, $state) {
-    // Setup scope for landing page
+    // Setup scope for forgot password page
+});
+
+app.controller('childprofilelistController', function ($scope, $state) {
+  // Setup scope for child profile list page
+});
+
+app.controller('instructionindexController', function ($scope, $state) {
+  // Setup scope for instruction index page
+});
+
+app.controller('settingsController', function ($scope, $state) {
+  // Setup scope for settings page
+});
+
+app.controller('aboutController', function ($scope, $state) {
+  // Setup scope for about page
 });
 
 app.controller('myChildrenController', function ($scope) {
@@ -63,6 +90,30 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/mychildren',
         templateUrl: 'templates/mychildren.html',
         controller: 'myChildrenController'
+    })
+
+    .state('instructionindex', {
+      url: '/instructionindex',
+      templateUrl: 'templates/instructionindex.html',
+      controller: 'instructionindexController'
+    })
+
+    .state('childprofilelist', {
+      url: '/childprofilelist',
+      templateUrl: 'templates/childprofilelist.html',
+      controller: 'childprofilelistController'
+    })
+
+    .state('settings', {
+      url: '/settings',
+      templateUrl: 'templates/settingspage.html',
+      controller: 'settingsController'
+    })
+
+    .state('about', {
+      url: '/about',
+      templateUrl: 'templates/aboutpage.html',
+      controller: 'aboutController'
     })
 
     // if none of the above states are matched, use this as the fallback

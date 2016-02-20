@@ -1,11 +1,10 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "MCM.KidsIdApp", "MCM.KidsIdApp.jsproj", "{7FC82490-3FFE-47BE-B5F6-F52ED8B78E38}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "MCM.KidsIdApp", "MCM.KidsIdApp\MCM.KidsIdApp.jsproj", "{7FC82490-3FFE-47BE-B5F6-F52ED8B78E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCM.KidsIdApp.MobileApi", "..\MCM.KidsIdApp.MobileApi\MCM.KidsIdApp.MobileApi.csproj", "{37FF08DC-36E5-41F6-B8C3-0BDBFDBA90A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCM.KidsIdApp.MobileApi", "MCM.KidsIdApp.MobileApi\MCM.KidsIdApp.MobileApi.csproj", "{37FF08DC-36E5-41F6-B8C3-0BDBFDBA90A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,3 +119,4 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
+
