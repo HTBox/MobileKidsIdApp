@@ -5,9 +5,19 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('mcmapp', ['ionic'])
 app.controller('loginController', function ($scope, $state) {
-    $scope.signIn = function (username, password) {
-        // Do some login logic here.
-        $state.go('landing');
+    $scope.signIn = function (service) {
+
+        var mobileService = new WindowsAzure.MobileServiceClient(
+            "http://mobilekidsidapp.azurewebsites.net"
+        );
+        console.log(mobileService);
+        mobileService.login(service).done(
+            function success(user) {
+                console.info('User ' + user + ' has logged in');
+                $state.go('landing');
+            }, function error(error) {
+                console.error('Failed to login: ', error);
+            });
     }
 });
 
@@ -51,8 +61,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 app.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+    $ionicPlatform.ready(function () {
+
+        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
         if (cordova.plugins.Keyboard.hideKeyboardAccessoryBar) {
