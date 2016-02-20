@@ -43,4 +43,5 @@
   <preference name="android-maxSdkVersion" value="15" />
   <preference name="android-targetSdkVersion" value="23" />
   <plugin name="cordova-plugin-ms-azure-mobile-apps" version="2.0.0-beta3" />
+  <plugin name="ionic-plugin-keyboard" version="1.0.8" />
 </widget>
