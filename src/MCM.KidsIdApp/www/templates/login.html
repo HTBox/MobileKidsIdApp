@@ -1,22 +1,35 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
-    <ion-content>
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Username</span>
-                <input type="text" ng-model="username">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" ng-model="password">
-            </label>
+    <ion-content class="login-background">
+        <div class="row padding">
+            <img src="img/login-header-img.png" />
+            <h1 class="col col-offset-10 login-title">
+                Missing<br>
+                Children<br>
+                Minnesota
+            </h1>
+
         </div>
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="signIn(username, password)">
-                Sign-In
-            </button>
-            <p class="text-center">
-                <a href="#/forgotpassword">Forgot password</a>
-            </p>
-        </div>
+        <div class="margin-top-10">
+            <div class="list col-offset-10 col-80 padding">
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('facebook')">
+                        <i class="icon ion-social-facebook padding-right"></i>
+                        Login with Facebook
+                    </button>
+                </div>
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('google')">
+                        <i class="icon ion-social-google padding-right"></i>
+                        Login with Google
+                    </button>
+                </div>
+                <div class="padding">
+                    <button class="button button-block button-royal" ng-click="signIn('twitter')">
+                        <i class="icon ion-social-twitter padding-right"></i>
+                        Login with Twitter
+                    </button>
+                </div>
+                </div>
+        </div> 
     </ion-content>
 </ion-view>
