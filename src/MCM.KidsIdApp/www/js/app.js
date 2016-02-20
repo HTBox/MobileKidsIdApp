@@ -14,7 +14,7 @@ app.controller('loginController', function ($scope, $state) {
         mobileService.login(service).done(
             function success(user) {
                 console.info("UserInfo: ", user);
-                $state.go('landing');
+                $state.go('myChildren');
             }, function error(error) {
                 console.error('Failed to login: ', error);
             });
@@ -27,6 +27,10 @@ app.controller('landingController', function ($scope, $state) {
 
 app.controller('forgotPasswordController', function ($scope, $state) {
     // Setup scope for landing page
+});
+
+app.controller('myChildrenController', function ($scope) {
+    //My children page
 });
 
 app.config(function ($stateProvider, $urlRouterProvider) {
@@ -53,6 +57,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
+    })
+
+    .state('myChildren', {
+        url: '/mychildren',
+        templateUrl: 'templates/mychildren.html',
+        controller: 'myChildrenController'
     })
 
     // if none of the above states are matched, use this as the fallback
