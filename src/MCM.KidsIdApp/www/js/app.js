@@ -1,3 +1,5 @@
+///<reference path="../ts/ui/StaticPage.ts"/>
+
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -20,7 +22,7 @@ app.controller('forgotPasswordController', function ($scope, $state) {
 });
 
 app.controller('staticPage', MCM.StaticPageCtrl)
-angular.module('mcmapp').directive('staticPage', MCM.StaticPageDir)
+app.directive('staticPage', MCM.StaticPageDir)
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
