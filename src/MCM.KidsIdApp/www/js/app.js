@@ -12,7 +12,6 @@ app.controller('loginController', function ($scope, $state) {
         );
         mobileService.login(service).done(
             function success(user) {
-                console.info("UserInfo: ", user);
                 $state.go('myChildren');
             }, function error(error) {
                 console.error('Failed to login: ', error);
