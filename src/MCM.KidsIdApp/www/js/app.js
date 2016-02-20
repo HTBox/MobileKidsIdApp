@@ -13,8 +13,8 @@ app.controller('loginController', function ($scope, $state) {
         console.log(mobileService);
         mobileService.login(service).done(
             function success(user) {
-                console.info('User ' + user + ' has logged in');
-                $state.go('landing');
+                console.info("UserInfo: ", user);
+                $state.go('myChildren');
             }, function error(error) {
                 console.error('Failed to login: ', error);
             });
@@ -56,6 +56,10 @@ app.controller('aboutController', function ($scope, $state) {
   // Setup scope for about page
 });
 
+app.controller('myChildrenController', function ($scope) {
+    //My children page
+});
+
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -80,6 +84,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
+    })
+
+    .state('myChildren', {
+        url: '/mychildren',
+        templateUrl: 'templates/mychildren.html',
+        controller: 'myChildrenController'
     })
 
     .state('instructionindex', {
