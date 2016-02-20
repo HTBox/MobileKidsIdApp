@@ -14,7 +14,12 @@ app.controller('loginController', function ($scope, $state) {
 });
 
 app.controller('landingController', function ($scope, $state) {
-    // Setup scope for landing page
+  $scope.showinstructionindex = function () {
+    $state.go('instructionindex');
+  }
+  $scope.showchildprofilelist = function () {
+    $state.go('childprofilelist');
+  }
 });
 
 app.controller('forgotPasswordController', function ($scope, $state) {
@@ -23,6 +28,13 @@ app.controller('forgotPasswordController', function ($scope, $state) {
 
 app.controller('staticPage', MCM.StaticPageCtrl)
 app.directive('staticPage', MCM.StaticPageDir)
+app.controller('childprofilelistController', function ($scope, $state) {
+  // Setup scope for landing page
+});
+
+app.controller('instructionindexController', function ($scope, $state) {
+  // Setup scope for landing page
+});
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -48,6 +60,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
+    })
+
+    .state('instructionindex', {
+      url: '/instructionindex',
+      templateUrl: 'templates/instructionindex.html',
+      controller: 'instructionindexController'
+    })
+
+    .state('childprofilelist', {
+      url: '/childprofilelist',
+      templateUrl: 'templates/childprofilelist.html',
+      controller: 'childprofilelistController'
     })
 
     // if none of the above states are matched, use this as the fallback
