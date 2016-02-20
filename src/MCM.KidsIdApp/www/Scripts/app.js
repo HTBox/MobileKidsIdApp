@@ -5,17 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('mcmapp', ['ionic'])
 app.controller('loginController', function ($scope, $state) {
-    $scope.signIn = function (service) {
-
-        var mobileService = new WindowsAzure.MobileServiceClient(
-            "http://mobilekidsidapp.azurewebsites.net"
-        );
-        mobileService.login(service).done(
-            function success(user) {
-                $state.go('myChildren');
-            }, function error(error) {
-                console.error('Failed to login: ', error);
-            });
+    $scope.signIn = function (username, password) {
+        // Do some login logic here.
+        $state.go('landing');
     }
 });
 
@@ -54,10 +46,6 @@ app.controller('aboutController', function ($scope, $state) {
   // Setup scope for about page
 });
 
-app.controller('myChildrenController', function ($scope) {
-    //My children page
-});
-
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -82,12 +70,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
-    })
-
-    .state('myChildren', {
-        url: '/mychildren',
-        templateUrl: 'templates/mychildren.html',
-        controller: 'myChildrenController'
     })
 
     .state('instructionindex', {
@@ -120,9 +102,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 app.run(function($ionicPlatform) {
-    $ionicPlatform.ready(function () {
-
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+  $ionicPlatform.ready(function() {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
         if (cordova.plugins.Keyboard.hideKeyboardAccessoryBar) {
