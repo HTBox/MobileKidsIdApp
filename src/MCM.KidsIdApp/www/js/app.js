@@ -13,7 +13,7 @@ app.controller('loginController', function ($scope, $state) {
         console.log(mobileService);
         mobileService.login(service).done(
             function success(user) {
-                console.info('User ' + user + ' has logged in');
+                console.info("UserInfo: ", user);
                 $state.go('landing');
             }, function error(error) {
                 console.error('Failed to login: ', error);
