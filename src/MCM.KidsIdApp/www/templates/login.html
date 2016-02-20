@@ -1,23 +1,29 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Username</span>
-                <input type="text" ng-model="username">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" ng-model="password">
-            </label>
+        <div class="row">
+            <img src="http://placehold.it/125x150" />
+            <h1 class="col col-offset-10">
+                Missing<br>
+                Children<br>
+                Minnesota
+           </h1>
+
         </div>
-      blaljkfdasdkjfalsdkjf;afsljkd;ad;lskjfadsfjkl;fd;klj
-        <div class="padding">
-            <button class="button button-block button-positive" ng-click="signIn(username, password)">
-                Sign-In
-            </button>
-            <p class="text-center">
-                <a href="#/forgotpassword">Forgot password</a>
-            </p>
+        <div class="row">
+            <div class="list col-90 padding">
+                <button class="button button-block button-royal" ng-click="signIn(username, password)">
+                    <i class="icon ion-upload"></i>
+                    Login with Hotmail
+                </button>
+                <button class="button button-block button-royal" ng-click="signIn(username, password)">
+                    <i class="icon ion-upload"></i>
+                    Login with Google
+                </button>
+                <button class="button button-block button-royal" ng-click="signIn(username, password)">
+                    <i class="icon ion-upload"></i>
+                    Login with Twitter
+                </button>
+            </div>
         </div>
     </ion-content>
 </ion-view>
