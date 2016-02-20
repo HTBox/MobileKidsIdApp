@@ -6,10 +6,14 @@ var cordovaBuild = require("taco-team-build");
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+//var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+process.env["ANDROID_PWD"] = "T0ast3r5!"
+process.env["P12_PWD"] = "@w3some5auce"
+process.env["ENC_PWD"] = "@w3some5auce"
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -19,7 +23,13 @@ var winPlatforms = ["android", "windows", "wp8"],
     linuxPlatforms = ["android"],
     osxPlatforms = ["ios"],
     buildArgs = {
-        android: ["--release","--device","--gradleArg=--no-daemon"],                // Warning: Omit the extra "--" when referencing platform
+        android: ["--release",
+                  "--device",
+                  "--gradleArg=--no-daemon",
+                  "--keystore=release.keystore",
+                  "--alias=droid-mkid", 
+                  "--storePassword=" + process.env["ANDROID_PWD"], 
+                  "--password=" + process.env["ANDROID_PWD"]], 
         ios: ["--release", "--device"],                                             // specific preferences like "-- --ant" for Android
         windows: ["--release", "--device"],                                         // or "-- --win" for Windows. You may also encounter a
         wp8: ["--release", "--device"]                                              // "TypeError" after adding a flag Android doesn't recognize
@@ -136,4 +146,12 @@ gulp.task("sim-ios", ["scripts"], function (callback) {
     cordovaBuild.setupCordova().done(function (cordova) {
         cordova.emulate({ platforms: ["ios"], options: ["--debug"] }, callback);
     });
+});
+
+gulp.task("install-ios-certs", function () {
+    sh.exec("sh ios-install-certs.sh");
+});
+
+gulp.task("decrypt-android", function () {
+    sh.exec("openssl des3 -d -in release.keystore.enc -out release.keystore -pass pass:" + process.env["ENC_PWD"]);
 });
