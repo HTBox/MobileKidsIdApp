@@ -30,8 +30,8 @@ class ChildProfileListController implements IControllerNavigation {
         return this._navigationLinks;
     }
 
-    public NavigateTo($controller: string) {
-        this._state.go($controller);
+    public NavigateTo(pStateName: string) {
+        this._state.go(pStateName);
     }
 }
 

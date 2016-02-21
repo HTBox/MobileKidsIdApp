@@ -16,6 +16,6 @@ interface IControllerNavigation {
     NavigateToPreviousView(): void;
     NavigateToHomeScreen(): void;
     NavigationLinks(): Array<NavigationLink>;
-    NavigateTo($controller: string): void;
+    NavigateTo(pStateName: string): void;
 }
 

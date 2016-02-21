@@ -1,8 +1,7 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../models/models.ts" />
-/// <reference path="IControllerNavigation.ts" />
 
-class MyChildrenController implements IControllerNavigation {
+class InstructionIndexController implements IControllerNavigation {
     private _state;
     private _scope;
     private _navigationLinks: Array<NavigationLink>;
@@ -13,7 +12,6 @@ class MyChildrenController implements IControllerNavigation {
 
         this._navigationLinks =
             [
-                new NavigationLink("addChildController","Add a Child")
             ];
     }
 
@@ -36,4 +34,4 @@ class MyChildrenController implements IControllerNavigation {
     }
 }
 
-angular.module('mcmapp').controller('myChildrenController', MyChildrenController);
+angular.module('mcmapp').controller('instructionIndexController', InstructionIndexController);

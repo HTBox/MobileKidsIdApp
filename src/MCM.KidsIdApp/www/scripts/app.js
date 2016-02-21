@@ -90,16 +90,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'myChildrenController'
     })
 
-    .state('instructionindex', {
+    .state('instructionIndex', {
       url: '/instructionindex',
       templateUrl: 'templates/instructionindex.html',
-      controller: 'instructionindexController'
+      controller: 'instructionIndexController'
     })
 
-    .state('childprofilelist', {
+    .state('childProfileList', {
       url: '/childprofilelist',
       templateUrl: 'templates/childprofilelist.html',
-      controller: 'childprofilelistController'
+      controller: 'childProfileListController'
     })
 
     .state('settings', {
