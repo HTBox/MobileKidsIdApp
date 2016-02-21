@@ -6,7 +6,7 @@ Android requires a keystore called release.keystore to be generated and stored i
 ###Configuring the build
 There are two environment variables that need to be set for the build to succeed.
 
-- ANDROID_PWD - Password to the Java keystore and alias the certificate.
+- ANDROID_PWD - Password to the Java keystore and alias of the certificate.
 - ENC_PWD - Password to unencrypt the file.
 
 **These should be filtered from CI output**. Do not add them as normal environment variables and be sure to validate they are also filtered out of the log output.
@@ -18,7 +18,6 @@ gulp build-android-release
 ```
 
 **NOTE:** You may need to remove the android platform to get a debug build to work again after doing a release build.  You can do this by installing the Cordova CLI (npm install -g cordova) and typing "cordova platform remove android"
-
 
 ###Generating the offical Android signing certificates
 Currently there is a self-signed bogus one in the repo. See **[Android documentation](http://developer.android.com/tools/publishing/app-signing.html)** for details on generating an offical one. Use **droid-mkid** as the key alias when doing so.
@@ -79,3 +78,4 @@ Next:
 2. If you updated the certificate, be sure **iosCodeSignIdentityRelease** in gulpfile.js has the correct signing identity configured.
 3. Take note of the P12 and encryption passwords you used and update the environment variables above accordingly.
 
+Finall, **if you update the name of the app (contents of the name element in config.xml), be sure to update appName** in gulpfile.js since this is used for HockeyApp deployment.
