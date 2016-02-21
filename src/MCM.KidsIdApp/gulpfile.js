@@ -14,8 +14,15 @@ var sh = require('shelljs');
 
 var jasmine = require('gulp-jasmine');
 
+var appName = "Kids Id App";
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  ipaPath: "./platforms/ios/build/device/" + appName + ".ipa",
+  dsymPath: "./platforms/ios/build/device/" + appName + ".app.dSYM",
+  releaseApkPath: "./platforms/android/build/outputs/apk/android-release.apk",
+  debugApkPath: "./platforms/android/build/outputs/apk/android-debug.apk",
+  appPackagesPath: "./platforms/windows/AppPackages/**/*",
+  typeScriptSources: "www/scripts/**/*.ts"
 };
 
 // Signing releated vars
@@ -27,11 +34,8 @@ var androidKeystorePwd = process.env["ANDROID_PWD"],
 
 // HockeyApp vars
 var hockeyappApiToken = process.env["HOCKEYAPP_API_TOKEN"],
-    hockeyappAppIdiOS = "", 
-    hockeyappAppIdAndroid = "",
-    ipaPath = "./platforms/ios/release/device/Kids Id App.ipa",
-    dsymPath = "./platforms/ios/release/device/Kids Id App.dSYM",
-    apkPath = "./platforms/android/build/outputs/apk/android-release.apk";
+    hockeyappAppIdiOS = "8411945a0f2c48b4bc5184304ef110a2", 
+    hockeyappAppIdAndroid = "278a0d6194964ec686a358590c0afa14";
 
 // build settings
 var winPlatforms = ["android", "windows"],
@@ -62,9 +66,13 @@ var winPlatforms = ["android", "windows"],
 
 gulp.task('default', ['sass', 'build', 'spec'], function() {
     // Copy results to bin folder
-    gulp.src("platforms/android/build/outputs/apk/*.apk").pipe(gulp.dest("bin/Android/Debug"));         // Gradle build
-    gulp.src("platforms/windows/AppPackages/**/*").pipe(gulp.dest("bin/Windows/Debug/AppPackages"));
-    gulp.src("platforms/ios/debug/device/*.ipa").pipe(gulp.dest("bin/iOS/Debug"));
+    // Android
+    gulp.src(paths.debugApkPath).pipe(gulp.dest("./bin/Android/Debug")); 
+    // iOS
+    gulp.src(paths.ipaPath).pipe(gulp.dest("./bin/iOS/Debug"));
+    gulp.src(paths.dsymPath).pipe(gulp.dest("./bin/iOS/Debug"));
+    // Windows
+    gulp.src(paths.appPackagesPath).pipe(gulp.dest("./bin/Windows/Debug/AppPackages"));
 });
 
 gulp.task('sass', function(done) {
@@ -109,12 +117,12 @@ gulp.task("scripts", function () {
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("www/scripts/**/*.ts")
+        gulp.src(paths.typeScriptSources)
             .pipe(ts(ts.createProject(tsconfigPath)))
             .pipe(gulp.dest("."));
     } else {
         // Otherwise use these default settings
-         gulp.src("www/scripts/**/*.ts")
+         gulp.src(paths.typeScriptSources)
             .pipe(ts({
                 noImplicitAny: false,
                 noEmitOnError: true,
@@ -156,7 +164,7 @@ gulp.task("build-android-release", ["sass","scripts"], function() {
     return cordovaBuild.buildProject("android", buildArgsRelease)
             .then(function() { 
                 sh.rm("release.keystore"); 
-                gulp.src("./platforms/android/build/outputs/apk/*.apk").pipe(gulp.dest("./bin/Android/Release"));
+                gulp.src(paths.releaseApkPath).pipe(gulp.dest("./bin/Android/Release"));
             });
 });
 
@@ -168,7 +176,8 @@ gulp.task("build-ios-release", ["sass","scripts"], function() {
     sh.exec("sh ios-install-certs.sh");
     return cordovaBuild.buildProject("ios", buildArgsRelease)
         .then(function() {
-            gulp.src("./platforms/ios/release/device/*.ipa").pipe(gulp.dest("./bin/iOS/Release"));
+            gulp.src(paths.ipaPath).pipe(gulp.dest("./bin/iOS/Release"));
+            gulp.src(paths.dsymPath).pipe(gulp.dest("./bin/iOS/Release"));
         });
 });
 
@@ -183,7 +192,7 @@ gulp.task("hockeyapp-android-release", function() {
         process.exit(1);
     }
     // Upload - See http://support.hockeyapp.net/kb/api/api-apps    
-    sh.exec(curl + '-F "status=2" -F "notify=0" -F "ipa=@' + apkPath + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdAndroid + '/upload');
+    sh.exec(curl + ' -F "status=2" -F "notify=0" -F "ipa=@' + paths.apkPath + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdAndroid + '/app_versions/upload');
 });
 
 gulp.task("hockeyapp-ios-release", function() {
@@ -192,12 +201,15 @@ gulp.task("hockeyapp-ios-release", function() {
         process.exit(1);
     }
     var curl = sh.which("curl");
-    var tar = sh.which("tar");
-    var targz = "hockey-dsym-upload.tar.gz";
-    // Compress dsym
-    sh.exec(tar + 'tar -cvzf ' + targz + ' ' + dsymPath);    
+    var zip = sh.which("zip");
+    var zipfile = "hockey-dsym-upload.dsym.zip";
+    // Compress dsym - Required for upload if you install cordova-plugin-hockeyapp
+    var zipcmd=zip + ' -r "' + zipfile + '" "' + paths.dsymPath + '"';
+    sh.exec(zipcmd);    
     // Upload - See http://support.hockeyapp.net/kb/api/api-apps
-    sh.exec(curl + '-F "status=2" -F "notify=0" -F "ipa=@' + ipaPath + '" -F "dsym=@' + targz + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdiOS + '/upload');
+    var curlString = curl + ' -F "status=2" -F "notify=0" -F "ipa=@' + paths.ipaPath + '" -F "dsym=@' + zipfile + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdiOS + '/app_versions/upload';
+    sh.exec(curlString);
+    sh.rm(zipfile);
 });
 
 
