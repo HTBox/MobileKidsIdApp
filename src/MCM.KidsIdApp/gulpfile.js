@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='sass' />
+/// <binding BeforeBuild='sass, default' />
 "use strict";
 
 var gulp = require('gulp');
