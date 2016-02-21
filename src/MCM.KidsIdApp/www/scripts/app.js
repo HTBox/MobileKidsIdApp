@@ -6,16 +6,20 @@
 var app = angular.module('mcmapp', ['ionic'])
 app.controller('loginController', function ($scope, $state) {
     $scope.signIn = function (service) {
-
-        var mobileService = new WindowsAzure.MobileServiceClient(
-            "http://mobilekidsidapp.azurewebsites.net"
-        );
-        mobileService.login(service).done(
-            function success(user) {
-                $state.go('landing');
-            }, function error(error) {
-                console.error('Failed to login: ', error);
-            });
+        if (service == 'test') {
+            $state.go('landing');
+        }
+        else {
+            var mobileService = new WindowsAzure.MobileServiceClient(
+                "http://mobilekidsidapp.azurewebsites.net"
+            );
+            mobileService.login(service).done(
+                function success(user) {
+                    $state.go('landing');
+                }, function error(error) {
+                    console.error('Failed to login: ', error);
+                });
+        }
     }
 });
 
