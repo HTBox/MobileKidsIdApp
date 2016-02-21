@@ -1,5 +1,8 @@
 {
     "android": {
+        "debug": {
+            "keystore": ""
+        },
         "release": {
             "keystore": "release.keystore",
             "alias": "droid-mkid"
