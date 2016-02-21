@@ -22,11 +22,14 @@ Finally, **if you update widget/@id in config.xml** you will need to edit the ID
 
     Android:
     ```
-    gulp build-android-release hockeyapp-android-release
+    gulp build-android-release 
+    gulp hockeyapp-android-release
     ```
-
+    Do not add "default" as this will cause a race condition.
+    
     iOS:
     ```
-    gulp build-ios-release hockeyapp-ios-release
+    gulp build-ios-release 
+    gulp hockeyapp-ios-release
     ```
-    **NOTE:** The iOS build requires a Mac. **Appveryor does not have Macs today.** However, you can kick off the build manually this same way as needed.    
+    Again, do not add "default" as this will cause a race condition. **NOTE:** The iOS build requires a Mac. **Appveryor does not have Macs today.** However, you can kick off the build manually this same way as needed.    
