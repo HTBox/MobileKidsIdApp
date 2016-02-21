@@ -1,1 +1,16 @@
-/* Empty. Add your own CSS if you like */
+.login-title {
+    color: #fff;
+    font-family:'Times New Roman', Times, serif;
+    text-shadow: 1px 1px #000;
+}
+
+.login-background {
+    background-image: url("../img/bckgrnd-placeholder.png");
+    background-size: cover;
+    background-repeat:no-repeat;
+}
+
+.margin-top-10 {
+    margin-top: 10%;
+}
+
