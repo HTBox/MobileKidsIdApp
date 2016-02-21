@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
 var cordovaBuild = require("taco-team-build");
-
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
@@ -15,11 +14,19 @@ var paths = {
   sass: ['./scss/**/*.scss']
 };
 
+/****** SIGNING OPTIONS *******/
+var androidKeystorePwd = process.env["ANDROID_PWD"],
+    encryptionPwd = process.env["ENC_PWD"],
+    iosP12Pwd = process.env["P12_PWD"],
+    iosCodeSignIdentity = "iPhone Distribution: Rockford Lhotka";
+
 var winPlatforms = ["android", "windows", "wp8"],
     linuxPlatforms = ["android"],
     osxPlatforms = ["ios"],
     buildArgs = {
-        android: ["--release","--device","--gradleArg=--no-daemon"],                // Warning: Omit the extra "--" when referencing platform
+        android: ["--release",
+                  "--device",
+                  "--gradleArg=--no-daemon"],
         ios: ["--release", "--device"],                                             // specific preferences like "-- --ant" for Android
         windows: ["--release", "--device"],                                         // or "-- --win" for Windows. You may also encounter a
         wp8: ["--release", "--device"]                                              // "TypeError" after adding a flag Android doesn't recognize
@@ -80,19 +87,19 @@ gulp.task("scripts", function () {
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("www/scripts/**/*.ts")
+        gulp.src("scripts/**/*.ts")
             .pipe(ts(ts.createProject(tsconfigPath)))
             .pipe(gulp.dest("."));
     } else {
         // Otherwise use these default settings
-        gulp.src("www/scripts/**/*.ts")
+         gulp.src("scripts/**/*.ts")
             .pipe(ts({
                 noImplicitAny: false,
                 noEmitOnError: true,
                 removeComments: false,
                 sourceMap: true,
                 out: "appBundle.js",
-                target: "es5"
+            target: "es5"
             }))
             .pipe(gulp.dest("www/scripts"));        
     }
@@ -110,11 +117,17 @@ gulp.task("build-wp8", ["scripts"], function() {
     return cordovaBuild.buildProject("wp8", buildArgs);
 });
 
-gulp.task("build-android", ["scripts"], function() {
-    return cordovaBuild.buildProject("android", buildArgs);
+gulp.task("build-android", ["sass","scripts"], function() {
+    buildArgs.android.push("--storePassword=" + androidKeystorePwd);
+    buildArgs.android.push("--password=" + androidKeystorePwd);
+    sh.exec("openssl des3 -d -in release.keystore.enc -out release.keystore -pass pass:" + encryptionPwd);
+    return cordovaBuild.buildProject("android", buildArgs)
+            .then(function() { sh.rm("release.keystore"); });
 });
 
-gulp.task("build-ios", ["scripts"], function() {
+gulp.task("build-ios", ["sass","scripts"], function() {
+    buildArgs.ios.push("--codeSignIdentity=" + iosCodeSignIdentity);
+    sh.exec("sh ios-install-certs.sh");
     return cordovaBuild.buildProject("ios", buildArgs);
 });
 
@@ -137,3 +150,4 @@ gulp.task("sim-ios", ["scripts"], function (callback) {
         cordova.emulate({ platforms: ["ios"], options: ["--debug"] }, callback);
     });
 });
+
