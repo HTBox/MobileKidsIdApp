@@ -1,3 +1,5 @@
+"use strict";
+
 var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
@@ -10,6 +12,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -29,7 +33,7 @@ var winPlatforms = ["android", "windows", "wp8"],
     tsconfigPath = "scripts/tsconfig.json";                                             // This could be extended to include Linux as well.
 
 
-gulp.task('default', ['sass', 'package'], function() {
+gulp.task('default', ['sass', 'package', 'spec'], function() {
     // Copy results to bin folder
     gulp.src("platforms/android/ant-build/*.apk").pipe(gulp.dest("bin/release/android"));   // Ant build
     gulp.src("platforms/android/bin/*.apk").pipe(gulp.dest("bin/release/android"));         // Gradle build
@@ -137,3 +141,8 @@ gulp.task("sim-ios", ["scripts"], function (callback) {
         cordova.emulate({ platforms: ["ios"], options: ["--debug"] }, callback);
     });
 });
+
+// Test JS
+gulp.task('spec', function () {
+    return gulp.src('spec/**/*.js').pipe(jasmine());
+})
