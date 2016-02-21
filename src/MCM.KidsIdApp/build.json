@@ -1,0 +1,8 @@
+{
+    "android": {
+        "release": {
+            "keystore": "release.keystore",
+            "alias": "droid-mkid"
+        }
+    }
+}
