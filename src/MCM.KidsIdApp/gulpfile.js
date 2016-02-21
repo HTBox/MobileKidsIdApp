@@ -1,3 +1,5 @@
+"use strict";
+
 var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
@@ -10,6 +12,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -29,7 +33,7 @@ var winPlatforms = ["android", "windows", "wp8"],
     tsconfigPath = "scripts/tsconfig.json";                                             // This could be extended to include Linux as well.
 
 
-gulp.task('default', ['sass', 'package'], function() {
+gulp.task('default', ['sass', 'package', 'spec'], function() {
     // Copy results to bin folder
     gulp.src("platforms/android/ant-build/*.apk").pipe(gulp.dest("bin/release/android"));   // Ant build
     gulp.src("platforms/android/bin/*.apk").pipe(gulp.dest("bin/release/android"));         // Gradle build
@@ -80,19 +84,19 @@ gulp.task("scripts", function () {
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("scripts/**/*.ts")
+        gulp.src("www/scripts/**/*.ts")
             .pipe(ts(ts.createProject(tsconfigPath)))
             .pipe(gulp.dest("."));
     } else {
         // Otherwise use these default settings
-         gulp.src("scripts/**/*.ts")
+        gulp.src("www/scripts/**/*.ts")
             .pipe(ts({
                 noImplicitAny: false,
                 noEmitOnError: true,
                 removeComments: false,
                 sourceMap: true,
                 out: "appBundle.js",
-            target: "es5"
+                target: "es5"
             }))
             .pipe(gulp.dest("www/scripts"));        
     }
@@ -137,3 +141,8 @@ gulp.task("sim-ios", ["scripts"], function (callback) {
         cordova.emulate({ platforms: ["ios"], options: ["--debug"] }, callback);
     });
 });
+
+// Test JS
+gulp.task('spec', function () {
+    return gulp.src('spec/**/*.js').pipe(jasmine());
+})
