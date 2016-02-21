@@ -1,9 +1,9 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-      <div class="list" ng-controller="LandingController">
+      <div class="list" ng-controller="landingController">
         <div class="padding">
             <ul>
-                <li ng-repeat="link in NavigationLinks">
+                <li ng-repeat="link in NavigationLinks()">
                     <button class="button button-block button-positive" ng-click="NavigateTo(link.controllerTarget)">
                         {{link.linkText}}
                     </button>
