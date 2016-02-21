@@ -26,7 +26,10 @@ build_script:
  - cmd: .\node_modules\.bin\gulp build-android-release
  # run tests: 
  - cmd: .\node_modules\.bin\gulp spec
- # deploy to hockeyapp 
- - cmd: .\node_modules\.bin\gulp hockeyapp-android-release
+ # deploy to hockeyapp
+ # This is commented out, because we don't want to 
+ # deploy every build. Need to figure out how to have this
+ # run only when the 'beta' branch is updated.  
+ # - cmd: .\node_modules\.bin\gulp hockeyapp-android-release
  
  
