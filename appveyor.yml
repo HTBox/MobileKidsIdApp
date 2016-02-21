@@ -24,5 +24,11 @@ before_build:
 
 build_script:
  - cmd: .\node_modules\.bin\gulp build-android-release
- - cmd: .\node_modules\.bin\gulp hockeyapp-release-android
+ 
+test_script:
+ - cmd: .\node_modules\.bin\gulp spec
+ 
+deploy_script:
+ - cmd: .\node_modules\.bin\gulp hockeyapp-android-release
+ 
  
