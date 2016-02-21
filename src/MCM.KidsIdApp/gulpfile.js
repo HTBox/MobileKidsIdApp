@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
 var cordovaBuild = require("taco-team-build");
-
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
@@ -15,17 +14,23 @@ var paths = {
   sass: ['./scss/**/*.scss']
 };
 
+process.env["ANDROID_PWD"] = "T0ast3r5!"
+process.env["P12_PWD"] = "T0ast3r5!"
+process.env["ENC_PWD"] = "@w3some5auce"
+
+/****** SIGNING OPTIONS *******/
+var androidKeystorePwd = process.env["ANDROID_PWD"],
+    encryptionPwd = process.env["ENC_PWD"],
+    iosP12Pwd = process.env["P12_PWD"],
+    iosCodeSignIdentity = "iPhone Distribution: Rockford Lhotka";
+
 var winPlatforms = ["android", "windows", "wp8"],
     linuxPlatforms = ["android"],
     osxPlatforms = ["ios"],
     buildArgs = {
         android: ["--release",
                   "--device",
-                  "--gradleArg=--no-daemon",
-                  "--keystore=release.keystore",
-                  "--alias=droid-mkid", 
-                  "--storePassword=" + process.env["ANDROID_PWD"], 
-                  "--password=" + process.env["ANDROID_PWD"]], 
+                  "--gradleArg=--no-daemon"],
         ios: ["--release", "--device"],                                             // specific preferences like "-- --ant" for Android
         windows: ["--release", "--device"],                                         // or "-- --win" for Windows. You may also encounter a
         wp8: ["--release", "--device"]                                              // "TypeError" after adding a flag Android doesn't recognize
@@ -116,7 +121,7 @@ gulp.task("build-wp8", ["scripts"], function() {
     return cordovaBuild.buildProject("wp8", buildArgs);
 });
 
-gulp.task("build-android", ["scripts", "decrypt-android"], function() {
+gulp.task("build-android", ["scripts", "decrypt-android-keystore"], function() {
     return cordovaBuild.buildProject("android", buildArgs);
 });
 
@@ -146,8 +151,13 @@ gulp.task("sim-ios", ["scripts"], function (callback) {
 
 gulp.task("install-ios-certs", function () {
     sh.exec("sh ios-install-certs.sh");
+    buildArgs.ios.push("--codeSignIdentity=" + iosCodeSignIdentity);
 });
 
-gulp.task("decrypt-android", function () {
-    sh.exec("openssl des3 -d -in release.keystore.enc -out release.keystore -pass pass:" + process.env["ENC_PWD"]);
+gulp.task("decrypt-android-keystore", function () {
+    sh.exec("openssl des3 -d -in ..\Signing\release.keystore.enc -out release.keystore -pass pass:" + encryptionPwd);
+    buildArgs.android.push("--keystore=release.keychain");
+    buildArgs.android.push("--alias=droid-mkid");
+    buildArgs.android.push("--storePassword=" + androidKeystorePwd);
+    buildArgs.android.push("--password=" + androidKeystorePwd);
 });
