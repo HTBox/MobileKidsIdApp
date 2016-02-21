@@ -21,6 +21,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+# Visual Studio Code cache/options directory
+.vscode/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -234,3 +237,4 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+src/MCM.KidsIdApp/www/scripts/appBundle.js
