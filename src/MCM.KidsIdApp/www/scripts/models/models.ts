@@ -7,7 +7,7 @@
     doctors: Array<Doctor>
 
     childDoctorLookup: Array<[number, number]>
-    
+
 }
 
 interface SystemSettings {
@@ -15,33 +15,33 @@ interface SystemSettings {
 }
 
 interface Child extends Person {
-    height: string
-    weight: string
-    measurementDate: Date
-    hairColor: string //Dropdown
-    hairStyle: string //Dropdown
-    eyeColor: string //Dropdown
-    glasses: boolean
-    contacts: boolean
-    skinTone: string //Dropdown
-    racialEthnicIdentity: string
-    featureDescription: string //Multiple
-    featurePhoto: Array<string> //Multiple
+    height?: string
+    weight?: string
+    measurementDate?: Date
+    hairColor?: string //Dropdown
+    hairStyle?: string //Dropdown
+    eyeColor?: string //Dropdown
+    glasses?: boolean
+    contacts?: boolean
+    skinTone?: string //Dropdown
+    racialEthnicIdentity?: string
+    featureDescription?: string //Multiple
+    featurePhoto?: Array<string> //Multiple
     //Feature/description cross reference.
-    featureDescriptionCrossReference: Array<string>
-    doctorID: number
-    medicAlertInfo: string
-    allergies: string
-    regularMedications: string
-    psychMedications: string
-    inhaler: boolean
-    diabetic: boolean
-    dentistID: number
+    featureDescriptionCrossReference?: Array<string>
+    doctorID?: number
+    medicAlertInfo?: string
+    allergies?: string
+    regularMedications?: string
+    psychMedications?: string
+    inhaler?: boolean
+    diabetic?: boolean
+    dentistID?: number
 
-    friendContactKeys: Array<string>
-    familyContactKeys: Array<string>
-    
-    checklist: Checklist
+    friendContactKeys?: Array<string>
+    familyContactKeys?: Array<string>
+
+    checklist?: Checklist
 }
 
 interface Doctor extends Person {
@@ -49,33 +49,33 @@ interface Doctor extends Person {
 }
 
 interface Person {
-    
+
     id: number
-    
+
     //Honorific - prefix - e.g.Mrs., Mr.or Dr.
-    honorific: string
+    honorific?: string
     //e.g. first name
-    givenName: string
+    givenName?: string
     //p - additional - name - other / middle name
-    additionalName: string
+    additionalName?: string
     //p - family - name - family(often last) name
-    familyName: string
+    familyName?: string
     //    p - nickname - nickname / alias / handle
-    nickname: string
-    email: string
-    photo: string
+    nickname?: string
+    email?: string
+    photo?: string
     //URL to home page
-    url: string
+    url?: string
     //ID of the associated address object.
-    addressID: number
+    addressID?: number
     //Telephone number
-    tel: string
-    jobTitle: string
-    sex: string
-    genderIdentity: string
+    tel?: string
+    jobTitle?: string
+    sex?: string
+    genderIdentity?: string
     //Birthday
-    bday: Date
-    note: string
+    bday?: Date
+    note?: string
 }
 
 
