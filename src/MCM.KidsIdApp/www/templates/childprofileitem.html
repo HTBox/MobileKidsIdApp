@@ -1,0 +1,18 @@
+﻿<ion-view view-title="Missing Children Minnesota">
+    <ion-content>
+        <div ng-controller="childProfileListController">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="NavigateToPreviousView()">
+                Child Profile
+            </button>
+            <div class="list">
+                <div class="item item-icon-left item-button-right" ng-repeat="navLink in NavigationLinks()">
+                    <i class="{{navLink.LeftIcon}}"/>
+                    <button class="button button-positive button-block button-clear icon-right" ng-click="NavigateTo({{navLink.controllerTarget}})">
+                        {{navLink.LinkText}}
+                        <i class="{{navLink.RightIcon}}"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
