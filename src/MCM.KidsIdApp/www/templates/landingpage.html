@@ -1,21 +1,16 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-      <div class="list">
+      <div class="list" ng-controller="landingController as lc">
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="showchildprofilelist()">
-            Child profiles
-          </button>
-          <button class="button button-block button-positive" ng-click="showinstructionindex()">
-            Information 2
-          </button>
-          <button class="button button-block button-positive" ng-click="showsettings()">
-            Settings
-          </button>
-          <button class="button button-block button-positive" ng-click="showabout()">
-            About
-          </button>
+            <ul>
+                <li ng-repeat="link in lc.NavigationLinks()">
+                    <button class="button button-block button-positive" ng-click="lc.NavigateTo(link.ControllerTarget)">
+                        {{link.LinkText}}
+                    </button>
+                </li>
+            </ul>
         </div>
       </div>
-      <static-page ref="data/static-content1.html"></static-page>
+      <static-page ref="data/static-content.html"></static-page>
     </ion-content>
 </ion-view>

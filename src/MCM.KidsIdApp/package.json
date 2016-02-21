@@ -14,6 +14,7 @@
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.3.0",
     "gulp-typescript": "^2.11.0",
+    "gulp-sourcemaps": "1.6.0",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0",
     "taco-team-build": "latest"
