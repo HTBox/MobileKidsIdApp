@@ -6,7 +6,7 @@ Player.prototype.play = function(song) {
 };
 
 Player.prototype.pause = function() {
-  this.isPlaying = true; // bug
+  this.isPlaying = false;
 };
 
 Player.prototype.resume = function() {
