@@ -237,5 +237,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
 src/MCM.KidsIdApp/www/scripts/appBundle.js
-src/MCM.KidsIdApp/www/scripts/appBundle.js.map
+*.js.map
