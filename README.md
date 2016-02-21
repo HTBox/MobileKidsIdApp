@@ -18,3 +18,11 @@ So the app has three key aspects.
 1. Provide the parent with information about how to keep their kids safe and what to do if they can’t find their child
 
 ![](https://raw.github.com/htbox/mobileKidsIdApp/master/resources/cnr_logo.jpg)
+
+Contributing
+============
+We accept pull requests, and appreciate assistance in this important effort.
+
+Anyone participating in this repo or project must follow our [code of conduct](https://github.com/HTBox/MobileKidsIdApp/blob/master/code_of_conduct.md).
+
+We have documentation on [setting up a dev environment](https://github.com/HTBox/MobileKidsIdApp/blob/master/docs/Developer%20setup.md).

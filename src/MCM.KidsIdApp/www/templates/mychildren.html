@@ -1,5 +1,9 @@
 ﻿<ion-view view-title="">
     <ion-content class="login-background">
-        <h1>My Children Screen</h1>
+        <div ng-controller="myChildrenController as mcc">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="mcc.NavigateToPreviousView()">
+                My Children
+            </button>
+        </div>
     </ion-content>
 </ion-view>
