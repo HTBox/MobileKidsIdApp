@@ -74,7 +74,8 @@ See "Optional: Using an Encrypted .p12 and .mobileprovision File" in [the same a
 openssl des3 -in <input file> -out <output file>
 ```
 
-Now, simply upload the new files using the same filenames back into the repository.
-
-Finally, take note of the P12 and encryption passwords you used and update the environment variables above accordingly.
+Next:
+1. Upload the new files using the same filenames back into the repository.
+2. If you updated the certificate, be sure **iosCodeSignIdentityRelease** in gulpfile.js has the correct signing identity configured.
+3. Take note of the P12 and encryption passwords you used and update the environment variables above accordingly.
 
