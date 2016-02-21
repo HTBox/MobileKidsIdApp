@@ -11,10 +11,6 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
-process.env["ANDROID_PWD"] = "T0ast3r5!"
-process.env["P12_PWD"] = "@w3some5auce"
-process.env["ENC_PWD"] = "@w3some5auce"
-
 var paths = {
   sass: ['./scss/**/*.scss']
 };
@@ -120,11 +116,11 @@ gulp.task("build-wp8", ["scripts"], function() {
     return cordovaBuild.buildProject("wp8", buildArgs);
 });
 
-gulp.task("build-android", ["scripts"], function() {
+gulp.task("build-android", ["scripts", "decrypt-android"], function() {
     return cordovaBuild.buildProject("android", buildArgs);
 });
 
-gulp.task("build-ios", ["scripts"], function() {
+gulp.task("build-ios", ["scripts", "install-ios-certs"], function() {
     return cordovaBuild.buildProject("ios", buildArgs);
 });
 
