@@ -22,5 +22,5 @@ module MCM {
 }
 
 
-angular.module('mcmapp').service('UserService', MCM.UserService);
-    
+angular.module('mcmapp')
+    .service('UserService', MCM.UserService);
