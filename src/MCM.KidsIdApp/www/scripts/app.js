@@ -34,25 +34,25 @@ app.controller('loginController', function ($scope, $state) {
 //  }
 //});
 
-app.controller('forgotPasswordController', function ($scope, $state) {
-    // Setup scope for forgot password page
-});
+//app.controller('forgotPasswordController', function ($scope, $state) {
+//    // Setup scope for forgot password page
+//});
 
-app.controller('childprofilelistController', function ($scope, $state) {
-  // Setup scope for child profile list page
-});
+//app.controller('childprofilelistController', function ($scope, $state) {
+//  // Setup scope for child profile list page
+//});
 
-app.controller('instructionindexController', function ($scope, $state) {
-  // Setup scope for instruction index page
-});
+//app.controller('instructionindexController', function ($scope, $state) {
+//  // Setup scope for instruction index page
+//});
 
-app.controller('settingsController', function ($scope, $state) {
-  // Setup scope for settings page
-});
+//app.controller('settingsController', function ($scope, $state) {
+//  // Setup scope for settings page
+//});
 
-app.controller('aboutController', function ($scope, $state) {
-  // Setup scope for about page
-});
+//app.controller('aboutController', function ($scope, $state) {
+//  // Setup scope for about page
+//});
 
 //app.controller('myChildrenController', function ($scope) {
 //    //My children page

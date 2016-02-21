@@ -1,8 +1,7 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../models/models.ts" />
-/// <reference path="IControllerNavigation.ts" />
 
-class LandingController implements IControllerNavigation {
+class AboutController implements IControllerNavigation {
     private _state;
     private _scope;
     private _navigationLinks: Array<NavigationLink>;
@@ -11,13 +10,9 @@ class LandingController implements IControllerNavigation {
         this._state = $state;
         this._scope = $scope;
 
-        this._navigationLinks = [
-            new NavigationLink("myChildren", "My Children"),
-            new NavigationLink("instructionIndex", "Instructions"),
-            new NavigationLink("profiles", "Profiles"),
-            new NavigationLink("about", "About"),
-            new NavigationLink("settings", "Settings")
-        ];
+        this._navigationLinks =
+            [
+            ];
     }
 
     public static $inject = ["$scope", "$state"]
@@ -39,4 +34,4 @@ class LandingController implements IControllerNavigation {
     }
 }
 
-angular.module('mcmapp').controller('landingController', LandingController);
+angular.module('mcmapp').controller('aboutController', AboutController);

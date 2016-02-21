@@ -1,8 +1,10 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
+/// <reference path="../models/models.ts" />
+/// <reference path="IControllerNavigation.ts" />
 
 class MyChildrenController implements IControllerNavigation {
     private _state;
-    private _scope: Data;
+    private _scope;
     private _navigationLinks: Array<NavigationLink>;
 
     constructor($scope, $state) {
