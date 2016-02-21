@@ -152,6 +152,10 @@ gulp.task("build-ios", ["sass","scripts"], function() {
 });
 
 gulp.task("build-android-release", ["sass","scripts"], function() {
+    // ** NOTE: You may need to remove the android platform (cordova platform remove android) when switching between debug and release builds. 
+    //          Build artifacts may expect release.keystore to be present after a release build and the script cleans it up to not leave 
+    //          an unencrypted version on the build server.
+     
     var openssl = sh.which("openssl");
     if(!openssl) {
         console.error("\"openssl\" not found in path. Download and install git command line tools at http://git-scm.com/downloads, ensure openssl is in the path, and try again.");
@@ -160,7 +164,7 @@ gulp.task("build-android-release", ["sass","scripts"], function() {
         console.error("Set environment variables ANDROID_PWD to the keystore password and ENC_PWD to the openssl encryption password.");
         process.exit(1);
     }
-    sh.exec(openssl + " des3 -d -in release.keystore.enc -out release.keystore -pass pass:" + encryptionPwd);
+    sh.exec('"' + openssl + '" des3 -d -in release.keystore.enc -out release.keystore -pass pass:' + encryptionPwd);
     return cordovaBuild.buildProject("android", buildArgsRelease)
             .then(function() { 
                 sh.rm("release.keystore"); 
@@ -192,7 +196,7 @@ gulp.task("hockeyapp-android-release", function() {
         process.exit(1);
     }
     // Upload - See http://support.hockeyapp.net/kb/api/api-apps    
-    sh.exec(curl + ' -F "status=2" -F "notify=0" -F "ipa=@' + paths.apkPath + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdAndroid + '/app_versions/upload');
+    sh.exec('"' + curl + '" -F "status=2" -F "notify=0" -F "ipa=@' + paths.releaseApkPath + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdAndroid + '/app_versions/upload');
 });
 
 gulp.task("hockeyapp-ios-release", function() {
