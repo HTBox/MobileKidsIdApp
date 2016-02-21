@@ -1,9 +1,8 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-        <div ng-controller="settingsController">
-            <h1>Settings</h1>
-            <button class="button button-block button-positive" ng-click="NavigateToHomeScreen()">
-                Back to Landing Page
+        <div ng-controller="settingsController as sc">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="sc.NavigateToPreviousView()">
+                Settings
             </button>
         </div>
     </ion-content>

@@ -1,9 +1,8 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-        <div ng-controller="childProfileListController">
-            <h1>My Child Profiles</h1>
-            <button class="button button-block button-positive" ng-click="NavigateToHomeScreen()">
-                Back to Landing Page
+        <div ng-controller="childProfileListController as cplc">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="cplc.NavigateToPreviousView()">
+                Child Profiles
             </button>
         </div>
     </ion-content>
