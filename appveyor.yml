@@ -23,5 +23,5 @@ before_build:
  - cmd: npm install
 
 build_script:
- - cmd: .\node_modules\.bin\gulp
+ - cmd: .\node_modules\.bin\gulp default build-android-release build-ios-release 
  
