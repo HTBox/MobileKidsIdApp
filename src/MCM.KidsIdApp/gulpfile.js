@@ -3,6 +3,7 @@
 
 var gulp = require('gulp');
 var fs = require("fs");
+var sourcemaps = require('gulp-sourcemaps');
 var ts = require("gulp-typescript");
 var cordovaBuild = require("taco-team-build");
 var gutil = require('gulp-util');
@@ -50,7 +51,7 @@ var winPlatforms = ["android", "windows"],
     },
     platformsToBuild = process.platform === "darwin" ? osxPlatforms :
                        (process.platform === "linux" ? linuxPlatforms : winPlatforms),  
-    tsconfigPath = "scripts/tsconfig.json"; 
+    tsconfigPath = "tsconfig.json"; 
 
 gulp.task('default', ['sass', 'build', 'spec'], function() {
     // Copy results to bin folder
@@ -99,24 +100,26 @@ gulp.task('git-check', function(done) {
 gulp.task("scripts", function () {
     // Compile TypeScript code - This sample is designed to compile anything under the "scripts" folder using settings
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
+    var tsConfig;
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("./www/scripts/**/*.ts")
-            .pipe(ts(ts.createProject(tsconfigPath)))
-            .pipe(gulp.dest("."));
+        tsConfig = ts(ts.createProject(tsconfigPath));
     } else {
         // Otherwise use these default settings
-         gulp.src("./www/scripts/**/*.ts")
-            .pipe(ts({
-                noImplicitAny: false,
-                noEmitOnError: true,
-                removeComments: false,
-                sourceMap: true,
-                out: "appBundle.js",
+        tsConfig = ts({
+            noImplicitAny: false,
+            noEmitOnError: true,
+            removeComments: false,
+            sourceMap: true,
+            out: "appBundle.js",
             target: "es5"
-            }))
-            .pipe(gulp.dest("./www/scripts"));        
+        });
     }
+    gulp.src("./www/scripts/**/*.ts")
+        .pipe(sourcemaps.init())
+        .pipe(tsConfig)
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest("./www/scripts"));
 });
 
 gulp.task("build", ["sass","scripts"], function () {
