@@ -1,3 +1,5 @@
+"use strict";
+
 var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
@@ -9,6 +11,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -47,7 +51,7 @@ var winPlatforms = ["android", "windows"],
                        (process.platform === "linux" ? linuxPlatforms : winPlatforms),  
     tsconfigPath = "scripts/tsconfig.json"; 
 
-gulp.task('default', ['sass', 'build'], function() {
+gulp.task('default', ['sass', 'build', 'spec'], function() {
     // Copy results to bin folder
     gulp.src("platforms/android/build/outputs/apk/*.apk").pipe(gulp.dest("bin/Android/Debug"));         // Gradle build
     gulp.src("platforms/windows/AppPackages/**/*").pipe(gulp.dest("bin/Windows/Debug/AppPackages"));
@@ -154,3 +158,8 @@ gulp.task("build-ios-release", ["sass","scripts"], function() {
             gulp.src("platforms/ios/release/device/*.ipa").pipe(gulp.dest("bin/iOS/Release"));
         });
 });
+
+// Test JS
+gulp.task('spec', function () {
+    return gulp.src('spec/**/*.js').pipe(jasmine());
+})

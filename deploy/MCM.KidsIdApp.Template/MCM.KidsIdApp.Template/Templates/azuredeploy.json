@@ -1,0 +1,95 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "MobileKidsIdWebAppName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "MobileKidsIdAppPlanName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "MobileKidsIdAppPlanSKU": {
+      "type": "string",
+      "allowedValues": [
+        "Free",
+        "Shared",
+        "Basic",
+        "Standard"
+      ],
+      "defaultValue": "Free"
+    },
+    "MobileKidsIdAppPlanWorkerSize": {
+      "type": "string",
+      "allowedValues": [
+        "0",
+        "1",
+        "2"
+      ],
+      "defaultValue": "0"
+    },
+    "GitHubRepositoryUrl": {
+      "type": "string"
+    },
+    "GitHubBranch": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "GitHubDeploymentName": "GitHubDeployment"
+  },
+  "resources": [
+    {
+      "name": "[parameters('MobileKidsIdAppPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-04-01",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "MobileKidsIdAppPlan"
+      },
+      "properties": {
+        "name": "[parameters('MobileKidsIdAppPlanName')]",
+        "sku": "[parameters('MobileKidsIdAppPlanSKU')]",
+        "workerSize": "[parameters('MobileKidsIdAppPlanWorkerSize')]",
+        "numberOfWorkers": 1
+      }
+    },
+    {
+      "name": "[parameters('MobileKidsIdWebAppName')]",
+      "type": "Microsoft.Web/sites",
+      "kind": "mobileapp",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-04-01",
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('MobileKidsIdAppPlanName'))]"
+      ],
+      "tags": {
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('MobileKidsIdAppPlanName'))]": "Resource",
+        "displayName": "MobileKidsIdWebApp"
+      },
+      "properties": {
+        "name": "[parameters('MobileKidsIdWebAppName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('MobileKidsIdAppPlanName'))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-04-01",
+          "name": "[variables('GitHubDeploymentName')]",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('MobileKidsIdWebAppName'))]"
+          ],
+          "tags": {
+            "displayName": "GitHubDeploymentExtension"
+          },
+          "properties": {
+            "RepoUrl": "[parameters('GitHubRepositoryUrl')]",
+            "branch": "[parameters('GitHubBranch')]"
+          }
+        }
+      ]
+    }
+  ]
+}
