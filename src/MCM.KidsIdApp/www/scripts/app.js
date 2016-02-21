@@ -54,9 +54,9 @@ app.controller('aboutController', function ($scope, $state) {
   // Setup scope for about page
 });
 
-app.controller('myChildrenController', function ($scope) {
-    //My children page
-});
+//app.controller('myChildrenController', function ($scope) {
+//    //My children page
+//});
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
