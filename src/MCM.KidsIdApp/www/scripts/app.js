@@ -12,7 +12,7 @@ app.controller('loginController', function ($scope, $state) {
         );
         mobileService.login(service).done(
             function success(user) {
-                $state.go('myChildren');
+                $state.go('landing');
             }, function error(error) {
                 console.error('Failed to login: ', error);
             });
