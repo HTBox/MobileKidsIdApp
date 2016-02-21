@@ -23,5 +23,5 @@ Contributing
 ============
 We accept pull requests, and appreciate assistance in this important effort.
 
-Anyone participating in this repo or project must follow our [code of conduct]().
+Anyone participating in this repo or project must follow our [code of conduct](https://github.com/HTBox/MobileKidsIdApp/blob/master/code_of_conduct.md).
 We have documentation on [setting up a dev environment](https://github.com/HTBox/MobileKidsIdApp/blob/master/docs/Developer%20setup.md).
