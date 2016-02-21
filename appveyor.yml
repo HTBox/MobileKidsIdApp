@@ -23,10 +23,5 @@ before_build:
  - cmd: npm install
 
 build_script:
- # Gulp should support all these targets in one command, but that doesn't
- # seem to be working:
- #  - cmd: .\node_modules\.bin\gulp default build-android-release build-ios-release
- - cmd: .\node_modules\.bin\gulp default
  - cmd: .\node_modules\.bin\gulp build-android-release  
- - cmd: .\node_modules\.bin\gulp build-ios-release  
  
