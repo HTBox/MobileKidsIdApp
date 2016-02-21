@@ -1,5 +1,9 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-        Child profile list...
+        <div ng-controller="childProfileListController as cplc">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="cplc.NavigateToPreviousView()">
+                Child Profiles
+            </button>
+        </div>
     </ion-content>
 </ion-view>
