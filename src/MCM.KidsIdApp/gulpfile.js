@@ -1,3 +1,4 @@
+/// <binding BeforeBuild='sass' />
 "use strict";
 
 var gulp = require('gulp');
@@ -22,7 +23,7 @@ var paths = {
   releaseApkPath: "./platforms/android/build/outputs/apk/android-release.apk",
   debugApkPath: "./platforms/android/build/outputs/apk/android-debug.apk",
   appPackagesPath: "./platforms/windows/AppPackages/**/*",
-  typeScriptSources: "www/scripts/**/*.ts"
+  typeScriptSources: "./www/scripts/**/*.ts"
 };
 
 // Signing releated vars
@@ -34,8 +35,8 @@ var androidKeystorePwd = process.env["ANDROID_PWD"],
 
 // HockeyApp vars
 var hockeyappApiToken = process.env["HOCKEYAPP_API_TOKEN"],
-    hockeyappAppIdiOS = "8411945a0f2c48b4bc5184304ef110a2", 
-    hockeyappAppIdAndroid = "278a0d6194964ec686a358590c0afa14";
+    hockeyappAppIdiOS = "8411945a0f2c48b4bc5184304ef110a2",             // TODO: UPDATE WITH CORRECT APP ID FROM HOCKEYAPP ACCOUNT
+    hockeyappAppIdAndroid = "278a0d6194964ec686a358590c0afa14";         // TODO: UPDATE WITH CORRECT APP ID FROM HOCEKYAPP ACCOUNT
 
 // build settings
 var winPlatforms = ["android", "windows"],
