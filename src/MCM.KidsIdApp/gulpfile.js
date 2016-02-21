@@ -101,12 +101,12 @@ gulp.task("scripts", function () {
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("scripts/**/*.ts")
+        gulp.src("./www/scripts/**/*.ts")
             .pipe(ts(ts.createProject(tsconfigPath)))
             .pipe(gulp.dest("."));
     } else {
         // Otherwise use these default settings
-         gulp.src("scripts/**/*.ts")
+         gulp.src("./www/scripts/**/*.ts")
             .pipe(ts({
                 noImplicitAny: false,
                 noEmitOnError: true,
@@ -115,7 +115,7 @@ gulp.task("scripts", function () {
                 out: "appBundle.js",
             target: "es5"
             }))
-            .pipe(gulp.dest("www/scripts"));        
+            .pipe(gulp.dest("./www/scripts"));        
     }
 });
 
