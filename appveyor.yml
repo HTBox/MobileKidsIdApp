@@ -29,7 +29,7 @@ build_script:
  # deploy to hockeyapp
  # This is commented out, because we don't want to 
  # deploy every build. Need to figure out how to have this
- # run only when the 'beta' branch is updated.  
+ # run only when the 'test-deploy' branch is updated.  
  # - cmd: .\node_modules\.bin\gulp hockeyapp-android-release
  
  
