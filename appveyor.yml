@@ -23,5 +23,7 @@ before_build:
  - cmd: npm install
 
 build_script:
- - cmd: .\node_modules\.bin\gulp default build-android-release build-ios-release 
+ # If AppVeyor could do the Mac build, this would be the command:
+ #  - cmd: .\node_modules\.bin\gulp default build-android-release build-ios-release
+ - cmd: .\node_modules\.bin\gulp default build-android-release  
  
