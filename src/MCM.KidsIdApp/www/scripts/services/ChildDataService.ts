@@ -74,6 +74,7 @@ module MCM{
     private findChild(childId){
       return this._children.filter((child:Child)=>{return (child.id === childId);})[0] || null;
     }
-
   }
 }
+
+angular.module('mcmapp').service('ChildDataService', MCM.ChildDataService);
