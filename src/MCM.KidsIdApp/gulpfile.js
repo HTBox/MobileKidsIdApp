@@ -1,3 +1,5 @@
+"use strict";
+
 var gulp = require('gulp');
 var fs = require("fs");
 var ts = require("gulp-typescript");
@@ -5,48 +7,64 @@ var cordovaBuild = require("taco-team-build");
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
-//var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-process.env["ANDROID_PWD"] = "T0ast3r5!"
-process.env["P12_PWD"] = "T0ast3r5!"
-process.env["ENC_PWD"] = "@w3some5auce"
-
-/****** SIGNING OPTIONS *******/
+// Signing releated vars
 var androidKeystorePwd = process.env["ANDROID_PWD"],
     encryptionPwd = process.env["ENC_PWD"],
     iosP12Pwd = process.env["P12_PWD"],
-    iosCodeSignIdentity = "iPhone Distribution: Rockford Lhotka";
+    iosCodeSignIdentityRelease = "iPhone Distribution: Rockford Lhotka",
+    iosCodeSignIdentityDebug = "iPhone Developer";
 
-var winPlatforms = ["android", "windows", "wp8"],
+// HockeyApp vars
+var hockeyappApiToken = process.env["HOCKEYAPP_API_TOKEN"],
+    hockeyappAppIdiOS = "", 
+    hockeyappAppIdAndroid = "",
+    ipaPath = "./platforms/ios/release/device/Kids Id App.ipa",
+    dsymPath = "./platforms/ios/release/device/Kids Id App.dSYM",
+    apkPath = "./platforms/android/build/outputs/apk/android-release.apk";
+
+// build settings
+var winPlatforms = ["android", "windows"],
     linuxPlatforms = ["android"],
     osxPlatforms = ["ios"],
     buildArgs = {
-        android: ["--release",
+        android: ["--debug",
                   "--device",
                   "--gradleArg=--no-daemon"],
-        ios: ["--release", "--device"],                                             // specific preferences like "-- --ant" for Android
-        windows: ["--release", "--device"],                                         // or "-- --win" for Windows. You may also encounter a
-        wp8: ["--release", "--device"]                                              // "TypeError" after adding a flag Android doesn't recognize
-    },                                                                              // when using Cordova < 4.3.0. This is fixed in 4.3.0.
+        ios: ["--debug", "--device", "--codeSignIdentity=" + iosCodeSignIdentityDebug],
+        windows: ["--debug", "--device"],
+        wp8: ["--debug", "--device"]
+    },
+    buildArgsRelease = {
+        android: ["--release",
+                  "--device",
+                  "--gradleArg=--no-daemon",
+                  "--storePassword=" + androidKeystorePwd,
+                  "--password=" + androidKeystorePwd],
+        ios: ["--release", 
+              "--device",
+              "--codeSignIdentity=" + iosCodeSignIdentityRelease],                                            
+        windows: ["--release", "--device"]
+    },
     platformsToBuild = process.platform === "darwin" ? osxPlatforms :
-                       (process.platform === "linux" ? linuxPlatforms : winPlatforms),  // "Darwin" is the platform name returned for OSX. 
-    tsconfigPath = "scripts/tsconfig.json";                                             // This could be extended to include Linux as well.
+                       (process.platform === "linux" ? linuxPlatforms : winPlatforms),  
+    tsconfigPath = "scripts/tsconfig.json"; 
 
-
-gulp.task('default', ['sass', 'package'], function() {
+gulp.task('default', ['sass', 'build', 'spec'], function() {
     // Copy results to bin folder
-    gulp.src("platforms/android/ant-build/*.apk").pipe(gulp.dest("bin/release/android"));   // Ant build
-    gulp.src("platforms/android/bin/*.apk").pipe(gulp.dest("bin/release/android"));         // Gradle build
-    gulp.src("platforms/windows/AppPackages/**/*").pipe(gulp.dest("bin/release/windows/AppPackages"));
-    gulp.src("platforms/wp8/bin/Release/*.xap").pipe(gulp.dest("bin/release/wp8"));
-    gulp.src("platforms/ios/build/device/*.ipa").pipe(gulp.dest("bin/release/ios"));
+    gulp.src("platforms/android/build/outputs/apk/*.apk").pipe(gulp.dest("bin/Android/Debug"));         // Gradle build
+    gulp.src("platforms/windows/AppPackages/**/*").pipe(gulp.dest("bin/Windows/Debug/AppPackages"));
+    gulp.src("platforms/ios/debug/device/*.ipa").pipe(gulp.dest("bin/iOS/Debug"));
 });
 
 gulp.task('sass', function(done) {
@@ -91,12 +109,12 @@ gulp.task("scripts", function () {
     // in scripts/tsconfig.json if present or this gulpfile if not.  Adjust as appropriate for your use case.
     if (fs.existsSync(tsconfigPath)) {
         // Use settings from scripts/tsconfig.json
-        gulp.src("scripts/**/*.ts")
+        gulp.src("www/scripts/**/*.ts")
             .pipe(ts(ts.createProject(tsconfigPath)))
             .pipe(gulp.dest("."));
     } else {
         // Otherwise use these default settings
-         gulp.src("scripts/**/*.ts")
+         gulp.src("www/scripts/**/*.ts")
             .pipe(ts({
                 noImplicitAny: false,
                 noEmitOnError: true,
@@ -109,55 +127,81 @@ gulp.task("scripts", function () {
     }
 });
 
-gulp.task("build", ["scripts"], function () {
+gulp.task("build", ["sass","scripts"], function () {
     return cordovaBuild.buildProject(platformsToBuild, buildArgs);
 });
 
-gulp.task("build-win", ["scripts"], function() {
+gulp.task("build-win", ["sass", "scripts"], function() {
     return cordovaBuild.buildProject("windows", buildArgs);
 });
 
-gulp.task("build-wp8", ["scripts"], function() {
-    return cordovaBuild.buildProject("wp8", buildArgs);
-});
-
-gulp.task("build-android", ["scripts", "decrypt-android-keystore"], function() {
+gulp.task("build-android", ["sass","scripts"], function() {
     return cordovaBuild.buildProject("android", buildArgs);
 });
 
-gulp.task("build-ios", ["scripts", "install-ios-certs"], function() {
+gulp.task("build-ios", ["sass","scripts"], function() {
     return cordovaBuild.buildProject("ios", buildArgs);
 });
 
-gulp.task("package", ["build"], function () {
-    return cordovaBuild.packageProject(platformsToBuild);
+gulp.task("build-android-release", ["sass","scripts"], function() {
+    var openssl = sh.which("openssl");
+    if(!openssl) {
+        console.error("\"openssl\" not found in path. Download and install git command line tools at http://git-scm.com/downloads, ensure openssl is in the path, and try again.");
+    }
+    if(!androidKeystorePwd || !encryptionPwd) {
+        console.error("Set environment variables ANDROID_PWD to the keystore password and ENC_PWD to the openssl encryption password.");
+        process.exit(1);
+    }
+    sh.exec(openssl + " des3 -d -in release.keystore.enc -out release.keystore -pass pass:" + encryptionPwd);
+    return cordovaBuild.buildProject("android", buildArgsRelease)
+            .then(function() { 
+                sh.rm("release.keystore"); 
+                gulp.src("./platforms/android/build/outputs/apk/*.apk").pipe(gulp.dest("./bin/Android/Release"));
+            });
 });
 
-// Example of running the app on an attached device.
-// Type "gulp run-ios" to execute. Note that ios-deploy will need to be installed globally.
-gulp.task("run-ios", ["scripts"], function (callback) {
-    cordovaBuild.setupCordova().done(function (cordova) {
-        cordova.run({ platforms: ["ios"], options: ["--debug", "--device"] }, callback);
-    });
-});
-
-// Example of running app on the iOS simulator
-// Type "gulp sim-ios" to execute. Note that ios-sim will need to be installed globally.
-gulp.task("sim-ios", ["scripts"], function (callback) {
-    cordovaBuild.setupCordova().done(function (cordova) {
-        cordova.emulate({ platforms: ["ios"], options: ["--debug"] }, callback);
-    });
-});
-
-gulp.task("install-ios-certs", function () {
+gulp.task("build-ios-release", ["sass","scripts"], function() {
+    if(!iosP12Pwd || !encryptionPwd) {
+        console.error("Set environment variables P12_PWD to the p12 signing cert password and ENC_PWD to the openssl encryption password.");
+        process.exit(1);
+    }
     sh.exec("sh ios-install-certs.sh");
-    buildArgs.ios.push("--codeSignIdentity=" + iosCodeSignIdentity);
+    return cordovaBuild.buildProject("ios", buildArgsRelease)
+        .then(function() {
+            gulp.src("./platforms/ios/release/device/*.ipa").pipe(gulp.dest("./bin/iOS/Release"));
+        });
 });
 
-gulp.task("decrypt-android-keystore", function () {
-    sh.exec("openssl des3 -d -in ..\Signing\release.keystore.enc -out release.keystore -pass pass:" + encryptionPwd);
-    buildArgs.android.push("--keystore=release.keychain");
-    buildArgs.android.push("--alias=droid-mkid");
-    buildArgs.android.push("--storePassword=" + androidKeystorePwd);
-    buildArgs.android.push("--password=" + androidKeystorePwd);
+gulp.task("hockeyapp-android-release", function() {
+    var curl = sh.which("curl");
+    if(!curl) {
+        console.error("\"curl\" not found in path. Download and install git command line tools at http://git-scm.com/downloads, ensure openssl is in the path, and try again.");
+        process.exit(1);
+    }
+    if(!hockeyappApiToken) {
+        console.error("Set environment variable HOCKEYAPP_API_TOKEN to your API key and try again.");
+        process.exit(1);
+    }
+    // Upload - See http://support.hockeyapp.net/kb/api/api-apps    
+    sh.exec(curl + '-F "status=2" -F "notify=0" -F "ipa=@' + apkPath + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdAndroid + '/upload');
 });
+
+gulp.task("hockeyapp-ios-release", function() {
+    if(!hockeyappApiToken) {
+        console.error("Set environment variable HOCKEYAPP_API_TOKEN to your API key and try again.");
+        process.exit(1);
+    }
+    var curl = sh.which("curl");
+    var tar = sh.which("tar");
+    var targz = "hockey-dsym-upload.tar.gz";
+    // Compress dsym
+    sh.exec(tar + 'tar -cvzf ' + targz + ' ' + dsymPath);    
+    // Upload - See http://support.hockeyapp.net/kb/api/api-apps
+    sh.exec(curl + '-F "status=2" -F "notify=0" -F "ipa=@' + ipaPath + '" -F "dsym=@' + targz + '" -H "X-HockeyAppToken: ' + hockeyappApiToken + '" https://rink.hockeyapp.net/api/2/apps/' + hockeyappAppIdiOS + '/upload');
+});
+
+
+// Test JS
+gulp.task('spec', function () {
+    return gulp.src('spec/**/*.js').pipe(jasmine());
+})
