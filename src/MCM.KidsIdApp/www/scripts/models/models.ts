@@ -14,6 +14,13 @@ interface EntityHistoryToken{
     applicationVersion?: string
     version?: string    
 }
+// Maps to identity principal provided by credentials provider.
+// TODO : Elaborate for token management, sessions, etc.
+interface UserIdentity{
+    id: string
+    providerName: string
+    created: Date
+}
 
 interface Person {    
     id: string    
@@ -135,19 +142,21 @@ interface FamilyMember extends Person{
     relation?: string
 }
 
+
 // TOP LEVEL STRUCTURES
 
 interface UserApplicationProfile{
     installed: Date
     firstUse: Date
     legalAcknowlegeDataSecurityPolicy: boolean
-    shareEmails: Array<string>
+    shareEmails?: Array<string>
+    loginIdentities: Array<UserIdentity>
     version?: EntityHistoryToken       
 }
 
 interface Family{
     id: string    
-    ownerLoginId: string // maps to identity value from provider.    
+    permittedLoginIdentities: Array<UserIdentity>  
     children: Array<Child>
     sharePolicy: SharePolicy
     version?: EntityHistoryToken   
