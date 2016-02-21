@@ -1,11 +1,12 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
+/// <reference path="../models/models.ts"/>
 
 class LandingController implements IControllerNavigation {
     private _state;
     private _scope: Data;
     private _navigationLinks: Array<NavigationLink>;
 
-    constructor($scope: Data, $state) {
+    constructor($scope, $state) {
         this._state = $state;
         this._scope = $scope;
 
@@ -21,15 +22,19 @@ class LandingController implements IControllerNavigation {
     public static $inject = ["$scope", "$state"]
 
     public NavigateToHomeScreen() {
-        this._state.go('landing');
+        this.NavigateTo('landing');
     }
 
     public NavigateToPreviousView() {
-        this._state.go('landing');
+        this.NavigateTo('landing');
     }
 
     public NavigationLinks() {
         return this._navigationLinks;
+    }
+
+    public NavigateTo($controller: string) {
+        this._state.go($controller);
     }
 }
 

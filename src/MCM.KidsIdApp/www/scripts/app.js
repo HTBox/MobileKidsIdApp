@@ -19,20 +19,20 @@ app.controller('loginController', function ($scope, $state) {
     }
 });
 
-app.controller('landingController', function ($scope, $state) {
-  $scope.showinstructionindex = function () {
-    $state.go('instructionindex');
-  }
-  $scope.showchildprofilelist = function () {
-    $state.go('childprofilelist');
-  }
-  $scope.showabout = function () {
-    $state.go('about');
-  }
-  $scope.showsettings = function () {
-    $state.go('settings');
-  }
-});
+//app.controller('landingController', function ($scope, $state) {
+//  $scope.showinstructionindex = function () {
+//    $state.go('instructionindex');
+//  }
+//  $scope.showchildprofilelist = function () {
+//    $state.go('childprofilelist');
+//  }
+//  $scope.showabout = function () {
+//    $state.go('about');
+//  }
+//  $scope.showsettings = function () {
+//    $state.go('settings');
+//  }
+//});
 
 app.controller('forgotPasswordController', function ($scope, $state) {
     // Setup scope for forgot password page

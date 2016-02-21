@@ -1,8 +1,15 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-      <div class="list">
+      <div class="list" ng-controller="LandingController">
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="showchildprofilelist()">
+            <ul>
+                <li ng-repeat="link in NavigationLinks">
+                    <button class="button button-block button-positive" ng-click="NavigateTo(link.controllerTarget)">
+                        {{link.linkText}}
+                    </button>
+                </li>
+            </ul>
+          <!--<button class="button button-block button-positive" ng-click="showchildprofilelist()">
             Child profiles
           </button>
           <button class="button button-block button-positive" ng-click="showinstructionindex()">
@@ -13,7 +20,7 @@
           </button>
           <button class="button button-block button-positive" ng-click="showabout()">
             About
-          </button>
+          </button>-->
         </div>
       </div>
       <static-page ref="data/static-content1.html"></static-page>

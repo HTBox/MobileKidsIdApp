@@ -5,7 +5,7 @@ class MyChildrenController implements IControllerNavigation {
     private _scope: Data;
     private _navigationLinks: Array<NavigationLink>;
 
-    constructor($scope: Data, $state) {
+    constructor($scope, $state) {
         this._state = $state;
         this._scope = $scope;
 
@@ -18,16 +18,20 @@ class MyChildrenController implements IControllerNavigation {
     public static $inject = ["$scope", "$state"]
 
     public NavigateToHomeScreen() {
-        this._state.go('landing');
+        this.NavigateTo('landing');
     }
 
     public NavigateToPreviousView() {
-        this._state.go('landing');
+        this.NavigateTo('landing');
     }
 
     public NavigationLinks() {
         return this._navigationLinks;
     }
+
+    public NavigateTo($controller: string) {
+        this._state.go($controller);
+    }
 }
 
-angular.module('mcmapp').controller('MyChildrenController', MyChildrenController);
+angular.module('mcmapp').controller('myChildrenController', MyChildrenController);
