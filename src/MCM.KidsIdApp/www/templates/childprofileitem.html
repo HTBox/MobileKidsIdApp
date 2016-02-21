@@ -1,0 +1,18 @@
+﻿<ion-view view-title="Missing Children Minnesota">
+    <ion-content>
+        <div ng-controller="childProfileListController as cplc">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="cplc.NavigateToPreviousView()">
+                Child Profile
+            </button>
+            <div class="list">
+                <div class="item item-icon-left item-button-right" ng-repeat="navLink in cplc.NavigationLinks()">
+                    <i class="{{navLink.LeftIcon}}"/>
+                    <button class="button button-positive button-block button-clear icon-right" ng-click="cplc.NavigateTo({{navLink.ControllerTarget}})">
+                        {{navLink.LinkText}}
+                        <i class="{{navLink.RightIcon}}"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
