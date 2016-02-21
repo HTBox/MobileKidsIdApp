@@ -23,5 +23,6 @@ before_build:
  - cmd: npm install
 
 build_script:
- - cmd: .\node_modules\.bin\gulp build-android-release  
+ - cmd: .\node_modules\.bin\gulp build-android-release
+ - cmd: .\node_modules\.bin\gulp hockeyapp-release-android
  
