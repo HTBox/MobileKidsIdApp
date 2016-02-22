@@ -37,7 +37,7 @@ var androidKeystorePwd = process.env["ANDROID_PWD"],
 // HockeyApp vars
 var hockeyappApiToken = process.env["HOCKEYAPP_API_TOKEN"],
     hockeyappAppIdiOS = "8411945a0f2c48b4bc5184304ef110a2",             // TODO: UPDATE WITH CORRECT APP ID FROM HOCKEYAPP ACCOUNT
-    hockeyappAppIdAndroid = "278a0d6194964ec686a358590c0afa14";         // TODO: UPDATE WITH CORRECT APP ID FROM HOCEKYAPP ACCOUNT
+    hockeyappAppIdAndroid = "149a28f8df374b18a9df3dbb15c57b6e";         
 
 // build settings
 var winPlatforms = ["android", "windows"],
