@@ -1,6 +1,10 @@
 Mobile Kids ID Kit
 ==================
 
+| CI build | HockeyApp deploy |
+| --- | --- |
+| ![Build status](https://ci.appveyor.com/api/projects/status/enlx8nkvk93g30x7?svg=true) | ![Build status](https://ci.appveyor.com/api/projects/status/0y0b8ctdaesjbomq?svg=true) |
+
 The intent of the app is to help parents keep up to date information on their kids, and to provide parents with relevant information to keep their kids safe and what to do if they can’t find their child.
 
 This app is created in collaboration with [Missing Children Minnesota](http://www.missingchildrenmn.net/).
