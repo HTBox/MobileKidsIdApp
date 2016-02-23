@@ -1,108 +1,104 @@
-﻿interface Data {
-
-    sytemSettings: SystemSettings
-
-    children: Array<Child>
-
-    doctors: Array<Doctor>
-
-    childDoctorLookup: Array<[number, number]>
-    
+﻿// BASE CLASS DEFINITIONS
+// Describes a reference to a binary file or foreign entity outside the context of this application.
+// Ex. Phone Contact, Photo, etc.
+interface ResourceReference{
+    id: string
+    resourceType: string
+    version?: EntityHistoryToken 
 }
 
-interface SystemSettings {
-    version: string
+// General entity history and comparison token. (Needs elaboration.)
+interface EntityHistoryToken{
+    created: Date
+    lastModified: Date
+    applicationVersion?: string
+    version?: string    
+}
+// Maps to identity principal provided by credentials provider.
+// TODO : Elaborate for token management, sessions, etc.
+interface UserIdentity{
+    id: string
+    providerName: string
+    created: Date
 }
 
-interface Child extends Person {
-    height: string
-    weight: string
-    measurementDate: Date
-    hairColor: string //Dropdown
-    hairStyle: string //Dropdown
-    eyeColor: string //Dropdown
-    glasses: boolean
-    contacts: boolean
-    skinTone: string //Dropdown
-    racialEthnicIdentity: string
-    featureDescription: string //Multiple
-    featurePhoto: Array<string> //Multiple
-    //Feature/description cross reference.
-    featureDescriptionCrossReference: Array<string>
-    doctorID: number
-    medicAlertInfo: string
-    allergies: string
-    regularMedications: string
-    psychMedications: string
-    inhaler: boolean
-    diabetic: boolean
-    dentistID: number
-
-    friendContactKeys: Array<string>
-    familyContactKeys: Array<string>
-    
-    checklist: Checklist
-}
-
-interface Doctor extends Person {
-    clinicName: string
-}
-
-interface Person {
-    
-    id: number
-    
+interface Person {    
+    id: string    
     //Honorific - prefix - e.g.Mrs., Mr.or Dr.
-    honorific: string
+    honorific?: string
     //e.g. first name
     givenName: string
     //p - additional - name - other / middle name
-    additionalName: string
+    additionalName?: string
     //p - family - name - family(often last) name
     familyName: string
     //    p - nickname - nickname / alias / handle
-    nickname: string
-    email: string
-    photo: string
+    nickname?: string
+    email?: string
     //URL to home page
-    url: string
-    //ID of the associated address object.
-    addressID: number
+    url?: string
+    addresses?: Array<Address>
     //Telephone number
-    tel: string
-    jobTitle: string
-    sex: string
-    genderIdentity: string
+    tel?: string
+    jobTitle?: string
+    sex?: string
+    genderIdentity?: string
     //Birthday
-    bday: Date
-    note: string
+    bday?: Date
+    notes?: string
+    photo?: ResourceReference
+    contact?: ResourceReference
+    version?: EntityHistoryToken    
 }
 
+interface PersonDescription{
+    height?: string
+    weight?: string
+    measurementDate?: Date
+    hairColor?: string 
+    hairStyle?: string 
+    eyeColor?: string 
+    eyeGlasses?: boolean
+    eyeContacts?: boolean
+    skinTone?: string
+    racialEthnicIdentity?: string 
+}
+
+interface MedicalNotes{
+    medicAlertInfo?: string
+    allergies?: string
+    regularMedications?: string
+    psychMedications?: string
+    inhaler?: boolean
+    diabetic?: boolean
+    notes?: string
+}
+
+interface DistinguishingFeature{
+    description: string
+    resource : ResourceReference
+}
 
 interface Address {
-
-    id: number
-
     /// House / apartment number, floor, street name
-    streetAddress: string
+    streetAddress?: string
     //Additional street details
-    extendedAddress: string
+    extendedAddress?: string
     //post office mailbox
-    postOfficeBox: string
+    postOfficeBox?: string
     //city / town / village
-    locality: string
+    locality?: string
     //state / county / province
-    region: string
+    region?: string
     //postal code, e.g.ZIP in the US
-    postalCode: string
+    postalCode?: string
     //should be full name of country, country code ok
-    countryName: string
+    countryName?: string
     ////a mailing label, plain text, perhaps with preformatting
-    //label: string
+    notes?: string    
 }
 
-
-interface Checklist {
+interface PreparationChecklist {
     childPhoto: boolean
     birthCertificate: boolean
     socialSecurityCard: boolean
@@ -115,6 +111,53 @@ interface Checklist {
     otherParentsAndFamily: boolean
 }
 
-interface Notifications {
+interface SharePolicy{
+    physicalDescription: boolean
+    distinguishingFeatures: boolean
+    professionalCareProviders: boolean
+    familyMembers: boolean
+    friends: boolean
+    documents: boolean
+    photos: boolean
+}
 
+// IMPLEMENTATION CLASSES
+
+interface Child extends Person {
+    physicalDescription?: PersonDescription
+    distinguishingFeatures?: Array<DistinguishingFeature>     
+    professionalCareProviders?: Array<CareProvider>
+    familyMembers?: Array<FamilyMember>
+    friends?: Array<Person>
+    medicalNotes?: MedicalNotes    
+    checklist?: PreparationChecklist
+}
+
+interface CareProvider extends Person {
+    clinicName?: string
+    careRoleDescription: string // physician, dentist, etc. (Might be pointed to a known enumeration later.)
+}
+
+interface FamilyMember extends Person{
+    relation?: string
+}
+
+
+// TOP LEVEL STRUCTURES
+
+interface UserApplicationProfile{
+    installed: Date
+    firstUse: Date
+    legalAcknowlegeDataSecurityPolicy: boolean
+    shareEmails?: Array<string>
+    loginIdentities: Array<UserIdentity>
+    version?: EntityHistoryToken       
+}
+
+interface Family{
+    id: string    
+    permittedLoginIdentities: Array<UserIdentity>  
+    children: Array<Child>
+    sharePolicy: SharePolicy
+    version?: EntityHistoryToken   
 }
