@@ -134,11 +134,15 @@ gulp.task("scripts", function () {
             target: "es5"
         });
     }
-    gulp.src("./www/scripts/**/*.ts")
+    gulp.src(paths.typeScriptSources)
         .pipe(sourcemaps.init())
         .pipe(tsConfig)
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest("./www/scripts"));
+});
+
+gulp.task('watch', function () {
+    gulp.watch(paths.typeScriptSources, ['scripts']);
 });
 
 gulp.task("build", ["sass","scripts"], function () {
