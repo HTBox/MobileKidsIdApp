@@ -15,6 +15,8 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var jasmine = require('gulp-jasmine');
+require('any-promise/register')('es6-promise');
+var jasmineBrowser = require('gulp-jasmine-browser');
 
 var appName = "Kids Id App";
 var paths = {
@@ -224,6 +226,32 @@ gulp.task("hockeyapp-ios-release", function() {
 
 
 // Test JS
-gulp.task('spec', function () {
-    return gulp.src('spec/**/*.js').pipe(jasmine());
+gulp.task('spec-compile', function () {
+    var tsConfig = ts({
+        noImplicitAny: false,
+        noEmitOnError: true,
+        removeComments: false,
+        sourceMap: true,
+        target: "es5"
+    });
+    return gulp.src(['spec/**/*.ts'])
+        .pipe(sourcemaps.init())
+        .pipe(tsConfig)
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest("spec-out/"));
+})
+var testFiles = ['www/lib/ionic/js/ionic.bundle.js',
+            'node_modules/angular-mocks/angular-mocks.js',
+            'www/scripts/app.js',
+            'www/scripts/appBundle.js',
+            'spec-out/**/*spec.js'];
+gulp.task('spec', ['spec-compile'], function () {
+    gulp.src(testFiles)
+        .pipe(jasmineBrowser.specRunner({ console: true }))
+        .pipe(jasmineBrowser.headless());
+})
+gulp.task('spec-browser', ['spec-compile'], function () {
+    gulp.src(testFiles)
+        .pipe(jasmineBrowser.specRunner())
+        .pipe(jasmineBrowser.server({ port: 8888 }));
 })
