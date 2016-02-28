@@ -23,5 +23,13 @@ before_build:
  - cmd: npm install
 
 build_script:
- - cmd: .\node_modules\.bin\gulp
+ - cmd: .\node_modules\.bin\gulp build-android-release
+ # run tests: 
+ - cmd: .\node_modules\.bin\gulp spec
+ # deploy to hockeyapp
+ # This is commented out, because we don't want to 
+ # deploy every build. Need to figure out how to have this
+ # run only when the 'test-deploy' branch is updated.  
+ # - cmd: .\node_modules\.bin\gulp hockeyapp-android-release
+ 
  
