@@ -22,7 +22,7 @@ So the app has three key aspects.
 1. Allow a parent to authorize authorities (police, court workers, missing children orgs like MCM) to access the info about a missing child to help in locating/recovering the child
 1. Provide the parent with information about how to keep their kids safe and what to do if they can’t find their child
 
-![](https://raw.github.com/htbox/mobileKidsIdApp/master/resources/cnr_logo.jpg)
+![](https://raw.github.com/htbox/mobileKidsIdApp/master/resources/MCM-logo-s.jpg)
 
 Contributing
 ============
