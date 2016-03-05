@@ -3,7 +3,7 @@
 // Definitions by: Michel Salib <https://github.com/michelsalib>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="../angularjs/angular.d.ts" />
+/// <reference path="./angular.d.ts" />
 
 // Support for AMD require and CommonJS
 declare module 'angular-ui-router' {
