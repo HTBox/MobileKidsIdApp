@@ -4,6 +4,25 @@
             <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="cplc.NavigateToPreviousView()">
                 Child Profiles
             </button>
+            
+
+            <div class="list">
+                <a class="item item-icon-right" href="#" ng-repeat="chld in cplc.children track by $index" ng-click="error('not implemented')">
+                    {{chld.givenName}}
+                    <i class="icon ion-close" ng-click="cplc.removeChild(chld)"></i>
+                </a>
+            </div>
+
+            The following is an interim quick way to get a new child in the list. The finished way should be to have the add child button bring you to the basic details screen.
+            <ng-form>
+                <label class="item item-input">
+                    <span class="input-label">New Child Name:</span>
+                    <input type="text" name="newChildName" ng-model="cplc.newChildName" required>
+                </label>
+                <button class="ion-plus button button-block button-positive" ng-click="cplc.addNewChild(cplc.newChildName)">
+                    Child
+                </button>
+            </ng-form>
         </div>
     </ion-content>
 </ion-view>
