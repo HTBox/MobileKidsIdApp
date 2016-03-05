@@ -161,3 +161,8 @@ interface Family{
     sharePolicy: SharePolicy
     version?: EntityHistoryToken   
 }
+
+interface ApplicationData {
+    userApplicationProfile: UserApplicationProfile
+    Family: Family
+}
