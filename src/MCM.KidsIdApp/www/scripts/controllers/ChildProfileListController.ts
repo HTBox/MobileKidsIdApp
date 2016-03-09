@@ -3,9 +3,10 @@
 /// <reference path="../models/models.ts" />
 /// <reference path="IControllerNavigation.ts" />
 /// <reference path="../services/ChildDataService.ts" />
+/// <reference path="../Definitions/angular-ui-router.d.ts" />
 
 class ChildProfileListController implements IControllerNavigation {
-    private _state;
+    private _state: angular.ui.IStateService;
     private _scope: angular.IScope;
     private _ionicPopup: ionic.popup.IonicPopupService;
     private _childDataService: MCM.ChildDataService;
@@ -45,6 +46,11 @@ class ChildProfileListController implements IControllerNavigation {
         this._state.go(pStateName);
     }
 
+    public editChild(child: Child) {
+        //This should be changed to bring you to the child profile item page instead of going to basicDetails
+        this.editChildById(child.id);
+    }
+
     private reloadChildList(): angular.IPromise<void> {
         return this._childDataService.getAllChildren().then(children => {
             this.children = children;
@@ -54,10 +60,8 @@ class ChildProfileListController implements IControllerNavigation {
     }
 
     public addNewChild(childName: string) {
-        let newChild: Child = { id: this._childDataService.generateUUID(), givenName: childName, familyName: "" };
-        this.newChildName = "";
-        this._childDataService.add(newChild)
-            .then(() => this.reloadChildList());
+        //Basic details page will treat child as a newly added child if id doesn't already exist.
+        this.editChildById(this._childDataService.generateUUID());
     }
     
     public removeChild(child: Child) {
@@ -70,6 +74,10 @@ class ChildProfileListController implements IControllerNavigation {
                     .then(() => this.reloadChildList());
             }
         });
+    }
+    
+    private editChildById(childId: string) {
+        this._state.go("basicDetails", { childId: childId });
     }
 }
 

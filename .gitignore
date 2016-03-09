@@ -242,3 +242,4 @@ _Pvt_Extensions
 src/MCM.KidsIdApp/www/scripts/appBundle.js
 *.js.map
 /src/MCM.KidsIdApp/spec-out
+src/MCM.KidsIdApp/www/lib/ionic-datepicker
