@@ -14,7 +14,7 @@ class LandingController implements IControllerNavigation {
         this._navigationLinks = [
             new NavigationLink("myChildren", "My Children"),
             new NavigationLink("instructionIndex", "Instructions"),
-            new NavigationLink("profiles", "Profiles"),
+            new NavigationLink("childProfileList", "Child Profiles"),
             new NavigationLink("about", "About"),
             new NavigationLink("settings", "Settings")
         ];

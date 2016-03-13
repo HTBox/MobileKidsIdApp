@@ -13,6 +13,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var watch = require('gulp-watch');
 
 var jasmine = require('gulp-jasmine');
 require('any-promise/register')('es6-promise');
@@ -26,7 +27,8 @@ var paths = {
   releaseApkPath: "./platforms/android/build/outputs/apk/android-release.apk",
   debugApkPath: "./platforms/android/build/outputs/apk/android-debug.apk",
   appPackagesPath: "./platforms/windows/AppPackages/**/*",
-  typeScriptSources: "./www/scripts/**/*.ts"
+  typeScriptSources: "./www/scripts/**/*.ts",
+  specSources: 'spec/**/*.ts'
 };
 
 // Signing releated vars
@@ -94,7 +96,9 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.typeScriptSources, ['scripts']);
+    gulp.watch(paths.specSources, ['spec-compile']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -141,10 +145,6 @@ gulp.task("scripts", function () {
         .pipe(tsConfig)
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest("./www/scripts"));
-});
-
-gulp.task('watch', function () {
-    gulp.watch(paths.typeScriptSources, ['scripts']);
 });
 
 gulp.task("build", ["sass","scripts"], function () {
@@ -238,7 +238,7 @@ gulp.task('spec-compile', function () {
         sourceMap: true,
         target: "es5"
     });
-    return gulp.src(['spec/**/*.ts'])
+    return gulp.src([paths.specSources])
         .pipe(sourcemaps.init())
         .pipe(tsConfig)
         .pipe(sourcemaps.write('.'))
@@ -246,7 +246,7 @@ gulp.task('spec-compile', function () {
 })
 var testFiles = ['www/lib/ionic/js/ionic.bundle.js',
             'node_modules/angular-mocks/angular-mocks.js',
-            'www/scripts/app.js',
+            'spec-out/appFake.js',
             'www/scripts/appBundle.js',
             'spec-out/**/*spec.js'];
 gulp.task('spec', ['spec-compile'], function () {
@@ -256,6 +256,7 @@ gulp.task('spec', ['spec-compile'], function () {
 })
 gulp.task('spec-browser', ['spec-compile'], function () {
     gulp.src(testFiles)
+        .pipe(watch(testFiles))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({ port: 8888 }));
 })

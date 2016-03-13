@@ -4,7 +4,16 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('mcmapp', ['ionic'])
-
+app.factory('storageService', function ($window, $injector) {
+    //Could also have used a provider for this instead of a factory, but then we can't use the $injector
+    // for instantiating the storage service implementation which is annoying.
+    if ($window.tinyHippos) {
+        console.log("Detected Ripple emulator. Using InMemoryStorageService instead of FileStorageService.");
+        return $injector.get('inMemoryStorageService');
+    } else {
+        return $injector.get('fileStorageService');
+    }
+});
 //app.controller('landingController', function ($scope, $state) {
 //  $scope.showinstructionindex = function () {
 //    $state.go('instructionindex');
