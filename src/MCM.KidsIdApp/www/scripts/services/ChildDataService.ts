@@ -55,8 +55,8 @@ module MCM{
                 return this.$q.resolve(false);
             }
 
-            var childPromise = this.findChild(upd.id);
-            childPromise.then(child => {
+            let findChildPromise = this.findChild(upd.id);
+            return findChildPromise.then(child => {
                 if (child) {
                     var props = Object.getOwnPropertyNames(upd);
                     props.forEach((property, index) => {
@@ -70,7 +70,8 @@ module MCM{
                         return upd;
                     });
                 }
-            });
+            }).then(child => this.saveChanges().then(() => child));
+
         }
 
         public delete(del: Child): angular.IPromise<boolean> {
