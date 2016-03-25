@@ -17,21 +17,26 @@ module MCM {
             this.$q = $q;
         }
 
-        storeText(text: string): angular.IPromise<void> {
-            
+        public storeText(text: string): angular.IPromise<void> {
+            return this.storeData([text], 'text/plain', storageFileName);
+        }
+        public storeData(data: any[], dataType: string, fileName: string): angular.IPromise<void> {
+            let blob: Blob = blobUtil.createBlob(data, { type: dataType });
+            return this.storeBlob(blob, fileName);
+        }
+        public storeBlob(blob: Blob, fileName: string): angular.IPromise<void> {
+
             let deferred: angular.IDeferred<void> = this.$q.defer<void>();
             window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
-                
-                dir.getFile(storageFileName, { create: true }, function (file) {
+
+                dir.getFile(fileName, { create: true }, function (file) {
 
                     file.remove(() => {
 
-                        dir.getFile(storageFileName, { create: true }, function (file) {
+                        dir.getFile(fileName, { create: true }, function (file) {
                             file.createWriter(function (fileWriter) {
 
                                 fileWriter.seek(fileWriter.length);
-
-                                let blob = new Blob([text], { type: 'text/plain' });
                                 fileWriter.write(blob);
                                 deferred.resolve();
                                 
@@ -82,6 +87,39 @@ module MCM {
 
             return deferred.promise;
         }
+        retrieveFile(fileName: string): angular.IPromise<Blob> {
+            let deferred = this.$q.defer<File>();
+    
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
+
+                dir.getFile(fileName, { create: true }, fileEntry => {
+
+                    fileEntry.file(file => {
+                        deferred.resolve(file);
+                    }, err => deferred.reject("Getting file from fileEntry failed. Code: " + err.code));
+
+                }, err => deferred.reject(err));
+
+            }, err => deferred.reject(err));
+    
+            return deferred.promise;
+        }
+        
+        deleteFile(fileName: string): angular.IPromise<void> {
+            let deferred = this.$q.defer<void>();
+
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
+                dir.getFile(fileName, { create: false }, fileEntry => {
+                    fileEntry.remove(() => {
+                        deferred.resolve();
+                    });
+                }, err => deferred.reject(err));
+            }, err => deferred.reject(err));
+
+            return deferred.promise;
+        }
+
+
     }
 }
 

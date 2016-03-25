@@ -131,6 +131,7 @@ interface Child extends Person {
     friends?: Array<Person>
     medicalNotes?: MedicalNotes    
     checklist?: PreparationChecklist
+    documentMetadatas: Array<DocumentMetadata>
 }
 
 interface CareProvider extends Person {
@@ -140,6 +141,13 @@ interface CareProvider extends Person {
 
 interface FamilyMember extends Person{
     relation?: string
+}
+
+
+interface DocumentMetadata {
+    description: string;
+    fileName: string;
+    thumbnailFileName: string;
 }
 
 

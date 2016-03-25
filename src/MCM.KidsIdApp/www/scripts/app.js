@@ -121,6 +121,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'basicDetailsController'
     })
 
+    .state('photos', {
+        url: '/photos/:childId',
+        templateUrl: 'templates/photos.html',
+        controller: 'photosController'
+    })
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 
