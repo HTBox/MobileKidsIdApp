@@ -9,7 +9,6 @@ module MCM {
         private _state: angular.ui.IStateService;
         private _ionicPopup: ionic.popup.IonicPopupService;
         private _childDataService: MCM.ChildDataService;
-        private _childId: string
 
         public static $inject = ['$scope', '$state', '$stateParams', '$ionicPopup', 'childDataService'];
 
@@ -42,9 +41,9 @@ module MCM {
         public NavigateToPreviousView() {
             let hasChangesPromise = this._childDataService.get(this.child)
                     .then(chld => this.checkChildHasChanges(this.child, chld));
-             
+            
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileList");
+                let go = () => this._state.go("childProfileItem", { childId: this.child.id });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',

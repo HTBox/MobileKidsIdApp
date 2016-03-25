@@ -47,8 +47,7 @@ class ChildProfileListController implements IControllerNavigation {
     }
 
     public editChild(child: Child) {
-        //This should be changed to bring you to the child profile item page instead of going to basicDetails
-        this.editChildById(child.id);
+        this._state.go("childProfileItem", { childId: child.id });
     }
 
     private reloadChildList(): angular.IPromise<void> {
