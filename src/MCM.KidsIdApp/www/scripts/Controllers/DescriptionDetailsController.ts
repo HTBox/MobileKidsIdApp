@@ -1,10 +1,10 @@
-﻿/// <reference path="../Definitions/angular.d.ts" />
-/// <reference path="../Services/UserService.ts" />
-/// <reference path="../Definitions/angular-ui-router.d.ts" />
+﻿/// <reference path="../definitions/angular.d.ts" />
+/// <reference path="../services/UserService.ts" />
+/// <reference path="../definitions/angular-ui-router.d.ts" />
 /// <reference path="../models/models.ts" />
 
 module MCM {
-    export class BasicDetailsController {
+    export class DescriptionDetailsController {
 
         //private _scope: any;
         private _state: angular.ui.IStateService;
@@ -18,30 +18,31 @@ module MCM {
             //this._scope = $scope;
             this._state = $state;
             this._ionicPopup = $ionicPopup;
-            let childId = $stateParams.childId;
-            childDataService.getById(childId).then(child => {
-                child = child === null ? <Child>{ id: childId } : angular.copy(child);
-                this.doDatePickerSetup(child.childDetails.birthday || new Date());
-                this.child = child;
+            this.childId = $stateParams.childId;
+            childDataService.getPhysicalDetails(this.childId).then(details => {
+              details = details === null ? <PhysicalDetails>{ } : angular.copy(details);
+              this.doDatePickerSetup(details.measurementDate || new Date());
+              this.details = details;
             });
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
         }
-        
-        public child: Child;
+
+        public childId: string;        
+        public details: PhysicalDetails;
         public datepickerObject;
 
-        public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {
-            if ((originalChild == null) != (editedChild == null)) return true;
-            return !angular.equals(originalChild.childDetails, editedChild.childDetails);
+        public checkChildHasChanges(editedDetails: PhysicalDetails, originalDetails: PhysicalDetails): boolean {
+          if ((originalDetails == null) != (editedDetails == null)) return true;
+          return !angular.equals(originalDetails, editedDetails);
         }
 
         public NavigateToPreviousView() {
-            let hasChangesPromise = this._childDataService.get(this.child)
-                    .then(chld => this.checkChildHasChanges(this.child, chld));
+            let hasChangesPromise = this._childDataService.getPhysicalDetails(this.childId)
+              .then(dtl => this.checkChildHasChanges(this.details, dtl));
             
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileItem", { childId: this.child.id });
+                let go = () => this._state.go("childProfileItem", { childId: this.childId });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',
@@ -57,22 +58,25 @@ module MCM {
 
         public saveChanges(formValid: boolean) {
             if (formValid) {
-                this._childDataService.update(this.child);
+                this._childDataService.getById(this.childId).then(child => {
+                    child.physicalDetails = this.details;
+                    this._childDataService.update(child);
+                }
             }
         }
 
         private doDatePickerSetup(defaultDate: Date) {
             //See this page for available options: https://github.com/rajeshwarpatlolla/ionic-datepicker
             this.datepickerObject = {
-                titleLabel: 'Select Date of Birth',
+                titleLabel: 'Select Date',
                 inputDate: defaultDate,
                 templateType: 'popup',
                 to: new Date(),
-                callback: (newDate => { this.child.birthday = newDate; }).bind(this),
+                callback: (newDate => { this.details.measurementDate = newDate; }).bind(this),
             };
         }
         
     }
 }
 
-angular.module('mcmapp').controller('basicDetailsController', MCM.BasicDetailsController);
+angular.module('mcmapp').controller('descriptionDetailsController', MCM.DescriptionDetailsController);

@@ -25,20 +25,20 @@ module MCM {
                     thumbnailDataURLpromise = this.$q.resolve(null);
                 }
                 return thumbnailDataURLpromise.then(thumbnailDataURL => {
-                    return <DocumentInfo>{ documentMetadata: docMetaData, thumbnailDataURL: thumbnailDataURL};
+                    return <DocumentInfo>{ FileReference: docMetaData, thumbnailDataURL: thumbnailDataURL};
                 });
             }));
             return promises.then(docInfoPromises => this.$q.all(docInfoPromises));
         }
 
         public removeDocument(childId: string, docInfo: DocumentInfo): angular.IPromise<void> {
-            let deleteFilePromise = this.storageService.deleteFile(docInfo.documentMetadata.fileName);
-            let deleteThumbnailPromise = docInfo.documentMetadata.thumbnailFileName ?
-                    this.storageService.deleteFile(docInfo.documentMetadata.thumbnailFileName) : null;
+            let deleteFilePromise = this.storageService.deleteFile(docInfo.FileReference.fileName);
+            let deleteThumbnailPromise = docInfo.FileReference.thumbnailFileName ?
+                    this.storageService.deleteFile(docInfo.FileReference.thumbnailFileName) : null;
             let removeDocMetadataPromise = this.childDataService.getById(childId).then(child => {
                 let docIndex: number;
                 for (var i = 0; i <= child.documentMetadatas.length - 1; i++) {
-                    if (child.documentMetadatas[i].fileName === docInfo.documentMetadata.fileName) {
+                    if (child.documentMetadatas[i].fileName === docInfo.FileReference.fileName) {
                         docIndex = i;
                         break;
                     }
@@ -88,12 +88,12 @@ module MCM {
             let theChild: Child;
             const getChildPromise = this.childDataService.getById(childId).then(child => theChild = child);
             return this.$q.all([saveThumbnailPromise, saveOriginalPromise, getChildPromise]).then(() => {
-                const docMetadata = <DocumentMetadata>{
+                const docMetadata = <FileReference>{
                     description: description, fileName: fileName,
                     thumbnailFileName: thumbFileName
                 };
                 const docInfo = <DocumentInfo>{
-                    documentMetadata: docMetadata,
+                    FileReference: docMetadata,
                     thumbnailDataURL: mythumbnailDataURL
                 };
                 if (!theChild.documentMetadatas)

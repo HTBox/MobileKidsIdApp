@@ -16,6 +16,8 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="android-maxSdkVersion" value="15" />
+    <preference name="android-targetSdkVersion" value="23" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
@@ -40,9 +42,8 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <plugin name="cordova-plugin-camera" version="2.1.0" />
-    <preference name="android-maxSdkVersion" value="15" />
-    <preference name="android-targetSdkVersion" value="23" />
     <plugin name="cordova-plugin-ms-azure-mobile-apps" version="2.0.0-beta3" />
     <plugin name="ionic-plugin-keyboard" version="1.0.8" />
     <engine name="android" spec="^4.0.0" />
+    <plugin name="cordova-plugin-file" spec="~4.1.1" />
 </widget>

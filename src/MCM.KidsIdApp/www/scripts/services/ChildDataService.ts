@@ -46,8 +46,16 @@ module MCM{
                 .then(appData => appData.Family.children);
         }
 
-        public getById(id: string): angular.IPromise<Child> {
-            return this.findChild(id);
+        public getById(childId: string): angular.IPromise<Child> {
+          return this.findChild(childId);
+        }
+
+        public getPhysicalDetails(childId: string): angular.IPromise<PhysicalDetails> {
+          return this.getById(childId).then(child => {
+            if (child == null)
+              throw "Child does not exist";
+            return child.physicalDetails;
+          });
         }
 
         public update(upd: Child): angular.IPromise<Child | boolean> {
