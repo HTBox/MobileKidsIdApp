@@ -31,8 +31,8 @@ module MCM {
         }
         
         public child: Child;
-        public descriptions: Array<PersonDescription>;
-        public description: PersonDescription;
+        public descriptions: Array<PhysicalDetails>;
+        public description: PhysicalDetails;
         public datepickerObject;
 
         public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {

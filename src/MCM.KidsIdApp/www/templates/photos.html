@@ -13,7 +13,7 @@
             </button>
 
             <div ng-repeat="documentInfo in photos.documentInfos track by $index">
-                <h4>{{documentInfo.documentMetadata.description}}</h4>
+                <h4>{{documentInfo.FileReference.description}}</h4>
                 <img class="preview" ng-src="{{documentInfo.thumbnailDataURL}}" />
                 <button class="button icon ion-close assertive" ng-click="photos.removeDocument(documentInfo)" />
             </div>
