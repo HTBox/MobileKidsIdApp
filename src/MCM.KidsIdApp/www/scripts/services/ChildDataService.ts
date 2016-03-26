@@ -46,7 +46,7 @@ module MCM{
                 .then(appData => appData.Family.children);
         }
 
-        public getById(id: number): angular.IPromise<Child> {
+        public getById(id: string): angular.IPromise<Child> {
             return this.findChild(id);
         }
 
@@ -105,11 +105,11 @@ module MCM{
             return uuid;
         }
 
-        private hasChild(childId): angular.IPromise<boolean> {
+        private hasChild(childId: string): angular.IPromise<boolean> {
             return this.getAllChildren()
                 .then(children => children.some((child: Child) => child.id === childId ));
         }
-        private findChild(childId): angular.IPromise<Child> {
+        private findChild(childId: string): angular.IPromise<Child> {
             return this.getAllChildren()
                 .then(children => children.filter((child:Child) => (child.id === childId))[0] || null);
         }

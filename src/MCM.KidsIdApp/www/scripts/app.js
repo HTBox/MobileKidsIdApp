@@ -97,6 +97,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'childProfileListController'
     })
 
+    .state('childProfileItem', {
+        url: '/childprofileitem/:childId',
+      templateUrl: 'templates/childprofileitem.html',
+      controller: 'childProfileItemController'
+    })
+
     .state('settings', {
       url: '/settings',
       templateUrl: 'templates/settingspage.html',
@@ -113,6 +119,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/basicDetails/:childId',
         templateUrl: 'templates/basicdetails.html',
         controller: 'basicDetailsController'
+    })
+
+    .state('photos', {
+        url: '/photos/:childId',
+        templateUrl: 'templates/photos.html',
+        controller: 'photosController'
     })
 
     // if none of the above states are matched, use this as the fallback
