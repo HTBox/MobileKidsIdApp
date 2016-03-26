@@ -49,10 +49,6 @@ app.factory('storageService', function ($window, $injector) {
 //  // Setup scope for about page
 //});
 
-//app.controller('myChildrenController', function ($scope) {
-//    //My children page
-//});
-
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -77,12 +73,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
-    })
-
-    .state('myChildren', {
-        url: '/mychildren',
-        templateUrl: 'templates/mychildren.html',
-        controller: 'myChildrenController'
     })
 
     .state('instructionIndex', {

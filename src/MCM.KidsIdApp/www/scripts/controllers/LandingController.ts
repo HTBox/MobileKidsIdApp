@@ -12,7 +12,6 @@ class LandingController implements IControllerNavigation {
         this._scope = $scope;
 
         this._navigationLinks = [
-            new NavigationLink("myChildren", "My Children"),
             new NavigationLink("instructionIndex", "Instructions"),
             new NavigationLink("childProfileList", "Child Profiles"),
             new NavigationLink("about", "About"),

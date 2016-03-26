@@ -1,10 +1,10 @@
-﻿/// <reference path="../Definitions/angular.d.ts" />
-/// <reference path="../Services/UserService.ts" />
-/// <reference path="../Definitions/angular-ui-router.d.ts" />
+﻿/// <reference path="../definitions/angular.d.ts" />
+/// <reference path="../services/UserService.ts" />
+/// <reference path="../definitions/angular-ui-router.d.ts" />
 /// <reference path="../models/models.ts" />
 
 module MCM {
-    export class BasicDetailsController {
+    export class DescriptionDetailsController {
 
         //private _scope: any;
         private _state: angular.ui.IStateService;
@@ -19,21 +19,25 @@ module MCM {
             this._state = $state;
             this._ionicPopup = $ionicPopup;
             let childId = $stateParams.childId;
+            let descriptionId = $stateParams.descriptionId;
             childDataService.getById(childId).then(child => {
-                child = child === null ? <Child>{ id: childId } : angular.copy(child);
-                this.doDatePickerSetup(child.childDetails.birthday || new Date());
-                this.child = child;
+                if (child == null)
+                  throw "Child does not exist";
+                child = angular.copy(child);
+                this.description = childDataService.getdescriptionById(child, descriptionId);
             });
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
         }
         
         public child: Child;
+        public descriptions: Array<PersonDescription>;
+        public description: PersonDescription;
         public datepickerObject;
 
         public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {
             if ((originalChild == null) != (editedChild == null)) return true;
-            return !angular.equals(originalChild.childDetails, editedChild.childDetails);
+            return  !angular.equals(originalChild.descriptions, editedChild.descriptions);
         }
 
         public NavigateToPreviousView() {
@@ -64,15 +68,15 @@ module MCM {
         private doDatePickerSetup(defaultDate: Date) {
             //See this page for available options: https://github.com/rajeshwarpatlolla/ionic-datepicker
             this.datepickerObject = {
-                titleLabel: 'Select Date of Birth',
+                titleLabel: 'Select Date',
                 inputDate: defaultDate,
                 templateType: 'popup',
                 to: new Date(),
-                callback: (newDate => { this.child.birthday = newDate; }).bind(this),
+                callback: (newDate => { this.description.measurementDate = newDate; }).bind(this),
             };
         }
         
     }
 }
 
-angular.module('mcmapp').controller('basicDetailsController', MCM.BasicDetailsController);
+angular.module('mcmapp').controller('descriptionDetailsController', MCM.DescriptionDetailsController);
