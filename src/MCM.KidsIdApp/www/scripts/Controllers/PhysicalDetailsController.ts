@@ -20,20 +20,18 @@ module MCM {
             this._ionicPopup = $ionicPopup;
             this.childId = $stateParams.childId;
             childDataService.getPhysicalDetails(this.childId).then(details => {
-              details = details === null ? <PhysicalDetails>{ } : angular.copy(details);
-              this.doDatePickerSetup(details.measurementDate || new Date());
-              this.details = details;
+                details = details == null ?
+                    <PhysicalDetails>{ measurementDate: new Date() } : angular.copy(details);
+                this.details = details;
             });
             this._childDataService = childDataService;
-            this.doDatePickerSetup(null);
         }
 
         public childId: string;        
         public details: PhysicalDetails;
-        public datepickerObject;
 
         public checkChildHasChanges(editedDetails: PhysicalDetails, originalDetails: PhysicalDetails): boolean {
-          if ((originalDetails == null) != (editedDetails == null)) return true;
+          if ((originalDetails === null) != (editedDetails === null)) return true;
           return !angular.equals(originalDetails, editedDetails);
         }
 
@@ -63,19 +61,7 @@ module MCM {
                     this._childDataService.update(child);
                 });
             }
-        }
-
-        private doDatePickerSetup(defaultDate: Date) {
-            //See this page for available options: https://github.com/rajeshwarpatlolla/ionic-datepicker
-            this.datepickerObject = {
-                titleLabel: 'Select Date',
-                inputDate: defaultDate,
-                templateType: 'popup',
-                to: new Date(),
-                callback: (newDate => { this.details.measurementDate = newDate; }).bind(this),
-            };
-        }
-        
+        }        
     }
 }
 

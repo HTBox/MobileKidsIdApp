@@ -7,12 +7,8 @@
                 </button>
 
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Date of Measurements</span>
-                    <ionic-datepicker input-obj="controller.datepickerObject">
-                        <button class="button button-block button-positive">
-                            {{controller.details.measurementDate | date:controller.datepickerObject.dateFormat}}
-                        </button>
-                    </ionic-datepicker>
+                    <span class="input-label">Date recorded</span>
+                    <span class="input-label">{{controller.details.measurementDate | date:'shortDate'}}</span>
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Height</span>
@@ -27,10 +23,6 @@
                     <input type="text" name="hairColor" ng-model="controller.details.hairColor">
                 </label>
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Hair color</span>
-                    <input type="text" name="hairColor" ng-model="controller.details.hairColor">
-                </label>
-                <label class="item item-input item-stacked-label">
                     <span class="input-label">Hair style</span>
                     <input type="text" name="hairStyle" ng-model="controller.details.hairStyle">
                 </label>
@@ -39,12 +31,10 @@
                     <input type="text" name="eyeColor" ng-model="controller.details.eyeColor">
                 </label>
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Eye glasses</span>
-                    <input type="checkbox" name="eyeGlasses" ng-model="controller.details.eyeGlasses">
+                    <ion-checkbox ng-model="controller.details.eyeGlasses">Eye glasses</ion-checkbox>
                 </label>
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Eye contacts</span>
-                    <input type="checkbox" name="eyeContacts" ng-model="controller.details.eyeContacts">
+                    <ion-checkbox ng-model="controller.details.eyeContacts">Eye contacts</ion-checkbox>
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Skin tone</span>
@@ -62,11 +52,6 @@
                     <span class="input-label">Gender identity</span>
                     <input type="text" name="genderIdentity" ng-model="controller.details.genderIdentity">
                 </label>
-                <!--The following is a hidden dummy input for getting form validation to work.-->
-                <input type="text" style="display:none" name="measurementDate" ng-model="controller.details.measurementDate" required />
-                <div ng-show="form.$submitted">
-                    <span ng-show="form.birthday.$error.required">Must enter Date.</span>
-                </div>
 
                 <button type="submit" class="button icon-left ion-archive button-block button-positive"
                         ng-click="controller.saveChanges(form.$valid)">
