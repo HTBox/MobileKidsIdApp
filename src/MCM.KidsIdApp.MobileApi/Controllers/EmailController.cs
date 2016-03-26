@@ -30,6 +30,7 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
 
             var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridApiKey"]);
             transportWeb.DeliverAsync(myMessage);
+            //this seems awfully happy-path to me, y'know
             HttpResponseMessage m = new HttpResponseMessage(HttpStatusCode.OK);
             return m;            
         }
