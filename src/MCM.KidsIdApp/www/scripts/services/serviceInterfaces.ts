@@ -12,7 +12,7 @@ declare module MCM {
     }
 
     interface DocumentInfo {
-        documentMetadata: DocumentMetadata;
+        FileReference: FileReference;
         thumbnailDataURL: string
     }
     

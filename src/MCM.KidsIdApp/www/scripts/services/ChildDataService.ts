@@ -50,7 +50,7 @@ module MCM{
             return this.findChild(id);
         }
 
-        public getdescriptionById(childId: string, descriptionId: string): angular.IPromise<PersonDescription> {
+        public getdescriptionById(childId: string, descriptionId: string): angular.IPromise<PhysicalDetails> {
           this.getById(childId).then(child => {
             if (child == null)
               throw "Child does not exist";
