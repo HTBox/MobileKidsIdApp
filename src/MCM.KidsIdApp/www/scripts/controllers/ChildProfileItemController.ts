@@ -2,46 +2,50 @@
 /// <reference path="../models/models.ts" />
 /// <reference path="IControllerNavigation.ts" />
 
-class ChildProfileItemController implements IControllerNavigation {
-    private _state;
-    private _scope;
-    private _navigationLinks: Array<NavigationLink>;
+module MCM {
+    export class ChildProfileItemController implements IControllerNavigation {
+        private _state;
+        private _scope;
+        private _childId: string;
+        private _navLinks: Array<NavigationLink>;
 
-    constructor($scope, $state) {
-        this._state = $state;
-        this._scope = $scope;
+        constructor($scope, $state, $stateParams: any) {
+            this._state = $state;
+            this._scope = $scope;
+            this._childId = $stateParams.childId;
+            
+            this._navLinks =
+                [
+                    new NavigationLink("basicDetails", "Child Basics", "ion-android-person", "ion-chevron-right"),
+                    new NavigationLink("photos", "Photos", "ion-ios-person-outline", "ion-chevron-right"),
+                    new NavigationLink("measurements", "Measurements", "ion-android-calendar", "ion-chevron-right"),
+                    new NavigationLink("physicalDetails", "Physical Details", "ion-ios-eye", "ion-chevron-right"),
+                    new NavigationLink("doctorInfo", "Doctor Info", "ion-network", "ion-chevron-right"),
+                    new NavigationLink("dentalInfo", "Dental Info", "ion-android-happy", "ion-chevron-right"),
+                    new NavigationLink("medicalAlertInfo", "Medical Alert Info", "ion-medkit", "ion-chevron-right"),
+                    new NavigationLink("distinguishingFeatures", "Distinguishing Features", "ion-ios-body", "ion-chevron-right"),
+                    new NavigationLink("idChecklist", "I.D. Checklist", "ion-checkmark", "ion-chevron-right")
+                ];
+        }
 
-        this._navigationLinks =
-            [
-                new NavigationLink("addPhoto", "Add Photo", "ion-ios-person-outline", "ion-chevron-right"),
-                new NavigationLink("childBasics", "Child Basics", "ion-android-person", "ion-chevron-right"),
-                new NavigationLink("measurements", "Measurements", "ion-android-calendar", "ion-chevron-right"),
-                new NavigationLink("physicalDetails", "Physical Details", "ion-ios-eye", "ion-chevron-right"),
-                new NavigationLink("doctorInfo", "Doctor Info", "ion-network", "ion-chevron-right"),
-                new NavigationLink("dentalInfo", "Dental Info", "ion-android-happy", "ion-chevron-right"),
-                new NavigationLink("medicalAlertInfo", "Medical Alert Info", "ion-medkit", "ion-chevron-right"),
-                new NavigationLink("distinguishingFeatures", "Distinguishing Features", "ion-ios-body", "ion-chevron-right"),
-                new NavigationLink("idChecklist", "I.D. Checklist", "ion-checkmark", "ion-chevron-right")
-            ];
-    }
+        public static $inject = ["$scope", "$state", "$stateParams"]
 
-    public static $inject = ["$scope", "$state"]
+        public NavigateToHomeScreen() {
+            this.NavigateTo('landing');
+        }
 
-    public NavigateToHomeScreen() {
-        this.NavigateTo('landing');
-    }
+        public NavigateToPreviousView() {
+            this.NavigateTo('childProfileList');
+        }
 
-    public NavigateToPreviousView() {
-        this.NavigateTo('childProfileList');
-    }
+        public NavigationLinks() {
+            return this._navLinks;
+        }
 
-    public NavigationLinks() {
-        return this._navigationLinks;
-    }
-
-    public NavigateTo(pStateName: string) {
-        this._state.go(pStateName);
+        public NavigateTo(pStateName: string) {
+            this._state.go(pStateName, { childId: this._childId });
+        }
     }
 }
 
-angular.module('mcmapp').controller('childProfileItemController', ChildProfileItemController);
+angular.module('mcmapp').controller('childProfileItemController', MCM.ChildProfileItemController);

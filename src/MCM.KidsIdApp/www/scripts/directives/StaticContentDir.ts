@@ -12,7 +12,7 @@ module MCM{
 
       },
       templateUrl: 'templates/static-content.html',
-      controller:MCM.StaticContentCtrl
+      //controller:MCM.StaticContentCtrl
     }
   }
 }

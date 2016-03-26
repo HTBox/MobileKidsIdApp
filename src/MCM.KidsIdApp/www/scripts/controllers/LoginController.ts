@@ -25,20 +25,24 @@ module MCM {
 
     public signIn (service) {
         const that = this;
-        var mobileService = new WindowsAzure.MobileServiceClient(
-            "http://mobilekidsidapp.azurewebsites.net",
-            null
-        );
-        mobileService.login(service).done(
-            function success(user) {
-                that.userService.someMethod('foo')
-                    .then( function (param) {
-                        console.log('in .then with param=' + param);
-                        that.state.go('landing');
-                    });
-            }, function error(error) {
-                console.error('Failed to login: ', error);
-            });
+        if (service == 'test') {
+            that.state.go('landing');
+        } else {
+            var mobileService = new WindowsAzure.MobileServiceClient(
+                "http://mobilekidsidapp.azurewebsites.net",
+                null
+            );
+            mobileService.login(service).done(
+                function success(user) {
+                    that.userService.someMethod('foo')
+                        .then(function (param) {
+                            console.log('in .then with param=' + param);
+                            that.state.go('landing');
+                        });
+                }, function error(error) {
+                    console.error('Failed to login: ', error);
+                });
+        }
     }
   }
 }
