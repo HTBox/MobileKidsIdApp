@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Web.Http;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace MCM.KidsIdApp.MobileApp.Controllers
 {
@@ -24,7 +25,8 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
             myMessage.Subject = "Your Details";
             myMessage.Text = value.Profile.ToString();
 
-            var transportWeb = new Web("key goes here");
+            var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridApiKey"]);
+
             transportWeb.DeliverAsync(myMessage).Wait();
         }
     }
