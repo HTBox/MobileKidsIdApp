@@ -1,0 +1,18 @@
+﻿<ion-view view-title="Missing Children Minnesota">
+    <ion-content>
+        <div ng-controller="distinguishingFeaturesController as controller">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="controller.NavigateToPreviousView()">
+                Distinguishing Features
+            </button>
+            <div class="padding">
+                <ul>
+                    <li ng-repeat="link in lc.NavigationLinks()">
+                        <button class="button button-block button-positive" ng-click="lc.NavigateTo(link.ControllerTarget)">
+                            {{link.LinkText}}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
