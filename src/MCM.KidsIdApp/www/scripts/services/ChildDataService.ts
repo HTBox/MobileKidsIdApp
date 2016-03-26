@@ -61,11 +61,10 @@ module MCM{
             return this.findChild(id);
         }
 
-        public getdescriptionById(childId: string, descriptionId: string): angular.IPromise<PhysicalDetails> {
+        public getPhysicalDetails(childId: string): angular.IPromise<PhysicalDetails> {
           return this.getById(childId).then(child => {
             if (child == null)
               throw "Child does not exist";
-            let foundChild = angular.copy(child);
             return child.physicalDetails;
           });
         }

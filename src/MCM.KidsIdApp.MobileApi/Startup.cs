@@ -9,6 +9,7 @@ namespace MCM.KidsIdApp.MobileApp
     {
         public void Configuration(IAppBuilder app)
         {
+            
             ConfigureMobileApp(app);
         }
     }

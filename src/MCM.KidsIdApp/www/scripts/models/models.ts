@@ -25,7 +25,6 @@ interface Person {
 }
 
 interface PhysicalDetails{
-    id : string
     height?: string
     weight?: string
     measurementDate?: Date
