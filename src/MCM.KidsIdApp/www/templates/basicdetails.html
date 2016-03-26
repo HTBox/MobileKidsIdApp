@@ -8,18 +8,18 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">First Name</span>
-                    <input type="text" name="givenName" ng-model="bscDtl.child.givenName" required>
+                    <input type="text" name="givenName" ng-model="bscDtl.child.childDetails.givenName" required>
                 </label>
                 <div ng-show="form.$submitted">
                     <span ng-show="form.givenName.$error.required">Must enter First Name.</span>
                 </div>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Middle Name</span>
-                    <input type="text" name="additionalName" ng-model="bscDtl.child.additionalName" >
+                    <input type="text" name="additionalName" ng-model="bscDtl.child.childDetails.additionalName" >
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Last Name</span>
-                    <input type="text" name="familyName" ng-model="bscDtl.child.familyName" required>
+                    <input type="text" name="familyName" ng-model="bscDtl.child.childDetails.familyName" required>
                 </label>
                 <div ng-show="form.$submitted">
                     <span ng-show="form.familyName.$error.required">Must enter Last Name.</span>
@@ -28,14 +28,14 @@
                     <span class="input-label">Date of Birth</span>
                     <ionic-datepicker input-obj="bscDtl.datepickerObject">
                         <button class="button button-block button-positive">
-                            {{bscDtl.child.bday | date:bscDtl.datepickerObject.dateFormat}}
+                            {{bscDtl.child.childDetails.birthday | date:bscDtl.datepickerObject.dateFormat}}
                         </button>
                     </ionic-datepicker>
                 </label>
                 <!--The following is a hidden dummy input for getting form validation to work.-->
-                <input type="text" style="display:none" name="bday" ng-model="bscDtl.child.bday" required />
+                <input type="text" style="display:none" name="birthday" ng-model="bscDtl.child.childDetails.birthday" required />
                 <div ng-show="form.$submitted">
-                    <span ng-show="form.bday.$error.required">Must enter Birthday.</span>
+                    <span ng-show="form.birthday.$error.required">Must enter Birthday.</span>
                 </div>
 
                 <button type="submit" class="button icon-left ion-archive button-block button-positive" 
