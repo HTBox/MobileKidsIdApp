@@ -17,7 +17,7 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
     public class EmailController : ApiController
     {
         // POST: api/Email
-        public void Post([FromBody]dynamic value)
+        public HttpResponseMessage Post([FromBody]dynamic value)
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(value.emailAddress.ToString());
@@ -29,8 +29,9 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
             myMessage.Text = value.profile.ToString();
 
             var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridApiKey"]);
-
             transportWeb.DeliverAsync(myMessage);
+            HttpResponseMessage m = new HttpResponseMessage(HttpStatusCode.OK);
+            return m;            
         }
     }
 }
