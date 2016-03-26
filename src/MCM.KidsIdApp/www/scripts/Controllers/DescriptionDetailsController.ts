@@ -18,17 +18,17 @@ module MCM {
             //this._scope = $scope;
             this._state = $state;
             this._ionicPopup = $ionicPopup;
-            this.childId = $stateParams.childId;
-            childDataService.getPhysicalDetails(this.childId).then(details => {
-              details = details === null ? <PhysicalDetails>{ } : angular.copy(details);
-              this.doDatePickerSetup(details.measurementDate || new Date());
-              this.details = details;
+            this._childId = $stateParams.childId;
+            childDataService.getPhysicalDetails(this._childId).then(details => {
+                details = details === null ? <PhysicalDetails>{ } : angular.copy(details);
+                this.doDatePickerSetup(details.measurementDate || new Date());
+                this.details = details;
             });
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
         }
 
-        public childId: string;        
+        private _childId: string;        
         public details: PhysicalDetails;
         public datepickerObject;
 
@@ -38,11 +38,11 @@ module MCM {
         }
 
         public NavigateToPreviousView() {
-            let hasChangesPromise = this._childDataService.getPhysicalDetails(this.childId)
+            let hasChangesPromise = this._childDataService.getPhysicalDetails(this._childId)
               .then(dtl => this.checkChildHasChanges(this.details, dtl));
             
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileItem", { childId: this.childId });
+                let go = () => this._state.go("childProfileItem", { childId: this._childId });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',
@@ -58,10 +58,10 @@ module MCM {
 
         public saveChanges(formValid: boolean) {
             if (formValid) {
-                this._childDataService.getById(this.childId).then(child => {
+                this._childDataService.getById(this._childId).then(child => {
                     child.physicalDetails = this.details;
                     this._childDataService.update(child);
-                }
+                });
             }
         }
 

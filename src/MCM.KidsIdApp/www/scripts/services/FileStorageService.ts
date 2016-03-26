@@ -4,8 +4,6 @@
 
 declare let cordova: Cordova
 
-let storageFileName = "mcmKidsIdApp.txt";
-
 module MCM {
     export class FileStorageService implements IStorageService {
 
@@ -17,8 +15,8 @@ module MCM {
             this.$q = $q;
         }
 
-        public storeText(text: string): angular.IPromise<void> {
-            return this.storeData([text], 'text/plain', storageFileName);
+        public storeText(fileName: string, text: string): angular.IPromise<void> {
+            return this.storeData([text], 'text/plain', fileName);
         }
         public storeData(data: any[], dataType: string, fileName: string): angular.IPromise<void> {
             let blob: Blob = blobUtil.createBlob(data, { type: dataType });
@@ -57,14 +55,14 @@ module MCM {
         }
 
 
-        retrieveText(): angular.IPromise<string> {
+        public retrieveText(fileName: string): angular.IPromise<string> {
             let deferred = this.$q.defer<string>();
             //let success = () => {
             //    console.log("Decrypt using Safe succeeded.");
     
                 window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
 
-                    dir.getFile(storageFileName, { create: true }, fileEntry => {
+                    dir.getFile(fileName, { create: true }, fileEntry => {
                 
                         fileEntry.file(file => {
                             let reader = new FileReader();
