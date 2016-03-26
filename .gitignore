@@ -243,4 +243,5 @@ src/MCM.KidsIdApp/www/scripts/appBundle.js
 *.js.map
 /src/MCM.KidsIdApp/spec-out
 src/MCM.KidsIdApp/www/lib/ionic-datepicker
+/src/MCM.KidsIdApp/www/lib/blob-util
 src/MCM.KidsIdApp.MobileApi/Web.Debug.config

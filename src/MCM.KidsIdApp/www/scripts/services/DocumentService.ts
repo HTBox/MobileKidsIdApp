@@ -14,8 +14,8 @@ module MCM {
 
         
         public getDocumentInfos(childId: string): angular.IPromise<Array<DocumentInfo>> {
-            let docMetadatasPromise = this.childDataService.getById(childId).then(child => child.documentMetadatas);
-            let promises = docMetadatasPromise.then(docMetadatas => (docMetadatas || []).map(docMetaData => {
+            let photosPromise = this.childDataService.getById(childId).then(child => child.photos);
+            let promises = photosPromise.then(docMetadatas => (docMetadatas || []).map(docMetaData => {
                 let thumbnailDataURLpromise: angular.IPromise<string>;
                 if (docMetaData.thumbnailFileName) {
                     thumbnailDataURLpromise = this.storageService.retrieveFile(docMetaData.thumbnailFileName)
@@ -37,13 +37,13 @@ module MCM {
                     this.storageService.deleteFile(docInfo.FileReference.thumbnailFileName) : null;
             let removeDocMetadataPromise = this.childDataService.getById(childId).then(child => {
                 let docIndex: number;
-                for (var i = 0; i <= child.documentMetadatas.length - 1; i++) {
-                    if (child.documentMetadatas[i].fileName === docInfo.FileReference.fileName) {
+                for (var i = 0; i <= child.photos.length - 1; i++) {
+                    if (child.photos[i].fileName === docInfo.FileReference.fileName) {
                         docIndex = i;
                         break;
                     }
                 }
-                child.documentMetadatas.splice(docIndex, 1);
+                child.photos.splice(docIndex, 1);
             });
             return this.$q.all([deleteFilePromise, deleteThumbnailPromise, removeDocMetadataPromise]) as any;
         }
@@ -96,9 +96,9 @@ module MCM {
                     FileReference: docMetadata,
                     thumbnailDataURL: mythumbnailDataURL
                 };
-                if (!theChild.documentMetadatas)
-                    theChild.documentMetadatas = [];
-                theChild.documentMetadatas.push(docMetadata);
+                if (!theChild.photos)
+                    theChild.photos = [];
+                theChild.photos.push(docMetadata);
                 return this.childDataService.update(theChild) as any;
             });
         }
