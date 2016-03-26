@@ -16,6 +16,7 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
     public class EmailController : ApiController
     {
         // POST: api/Email
+        public void Post([FromBody]dynamic value)
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(value.EmailAddress.ToString());
