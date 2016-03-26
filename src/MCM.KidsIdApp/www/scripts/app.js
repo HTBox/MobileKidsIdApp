@@ -7,7 +7,7 @@ var app = angular.module('mcmapp', ['ionic', 'ionic-datepicker'])
 app.factory('storageService', function ($window, $injector) {
     //Could also have used a provider for this instead of a factory, but then we can't use the $injector
     // for instantiating the storage service implementation which is annoying.
-    if ($window.tinyHippos) {
+    if ($window.tinyHippos || !window.cordova) {
         console.log("Detected Ripple emulator. Using InMemoryStorageService instead of FileStorageService.");
         return $injector.get('inMemoryStorageService');
     } else {
@@ -125,6 +125,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/photos/:childId',
         templateUrl: 'templates/photos.html',
         controller: 'photosController'
+    })
+    
+    .state('measurements', {
+        url: 'measurements/:childId',
+        templateUrl: 'templates/measurements.html',
+        controller: 'measurementsController'
     })
 
     // if none of the above states are matched, use this as the fallback
