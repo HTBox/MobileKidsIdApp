@@ -37,7 +37,7 @@ module MCM {
 
         getDefaultApplicationData(): ApplicationData {
             throw "getDefaultApplicationData not implemented.";
-            return <ApplicationData>{ };
+            //return <ApplicationData>{ };
         }
 
     }
