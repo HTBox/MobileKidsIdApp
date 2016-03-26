@@ -50,6 +50,16 @@ module MCM{
             return this.findChild(id);
         }
 
+        public getdescriptionById(childId: string, descriptionId: string): angular.IPromise<PersonDescription> {
+          this.getById(childId).then(child => {
+            if (child == null)
+              throw "Child does not exist";
+            let foundChild = angular.copy(child);
+            let descriptions = child.descriptions;
+            let description = descriptions.filter(m => m.id == descriptionId)[0];
+          });
+        }
+
         public update(upd: Child): angular.IPromise<Child | boolean> {
             if(!upd || !upd.id){
                 return this.$q.resolve(false);

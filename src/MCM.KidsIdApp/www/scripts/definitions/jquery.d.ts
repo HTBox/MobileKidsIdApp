@@ -1119,7 +1119,7 @@ interface JQueryStatic {
    *
    * @param data a well-formed XML string to be parsed
    */
-  parseXML(data: string): XMLDocument;
+  parsexML(data: string): XMLDocument;
 
   /**
    * Remove the whitespace from the beginning and end of a string.

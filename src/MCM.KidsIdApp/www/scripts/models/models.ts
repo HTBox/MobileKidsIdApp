@@ -24,34 +24,13 @@ interface UserIdentity{
 
 interface Person {    
     id: string    
-    //Honorific - prefix - e.g.Mrs., Mr.or Dr.
-    honorific?: string
-    //e.g. first name
-    givenName: string
-    //p - additional - name - other / middle name
-    additionalName?: string
-    //p - family - name - family(often last) name
-    familyName: string
-    //    p - nickname - nickname / alias / handle
-    nickname?: string
-    email?: string
-    //URL to home page
-    url?: string
-    addresses?: Array<Address>
-    //Telephone number
-    tel?: string
-    jobTitle?: string
-    sex?: string
-    genderIdentity?: string
-    //Birthday
-    bday?: Date
-    notes?: string
     photo?: ResourceReference
     contact?: ResourceReference
     version?: EntityHistoryToken    
 }
 
 interface PersonDescription{
+    id : string
     height?: string
     weight?: string
     measurementDate?: Date
@@ -62,6 +41,8 @@ interface PersonDescription{
     eyeContacts?: boolean
     skinTone?: string
     racialEthnicIdentity?: string 
+    gender?: string
+    genderIdentity?: string
 }
 
 interface MedicalNotes{
@@ -77,25 +58,6 @@ interface MedicalNotes{
 interface DistinguishingFeature{
     description: string
     resource : ResourceReference
-}
-
-interface Address {
-    /// House / apartment number, floor, street name
-    streetAddress?: string
-    //Additional street details
-    extendedAddress?: string
-    //post office mailbox
-    postOfficeBox?: string
-    //city / town / village
-    locality?: string
-    //state / county / province
-    region?: string
-    //postal code, e.g.ZIP in the US
-    postalCode?: string
-    //should be full name of country, country code ok
-    countryName?: string
-    ////a mailing label, plain text, perhaps with preformatting
-    notes?: string    
 }
 
 interface PreparationChecklist {
@@ -123,8 +85,20 @@ interface SharePolicy{
 
 // IMPLEMENTATION CLASSES
 
-interface Child extends Person {
-    physicalDescription?: PersonDescription
+interface ChildDetails extends Person {
+  //e.g. first name
+  givenName: string
+  //p - additional - name - other / middle name
+  additionalName?: string
+  //p - family - name - family(often last) name
+  familyName: string
+  birthday?: Date
+}
+
+interface Child {
+    id: string    
+    childDetails : ChildDetails
+    descriptions?: Array<PersonDescription>
     distinguishingFeatures?: Array<DistinguishingFeature>     
     professionalCareProviders?: Array<CareProvider>
     familyMembers?: Array<FamilyMember>
