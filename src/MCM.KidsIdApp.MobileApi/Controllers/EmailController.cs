@@ -20,14 +20,14 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
         public void Post([FromBody]dynamic value)
         {
             var myMessage = new SendGridMessage();
-            myMessage.AddTo(value.EmailAddress.ToString());
+            myMessage.AddTo(value.emailAddress.ToString());
             myMessage.From = new MailAddress("dan@dnord.com", "Dan Nordquist");
             myMessage.Subject = "Your Details";
-            myMessage.Text = value.Profile.ToString();
+            myMessage.Text = value.profile.ToString();
 
             var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridApiKey"]);
 
-            transportWeb.DeliverAsync(myMessage).Wait();
+            transportWeb.DeliverAsync(myMessage);
         }
     }
 }
