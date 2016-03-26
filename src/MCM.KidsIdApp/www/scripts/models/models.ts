@@ -90,7 +90,7 @@ interface Child {
     medicalNotes?: MedicalNotes    
     checklist?: PreparationChecklist
     documents?: Array<FileReference>
-    photos?: ResourceReference
+    photos?: Array<FileReference>
 }
 
 interface CareProvider extends Person {

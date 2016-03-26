@@ -24,7 +24,9 @@ module MCM {
                 if (child == null)
                   throw "Child does not exist";
                 child = angular.copy(child);
-                this.description = childDataService.getdescriptionById(child, descriptionId);
+                childDataService.getdescriptionById(childId, descriptionId).then(physicalDetails => {
+                    this.physicalDetails = physicalDetails;
+                });
             });
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
@@ -32,12 +34,12 @@ module MCM {
         
         public child: Child;
         public descriptions: Array<PhysicalDetails>;
-        public description: PhysicalDetails;
+        public physicalDetails: PhysicalDetails;
         public datepickerObject;
 
         public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {
             if ((originalChild == null) != (editedChild == null)) return true;
-            return  !angular.equals(originalChild.descriptions, editedChild.descriptions);
+            return !angular.equals(originalChild.physicalDetails, editedChild.physicalDetails);
         }
 
         public NavigateToPreviousView() {
@@ -72,7 +74,7 @@ module MCM {
                 inputDate: defaultDate,
                 templateType: 'popup',
                 to: new Date(),
-                callback: (newDate => { this.description.measurementDate = newDate; }).bind(this),
+                callback: (newDate => { this.physicalDetails.measurementDate = newDate; }).bind(this),
             };
         }
         
