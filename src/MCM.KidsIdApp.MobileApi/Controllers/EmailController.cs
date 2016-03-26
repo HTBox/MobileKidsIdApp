@@ -21,7 +21,10 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(value.emailAddress.ToString());
-            myMessage.From = new MailAddress("dan@dnord.com", "Dan Nordquist");
+            myMessage.From = new MailAddress(
+                ConfigurationManager.AppSettings["EmailFromAddress"],
+                ConfigurationManager.AppSettings["EmailFromName"]
+                );
             myMessage.Subject = "Your Details";
             myMessage.Text = value.profile.ToString();
 
