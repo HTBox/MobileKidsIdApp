@@ -1,5 +1,6 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../models/models.ts" />
+/// <reference path="IControllerNavigation.ts" />
 
 class AboutController implements IControllerNavigation {
     private _state;
