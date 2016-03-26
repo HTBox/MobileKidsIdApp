@@ -25,14 +25,23 @@ namespace MCM.KidsIdApp.MobileApp.Controllers
                 ConfigurationManager.AppSettings["EmailFromAddress"],
                 ConfigurationManager.AppSettings["EmailFromName"]
                 );
-            myMessage.Subject = "Your Details";
-            myMessage.Text = value.profile.ToString();
+            myMessage.Subject = "Your KidsID Profile Details";
+            myMessage.Text = GetFormattedBody(value.profile);
 
             var transportWeb = new Web(ConfigurationManager.AppSettings["SendGridApiKey"]);
             transportWeb.DeliverAsync(myMessage);
             //this seems awfully happy-path to me, y'know
             HttpResponseMessage m = new HttpResponseMessage(HttpStatusCode.OK);
             return m;            
+        }
+
+        private string GetFormattedBody(dynamic profile)
+        {
+            string body = "You are recieving this email because a user of the KidsID app is sending you profile information for a child." + Environment.NewLine + Environment.NewLine;
+            body += "Profile details have been attached, but only those that you selected." + Environment.NewLine + Environment.NewLine;
+            body += "Authorities can use this data to communicate or create alerts for a child. Forward this email to authorities if necessary." + Environment.NewLine + Environment.NewLine;
+            body += profile.ToString() + Environment.NewLine + Environment.NewLine;
+            return body;
         }
     }
 }
