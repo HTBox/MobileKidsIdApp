@@ -18,8 +18,7 @@ module MCM {
                 [
                     new NavigationLink("basicDetails", "Child Basics", "ion-android-person", "ion-chevron-right"),
                     new NavigationLink("photos", "Photos", "ion-ios-person-outline", "ion-chevron-right"),
-                    new NavigationLink("measurements", "Measurements", "ion-android-calendar", "ion-chevron-right"),
-                    new NavigationLink("physicalDetails", "Physical Details", "ion-ios-eye", "ion-chevron-right"),
+                    new NavigationLink("descriptionDetails", "Physical Details", "ion-ios-eye", "ion-chevron-right"),
                     new NavigationLink("doctorInfo", "Doctor Info", "ion-network", "ion-chevron-right"),
                     new NavigationLink("dentalInfo", "Dental Info", "ion-android-happy", "ion-chevron-right"),
                     new NavigationLink("medicalAlertInfo", "Medical Alert Info", "ion-medkit", "ion-chevron-right"),

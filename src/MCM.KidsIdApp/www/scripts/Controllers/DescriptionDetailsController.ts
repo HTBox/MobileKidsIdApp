@@ -18,34 +18,31 @@ module MCM {
             //this._scope = $scope;
             this._state = $state;
             this._ionicPopup = $ionicPopup;
-            let childId = $stateParams.childId;
-            let descriptionId = $stateParams.descriptionId;
-            childDataService.getById(childId).then(child => {
-                if (child == null)
-                  throw "Child does not exist";
-                child = angular.copy(child);
-                this.description = childDataService.getdescriptionById(child, descriptionId);
+            this.childId = $stateParams.childId;
+            childDataService.getPhysicalDetails(this.childId).then(details => {
+              details = details === null ? <PhysicalDetails>{ } : angular.copy(details);
+              this.doDatePickerSetup(details.measurementDate || new Date());
+              this.details = details;
             });
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
         }
-        
-        public child: Child;
-        public descriptions: Array<PhysicalDetails>;
-        public description: PhysicalDetails;
+
+        public childId: string;        
+        public details: PhysicalDetails;
         public datepickerObject;
 
-        public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {
-            if ((originalChild == null) != (editedChild == null)) return true;
-            return  !angular.equals(originalChild.descriptions, editedChild.descriptions);
+        public checkChildHasChanges(editedDetails: PhysicalDetails, originalDetails: PhysicalDetails): boolean {
+          if ((originalDetails == null) != (editedDetails == null)) return true;
+          return !angular.equals(originalDetails, editedDetails);
         }
 
         public NavigateToPreviousView() {
-            let hasChangesPromise = this._childDataService.get(this.child)
-                    .then(chld => this.checkChildHasChanges(this.child, chld));
+            let hasChangesPromise = this._childDataService.getPhysicalDetails(this.childId)
+              .then(dtl => this.checkChildHasChanges(this.details, dtl));
             
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileItem", { childId: this.child.id });
+                let go = () => this._state.go("childProfileItem", { childId: this.childId });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',
@@ -61,7 +58,10 @@ module MCM {
 
         public saveChanges(formValid: boolean) {
             if (formValid) {
-                this._childDataService.update(this.child);
+                this._childDataService.getById(this.childId).then(child => {
+                    child.physicalDetails = this.details;
+                    this._childDataService.update(child);
+                }
             }
         }
 
@@ -72,7 +72,7 @@ module MCM {
                 inputDate: defaultDate,
                 templateType: 'popup',
                 to: new Date(),
-                callback: (newDate => { this.description.measurementDate = newDate; }).bind(this),
+                callback: (newDate => { this.details.measurementDate = newDate; }).bind(this),
             };
         }
         
