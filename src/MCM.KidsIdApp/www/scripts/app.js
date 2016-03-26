@@ -117,12 +117,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'photosController'
     })
     
-    .state('measurements', {
-        url: 'measurements/:childId',
-        templateUrl: 'templates/measurements.html',
-        controller: 'measurementsController'
+    .state('idChecklist', {
+        url: 'idchecklist/:childId',
+        templateUrl: 'templates/idchecklist.html',
+        controller: 'idChecklistController'
     })
-
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 

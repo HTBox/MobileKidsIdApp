@@ -80,9 +80,9 @@ interface ChildDetails {
 
 interface Child {
     id: string    
-    childDetails : ChildDetails
+    childDetails: ChildDetails
     physicalDetails?: PhysicalDetails
-    distinguishingFeatures?: Array<DistinguishingFeature>     
+    distinguishingFeatures?: Array<DistinguishingFeature>
     professionalCareProviders?: Array<CareProvider>
     familyMembers?: Array<FamilyMember>
     friends?: Array<Person>
