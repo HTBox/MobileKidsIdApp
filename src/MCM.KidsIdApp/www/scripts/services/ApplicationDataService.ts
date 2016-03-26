@@ -16,9 +16,11 @@ module MCM {
 
         public static $inject = ["storageService"]
 
+        private saveFileName: string = "ApplicationData.json"
+
         getApplicationData(): ng.IPromise<ApplicationData> {
             if (!this.applicationDataPromise) {
-                this.applicationDataPromise = this.storageService.retrieveText()
+                this.applicationDataPromise = this.storageService.retrieveText(this.saveFileName)
                     .then(fileText => {
                         return fileText ? JSON.parse(fileText) : this.getDefaultApplicationData();
                     }, err => console.log(err));
@@ -29,12 +31,13 @@ module MCM {
         saveApplicationData(): ng.IPromise<void> {
             return this.applicationDataPromise.then(applicationData => {
                 let saveText = JSON.stringify(applicationData);
-                return this.storageService.storeText(saveText);
+                return this.storageService.storeText(this.saveFileName, saveText);
             });
         }
 
         getDefaultApplicationData(): ApplicationData {
-            return <ApplicationData>{ Family: <Family>{children: []}};
+            throw "getDefaultApplicationData not implemented.";
+            //return <ApplicationData>{ };
         }
 
     }

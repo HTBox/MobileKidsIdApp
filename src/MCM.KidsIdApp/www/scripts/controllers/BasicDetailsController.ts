@@ -1,6 +1,10 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../Services/UserService.ts" />
+/// <reference path="../Services/ChildDataService.ts" />
 /// <reference path="../Definitions/angular-ui-router.d.ts" />
+/// <reference path="../Definitions/ionic/ionic.d.ts" />
+/// <reference path="../models/models.ts" />
+/// <reference path="../Definitions/contacts.d.ts" />
 
 module MCM {
     export class BasicDetailsController {
@@ -19,31 +23,32 @@ module MCM {
             this._ionicPopup = $ionicPopup;
             let childId = $stateParams.childId;
             childDataService.getById(childId).then(child => {
-                child = child === null ? <Child>{ id: childId } : angular.copy(child);
-                this.doDatePickerSetup(child.bday || new Date());
-                this.child = child;
+                const childDetails = (child && child.childDetails) ?
+                        angular.copy(child.childDetails) : <ChildDetails>{ givenName: "", familyName: "" };
+                this.doDatePickerSetup(childDetails.birthday || new Date());
+                this.childDetails = childDetails;
             });
+            this._childId = childId;
             this._childDataService = childDataService;
             this.doDatePickerSetup(null);
         }
         
-        public child: Child;
+        private _childId: string
+        public childDetails: ChildDetails;
         public datepickerObject;
 
-        public checkChildHasChanges(editedChild: Child, originalChild: Child): boolean {
-            if ((originalChild == null) != (editedChild == null)) return true;
-            return originalChild.givenName != editedChild.givenName
-                || originalChild.additionalName != editedChild.additionalName
-                || originalChild.familyName != editedChild.familyName
-                || !angular.equals(originalChild.bday, editedChild.bday);
+        public checkChildDetailsHasChanges(editedChildDetails: ChildDetails,
+                        originalChildDetails: ChildDetails): boolean {
+            if ((originalChildDetails == null) != (editedChildDetails == null)) return true;
+            return !angular.equals(originalChildDetails, editedChildDetails);
         }
 
         public NavigateToPreviousView() {
-            let hasChangesPromise = this._childDataService.get(this.child)
-                    .then(chld => this.checkChildHasChanges(this.child, chld));
+            let hasChangesPromise = this._childDataService.getById(this._childId)
+                .then(chld => this.checkChildDetailsHasChanges(this.childDetails, chld.childDetails));
             
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileItem", { childId: this.child.id });
+                let go = () => this._state.go("childProfileItem", { childId: this._childId });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',
@@ -59,7 +64,13 @@ module MCM {
 
         public saveChanges(formValid: boolean) {
             if (formValid) {
-                this._childDataService.update(this.child);
+                return this._childDataService.getById(this._childId).then(child => {
+                    if (!child) {
+                        child = <Child>{ id: this._childId };
+                    }
+                    child.childDetails = this.childDetails;
+                    return this._childDataService.update(child);
+                });
             }
         }
 
@@ -67,26 +78,22 @@ module MCM {
             //See this page for available options: https://github.com/rajeshwarpatlolla/ionic-datepicker
             this.datepickerObject = {
                 titleLabel: 'Select Date of Birth',
-                //todayLabel: 'Today',
-                //closeLabel: 'Close',
-                //setLabel: 'Set',
-                //setButtonType: 'button-assertive',
-                //todayButtonType: 'button-assertive',
-                //closeButtonType: 'button-assertive',
                 inputDate: defaultDate,
-                //mondayFirst: true,  //Optional
                 templateType: 'popup',
-                //showTodayButton: 'true',
-                //modalHeaderColor: 'bar-positive',
-                //modalFooterColor: 'bar-positive',
                 to: new Date(),
-                callback: (newDate => { this.child.bday = newDate; }).bind(this),
-                //dateFormat: 'MM-dd-yyyy',
-                //closeOnSelect: false,
+                callback: (newDate => { this.childDetails.birthday = newDate; }).bind(this),
             };
         }
         
+        public test() {
+            navigator.contacts.pickContact(function (contact) {
+                console.log('The following contact has been selected:' + JSON.stringify(contact));
+            }, function (err) {
+                console.log('Error: ' + err);
+            });
     }
+
+}
 }
 
 angular.module('mcmapp').controller('basicDetailsController', MCM.BasicDetailsController);

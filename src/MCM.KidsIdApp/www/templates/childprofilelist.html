@@ -12,7 +12,7 @@
             <div class="list">
                 <a class="item item-icon-right" href="#" ng-repeat="chld in cplc.children track by $index">
                     <!-- Make the name element display block style so it fills the space and makes it easier to click.-->
-                    <i style="display:block" ng-click="cplc.editChild(chld)">{{chld.givenName}}</i>
+                    <i style="display:block" ng-click="cplc.editChild(chld)">{{chld.childDetails.givenName}}</i>
                     <i class="icon ion-close assertive" ng-click="cplc.removeChild(chld)"></i>
                 </a>
             </div>

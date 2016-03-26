@@ -6,9 +6,9 @@
 module MCM{
     export class ChildDataService{
 
-        public static $inject = ['$q', 'applicationDataService'];
+        public static $inject = ['$q', 'storageService'];
 
-        constructor(private $q: angular.IQService, private applicationDataService: ApplicationDataService){
+        constructor(private $q: angular.IQService, private storageService: IStorageService){
             
         }
 
@@ -39,15 +39,34 @@ module MCM{
             return this.findChild(get.id);
         }
 
+        private saveFileName: string = "family.json";
+        private family: Family;
+        private getFamilyPromise: angular.IPromise<Family>;
+
         public getAllChildren(): angular.IPromise<Child[]> {
             //return [<Child>{ id: "", givenName: "Fred", familyName: "" }];
             //return this.$q.resolve([<Child>{ id: "", givenName: "Fred", familyName: "" }]);
-            return this.applicationDataService.getApplicationData()
-                .then(appData => appData.Family.children);
+            if (!this.getFamilyPromise) {
+                this.getFamilyPromise = this.storageService.retrieveText(this.saveFileName)
+                    .then(familyJSON => {
+                        this.family = familyJSON ? (JSON.parse(familyJSON) as Family) : <Family>{ children: [] }
+                        return this.family;
+                    });
+            }
+            return this.getFamilyPromise.then(_ => this.family.children);
         }
+
 
         public getById(id: string): angular.IPromise<Child> {
             return this.findChild(id);
+        }
+
+        public getPhysicalDetails(childId: string): angular.IPromise<PhysicalDetails> {
+          return this.getById(childId).then(child => {
+            if (child == null)
+              throw "Child does not exist";
+            return child.physicalDetails;
+          });
         }
 
         public update(upd: Child): angular.IPromise<Child | boolean> {
@@ -115,8 +134,11 @@ module MCM{
         }
         
         private saveChanges(): angular.IPromise<void> {
-            return this.applicationDataService.saveApplicationData();
+            //Need to make sure the family has finished being populated from disk before saving back to disk.
+            return this.getAllChildren()
+                .then(_ => this.storageService.storeText(this.saveFileName, JSON.stringify(this.family)));
         }
+
     }
 }
 

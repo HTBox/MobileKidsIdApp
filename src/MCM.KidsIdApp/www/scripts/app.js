@@ -7,7 +7,7 @@ var app = angular.module('mcmapp', ['ionic', 'ionic-datepicker'])
 app.factory('storageService', function ($window, $injector) {
     //Could also have used a provider for this instead of a factory, but then we can't use the $injector
     // for instantiating the storage service implementation which is annoying.
-    if ($window.tinyHippos) {
+    if ($window.tinyHippos || !window.cordova) {
         console.log("Detected Ripple emulator. Using InMemoryStorageService instead of FileStorageService.");
         return $injector.get('inMemoryStorageService');
     } else {
@@ -49,10 +49,6 @@ app.factory('storageService', function ($window, $injector) {
 //  // Setup scope for about page
 //});
 
-//app.controller('myChildrenController', function ($scope) {
-//    //My children page
-//});
-
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -77,12 +73,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/landing',
         templateUrl: 'templates/landingpage.html',
         controller: 'landingController'
-    })
-
-    .state('myChildren', {
-        url: '/mychildren',
-        templateUrl: 'templates/mychildren.html',
-        controller: 'myChildrenController'
     })
 
     .state('instructionIndex', {
@@ -126,7 +116,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/photos.html',
         controller: 'photosController'
     })
-
+    
+    .state('idChecklist', {
+        url: 'idchecklist/:childId',
+        templateUrl: 'templates/idchecklist.html',
+        controller: 'idChecklistController'
+    })
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 

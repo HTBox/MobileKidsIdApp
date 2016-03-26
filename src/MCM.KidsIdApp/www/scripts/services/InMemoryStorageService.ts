@@ -7,20 +7,19 @@ module MCM {
 
         public static $inject = ["$q"];
         private $q: angular.IQService
-        private inMemoryText: string
+        private inMemoryTextLookup: { [fileName: string]: string; } = {}
 
         constructor($q: angular.IQService) {
             this.$q = $q;
-            this.inMemoryText = null;
         }
 
-        storeText(text: string): angular.IPromise<void> {
-            this.inMemoryText = text;
+        storeText(fileName: string, text: string): angular.IPromise<void> {
+            this.inMemoryTextLookup[fileName] = text;
             return this.$q.resolve();
         }
         
-        retrieveText(): angular.IPromise<string> {
-            return this.$q.resolve(this.inMemoryText);
+        retrieveText(fileName: string): angular.IPromise<string> {
+            return this.$q.resolve(this.inMemoryTextLookup[fileName]);
         }
 
         private filesDictionary: { [fileName: string]: Blob; } = {};

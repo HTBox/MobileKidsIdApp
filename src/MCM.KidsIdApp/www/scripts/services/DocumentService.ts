@@ -14,8 +14,8 @@ module MCM {
 
         
         public getDocumentInfos(childId: string): angular.IPromise<Array<DocumentInfo>> {
-            let docMetadatasPromise = this.childDataService.getById(childId).then(child => child.documentMetadatas);
-            let promises = docMetadatasPromise.then(docMetadatas => (docMetadatas || []).map(docMetaData => {
+            let photosPromise = this.childDataService.getById(childId).then(child => child.photos);
+            let promises = photosPromise.then(docMetadatas => (docMetadatas || []).map(docMetaData => {
                 let thumbnailDataURLpromise: angular.IPromise<string>;
                 if (docMetaData.thumbnailFileName) {
                     thumbnailDataURLpromise = this.storageService.retrieveFile(docMetaData.thumbnailFileName)
@@ -25,25 +25,25 @@ module MCM {
                     thumbnailDataURLpromise = this.$q.resolve(null);
                 }
                 return thumbnailDataURLpromise.then(thumbnailDataURL => {
-                    return <DocumentInfo>{ documentMetadata: docMetaData, thumbnailDataURL: thumbnailDataURL};
+                    return <DocumentInfo>{ FileReference: docMetaData, thumbnailDataURL: thumbnailDataURL};
                 });
             }));
             return promises.then(docInfoPromises => this.$q.all(docInfoPromises));
         }
 
         public removeDocument(childId: string, docInfo: DocumentInfo): angular.IPromise<void> {
-            let deleteFilePromise = this.storageService.deleteFile(docInfo.documentMetadata.fileName);
-            let deleteThumbnailPromise = docInfo.documentMetadata.thumbnailFileName ?
-                    this.storageService.deleteFile(docInfo.documentMetadata.thumbnailFileName) : null;
+            let deleteFilePromise = this.storageService.deleteFile(docInfo.FileReference.fileName);
+            let deleteThumbnailPromise = docInfo.FileReference.thumbnailFileName ?
+                    this.storageService.deleteFile(docInfo.FileReference.thumbnailFileName) : null;
             let removeDocMetadataPromise = this.childDataService.getById(childId).then(child => {
                 let docIndex: number;
-                for (var i = 0; i <= child.documentMetadatas.length - 1; i++) {
-                    if (child.documentMetadatas[i].fileName === docInfo.documentMetadata.fileName) {
+                for (var i = 0; i <= child.photos.length - 1; i++) {
+                    if (child.photos[i].fileName === docInfo.FileReference.fileName) {
                         docIndex = i;
                         break;
                     }
                 }
-                child.documentMetadatas.splice(docIndex, 1);
+                child.photos.splice(docIndex, 1);
             });
             return this.$q.all([deleteFilePromise, deleteThumbnailPromise, removeDocMetadataPromise]) as any;
         }
@@ -88,17 +88,17 @@ module MCM {
             let theChild: Child;
             const getChildPromise = this.childDataService.getById(childId).then(child => theChild = child);
             return this.$q.all([saveThumbnailPromise, saveOriginalPromise, getChildPromise]).then(() => {
-                const docMetadata = <DocumentMetadata>{
+                const docMetadata = <FileReference>{
                     description: description, fileName: fileName,
                     thumbnailFileName: thumbFileName
                 };
                 const docInfo = <DocumentInfo>{
-                    documentMetadata: docMetadata,
+                    FileReference: docMetadata,
                     thumbnailDataURL: mythumbnailDataURL
                 };
-                if (!theChild.documentMetadatas)
-                    theChild.documentMetadatas = [];
-                theChild.documentMetadatas.push(docMetadata);
+                if (!theChild.photos)
+                    theChild.photos = [];
+                theChild.photos.push(docMetadata);
                 return this.childDataService.update(theChild) as any;
             });
         }
