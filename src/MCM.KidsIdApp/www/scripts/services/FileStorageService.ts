@@ -1,24 +1,25 @@
 ﻿/// <reference path="../definitions/FileSystem.d.ts" />
 /// <reference path="../definitions/angular.d.ts" />
-/// <reference path="../definitions/services.d.ts" />
+/// <reference path="../services/serviceInterfaces.ts" />
 
 declare let cordova: Cordova
 
 let storageFileName = "mcmKidsIdApp.txt";
 
 module MCM {
-    export class FileService implements IFileService {
+    export class FileStorageService implements IStorageService {
 
         public static $inject = ["$q"];
         private $q: angular.IQService
+        
 
         constructor($q: angular.IQService) {
             this.$q = $q;
         }
 
-        saveTextToFile(text: string): angular.IPromise<void> {
-            var deferred: angular.IDeferred<void> = this.$q.defer<void>();
-
+        storeText(text: string): angular.IPromise<void> {
+            
+            let deferred: angular.IDeferred<void> = this.$q.defer<void>();
             window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
                 
                 dir.getFile(storageFileName, { create: true }, function (file) {
@@ -45,33 +46,32 @@ module MCM {
                 });
 
 
-            });
+            }, err => deferred.reject(err));
 
             return deferred.promise;
         }
 
 
-        getFileText(): angular.IPromise<string> {
-            var deferred = this.$q.defer<string>();
-
+        retrieveText(): angular.IPromise<string> {
+            let deferred = this.$q.defer<string>();
             //let success = () => {
             //    console.log("Decrypt using Safe succeeded.");
     
                 window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir: DirectoryEntry) {
 
-                    dir.getFile(storageFileName, { create: false }, fileEntry => {
+                    dir.getFile(storageFileName, { create: true }, fileEntry => {
                 
                         fileEntry.file(file => {
                             let reader = new FileReader();
 
-                            reader.onloadend = e => {
+                            reader.onloadend = function(e) { //Can't use an arrow function because need access to correct 'this'.
                                 deferred.resolve(this.result);
                             };
 
                             reader.readAsText(file);
                         }, err => deferred.reject("Creating the writer failed. Code: " + err.code) );
 
-                    }, err => deferred.reject("Getting the file failed. Code: " + err.code));
+                    }, err => deferred.reject(err));
         
                 }, err => deferred.reject(err) );
     
@@ -85,4 +85,4 @@ module MCM {
     }
 }
 
-angular.module('mcmapp').service('fileService', MCM.FileService);
+angular.module('mcmapp').service('fileStorageService', MCM.FileStorageService);

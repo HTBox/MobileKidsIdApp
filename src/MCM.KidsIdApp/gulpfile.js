@@ -13,8 +13,11 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var watch = require('gulp-watch');
 
 var jasmine = require('gulp-jasmine');
+require('any-promise/register')('es6-promise');
+var jasmineBrowser = require('gulp-jasmine-browser');
 
 var appName = "Kids Id App";
 var paths = {
@@ -24,7 +27,8 @@ var paths = {
   releaseApkPath: "./platforms/android/build/outputs/apk/android-release.apk",
   debugApkPath: "./platforms/android/build/outputs/apk/android-debug.apk",
   appPackagesPath: "./platforms/windows/AppPackages/**/*",
-  typeScriptSources: "./www/scripts/**/*.ts"
+  typeScriptSources: "./www/scripts/**/*.ts",
+  specSources: 'spec/**/*.ts'
 };
 
 // Signing releated vars
@@ -92,7 +96,9 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.typeScriptSources, ['scripts']);
+    gulp.watch(paths.specSources, ['spec-compile']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -134,7 +140,7 @@ gulp.task("scripts", function () {
             target: "es5"
         });
     }
-    gulp.src("./www/scripts/**/*.ts")
+    gulp.src(paths.typeScriptSources)
         .pipe(sourcemaps.init())
         .pipe(tsConfig)
         .pipe(sourcemaps.write('.'))
@@ -224,6 +230,33 @@ gulp.task("hockeyapp-ios-release", function() {
 
 
 // Test JS
-gulp.task('spec', function () {
-    return gulp.src('spec/**/*.js').pipe(jasmine());
+gulp.task('spec-compile', function () {
+    var tsConfig = ts({
+        noImplicitAny: false,
+        noEmitOnError: true,
+        removeComments: false,
+        sourceMap: true,
+        target: "es5"
+    });
+    return gulp.src([paths.specSources])
+        .pipe(sourcemaps.init())
+        .pipe(tsConfig)
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest("spec-out/"));
+})
+var testFiles = ['www/lib/ionic/js/ionic.bundle.js',
+            'node_modules/angular-mocks/angular-mocks.js',
+            'spec-out/appFake.js',
+            'www/scripts/appBundle.js',
+            'spec-out/**/*spec.js'];
+gulp.task('spec', ['spec-compile'], function () {
+    gulp.src(testFiles)
+        .pipe(jasmineBrowser.specRunner({ console: true }))
+        .pipe(jasmineBrowser.headless());
+})
+gulp.task('spec-browser', ['spec-compile'], function () {
+    gulp.src(testFiles)
+        .pipe(watch(testFiles))
+        .pipe(jasmineBrowser.specRunner())
+        .pipe(jasmineBrowser.server({ port: 8888 }));
 })
