@@ -40,6 +40,10 @@ module MCM {
             this._state.go("childProfileItem", { childId: this._childId });
         }
         
+        public NavigateToDocuments() {
+            this._state.go("documents", {childId: this._childId});
+        }
+        
         public SaveCheckList() {
             this._childDataService.getById(this._childId).then((child) => {
                 child.checklist = this.checkList;

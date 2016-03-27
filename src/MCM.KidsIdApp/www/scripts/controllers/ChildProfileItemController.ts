@@ -23,7 +23,8 @@ module MCM {
                     new NavigationLink("dentalInfo", "Dental Info", "ion-android-happy", "ion-chevron-right"),
                     new NavigationLink("medicalAlertInfo", "Medical Alert Info", "ion-medkit", "ion-chevron-right"),
                     new NavigationLink("distinguishingFeatures", "Distinguishing Features", "ion-ios-body", "ion-chevron-right"),
-                    new NavigationLink("idChecklist", "I.D. Checklist", "ion-checkmark", "ion-chevron-right")
+                    new NavigationLink("idChecklist", "I.D. Checklist", "ion-checkmark", "ion-chevron-right"),
+                    new NavigationLink("documents", "Documents", "ion-ios-box", "ion-chevron-right")
                 ];
         }
 
