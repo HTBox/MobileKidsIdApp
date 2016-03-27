@@ -111,7 +111,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'basicDetailsController'
     })
 
-    .state('photos', {
+    .state('photos', { 
         url: '/photos/:childId',
         templateUrl: 'templates/photos.html',
         controller: 'photosController'
@@ -122,6 +122,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/idchecklist.html',
         controller: 'idChecklistController'
     })
+
+    .state('physicalDetails', {
+        url: '/physicalDetails/:childId',
+        templateUrl: 'templates/physicaldetails.html',
+        controller: 'physicalDetailsController'
+    })
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 
