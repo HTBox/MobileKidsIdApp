@@ -1,53 +1,62 @@
 ﻿<ion-view view-title="Missing Children Minnesota">
     <ion-content>
-        <form name="form" novalidate>
-            <div ng-controller="basicDetailsController as bscDtl">
-                <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="bscDtl.NavigateToPreviousView()">
-                    Child Info Menu
+        <div ng-controller="basicDetailsController as bscDtl">
+            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="bscDtl.NavigateToPreviousView()">
+                Child Info Menu
+            </button>
+            <!--<ion-scroll >-->
+                <form name="form" novalidate>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">First Name</span>
+                        <input type="text" name="givenName" ng-model="bscDtl.childDetails.givenName" required>
+                    </label>
+                    <div class="assertive" ng-show="form.$submitted">
+                        <span ng-show="form.givenName.$error.required">Must enter First Name.</span>
+                    </div>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Middle Name</span>
+                        <input type="text" name="additionalName" ng-model="bscDtl.childDetails.additionalName">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" name="familyName" ng-model="bscDtl.childDetails.familyName" required>
+                    </label>
+                    <div class="assertive" ng-show="form.$submitted">
+                        <span ng-show="form.familyName.$error.required">Must enter Last Name.</span>
+                    </div>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date of Birth</span>
+                        <ionic-datepicker input-obj="bscDtl.datepickerObject">
+                            <button class="button button-block button-positive">
+                                {{bscDtl.childDetails.birthday | date:bscDtl.datepickerObject.dateFormat}}
+                            </button>
+                        </ionic-datepicker>
+                    </label>
+                    <!--The following is a hidden dummy input for getting form validation to work.-->
+                    <input type="text" style="display:none" name="birthday" ng-model="bscDtl.childDetails.birthday" required />
+                    <div class="assertive" ng-show="form.$submitted">
+                        <span ng-show="form.birthday.$error.required">Must enter Birthday.</span>
+                    </div>
+
+                    <div class="item item-divider">
+                        Linked Contact Info
+                    </div>
+                </form>
+
+                <button type="submit" class="button icon-left ion-link button-block button-positive"
+                        ng-click="bscDtl.linkToContact()">
+                    Link A Contact
                 </button>
 
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">First Name</span>
-                    <input type="text" name="givenName" ng-model="bscDtl.childDetails.givenName" required>
-                </label>
-                <div ng-show="form.$submitted">
-                    <span ng-show="form.givenName.$error.required">Must enter First Name.</span>
-                </div>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Middle Name</span>
-                    <input type="text" name="additionalName" ng-model="bscDtl.childDetails.additionalName" >
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Last Name</span>
-                    <input type="text" name="familyName" ng-model="bscDtl.childDetails.familyName" required>
-                </label>
-                <div ng-show="form.$submitted">
-                    <span ng-show="form.familyName.$error.required">Must enter Last Name.</span>
-                </div>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Date of Birth</span>
-                    <ionic-datepicker input-obj="bscDtl.datepickerObject">
-                        <button class="button button-block button-positive">
-                            {{bscDtl.childDetails.birthday | date:bscDtl.datepickerObject.dateFormat}}
-                        </button>
-                    </ionic-datepicker>
-                </label>
-                <!--The following is a hidden dummy input for getting form validation to work.-->
-                <input type="text" style="display:none" name="birthday" ng-model="bscDtl.childDetails.birthday" required />
-                <div ng-show="form.$submitted">
-                    <span ng-show="form.birthday.$error.required">Must enter Birthday.</span>
-                </div>
-
-                <button type="submit" class="button icon-left ion-archive button-block button-positive" 
-                        ng-click="bscDtl.saveChanges(form.$valid)">
-                    Save
-                </button>
-
-                <button type="submit" class="button icon-left ion-archive button-block button-positive"
-                        ng-click="bscDtl.test()">
-                    TEST
-                </button>
+                <phone-contact phone-contact-obj="bscDtl.phoneContact"></phone-contact>
+            <!--</ion-scroll>-->
+                <!--<div class="bar bar-footer">-->
+                    <button type="submit" class="button icon-left ion-archive button-block button-positive"
+                            ng-click="bscDtl.saveChanges(form.$valid)">
+                        Save
+                    </button>
+                <!--</div>-->
             </div>
-        </form>
     </ion-content>
 </ion-view>
