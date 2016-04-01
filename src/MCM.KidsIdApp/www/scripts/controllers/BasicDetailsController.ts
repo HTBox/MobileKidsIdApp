@@ -76,12 +76,14 @@ module MCM {
             });
         }
 
+        public retrieveContactFinished = false;
+
         private populatePhoneContactInfoFromContact(contact: Contact) {
             this.phoneContact = contact;
-            //Calling resize here was an attempt at fixing an issue on a Android 4.3 phone where content
-            //gets cut off at the bottom of the screen, but not sure that it helped anything.
-            const doResize = this.$ionicScrollDelegate.resize();
-            setTimeout(doResize, 500);
+            //Docs say to call resize after a promise is resolved: http://ionicframework.com/docs/api/directive/ionContent/
+            //Doesn't seem to do anything useful on Android but might help on other platforms.
+            this.$ionicScrollDelegate.resize();
+            this.retrieveContactFinished = true;
         }
 
         public linkToContact() {
