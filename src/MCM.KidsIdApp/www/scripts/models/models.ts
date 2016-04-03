@@ -15,7 +15,7 @@ interface FileReference extends ResourceReference {
 }
 
 // Describes a contact
-interface ContactReference extends ResourceReference {
+interface ContactReference {
     contactId: string
 }
 

@@ -44,6 +44,7 @@
     <plugin name="cordova-plugin-camera" version="2.1.0" />
     <plugin name="cordova-plugin-ms-azure-mobile-apps" version="2.0.0-beta3" />
     <plugin name="ionic-plugin-keyboard" version="1.0.8" />
+    <plugin name="cordova-plugin-contacts" version="2.0.1" />
     <engine name="android" spec="^4.0.0" />
     <plugin name="cordova-plugin-file" spec="~4.1.1" />
 </widget>

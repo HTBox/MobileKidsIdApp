@@ -1,0 +1,31 @@
+﻿<label class="item item-input item-stacked-label">
+    Addresses
+</label>
+<div class="item assertive" ng-show="!phoneContactObj.addresses.length">
+    MISSING
+</div>
+<div class="item" ng-repeat="address in (phoneContactObj.addresses||[])">
+    <div>{{address.type}}</div>
+    <div>{{address.formatted}}</div>
+</div>
+<label class="item item-input item-stacked-label">
+    <span class="input-label">Telephone Numbers</span>
+    <span>{{phoneContactObj.tel}}</span>
+</label>
+<div class="item assertive" ng-show="!phoneContactObj.phoneNumbers.length">
+    MISSING
+</div>
+<div class="item" ng-repeat="phoneNumber in (phoneContactObj.phoneNumbers||[])">
+    <div>{{phoneNumber.type}}</div>
+    <div>{{phoneNumber.value}}</div>
+</div>
+<label class="item item-input item-stacked-label">
+    <span class="input-label">E-mail Addresses</span>
+</label>
+<div class="item assertive" ng-show="!phoneContactObj.emails.length">
+    MISSING
+</div>
+<div class="item" ng-repeat="email in (phoneContactObj.emails||[])">
+    <div>{{email.type}}</div>
+    <div>{{email.value}}</div>
+</div>
