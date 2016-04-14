@@ -26,6 +26,11 @@
     <script src="scripts/appBundle.js"></script>
   </head>
   <body ng-app="mcmapp">
+      <ion-nav-bar class="bar-positive" align-title="center">
+          <ion-nav-back-button class="icon-left ion-chevron-left col col-10" >
+              <!-- adding the 'col col-10' part to the class makes the button a little wider (easier to click)-->
+          </ion-nav-back-button>
+      </ion-nav-bar>
       <ion-nav-view class="padding"></ion-nav-view>
   </body>
 </html>

@@ -66,10 +66,6 @@ module MCM {
             }, err => console.log("Error removing doc: " + err));
         }
 
-        public NavigateToPreviousView() {
-            this.$state.go('childProfileItem', { childId: this._childId });
-        }
-
     }
     
 }

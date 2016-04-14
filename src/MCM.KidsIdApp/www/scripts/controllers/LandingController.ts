@@ -1,33 +1,25 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../models/models.ts" />
-/// <reference path="IControllerNavigation.ts" />
+/// <reference path="NavigationLink.ts" />
 
-class LandingController implements IControllerNavigation {
+class LandingController {
     private _state;
     private _scope;
-    private _navigationLinks: Array<NavigationLink>;
+    private _navigationLinks: Array<MCM.NavigationLink>;
 
     constructor($scope, $state) {
         this._state = $state;
         this._scope = $scope;
 
         this._navigationLinks = [
-            new NavigationLink("instructionIndex", "Instructions"),
-            new NavigationLink("childProfileList", "Child Profiles"),
-            new NavigationLink("about", "About"),
-            new NavigationLink("settings", "Settings")
+            new MCM.NavigationLink("instructionIndex", "Instructions"),
+            new MCM.NavigationLink("childProfileList", "Child Profiles"),
+            new MCM.NavigationLink("about", "About"),
+            new MCM.NavigationLink("settings", "Settings")
         ];
     }
 
     public static $inject = ["$scope", "$state"]
-
-    public NavigateToHomeScreen() {
-        this.NavigateTo('landing');
-    }
-
-    public NavigateToPreviousView() {
-        this.NavigateTo('landing');
-    }
 
     public NavigationLinks() {
         return this._navigationLinks;

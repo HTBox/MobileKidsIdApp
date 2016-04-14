@@ -1,9 +1,6 @@
-<ion-view view-title="Missing Children Minnesota">
+<ion-view view-title="I.D. Checklist">
     <ion-content>
         <div ng-controller="idChecklistController as iDC">
-            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="iDC.NavigateToPreviousView()">
-                ID Checklist
-            </button>
             <ion-list>
                 <ion-checkbox ng-model="iDC.checkList.childPhoto">Photo</ion-checkbox>
                 <ion-checkbox ng-model="iDC.checkList.birthCertificate">Birth Certificate</ion-checkbox>

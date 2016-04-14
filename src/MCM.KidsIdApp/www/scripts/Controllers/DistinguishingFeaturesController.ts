@@ -5,7 +5,7 @@
 
 class DistinguishingFeaturesController {
     private _state: angular.ui.IStateService;
-    private _navigationLinks: Array<NavigationLink>;
+    private _navigationLinks: Array<MCM.NavigationLink>;
 
     public static $inject = ['$scope', '$state', '$stateParams', 'childDataService'];
 
@@ -17,7 +17,7 @@ class DistinguishingFeaturesController {
 
         childDataService.getById(this.childId).then(child => {
             this._navigationLinks = child.distinguishingFeatures.map(df =>
-                new NavigationLink("", df.description.substring(0, 20)));
+                new MCM.NavigationLink("", df.description.substring(0, 20)));
         });
     }
 
