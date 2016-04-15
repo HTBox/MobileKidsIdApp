@@ -30,12 +30,12 @@ describe("ApplicationDataService", function () {
 
     it('should retain changes to application data after store/retrieve', done => {
         angular.mock.inject(function ($state) {
-            let id = "2";
+            const acknowledged = true;
             _applicationDataSvc.getApplicationData().then(appdata => {
-                appdata.Family.id = id;
+                appdata.userApplicationProfile.legalAcknowlegeDataSecurityPolicy = acknowledged;
                 return _applicationDataSvc.saveApplicationData();
             }).then(() => _applicationDataSvc.getApplicationData()).then(appdata => {
-                expect(appdata.Family.id).toBe(id);
+                expect(appdata.userApplicationProfile.legalAcknowlegeDataSecurityPolicy).toBe(acknowledged);
                 done();
             });
             $rootScope.$digest();

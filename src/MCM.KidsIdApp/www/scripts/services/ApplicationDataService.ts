@@ -36,8 +36,10 @@ module MCM {
         }
 
         getDefaultApplicationData(): ApplicationData {
-            throw "getDefaultApplicationData not implemented.";
-            //return <ApplicationData>{ };
+            return {
+                userApplicationProfile: { legalAcknowlegeDataSecurityPolicy: false, firstUse: new Date() },
+                permittedLoginIdentities: []
+            };
         }
 
     }

@@ -3,6 +3,7 @@
 
 var gulp = require('gulp');
 var fs = require("fs");
+var del = require('del');
 var sourcemaps = require('gulp-sourcemaps');
 var ts = require("gulp-typescript");
 var cordovaBuild = require("taco-team-build");
@@ -28,7 +29,8 @@ var paths = {
   debugApkPath: "./platforms/android/build/outputs/apk/android-debug.apk",
   appPackagesPath: "./platforms/windows/AppPackages/**/*",
   typeScriptSources: "./www/scripts/**/*.ts",
-  specSources: 'spec/**/*.ts'
+  specSources: 'spec/**/*.ts',
+  specOut: 'spec-out/'
 };
 
 // Signing releated vars
@@ -230,7 +232,10 @@ gulp.task("hockeyapp-ios-release", function() {
 
 
 // Test JS
-gulp.task('spec-compile', function () {
+gulp.task("spec-clean", function () {
+    return del(paths.specOut + "/**/*");
+})
+gulp.task('spec-compile', ['spec-clean'], function () {
     var tsConfig = ts({
         noImplicitAny: false,
         noEmitOnError: true,
@@ -242,7 +247,7 @@ gulp.task('spec-compile', function () {
         .pipe(sourcemaps.init())
         .pipe(tsConfig)
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest("spec-out/"));
+        .pipe(gulp.dest(paths.specOut));
 })
 var testFiles = ['www/lib/ionic/js/ionic.bundle.js',
             'node_modules/angular-mocks/angular-mocks.js',
