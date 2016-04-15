@@ -35,8 +35,11 @@ module MCM {
             this._childId = childId;
             this.doDatePickerSetup(null);
 
-            this.internalGoBack = $rootScope.$ionicGoBack;
-            $scope.$on('$stateChangeStart', this.onStateChangeStart.bind(this));
+            let unsubscribeStateChangeStart = $scope.$on('$stateChangeStart', this.onStateChangeStart.bind(this));
+            this.internalGoBack = () => {
+                unsubscribeStateChangeStart();
+                $rootScope.$ionicGoBack();
+            };
         }
         
 
@@ -58,11 +61,7 @@ module MCM {
 
 
         private internalGoBack: () => void;
-        private isInternalGoBack: boolean;
         private onStateChangeStart(event: ng.IAngularEvent, toState, toParams) {
-            if (this.isInternalGoBack)
-                return; //Just allow the event to proceed as normal if it was triggered by calling internalGoBack.
-
             //Since the check for changes is asynchronous, we have to cancel the event no matter what
             //by calling preventDefault (even if it turns out there are no changes). After the check
             //finishes, we'll call internalGoBack if necessary.
@@ -80,12 +79,10 @@ module MCM {
                         template: 'There are unsaved changes. Ignore changes and leave?'
                     }).then(answer => {
                         if (answer) {
-                            this.isInternalGoBack = true;
                             this.internalGoBack();
                         }
                     });
                 } else {
-                    this.isInternalGoBack = true;
                     this.internalGoBack();
                 }
             });
