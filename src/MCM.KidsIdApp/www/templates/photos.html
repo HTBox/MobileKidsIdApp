@@ -5,12 +5,9 @@
       height: auto;
     }
 </style>
-<ion-view view-title="Missing Children Minnesota">
+<ion-view view-title="Photos">
     <ion-content>
         <div ng-controller="photosController as photos">
-            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="photos.NavigateToPreviousView()">
-                Child Info Menu
-            </button>
 
             <div ng-repeat="documentInfo in photos.documentInfos track by $index">
                 <h4>{{documentInfo.FileReference.description}}</h4>

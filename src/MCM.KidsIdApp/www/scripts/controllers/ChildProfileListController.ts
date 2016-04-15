@@ -1,16 +1,14 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../Definitions/ionic/ionic.d.ts" />
 /// <reference path="../models/models.ts" />
-/// <reference path="IControllerNavigation.ts" />
 /// <reference path="../services/ChildDataService.ts" />
 /// <reference path="../Definitions/angular-ui-router.d.ts" />
 
-class ChildProfileListController implements IControllerNavigation {
+class ChildProfileListController {
     private _state: angular.ui.IStateService;
     private _scope: angular.IScope;
     private _ionicPopup: ionic.popup.IonicPopupService;
     private _childDataService: MCM.ChildDataService;
-    private _navigationLinks: Array<NavigationLink>;
 
     constructor($scope: angular.IScope, $state, $ionicPopup: ionic.popup.IonicPopupService,
                 childDataService: MCM.ChildDataService) {
@@ -19,32 +17,14 @@ class ChildProfileListController implements IControllerNavigation {
         this._ionicPopup = $ionicPopup;
         this._childDataService = childDataService;
         this.reloadChildList();
-
-        this._navigationLinks =
-            [
-            ];
+        
     }
 
     public newChildName: string
     public children: Array<Child>
 
     public static $inject = ["$scope", "$state", "$ionicPopup", "childDataService"]
-
-    public NavigateToHomeScreen() {
-        this.NavigateTo('landing');
-    }
-
-    public NavigateToPreviousView() {
-        this.NavigateTo('landing');
-    }
-
-    public NavigationLinks() {
-        return this._navigationLinks;
-    }
-
-    public NavigateTo(pStateName: string) {
-        this._state.go(pStateName);
-    }
+    
 
     public editChild(child: Child) {
         this._state.go("childProfileItem", { childId: child.id });

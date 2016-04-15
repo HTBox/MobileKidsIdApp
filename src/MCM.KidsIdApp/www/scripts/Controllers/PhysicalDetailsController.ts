@@ -11,9 +11,9 @@ module MCM {
         private _ionicPopup: ionic.popup.IonicPopupService;
         private _childDataService: MCM.ChildDataService;
 
-        public static $inject = ['$scope', '$state', '$stateParams', '$ionicPopup', 'childDataService'];
+        public static $inject = ['$scope', '$rootScope', '$state', '$stateParams', '$ionicPopup', 'childDataService'];
 
-        constructor($scope: ng.IScope, $state: angular.ui.IStateService, $stateParams: any,
+        constructor($scope: ng.IScope, $rootScope: any, $state: angular.ui.IStateService, $stateParams: any,
                 $ionicPopup: ionic.popup.IonicPopupService, childDataService: MCM.ChildDataService) {
             //this._scope = $scope;
             this._state = $state;
@@ -25,6 +25,12 @@ module MCM {
                 this.details = details;
             });
             this._childDataService = childDataService;
+
+            let unsubscribeStateChangeStart = $scope.$on('$stateChangeStart', this.onStateChangeStart.bind(this));
+            this.internalGoBack = () => {
+                unsubscribeStateChangeStart();
+                $rootScope.$ionicGoBack();
+            };
         }
 
         public childId: string;        
@@ -35,21 +41,27 @@ module MCM {
           return !angular.equals(originalDetails, editedDetails);
         }
 
-        public NavigateToPreviousView() {
+        private internalGoBack: () => void;
+        private onStateChangeStart(event: ng.IAngularEvent, toState, toParams) {
+            //Since the check for changes is asynchronous, we have to cancel the event no matter what
+            //by calling preventDefault (even if it turns out there are no changes). After the check
+            //finishes, we'll call internalGoBack if necessary.
+            event.preventDefault();
+
             let hasChangesPromise = this._childDataService.getPhysicalDetails(this.childId)
-              .then(dtl => this.checkChildHasChanges(this.details, dtl));
-            
+                .then(dtl => this.checkChildHasChanges(this.details, dtl));
             hasChangesPromise.then(hasChanges => {
-                let go = () => this._state.go("childProfileItem", { childId: this.childId });
                 if (hasChanges) {
                     this._ionicPopup.confirm({
                         title: 'Confirm Leave Page',
                         template: 'There are unsaved changes. Ignore changes and leave?'
                     }).then(answer => {
-                        if (answer) { go(); }
+                        if (answer) {
+                            this.internalGoBack();
+                        }
                     });
                 } else {
-                    go();
+                    this.internalGoBack();
                 }
             });
         }

@@ -1,6 +1,7 @@
 ﻿/// <reference path="../Definitions/angular.d.ts" />
 /// <reference path="../Services/UserService.ts" />
 /// <reference path="../Services/ChildDataService.ts" />
+/// <reference path="../Services/ContactsService.ts" />
 /// <reference path="../Definitions/angular-ui-router.d.ts" />
 /// <reference path="../Definitions/ionic/ionic.d.ts" />
 /// <reference path="../models/models.ts" />
@@ -8,22 +9,22 @@
 
 module MCM {
     export class BasicDetailsController {
+        
+        public static $inject = ['$scope', '$rootScope', '$state', '$stateParams', '$ionicScrollDelegate',
+            '$ionicPlatform', '$ionicHistory', '$ionicPopup', 'childDataService', 'contactsService'];
 
-        //private _scope: any;
-
-        public static $inject = ['$scope', '$state', '$stateParams', '$ionicScrollDelegate',
-                '$ionicPopup', 'childDataService', 'contactsService'];
-
-        constructor($scope: ng.IScope, private $state: angular.ui.IStateService, $stateParams: any,
+        constructor($scope: ng.IScope, $rootScope: any,
+                $state: angular.ui.IStateService, $stateParams: any,
                 private $ionicScrollDelegate: ionic.scroll.IonicScrollDelegate,
+                $ionicPlatform: ionic.platform.IonicPlatformService,
+                $ionicHistory: any,
                 private $ionicPopup: ionic.popup.IonicPopupService,
                 private childDataService: MCM.ChildDataService,
                 private contactsService: MCM.ContactsService) {
-            //this._scope = $scope;
             let childId = $stateParams.childId;
             childDataService.getById(childId).then(child => {
-                const childDetails = (child && child.childDetails) ?
-                        angular.copy(child.childDetails) : <ChildDetails>{ givenName: "", familyName: "" };
+                const childDetails: ChildDetails = (child && child.childDetails) ?
+                        angular.copy(child.childDetails) : this.createDefaultChildDetails();
                 this.doDatePickerSetup(childDetails.birthday || new Date());
                 const contactId = childDetails.contact ? childDetails.contact.contactId : null;
                 contactsService.findContactById(contactId).then(contact => {
@@ -33,45 +34,56 @@ module MCM {
             });
             this._childId = childId;
             this.doDatePickerSetup(null);
+
+            let unsubscribeStateChangeStart = $scope.$on('$stateChangeStart', this.onStateChangeStart.bind(this));
+            this.internalGoBack = () => {
+                unsubscribeStateChangeStart();
+                $rootScope.$ionicGoBack();
+            };
         }
         
+
         private _childId: string
         public childDetails: ChildDetails;
         public phoneContact: Contact;
         public datepickerObject;
 
+        private createDefaultChildDetails(): ChildDetails {
+            return { givenName: "", familyName: "" };
+        }
+
         public checkChildDetailsHasChanges(editedChildDetails: ChildDetails,
                         originalChildDetails: ChildDetails): boolean {
-            if ((originalChildDetails == null) != (editedChildDetails == null)) return true;
+            if (originalChildDetails == null &&
+                    angular.equals(editedChildDetails, this.createDefaultChildDetails())) return false;
             return !angular.equals(originalChildDetails, editedChildDetails);
         }
 
-        public NavigateToPreviousView() {
-            let childChangeInfoPromise = this.childDataService.getById(this._childId)
+
+        private internalGoBack: () => void;
+        private onStateChangeStart(event: ng.IAngularEvent, toState, toParams) {
+            //Since the check for changes is asynchronous, we have to cancel the event no matter what
+            //by calling preventDefault (even if it turns out there are no changes). After the check
+            //finishes, we'll call internalGoBack if necessary.
+            event.preventDefault();
+
+            let hasChangesPromise = this.childDataService.getById(this._childId)
                 .then(chld => {
-                    const hasChanges = !chld || this.checkChildDetailsHasChanges(this.childDetails, chld.childDetails);
-                    return { isChildPersisted: chld != null, hasChanges };
+                    const retrievedDetails = chld ? chld.childDetails : null;
+                    return this.checkChildDetailsHasChanges(this.childDetails, retrievedDetails);
                 });
-            
-            childChangeInfoPromise.then(childChangeInfo => {
-                let go = () => this.$state.go("childProfileItem", { childId: this._childId });
-                if (childChangeInfo.hasChanges) {
+            hasChangesPromise.then(hasChanges => {
+                if (hasChanges) {
                     this.$ionicPopup.confirm({
                         title: 'Confirm Leave Page',
                         template: 'There are unsaved changes. Ignore changes and leave?'
                     }).then(answer => {
                         if (answer) {
-                            if (childChangeInfo.isChildPersisted) {
-                                go();
-                            } else {
-                                //If leaving the page and the child has never been persisted, go all the
-                                //way back to child profile list.
-                                this.$state.go("childProfileList");
-                            }
+                            this.internalGoBack();
                         }
                     });
                 } else {
-                    go();
+                    this.internalGoBack();
                 }
             });
         }

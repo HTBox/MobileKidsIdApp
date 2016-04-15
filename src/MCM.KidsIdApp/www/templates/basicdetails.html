@@ -1,10 +1,7 @@
-﻿<ion-view view-title="Missing Children Minnesota">
+﻿<ion-view view-title="Basic Details">
     <div ng-controller="basicDetailsController as bscDtl">
         <ion-content >
-            <button class="button icon-left ion-chevron-left button-block button-positive" ng-click="bscDtl.NavigateToPreviousView()">
-                Child Info Menu
-            </button>
-            <form name="form" novalidate>
+            <form id="form" name="form" novalidate>
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">First Name</span>
@@ -49,7 +46,7 @@
             </button>
 
             <phone-contact phone-contact-obj="bscDtl.phoneContact"></phone-contact>
-            <button type="submit" class="button icon-left ion-archive button-block button-positive"
+            <button type="submit" form="form" class="button icon-left ion-archive button-block button-positive"
                     ng-click="bscDtl.saveChanges(form.$valid)">
                 Save
             </button>

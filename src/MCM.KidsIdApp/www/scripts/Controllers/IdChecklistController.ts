@@ -36,10 +36,6 @@ module MCM {
             }
         }
         
-        public NavigateToPreviousView() {
-            this._state.go("childProfileItem", { childId: this._childId });
-        }
-        
         public NavigateToDocuments() {
             this._state.go("documents", {childId: this._childId});
         }
