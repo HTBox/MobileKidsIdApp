@@ -36,12 +36,71 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="ContentMenu.cs" />
-    <Compile Include="LandingPage.xaml.cs">
-      <DependentUpon>LandingPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\About.cs" />
+    <Compile Include="ViewModels\BasicDetails.cs" />
+    <Compile Include="ViewModels\ChildprofileItem.cs" />
+    <Compile Include="ViewModels\ChildprofileList.cs" />
+    <Compile Include="ViewModels\DistinguishingFeatures.cs" />
+    <Compile Include="ViewModels\ForgotPassword.cs" />
+    <Compile Include="ViewModels\IdChecklist.cs" />
+    <Compile Include="ViewModels\InstructionIndex.cs" />
+    <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\PhoneContact.cs" />
+    <Compile Include="ViewModels\Photos.cs" />
+    <Compile Include="ViewModels\PhysicalDetails.cs" />
+    <Compile Include="ViewModels\ProfessionalCareProviders.cs" />
+    <Compile Include="ViewModels\Settings.cs" />
+    <Compile Include="ViewModels\StaticContent.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BasicDetails.xaml.cs">
+      <DependentUpon>BasicDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChildprofileItem.xaml.cs">
+      <DependentUpon>ChildprofileItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChildprofileList.xaml.cs">
+      <DependentUpon>ChildprofileList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DistinguishingFeatures.xaml.cs">
+      <DependentUpon>DistinguishingFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ForgotPassword.xaml.cs">
+      <DependentUpon>ForgotPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IdChecklist.xaml.cs">
+      <DependentUpon>IdChecklist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstructionIndex.xaml.cs">
+      <DependentUpon>InstructionIndex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Landing.xaml.cs">
+      <DependentUpon>Landing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\LandingMenu.cs" />
+    <Compile Include="ViewModels\Landing.cs" />
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PhoneContact.xaml.cs">
+      <DependentUpon>PhoneContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Photos.xaml.cs">
+      <DependentUpon>Photos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhysicalDetails.xaml.cs">
+      <DependentUpon>PhysicalDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfessionalCareProviders.xaml.cs">
+      <DependentUpon>ProfessionalCareProviders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StaticContent.xaml.cs">
+      <DependentUpon>StaticContent.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -62,7 +121,97 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LandingPage.xaml">
+    <EmbeddedResource Include="Views\Landing.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\About.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BasicDetails.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ChildprofileItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ChildprofileList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DistinguishingFeatures.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ForgotPassword.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\IdChecklist.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InstructionIndex.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Login.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\PhoneContact.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Photos.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PhysicalDetails.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProfessionalCareProviders.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\StaticContent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
