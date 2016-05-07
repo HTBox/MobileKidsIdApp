@@ -35,11 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CareProvider.cs" />
+    <Compile Include="Child.cs" />
+    <Compile Include="ChildDetails.cs" />
+    <Compile Include="DistinguishingFeature.cs" />
+    <Compile Include="FamilyMember.cs" />
     <Compile Include="FileReference.cs" />
     <Compile Include="IContactReference.cs" />
     <Compile Include="IResourceReference.cs" />
+    <Compile Include="MedicalNotes.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PhysicalDetails.cs" />
+    <Compile Include="PreparationChecklist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
