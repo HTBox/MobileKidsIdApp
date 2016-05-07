@@ -8,11 +8,11 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class LandingMenu
+    public class Landing
     {
         public ICommand DisplayMainMenu { protected set; get; }
 
-        public LandingMenu()
+        public Landing()
         {
             DisplayMainMenu = new Command<string>((text) => { });
         }
