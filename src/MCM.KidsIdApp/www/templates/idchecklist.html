@@ -1,0 +1,25 @@
+<ion-view view-title="I.D. Checklist">
+    <ion-content>
+        <div ng-controller="idChecklistController as iDC">
+            <ion-list>
+                <ion-checkbox ng-model="iDC.checkList.childPhoto">Photo</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.birthCertificate">Birth Certificate</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.socialSecurityCard">Social Security Card</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.physicalDetails">Description Details</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.distinguishingFeatures">Distinguishing Features</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.friends">Friends</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.dna">DNA</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.mementos">Mementos</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.divorceCustodyPapers">Divorce or Custody Papers</ion-checkbox>
+                <ion-checkbox ng-model="iDC.checkList.otherParentsAndFamily">Other Relative Info</ion-checkbox>
+
+                <button class="button button-block button-positive" ng-click="iDC.SaveCheckList()">
+                    Save
+                </button>
+                <button class="button button-block button-positive" ng-click="iDC.NavigateToDocuments()">
+                    Go To Documents
+                </button>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,60 @@
+﻿<ion-view view-title="Physical Details">
+    <ion-content>
+        <form name="form" novalidate>
+            <div ng-controller="physicalDetailsController as controller">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Date recorded</span>
+                    <span class="input-label">{{controller.details.measurementDate | date:'shortDate'}}</span>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Height</span>
+                    <input type="text" name="height" ng-model="controller.details.height">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Weight</span>
+                    <input type="text" name="weight" ng-model="controller.details.weight">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Hair color</span>
+                    <input type="text" name="hairColor" ng-model="controller.details.hairColor">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Hair style</span>
+                    <input type="text" name="hairStyle" ng-model="controller.details.hairStyle">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Eye color</span>
+                    <input type="text" name="eyeColor" ng-model="controller.details.eyeColor">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <ion-checkbox ng-model="controller.details.eyeGlasses">Eye glasses</ion-checkbox>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <ion-checkbox ng-model="controller.details.eyeContacts">Eye contacts</ion-checkbox>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Skin tone</span>
+                    <input type="text" name="skinTone" ng-model="controller.details.skinTone">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Racial/ethnic identity</span>
+                    <input type="text" name="racialEthnicIdentity" ng-model="controller.details.racialEthnicIdentity">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Gender</span>
+                    <input type="text" name="gender" ng-model="controller.details.gender">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Gender identity</span>
+                    <input type="text" name="genderIdentity" ng-model="controller.details.genderIdentity">
+                </label>
+
+                <button type="submit" class="button icon-left ion-archive button-block button-positive"
+                        ng-click="controller.saveChanges(form.$valid)">
+                    Save
+                </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

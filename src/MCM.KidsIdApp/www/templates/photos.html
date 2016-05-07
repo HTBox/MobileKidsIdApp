@@ -1,0 +1,24 @@
+﻿
+<style type="text/css">
+    .preview {
+      width: 100px;
+      height: auto;
+    }
+</style>
+<ion-view view-title="Photos">
+    <ion-content>
+        <div ng-controller="photosController as photos">
+
+            <div ng-repeat="documentInfo in photos.documentInfos track by $index">
+                <h4>{{documentInfo.FileReference.description}}</h4>
+                <img class="preview" ng-src="{{documentInfo.thumbnailDataURL}}" />
+                <button class="button icon ion-close assertive" ng-click="photos.removeDocument(documentInfo)" />
+            </div>
+
+            <button class="button icon-left ion-archive button-block button-positive" file-select="photos.processSelectedFiles" >
+                Select File
+            </button>
+
+        </div>
+    </ion-content>
+</ion-view>

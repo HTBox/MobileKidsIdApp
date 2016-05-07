@@ -1,0 +1,22 @@
+﻿<ion-view view-title="Child Profiles">
+    <ion-content>
+        <div ng-controller="childProfileListController as cplc">
+            
+            <div ng-show="cplc.children.length == 0">
+                You haven't added your children yet.
+            </div>
+
+            <div class="list">
+                <a class="item item-icon-right" href="#" ng-repeat="chld in cplc.children track by $index">
+                    <!-- Make the name element display block style so it fills the space and makes it easier to click.-->
+                    <i style="display:block" ng-click="cplc.editChild(chld)">{{chld.childDetails.givenName}}</i>
+                    <i class="icon ion-close assertive" ng-click="cplc.removeChild(chld)"></i>
+                </a>
+            </div>
+
+            <button class="ion-plus button button-block button-positive" ng-click="cplc.addNewChild(cplc.newChildName)">
+                Add a Child
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
