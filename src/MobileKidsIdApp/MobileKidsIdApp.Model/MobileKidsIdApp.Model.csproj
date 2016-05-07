@@ -35,10 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApplicationData.cs" />
     <Compile Include="CareProvider.cs" />
     <Compile Include="Child.cs" />
     <Compile Include="ChildDetails.cs" />
     <Compile Include="DistinguishingFeature.cs" />
+    <Compile Include="Family.cs" />
     <Compile Include="FamilyMember.cs" />
     <Compile Include="FileReference.cs" />
     <Compile Include="IContactReference.cs" />
@@ -48,6 +50,8 @@
     <Compile Include="PhysicalDetails.cs" />
     <Compile Include="PreparationChecklist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserApplicationProfile.cs" />
+    <Compile Include="UserIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
