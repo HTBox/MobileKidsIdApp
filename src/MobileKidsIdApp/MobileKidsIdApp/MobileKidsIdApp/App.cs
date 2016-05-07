@@ -12,19 +12,7 @@ namespace MobileKidsIdApp
         public App()
         {
             // The root page of your application
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            XAlign = TextAlignment.Center,
-                            Text = "Oh Hey Dere"
-                        }
-                    }
-                }
-            };
+            MainPage = new LandingPage();
         }
 
         protected override void OnStart()
