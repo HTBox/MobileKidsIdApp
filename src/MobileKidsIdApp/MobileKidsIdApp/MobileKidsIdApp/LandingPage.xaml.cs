@@ -14,5 +14,10 @@ namespace MobileKidsIdApp
         {
             InitializeComponent();
         }
+
+        private void DisplayContentMenu(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ContentMenu());
+        }
     }
 }
