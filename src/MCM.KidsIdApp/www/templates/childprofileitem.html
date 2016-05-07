@@ -1,0 +1,15 @@
+﻿<ion-view view-title="Child Profile">
+    <ion-content>
+        <div ng-controller="childProfileItemController as cplic">
+
+            <div class="list">
+                <a class="item item-icon-left item-icon-right" href="#"
+                     ng-repeat="navLink in cplic.NavigationLinks()" ng-click="cplic.NavigateTo(navLink.ControllerTarget)" >
+                    <i class="icon {{navLink.LeftIcon}}"></i>
+                    {{navLink.LinkText}}
+                    <i class="icon {{navLink.RightIcon}}"></i>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

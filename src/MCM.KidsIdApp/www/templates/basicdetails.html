@@ -1,0 +1,62 @@
+﻿<ion-view view-title="Basic Details">
+    <div ng-controller="basicDetailsController as bscDtl">
+        <ion-content >
+            <form id="form" name="form" novalidate>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">First Name</span>
+                    <input type="text" name="givenName" ng-model="bscDtl.childDetails.givenName" required>
+                </label>
+                <div class="assertive" ng-show="form.$submitted">
+                    <span ng-show="form.givenName.$error.required">Must enter First Name.</span>
+                </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Middle Name</span>
+                    <input type="text" name="additionalName" ng-model="bscDtl.childDetails.additionalName">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Last Name</span>
+                    <input type="text" name="familyName" ng-model="bscDtl.childDetails.familyName" required>
+                </label>
+                <div class="assertive" ng-show="form.$submitted">
+                    <span ng-show="form.familyName.$error.required">Must enter Last Name.</span>
+                </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Date of Birth</span>
+                    <ionic-datepicker input-obj="bscDtl.datepickerObject">
+                        <button class="button button-block button-positive">
+                            {{bscDtl.childDetails.birthday | date:bscDtl.datepickerObject.dateFormat}}
+                        </button>
+                    </ionic-datepicker>
+                </label>
+                <!--The following is a hidden dummy input for getting form validation to work.-->
+                <input type="text" style="display:none" name="birthday" ng-model="bscDtl.childDetails.birthday" required />
+                <div class="assertive" ng-show="form.$submitted">
+                    <span ng-show="form.birthday.$error.required">Must enter Birthday.</span>
+                </div>
+
+                <div class="item item-divider">
+                    Linked Contact Info
+                </div>
+            </form>
+
+            <button type="submit" class="button icon-left ion-link button-block button-positive"
+                    ng-click="bscDtl.linkToContact()">
+                Link A Contact
+            </button>
+
+            <phone-contact phone-contact-obj="bscDtl.phoneContact"></phone-contact>
+            <button type="submit" form="form" class="button icon-left ion-archive button-block button-positive"
+                    ng-click="bscDtl.saveChanges(form.$valid)">
+                Save
+            </button>
+            <div style="height:800px" ng-show="!bscDtl.retrieveContactFinished" >
+                <!--This div is here as a jerry-rigged way to get around a bug where on an Android 4.3
+                    phone the scrollable area won't update after the promise that sets the phoneContact
+                    resolves.  According to http://ionicframework.com/docs/api/directive/ionContent/
+                    you're supposed to be able to call $ionicScrollDelegate.resize after a promise.
+                    Without this div hack you're unable to scroll down further than what fits on one screen.-->
+            </div>
+        </ion-content>
+    </div>
+</ion-view>

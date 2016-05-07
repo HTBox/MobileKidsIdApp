@@ -1,0 +1,15 @@
+﻿<ion-view view-title="Distinguishing Features">
+    <ion-content>
+        <div ng-controller="distinguishingFeaturesController as controller">
+            <div class="padding">
+                <ul>
+                    <li ng-repeat="link in lc.NavigationLinks()">
+                        <button class="button button-block button-positive" ng-click="lc.NavigateTo(link.ControllerTarget)">
+                            {{link.LinkText}}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

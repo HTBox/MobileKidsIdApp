@@ -1,0 +1,16 @@
+﻿<ion-view view-title="Missing Children Minnesota" hide-nav-bar="true">
+    <ion-content>
+      <div class="list" ng-controller="landingController as lc">
+        <div class="padding">
+            <ul>
+                <li ng-repeat="link in lc.NavigationLinks()">
+                    <button class="button button-block button-positive" ng-click="lc.NavigateTo(link.ControllerTarget)">
+                        {{link.LinkText}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+      </div>
+      <static-page ref="data/static-content.html"></static-page>
+    </ion-content>
+</ion-view>
