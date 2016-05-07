@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace MobileKidsIdApp
+namespace MobileKidsIdApp.Views
 {
     public partial class LandingPage : ContentPage
     {
