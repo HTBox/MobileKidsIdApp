@@ -9,10 +9,13 @@ namespace MobileKidsIdApp
 {
     public class App : Application
     {
+        public static NavigationPage RootPage { private set; get; }
+
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new Views.Landing());
+            RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
+            MainPage = RootPage;
         }
 
         protected override void OnStart()

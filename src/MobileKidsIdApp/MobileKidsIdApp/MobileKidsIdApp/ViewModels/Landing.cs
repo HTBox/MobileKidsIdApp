@@ -10,11 +10,14 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class Landing
     {
-        public ICommand DisplayMainMenu { protected set; get; }
+        public ICommand DisplayContentMenuCommand { get; private set; }
 
         public Landing()
         {
-            DisplayMainMenu = new Command<string>((text) => { });
+            DisplayContentMenuCommand = new Command<string>((text) => 
+            {
+                App.RootPage.Navigation.PushAsync(new Views.StaticContent { BindingContext = new StaticContent() });
+            });
         }
     }
 }
