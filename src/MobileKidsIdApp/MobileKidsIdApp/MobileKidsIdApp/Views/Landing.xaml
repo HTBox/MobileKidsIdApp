@@ -4,7 +4,7 @@
              x:Class="MobileKidsIdApp.Views.Landing">
     <StackLayout>
         <Label Text="Mobile Kids Id Kit" Margin="0,0,10,0"/>
-        <Button Text="Content" Command="{Binding DisplayContentMenu}"/>
+        <Button Text="Content" Command="{Binding DisplayContentMenuCommand}"/>
         <Button Text="My kids"/>
         <Button Text="Options"/>
         <Button Text="Logout"/>
