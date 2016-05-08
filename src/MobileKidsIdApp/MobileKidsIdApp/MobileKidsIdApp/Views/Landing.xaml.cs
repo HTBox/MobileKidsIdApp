@@ -8,16 +8,16 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Views
 {
-    public partial class LandingPage : ContentPage
+    public partial class Landing : ContentPage
     {
-        public LandingPage()
+        public Landing()
         {
             InitializeComponent();
         }
 
         private void DisplayContentMenu(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ContentMenu());
+            Navigation.PushAsync(new StaticContent());
         }
     }
 }
