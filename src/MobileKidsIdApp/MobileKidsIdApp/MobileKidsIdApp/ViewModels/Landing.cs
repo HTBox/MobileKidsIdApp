@@ -14,9 +14,9 @@ namespace MobileKidsIdApp.ViewModels
 
         public Landing()
         {
-            DisplayContentMenuCommand = new Command<string>((text) => 
+            DisplayContentMenuCommand = new Command(() => 
             {
-                App.RootPage.Navigation.PushAsync(new Views.StaticContent { BindingContext = new StaticContent() });
+                App.RootPage.Navigation.PushAsync(new Views.InstructionIndex { BindingContext = new InstructionIndex() });
             });
         }
     }

@@ -42,6 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\About.cs" />
     <Compile Include="ViewModels\BasicDetails.cs" />
+    <Compile Include="ViewModels\BindableObject.cs" />
     <Compile Include="ViewModels\ChildprofileItem.cs" />
     <Compile Include="ViewModels\ChildprofileList.cs" />
     <Compile Include="ViewModels\DistinguishingFeatures.cs" />
