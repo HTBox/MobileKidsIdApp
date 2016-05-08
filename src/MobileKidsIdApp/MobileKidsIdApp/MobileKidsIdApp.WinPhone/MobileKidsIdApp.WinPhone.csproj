@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{136B8A64-1BB3-4A09-8A02-5AA535B3B368}</ProjectGuid>
+    <ProjectGuid>{609E0098-4C13-48B6-BF31-4A2D3FFD6D72}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MobileKidsIdApp.WinPhone</RootNamespace>

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{25AF259E-B9EB-4708-9A9E-6A12DBEC6ABF}</ProjectGuid>
+    <ProjectGuid>{88D151DE-4BBB-482D-B387-2AC5BCEFEDF0}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>MobileKidsIdApp.iOS</RootNamespace>

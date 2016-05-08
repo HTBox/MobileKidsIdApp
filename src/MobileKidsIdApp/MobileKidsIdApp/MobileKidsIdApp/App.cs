@@ -12,7 +12,7 @@ namespace MobileKidsIdApp
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new Views.LandingPage());
+            MainPage = new NavigationPage(new Views.Landing());
         }
 
         protected override void OnStart()
