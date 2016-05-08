@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileKidsIdApp.Model
+namespace MobileKidsIdApp.Models.DataModels
 {
     /// <summary>
     /// Describes a reference to a file, contact, or foreign entity outside the context of this application.

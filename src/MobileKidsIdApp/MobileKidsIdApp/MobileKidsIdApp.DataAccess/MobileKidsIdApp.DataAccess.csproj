@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</ProjectGuid>
+    <ProjectGuid>{0057354D-D5BB-4BB2-9D3E-1406FE1F7D7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MobileKidsIdApp.Models</RootNamespace>
-    <AssemblyName>MobileKidsIdApp.Models</AssemblyName>
+    <RootNamespace>MobileKidsIdApp.DataAccess</RootNamespace>
+    <AssemblyName>MobileKidsIdApp.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -35,37 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApplicationData.cs" />
-    <Compile Include="CareProvider.cs" />
-    <Compile Include="Child.cs" />
-    <Compile Include="ChildDetails.cs" />
-    <Compile Include="DataModels\ApplicationData.cs" />
-    <Compile Include="DataModels\CareProvider.cs" />
-    <Compile Include="DataModels\Child.cs" />
-    <Compile Include="DataModels\ChildDetails.cs" />
-    <Compile Include="DataModels\DistinguishingFeature.cs" />
-    <Compile Include="DataModels\Family.cs" />
-    <Compile Include="DataModels\FamilyMember.cs" />
-    <Compile Include="DataModels\FileReference.cs" />
-    <Compile Include="DataModels\IContactReference.cs" />
-    <Compile Include="DataModels\IResourceReference.cs" />
-    <Compile Include="DataModels\MedicalNotes.cs" />
-    <Compile Include="DataModels\Person.cs" />
-    <Compile Include="DataModels\PhysicalDetails.cs" />
-    <Compile Include="DataModels\PreparationChecklist.cs" />
-    <Compile Include="DistinguishingFeature.cs" />
-    <Compile Include="Family.cs" />
-    <Compile Include="FamilyMember.cs" />
-    <Compile Include="FileReference.cs" />
-    <Compile Include="MedicalNotes.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PhysicalDetails.cs" />
-    <Compile Include="PreparationChecklist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataModels\UserApplicationProfile.cs" />
-    <Compile Include="DataModels\UserIdentity.cs" />
-    <Compile Include="UserApplicationProfile.cs" />
-    <Compile Include="UserIdentity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>MobileKidsIdApp.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">
