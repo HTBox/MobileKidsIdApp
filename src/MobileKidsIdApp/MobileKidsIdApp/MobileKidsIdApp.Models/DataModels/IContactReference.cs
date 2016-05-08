@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Csla;
 
-namespace MobileKidsIdApp.Models
+namespace MobileKidsIdApp.Models.DataModels
 {
-    [Serializable]
-    public class Family : BusinessListBase<Family, Child>
+    public interface IContactReference
     {
-
+        string ContactId { get; set; }
     }
 }

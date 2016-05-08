@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Csla;
 
-namespace MobileKidsIdApp.Model
+namespace MobileKidsIdApp.Models
 {
-    /// <summary>
-    /// Maps to identity principal provided by credentials provider.
-    // TODO : Elaborate for token management, sessions, issuer URI, timestamp last verified, etc.
-    /// </summary>
-    public class UserIdentity
+    [Serializable]
+    public class UserIdentity : BusinessBase<UserIdentity>
     {
-        public string ProviderName { get; set; }
-        public string UserIdFromProvider { get; set; }
+        public static readonly PropertyInfo<string> ProviderNameProperty = RegisterProperty<string>(c => c.ProviderName);
+        public string ProviderName
+        {
+            get { return GetProperty(ProviderNameProperty); }
+            set { SetProperty(ProviderNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> UserIdFromProviderProperty = RegisterProperty<string>(c => c.UserIdFromProvider);
+        public string UserIdFromProvider
+        {
+            get { return GetProperty(UserIdFromProviderProperty); }
+            set { SetProperty(UserIdFromProviderProperty, value); }
+        }
     }
 }

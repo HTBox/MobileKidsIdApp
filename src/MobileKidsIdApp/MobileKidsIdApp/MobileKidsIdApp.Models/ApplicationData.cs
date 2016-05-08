@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Csla;
 
-namespace MobileKidsIdApp.Model
+namespace MobileKidsIdApp.Models
 {
-    public class ApplicationData
+    [Serializable]
+    public class ApplicationData : BusinessBase<ApplicationData>
     {
-        public ApplicationData()
+        public static readonly PropertyInfo<UserApplicationProfile> UserApplicationProfileProperty = RegisterProperty<UserApplicationProfile>(c => c.UserApplicationProfile);
+        public UserApplicationProfile UserApplicationProfile
         {
-            PermittedLoginIdentities = Enumerable.Empty<UserIdentity>();
+            get { return GetProperty(UserApplicationProfileProperty); }
+            private set { LoadProperty(UserApplicationProfileProperty, value); }
         }
 
-        public UserApplicationProfile UserApplicationProfile { get; set; }
-        public IEnumerable<UserIdentity> PermittedLoginIdentities { get; set; }   
+        public static readonly PropertyInfo<List<UserIdentity>> PermittedLoginIdentitiesProperty = RegisterProperty<List<UserIdentity>>(c => c.PermittedLoginIdentities);
+        public List<UserIdentity> PermittedLoginIdentities
+        {
+            get { return GetProperty(PermittedLoginIdentitiesProperty); }
+            private set { LoadProperty(PermittedLoginIdentitiesProperty, value); }
+        }
+
+        protected override void DataPortal_Create()
+        {
+            UserApplicationProfile = new UserApplicationProfile();
+            PermittedLoginIdentities = new List<UserIdentity>();
+        }
     }
 }

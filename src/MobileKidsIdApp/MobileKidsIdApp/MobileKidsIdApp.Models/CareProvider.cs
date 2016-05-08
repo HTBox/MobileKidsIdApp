@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Csla;
 
-namespace MobileKidsIdApp.Model
+namespace MobileKidsIdApp.Models
 {
-    public class CareProvider : Person
+    [Serializable]
+    public class CareProvider : BusinessBase<CareProvider>
     {
-        public string ClinicName { get; set; }
-        public string CareRoleDescription { get; set; }
+        public static readonly PropertyInfo<string> ClinicNameProperty = RegisterProperty<string>(c => c.ClinicName);
+        public string ClinicName
+        {
+            get { return GetProperty(ClinicNameProperty); }
+            set { SetProperty(ClinicNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> CareRoleDescriptionProperty = RegisterProperty<string>(c => c.CareRoleDescription);
+        public string CareRoleDescription
+        {
+            get { return GetProperty(CareRoleDescriptionProperty); }
+            set { SetProperty(CareRoleDescriptionProperty, value); }
+        }
     }
 }
