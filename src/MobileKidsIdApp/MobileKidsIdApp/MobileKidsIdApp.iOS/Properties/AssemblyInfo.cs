@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MobileKidsIdApp.iOS")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Mobile Kids Id App")]
+[assembly: AssemblyDescription("Mobile Kids Id App")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MobileKidsIdApp.iOS")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("Humanitarian Toolbox")]
+[assembly: AssemblyProduct("Mobile Kids Id App")]
+[assembly: AssemblyCopyright("Copyright © Humanitarian Toolbox 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
