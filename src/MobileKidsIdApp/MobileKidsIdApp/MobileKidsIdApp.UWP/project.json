@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "CSLA-Core": "4.6.400-Beta-16050801",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Xamarin.Forms": "2.2.0.31"
   },
