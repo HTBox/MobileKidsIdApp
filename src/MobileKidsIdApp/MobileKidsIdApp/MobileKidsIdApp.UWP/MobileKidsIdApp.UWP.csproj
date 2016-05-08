@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{09E69250-4634-41F9-A918-13C02A7E4C11}</ProjectGuid>
+    <ProjectGuid>{DCCC64E7-3022-46BA-8C01-70450BED7CF4}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MobileKidsIdApp.UWP</RootNamespace>

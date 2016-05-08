@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Views
 {
-    public partial class ChildprofileList : ContentPage
+    public partial class ChildProfileList : ContentPage
     {
-        public ChildprofileList()
+        public ChildProfileList()
         {
             InitializeComponent();
         }
