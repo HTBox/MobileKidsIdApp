@@ -30,11 +30,11 @@ namespace MobileKidsIdApp.Models
             PermittedLoginIdentities = DataPortal.CreateChild<UserIdentityList>();
         }
 
-        private void DataPortal_Fetch()
+        private async Task DataPortal_Fetch()
         {
             var provider = new DataAccess.DataProviderFactory().GetDataProvider();
             var dal = provider.GetApplicationDataProvider();
-            var data = dal.Get();
+            var data = await dal.Get();
             using (BypassPropertyChecks)
             {
                 UserApplicationProfile = DataPortal.FetchChild<UserApplicationProfile>(data.UserApplicationProfile);
@@ -42,14 +42,14 @@ namespace MobileKidsIdApp.Models
             }
         }
 
-        protected override void DataPortal_Update()
+        private new async Task DataPortal_Update()
         {
             var provider = new DataAccess.DataProviderFactory().GetDataProvider();
             var dal = provider.GetApplicationDataProvider();
             var dtoRoot = new DataAccess.DataModels.ApplicationData();
             DataPortal.UpdateChild(UserApplicationProfile, dtoRoot.UserApplicationProfile);
             DataPortal.UpdateChild(PermittedLoginIdentities, dtoRoot.PermittedLoginIdentities);
-            dal.Save(dtoRoot);
+            await dal.Save(dtoRoot);
         }
     }
 }
