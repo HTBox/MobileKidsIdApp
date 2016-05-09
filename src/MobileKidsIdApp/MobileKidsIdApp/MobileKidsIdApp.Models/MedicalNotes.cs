@@ -61,6 +61,7 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Fetch(DataAccess.DataModels.MedicalNotes notes)
         {
+            if (notes == null) return;
             using (BypassPropertyChecks)
             {
                 MedicalAlertInfo = notes.MedicAlertInfo;

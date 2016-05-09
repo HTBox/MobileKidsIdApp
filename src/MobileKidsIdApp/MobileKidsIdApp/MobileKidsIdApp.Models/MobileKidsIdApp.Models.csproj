@@ -58,8 +58,14 @@
     <Compile Include="UserIdentityList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16050801\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
+    <ProjectReference Include="..\MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj">
+      <Project>{0057354d-d5bb-4bb2-9d3e-1406fe1f7d7f}</Project>
+      <Name>MobileKidsIdApp.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16050904\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -67,13 +73,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16050801\analyzers\c#\Csla.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj">
-      <Project>{0057354d-d5bb-4bb2-9d3e-1406fe1f7d7f}</Project>
-      <Name>MobileKidsIdApp.DataAccess</Name>
-    </ProjectReference>
+    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16050904\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

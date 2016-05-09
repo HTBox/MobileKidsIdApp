@@ -10,7 +10,8 @@ namespace MobileKidsIdApp.DataAccess
     {
         public IDataProvider GetDataProvider()
         {
-            return new LocalStorage.DataProvider();
+            //return new LocalStorage.DataProvider();
+            return new MockStorage.DataProvider();
         }
     }
 }

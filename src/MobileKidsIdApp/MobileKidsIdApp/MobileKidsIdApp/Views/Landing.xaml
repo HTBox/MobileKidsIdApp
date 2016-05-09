@@ -5,7 +5,7 @@
     <StackLayout>
         <Label Text="Mobile Kids Id Kit" Margin="0,0,10,0"/>
         <Button Text="Content" Command="{Binding DisplayContentMenuCommand}"/>
-        <Button Text="My kids"/>
+        <Button Text="My kids" Command="{Binding ChildProfileListCommand}"/>
         <Button Text="Options"/>
         <Button Text="Logout"/>
     </StackLayout>
