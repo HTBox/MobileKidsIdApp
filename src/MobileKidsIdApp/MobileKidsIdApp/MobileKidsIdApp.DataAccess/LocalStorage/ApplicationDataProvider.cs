@@ -1,18 +1,38 @@
 ﻿using System;
 using MobileKidsIdApp.DataAccess.DataModels;
+using PCLStorage;
+using System.Threading.Tasks;
 
 namespace MobileKidsIdApp.DataAccess.LocalStorage
 {
     public class ApplicationDataProvider : IApplicationDataProvider
     {
-        public ApplicationData Get()
+        public async Task<ApplicationData> Get()
         {
-            throw new NotImplementedException();
+            ApplicationData result;
+            var fileSystem = FileSystem.Current;
+            var rootFolder = fileSystem.LocalStorage;
+            var file = await rootFolder.GetFileAsync("ApplicationData.txt");
+            if (file != null)
+            {
+                var data = file.ReadAllTextAsync();
+                // TODO: deserialize data here
+                result = new ApplicationData();
+            }
+            else
+            {
+                result = new ApplicationData();
+            }
+            return result;
         }
 
-        public void Save(ApplicationData data)
+        public async Task Save(ApplicationData data)
         {
-            throw new NotImplementedException();
+            var fileSystem = FileSystem.Current;
+            var rootFolder = fileSystem.LocalStorage;
+            var file = await rootFolder.CreateFileAsync("ApplicationData.txt", CreationCollisionOption.ReplaceExisting);
+            // TODO: serialize data here
+            await file.WriteAllTextAsync("");
         }
     }
 }
