@@ -24,13 +24,35 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(ContactIdProperty, value); }
         }
 
+        public static int LastId = -1;
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                LastId++;
+                Id = LastId.ToString();
+            }
+            base.Child_Create();
+        }
+
         private void Child_Fetch(DataAccess.DataModels.Person person)
         {
             using (BypassPropertyChecks)
             {
                 Id = person.Id;
-                ContactId = person.ContactReference.ContactId;
+                ContactId = person.ContactId;
             }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.Person> list)
+        {
+            var person = new DataAccess.DataModels.Person();
+            using (BypassPropertyChecks)
+            {
+                person.Id = Id;
+                person.ContactId = ContactId;
+            }
+            list.Add(person);
         }
     }
 }

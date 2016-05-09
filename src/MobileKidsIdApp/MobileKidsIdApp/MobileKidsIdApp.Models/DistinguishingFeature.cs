@@ -31,6 +31,17 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(FileReferenceProperty, value); }
         }
 
+        public static int LastId = -1;
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                LastId++;
+                Id = LastId.ToString();
+            }
+            base.Child_Create();
+        }
+
         private void Child_Fetch(DataAccess.DataModels.DistinguishingFeature feature)
         {
             using (BypassPropertyChecks)
@@ -39,6 +50,22 @@ namespace MobileKidsIdApp.Models
                 Description = feature.Description;
                 FileReference = DataPortal.FetchChild<FileReference>(feature.FileReference);
             }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.DistinguishingFeature> list)
+        {
+            var feature = new DataAccess.DataModels.DistinguishingFeature();
+            using (BypassPropertyChecks)
+            {
+                feature.Id = Id;
+                feature.Description = Description;
+                if (FieldManager.FieldExists(FileReferenceProperty))
+                {
+                    feature.FileReference = new DataAccess.DataModels.FileReference();
+                    DataPortal.UpdateChild(FileReference, feature.FileReference);
+                }
+            }
+            list.Add(feature);
         }
     }
 }

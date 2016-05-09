@@ -10,7 +10,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             throw new NotImplementedException();
         }
 
-        public Family Save(Family data)
+        public void Save(Family data)
         {
             throw new NotImplementedException();
         }

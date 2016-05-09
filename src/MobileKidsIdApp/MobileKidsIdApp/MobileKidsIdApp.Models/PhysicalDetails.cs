@@ -28,7 +28,7 @@ namespace MobileKidsIdApp.Models
         public DateTime? MeasurementDate
         {
             get { return GetProperty(MeasurementDateProperty); }
-            private set { LoadProperty(MeasurementDateProperty, value); }
+            set { LoadProperty(MeasurementDateProperty, value); }
         }
 
         public static readonly PropertyInfo<string> HairColorProperty = RegisterProperty<string>(c => c.HairColor);
@@ -110,6 +110,25 @@ namespace MobileKidsIdApp.Models
                 RacialEthnicIdentity = details.RacialEthnicIdentity;
                 Gender = details.Gender;
                 GenderIdentity = details.GenderIdentity;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.PhysicalDetails details)
+        {
+            using (BypassPropertyChecks)
+            {
+                details.Height = Height;
+                details.Weight = Weight;
+                details.MeasurementDate = MeasurementDate;
+                details.HairColor = HairColor;
+                details.HairStyle = HairStyle;
+                details.EyeColor = EyeColor;
+                details.EyeGlasses = EyeGlasses;
+                details.EyeContacts = EyeContacts;
+                details.SkinTone = SkinTone;
+                details.RacialEthnicIdentity = RacialEthnicIdentity;
+                details.Gender = Gender;
+                details.GenderIdentity = GenderIdentity;
             }
         }
     }

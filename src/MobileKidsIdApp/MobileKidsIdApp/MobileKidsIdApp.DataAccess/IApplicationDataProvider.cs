@@ -9,6 +9,6 @@ namespace MobileKidsIdApp.DataAccess
     public interface IApplicationDataProvider
     {
         DataModels.ApplicationData Get();
-        DataModels.ApplicationData Save(DataModels.ApplicationData data);
+        void Save(DataModels.ApplicationData data);
     }
 }
