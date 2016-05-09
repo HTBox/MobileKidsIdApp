@@ -23,5 +23,14 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(UserIdFromProviderProperty); }
             set { SetProperty(UserIdFromProviderProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.UserIdentity identity)
+        {
+            using (BypassPropertyChecks)
+            {
+                ProviderName = identity.ProviderName;
+                UserIdFromProvider = identity.UserIdFromProvider;
+            }
+        }
     }
 }

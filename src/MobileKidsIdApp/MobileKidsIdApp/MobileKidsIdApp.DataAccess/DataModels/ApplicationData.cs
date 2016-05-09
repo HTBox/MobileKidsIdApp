@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileKidsIdApp.Models.DataModels
+namespace MobileKidsIdApp.DataAccess.DataModels
 {
     public class ApplicationData
     {
@@ -14,6 +14,6 @@ namespace MobileKidsIdApp.Models.DataModels
         }
 
         public UserApplicationProfile UserApplicationProfile { get; set; }
-        public List<UserIdentity> PermittedLoginIdentities { get; set; }   
+        public List<UserIdentity> PermittedLoginIdentities { get; set; }  
     }
 }

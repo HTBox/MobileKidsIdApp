@@ -30,5 +30,15 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(FileReferenceProperty); }
             private set { LoadProperty(FileReferenceProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.DistinguishingFeature feature)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = feature.Id;
+                Description = feature.Description;
+                FileReference = DataPortal.FetchChild<FileReference>(feature.FileReference);
+            }
+        }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileKidsIdApp.Models.DataModels
+namespace MobileKidsIdApp.DataAccess.DataModels
 {
-    public interface IContactReference
+    public class FamilyMember : Person
     {
-        string ContactId { get; set; }
+        public string Relation { get; set; }
     }
 }

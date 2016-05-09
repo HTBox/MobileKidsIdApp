@@ -93,5 +93,24 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(GenderIdentityProperty); }
             set { SetProperty(GenderIdentityProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.PhysicalDetails details)
+        {
+            using (BypassPropertyChecks)
+            {
+                Height = details.Height;
+                Weight = details.Weight;
+                MeasurementDate = details.MeasurementDate;
+                HairColor = details.HairColor;
+                HairStyle = details.HairStyle;
+                EyeColor = details.EyeColor;
+                EyeGlasses = details.EyeGlasses;
+                EyeContacts = details.EyeContacts;
+                SkinTone = details.SkinTone;
+                RacialEthnicIdentity = details.RacialEthnicIdentity;
+                Gender = details.Gender;
+                GenderIdentity = details.GenderIdentity;
+            }
+        }
     }
 }

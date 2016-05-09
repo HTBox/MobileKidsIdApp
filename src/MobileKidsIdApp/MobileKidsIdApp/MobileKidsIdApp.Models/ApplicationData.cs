@@ -17,8 +17,8 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(UserApplicationProfileProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<UserIdentity>> PermittedLoginIdentitiesProperty = RegisterProperty<List<UserIdentity>>(c => c.PermittedLoginIdentities);
-        public List<UserIdentity> PermittedLoginIdentities
+        public static readonly PropertyInfo<UserIdentityList> PermittedLoginIdentitiesProperty = RegisterProperty<UserIdentityList>(c => c.PermittedLoginIdentities);
+        public UserIdentityList PermittedLoginIdentities
         {
             get { return GetProperty(PermittedLoginIdentitiesProperty); }
             private set { LoadProperty(PermittedLoginIdentitiesProperty, value); }
@@ -26,8 +26,20 @@ namespace MobileKidsIdApp.Models
 
         protected override void DataPortal_Create()
         {
-            UserApplicationProfile = new UserApplicationProfile();
-            PermittedLoginIdentities = new List<UserIdentity>();
+            UserApplicationProfile = DataPortal.CreateChild<UserApplicationProfile>();
+            PermittedLoginIdentities = DataPortal.CreateChild<UserIdentityList>();
+        }
+
+        private void DataPortal_Fetch()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetApplicationDataProvider();
+            var data = dal.Get();
+            using (BypassPropertyChecks)
+            {
+                UserApplicationProfile = DataPortal.FetchChild<UserApplicationProfile>(data.UserApplicationProfile);
+                PermittedLoginIdentities = DataPortal.FetchChild<UserIdentityList>(data.PermittedLoginIdentities);
+            }
         }
     }
 }

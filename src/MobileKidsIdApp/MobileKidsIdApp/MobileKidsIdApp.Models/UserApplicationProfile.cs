@@ -23,5 +23,14 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(LegalAcknowlegeDataSecurityPolicyProperty); }
             set { SetProperty(LegalAcknowlegeDataSecurityPolicyProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.UserApplicationProfile profile)
+        {
+            using (BypassPropertyChecks)
+            {
+                FirstUse = profile.FirstUse;
+                LegalAcknowlegeDataSecurityPolicy = profile.LegalAcknowlegeDataSecurityPolicy;
+            }
+        }
     }
 }

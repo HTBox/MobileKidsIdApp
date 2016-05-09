@@ -23,5 +23,14 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(CareRoleDescriptionProperty); }
             set { SetProperty(CareRoleDescriptionProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.CareProvider provider)
+        {
+            using (BypassPropertyChecks)
+            {
+                ClinicName = provider.ClinicName;
+                CareRoleDescription = provider.CareRoleDescription;
+            }
+        }
     }
 }
