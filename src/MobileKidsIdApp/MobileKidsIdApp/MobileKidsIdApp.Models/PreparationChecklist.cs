@@ -82,6 +82,7 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Fetch(DataAccess.DataModels.PreparationChecklist list)
         {
+            if (list == null) return;
             using (BypassPropertyChecks)
             {
                 ChildPhoto = list.ChildPhoto;

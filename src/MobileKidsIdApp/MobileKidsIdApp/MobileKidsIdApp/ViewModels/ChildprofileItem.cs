@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    class ChildprofileItem
+    class ChildProfileItem
     {
     }
 }
