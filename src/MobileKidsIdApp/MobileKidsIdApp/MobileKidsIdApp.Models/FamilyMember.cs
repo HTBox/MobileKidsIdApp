@@ -17,11 +17,11 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(IdProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> ContactReferenceProperty = RegisterProperty<string>(c => c.ContactReference);
-        public string ContactReference
+        public static readonly PropertyInfo<string> ContactIdProperty = RegisterProperty<string>(c => c.ContactId);
+        public string ContactId
         {
-            get { return GetProperty(ContactReferenceProperty); }
-            private set { LoadProperty(ContactReferenceProperty, value); }
+            get { return GetProperty(ContactIdProperty); }
+            private set { LoadProperty(ContactIdProperty, value); }
         }
 
         public static readonly PropertyInfo<string> RelationProperty = RegisterProperty<string>(c => c.Relation);
@@ -29,6 +29,16 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(RelationProperty); }
             set { SetProperty(RelationProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.FamilyMember member)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = member.Id;
+                ContactId = member.ContactReference.ContactId;
+                Relation = member.Relation;
+            }
         }
     }
 }

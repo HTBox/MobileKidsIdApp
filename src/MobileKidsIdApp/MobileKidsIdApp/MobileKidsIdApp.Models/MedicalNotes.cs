@@ -58,5 +58,19 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(DiabeticProperty); }
             set { SetProperty(DiabeticProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.MedicalNotes notes)
+        {
+            using (BypassPropertyChecks)
+            {
+                MedicalAlertInfo = notes.MedicAlertInfo;
+                Allergies = notes.Allergies;
+                RegularMedications = notes.RegularMedications;
+                PsychMedications = notes.PsychMedications;
+                Notes = notes.Notes;
+                Inhaler = notes.Inhaler;
+                Diabetic = notes.Diabetic;
+            }
+        }
     }
 }

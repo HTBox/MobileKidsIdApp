@@ -37,5 +37,16 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(FileNameProperty); }
             set { SetProperty(FileNameProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.FileReference reference)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = reference.Id;
+                ResourceType = reference.ResourceType;
+                Description = reference.Description;
+                FileName = reference.FileName;
+            }
+        }
     }
 }

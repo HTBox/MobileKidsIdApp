@@ -35,13 +35,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataModels\ApplicationData.cs" />
+    <Compile Include="DataModels\CareProvider.cs" />
+    <Compile Include="DataModels\Child.cs" />
+    <Compile Include="DataModels\ChildDetails.cs" />
+    <Compile Include="DataModels\DistinguishingFeature.cs" />
+    <Compile Include="DataModels\Family.cs" />
+    <Compile Include="DataModels\FamilyMember.cs" />
+    <Compile Include="DataModels\FileReference.cs" />
+    <Compile Include="DataModels\IContactReference.cs" />
+    <Compile Include="DataModels\IResourceReference.cs" />
+    <Compile Include="DataModels\MedicalNotes.cs" />
+    <Compile Include="DataModels\Person.cs" />
+    <Compile Include="DataModels\PhysicalDetails.cs" />
+    <Compile Include="DataModels\PreparationChecklist.cs" />
+    <Compile Include="DataModels\UserApplicationProfile.cs" />
+    <Compile Include="DataModels\UserIdentity.cs" />
+    <Compile Include="DataProviderFactory.cs" />
+    <Compile Include="IApplicationDataProvider.cs" />
+    <Compile Include="IDataProvider.cs" />
+    <Compile Include="IFamilyProvider.cs" />
+    <Compile Include="LocalStorage\ApplicationDataProvider.cs" />
+    <Compile Include="LocalStorage\DataProvider.cs" />
+    <Compile Include="LocalStorage\FamilyProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>MobileKidsIdApp.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">

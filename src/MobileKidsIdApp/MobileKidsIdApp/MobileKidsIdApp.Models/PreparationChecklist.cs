@@ -79,5 +79,22 @@ namespace MobileKidsIdApp.Models
             get { return GetProperty(OtherParentsAndFamilyProperty); }
             set { SetProperty(OtherParentsAndFamilyProperty, value); }
         }
+
+        private void Child_Fetch(DataAccess.DataModels.PreparationChecklist list)
+        {
+            using (BypassPropertyChecks)
+            {
+                ChildPhoto = list.ChildPhoto;
+                BirthCertificate = list.BirthCertificate;
+                SocialSecurityCard = list.SocialSecurityCard;
+                PhysicalDetails = list.PhysicalDetails;
+                DistinguishingFeatures = list.DistinguishingFeatures;
+                Friends = list.Friends;
+                DNA = list.DNA;
+                Mementos = list.Mementos;
+                DivorceCustodyPapers = list.DivorceCustodyPapers;
+                OtherParentsAndFamily = list.OtherParentsAndFamily;
+            }
+        }
     }
 }
