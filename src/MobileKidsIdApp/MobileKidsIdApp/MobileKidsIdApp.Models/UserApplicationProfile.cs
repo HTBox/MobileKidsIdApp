@@ -32,5 +32,14 @@ namespace MobileKidsIdApp.Models
                 LegalAcknowlegeDataSecurityPolicy = profile.LegalAcknowlegeDataSecurityPolicy;
             }
         }
+
+        private void Child_Update(DataAccess.DataModels.UserApplicationProfile profile)
+        {
+            using (BypassPropertyChecks)
+            {
+                profile.FirstUse = FirstUse;
+                profile.LegalAcknowlegeDataSecurityPolicy = LegalAcknowlegeDataSecurityPolicy;
+            }
+        }
     }
 }

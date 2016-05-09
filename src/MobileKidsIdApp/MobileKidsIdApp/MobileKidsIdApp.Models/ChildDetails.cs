@@ -53,7 +53,19 @@ namespace MobileKidsIdApp.Models
                 AdditionalName = details.AdditonalName;
                 FamilyName = details.FamilyName;
                 Birthday = details.Birthday;
-                ContactId = details.ContactReference.ContactId;
+                ContactId = details.ContactId;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.ChildDetails details)
+        {
+            using (BypassPropertyChecks)
+            {
+                details.GivenName = GivenName;
+                details.AdditonalName = AdditionalName;
+                details.FamilyName = FamilyName;
+                details.Birthday = Birthday;
+                details.ContactId = ContactId;
             }
         }
     }

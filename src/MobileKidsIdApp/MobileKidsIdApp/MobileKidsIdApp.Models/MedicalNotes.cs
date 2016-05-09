@@ -72,5 +72,19 @@ namespace MobileKidsIdApp.Models
                 Diabetic = notes.Diabetic;
             }
         }
+
+        private void Child_Update(DataAccess.DataModels.MedicalNotes notes)
+        {
+            using (BypassPropertyChecks)
+            {
+                notes.MedicAlertInfo = MedicalAlertInfo;
+                notes.Allergies = Allergies;
+                notes.RegularMedications = RegularMedications;
+                notes.PsychMedications = PsychMedications;
+                notes.Notes = Notes;
+                notes.Inhaler = Inhaler;
+                notes.Diabetic = Diabetic;
+            }
+        }
     }
 }

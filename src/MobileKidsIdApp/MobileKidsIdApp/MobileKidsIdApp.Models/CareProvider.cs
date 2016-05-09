@@ -32,5 +32,16 @@ namespace MobileKidsIdApp.Models
                 CareRoleDescription = provider.CareRoleDescription;
             }
         }
+
+        private void Child_Update(List<DataAccess.DataModels.CareProvider> list)
+        {
+            var provider = new DataAccess.DataModels.CareProvider();
+            using (BypassPropertyChecks)
+            {
+                provider.ClinicName = ClinicName;
+                provider.CareRoleDescription = CareRoleDescription;
+            }
+            list.Add(provider);
+        }
     }
 }

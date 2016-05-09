@@ -18,5 +18,14 @@ namespace MobileKidsIdApp.Models
             foreach (var item in data.Children)
                 Add(DataPortal.FetchChild<Child>(item));
         }
+
+        protected override void DataPortal_Update()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetFamilyProvider();
+            var dtoRoot = new DataAccess.DataModels.Family();
+            Child_Update(dtoRoot.Children);
+            dal.Save(dtoRoot);
+        }
     }
 }

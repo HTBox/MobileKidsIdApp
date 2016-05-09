@@ -38,6 +38,17 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(FileNameProperty, value); }
         }
 
+        public static int LastId = -1;
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                LastId++;
+                Id = LastId.ToString();
+            }
+            base.Child_Create();
+        }
+
         private void Child_Fetch(DataAccess.DataModels.FileReference reference)
         {
             using (BypassPropertyChecks)
@@ -47,6 +58,24 @@ namespace MobileKidsIdApp.Models
                 Description = reference.Description;
                 FileName = reference.FileName;
             }
+        }
+
+        private void Child_Update(DataAccess.DataModels.FileReference reference)
+        {
+            using (BypassPropertyChecks)
+            {
+                reference.Id = Id;
+                reference.ResourceType = ResourceType;
+                reference.Description = Description;
+                reference.FileName = FileName;
+            }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.FileReference> list)
+        {
+            var reference = new DataAccess.DataModels.FileReference();
+            Child_Update(reference);
+            list.Add(reference);
         }
     }
 }

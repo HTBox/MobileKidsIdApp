@@ -9,6 +9,6 @@ namespace MobileKidsIdApp.DataAccess.DataModels
     public class Person 
     {
         public string Id { get; set; }
-        public IContactReference ContactReference { get; set; }
+        public string ContactId { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobileKidsIdApp.DataAccess.DataModels
 {
-    public class FileReference : IResourceReference
+    public class FileReference
     {
         public string Id
         {

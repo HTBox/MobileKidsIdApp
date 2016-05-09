@@ -87,6 +87,17 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(PhotosProperty, value); }
         }
 
+        public static int LastId = -1;
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                LastId++;
+                Id = LastId.ToString();
+            }
+            base.Child_Create();
+        }
+
         private void Child_Fetch(DataAccess.DataModels.Child child)
         {
             using (BypassPropertyChecks)
@@ -103,6 +114,26 @@ namespace MobileKidsIdApp.Models
                 Documents = DataPortal.FetchChild<FileReferenceList>(child.Documents);
                 Photos = DataPortal.FetchChild<FileReferenceList>(child.Photos);
             }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.Child> list)
+        {
+            var child = new DataAccess.DataModels.Child();
+            using (BypassPropertyChecks)
+            {
+                child.Id = Id;
+                DataPortal.UpdateChild(ChildDetails, child.ChildDetails);
+                DataPortal.UpdateChild(PhysicalDetails, child.PhysicalDetails);
+                DataPortal.UpdateChild(DistinguishingFeatures, child.DistinguishingFeatures);
+                DataPortal.UpdateChild(ProfessionalCareProviders, child.ProfessionalCareProviders);
+                DataPortal.UpdateChild(FamilyMembers, child.FamilyMembers);
+                DataPortal.UpdateChild(Friends, child.Friends);
+                DataPortal.UpdateChild(MedicalNotes, child.MedicalNotes);
+                DataPortal.UpdateChild(Checklist, child.Checklist);
+                DataPortal.UpdateChild(Documents, child.Documents);
+                DataPortal.UpdateChild(Photos, child.Photos);
+            }
+            list.Add(child);
         }
     }
 }

@@ -96,5 +96,22 @@ namespace MobileKidsIdApp.Models
                 OtherParentsAndFamily = list.OtherParentsAndFamily;
             }
         }
+
+        private void Child_Update(DataAccess.DataModels.PreparationChecklist list)
+        {
+            using (BypassPropertyChecks)
+            {
+                list.ChildPhoto = ChildPhoto;
+                list.BirthCertificate = BirthCertificate;
+                list.SocialSecurityCard = SocialSecurityCard;
+                list.PhysicalDetails = PhysicalDetails;
+                list.DistinguishingFeatures = DistinguishingFeatures;
+                list.Friends = Friends;
+                list.DNA = DNA;
+                list.Mementos = Mementos;
+                list.DivorceCustodyPapers = DivorceCustodyPapers;
+                list.OtherParentsAndFamily = OtherParentsAndFamily;
+            }
+        }
     }
 }

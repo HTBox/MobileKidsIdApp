@@ -41,5 +41,15 @@ namespace MobileKidsIdApp.Models
                 PermittedLoginIdentities = DataPortal.FetchChild<UserIdentityList>(data.PermittedLoginIdentities);
             }
         }
+
+        protected override void DataPortal_Update()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetApplicationDataProvider();
+            var dtoRoot = new DataAccess.DataModels.ApplicationData();
+            DataPortal.UpdateChild(UserApplicationProfile, dtoRoot.UserApplicationProfile);
+            DataPortal.UpdateChild(PermittedLoginIdentities, dtoRoot.PermittedLoginIdentities);
+            dal.Save(dtoRoot);
+        }
     }
 }

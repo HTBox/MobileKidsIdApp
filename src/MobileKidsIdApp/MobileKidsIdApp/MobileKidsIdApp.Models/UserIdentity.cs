@@ -32,5 +32,16 @@ namespace MobileKidsIdApp.Models
                 UserIdFromProvider = identity.UserIdFromProvider;
             }
         }
+
+        private void Child_Update(List<DataAccess.DataModels.UserIdentity> list)
+        {
+            var identity = new DataAccess.DataModels.UserIdentity();
+            using (BypassPropertyChecks)
+            {
+                identity.ProviderName = ProviderName;
+                identity.UserIdFromProvider = UserIdFromProvider;
+            }
+            list.Add(identity);
+        }
     }
 }

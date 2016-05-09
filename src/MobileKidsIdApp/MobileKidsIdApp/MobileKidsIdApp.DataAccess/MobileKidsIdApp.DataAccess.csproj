@@ -43,8 +43,6 @@
     <Compile Include="DataModels\Family.cs" />
     <Compile Include="DataModels\FamilyMember.cs" />
     <Compile Include="DataModels\FileReference.cs" />
-    <Compile Include="DataModels\IContactReference.cs" />
-    <Compile Include="DataModels\IResourceReference.cs" />
     <Compile Include="DataModels\MedicalNotes.cs" />
     <Compile Include="DataModels\Person.cs" />
     <Compile Include="DataModels\PhysicalDetails.cs" />
