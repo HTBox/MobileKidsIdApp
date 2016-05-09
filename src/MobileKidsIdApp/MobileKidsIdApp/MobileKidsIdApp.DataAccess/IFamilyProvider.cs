@@ -8,7 +8,7 @@ namespace MobileKidsIdApp.DataAccess
 {
     public interface IFamilyProvider
     {
-        DataModels.Family Get();
-        void Save(DataModels.Family data);
+        Task<DataModels.Family> Get();
+        Task Save(DataModels.Family data);
     }
 }
