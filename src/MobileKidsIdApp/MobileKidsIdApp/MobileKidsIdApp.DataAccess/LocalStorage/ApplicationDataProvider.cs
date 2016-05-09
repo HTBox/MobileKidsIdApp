@@ -2,6 +2,7 @@
 using MobileKidsIdApp.DataAccess.DataModels;
 using PCLStorage;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MobileKidsIdApp.DataAccess.LocalStorage
 {
@@ -15,9 +16,9 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             var file = await rootFolder.GetFileAsync("ApplicationData.txt");
             if (file != null)
             {
-                var data = file.ReadAllTextAsync();
-                // TODO: deserialize data here
-                result = new ApplicationData();
+                await file.OpenAsync(FileAccess.Read);
+                var json = await file.ReadAllTextAsync();
+                result = JsonConvert.DeserializeObject<ApplicationData>(json);
             }
             else
             {
@@ -28,11 +29,11 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
 
         public async Task Save(ApplicationData data)
         {
+            var json = JsonConvert.SerializeObject(data);
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
             var file = await rootFolder.CreateFileAsync("ApplicationData.txt", CreationCollisionOption.ReplaceExisting);
-            // TODO: serialize data here
-            await file.WriteAllTextAsync("");
+            await file.WriteAllTextAsync(json);
         }
     }
 }
