@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.BasicDetails"
              Title="Basic details">
-    <TableView BindingContext="{Binding Model}" Intent="Form">
+    <TableView Intent="Form">
         <TableView.Root>
             <TableSection Title="Name">
-                <EntryCell Label="Given" Text="{Binding GivenName}"/>
-                <EntryCell Label="Middle" Text="{Binding AdditionalName}"/>
-                <EntryCell Label="Family" Text="{Binding FamilyName}"/>
+                <EntryCell Label="Given" Text="{Binding Model.GivenName}"/>
+                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}"/>
+                <EntryCell Label="Family" Text="{Binding Model.FamilyName}"/>
             </TableSection>
             <TableSection Title="Birthday">
                 <ViewCell>
-                    <DatePicker Date="{Binding Birthday}"/>
+                    <DatePicker Date="{Binding Model.Birthday}"/>
                 </ViewCell>
             </TableSection>
             <TableSection Title="Contact">
