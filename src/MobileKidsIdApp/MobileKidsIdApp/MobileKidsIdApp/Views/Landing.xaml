@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileKidsIdApp.Views.Landing">
+             x:Class="MobileKidsIdApp.Views.Landing"
+             Title="Kids Id Kit">
     <StackLayout>
-        <Label Text="Mobile Kids Id Kit" Margin="0,0,10,0"/>
         <Button Text="Content" Command="{Binding DisplayContentMenuCommand}"/>
         <Button Text="My kids" Command="{Binding ChildProfileListCommand}"/>
         <Button Text="Options"/>

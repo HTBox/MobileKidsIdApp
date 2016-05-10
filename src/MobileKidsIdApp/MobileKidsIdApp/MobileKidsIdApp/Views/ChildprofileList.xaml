@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileKidsIdApp.Views.ChildProfileList">
-    <Grid>
-        <ListView ItemsSource="{Binding Model}" Margin="5">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Vertical" Margin="3">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding ChildDetails.GivenName}" Margin="0,0,0,3"/>
-                                <Label Text="{Binding ChildDetails.AdditionalName}" Margin="0,0,0,3"/>
-                                <Label Text="{Binding ChildDetails.FamilyName}"/>
-                            </StackLayout>
+             x:Class="MobileKidsIdApp.Views.ChildProfileList"
+             Title="Child list">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Save" Command="{Binding SaveItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ListView ItemsSource="{Binding Model}" Margin="5" ItemTapped="ShowChild">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical" Margin="3">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding ChildDetails.GivenName}" Margin="0,0,0,3"/>
+                            <Label Text="{Binding ChildDetails.AdditionalName}" Margin="0,0,0,3"/>
+                            <Label Text="{Binding ChildDetails.FamilyName}"/>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
