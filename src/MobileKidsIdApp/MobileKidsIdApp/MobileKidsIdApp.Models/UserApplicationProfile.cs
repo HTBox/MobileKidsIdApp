@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class UserApplicationProfile : BusinessBase<UserApplicationProfile>
+    public class UserApplicationProfile : BaseTypes.BusinessBase<UserApplicationProfile>
     {
         public static readonly PropertyInfo<DateTime> FirstUseProperty = RegisterProperty<DateTime>(c => c.FirstUse);
         public DateTime FirstUse

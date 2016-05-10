@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class DistinguishingFeature : BusinessBase<DistinguishingFeature>
+    public class DistinguishingFeature : BaseTypes.BusinessBase<DistinguishingFeature>
     {
         public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
         public string Id
@@ -24,11 +24,11 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(DescriptionProperty, value); }
         }
 
-        public static readonly PropertyInfo<FileReference> FileReferenceProperty = RegisterProperty<FileReference>(c => c.FileReference);
+        public static readonly PropertyInfo<FileReference> PhotoReference = RegisterProperty<FileReference>(c => c.FileReference);
         public FileReference FileReference
         {
-            get { return GetProperty(FileReferenceProperty); }
-            private set { LoadProperty(FileReferenceProperty, value); }
+            get { return GetProperty(PhotoReference); }
+            private set { LoadProperty(PhotoReference, value); }
         }
 
         public static int LastId = -1;
@@ -59,7 +59,7 @@ namespace MobileKidsIdApp.Models
             {
                 feature.Id = Id;
                 feature.Description = Description;
-                if (FieldManager.FieldExists(FileReferenceProperty))
+                if (FieldManager.FieldExists(PhotoReference))
                 {
                     feature.FileReference = new DataAccess.DataModels.FileReference();
                     DataPortal.UpdateChild(FileReference, feature.FileReference);

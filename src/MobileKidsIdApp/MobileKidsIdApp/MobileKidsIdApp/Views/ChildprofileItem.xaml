@@ -4,12 +4,15 @@
              x:Class="MobileKidsIdApp.Views.ChildProfileItem"
              Title="{Binding Model.ChildDetails.GivenName}">
     <StackLayout>
-        <Button Text="Edit basic info" Command="{Binding EditChildDetailsCommand}"/>
-        <Button Text="Edit physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
-        <Button Text="Edit family" Command="{Binding EditFamilyCommand}"/>
-        <Button Text="Edit friends" Command="{Binding EditFriendsCommand}"/>
-        <Button Text="Edit care providers" Command="{Binding EditCareProvidersCommand}"/>
-        <Button Text="Edit documents" Command="{Binding EditDocumentsCommand}"/>
-        <Button Text="Edit photos" Command="{Binding EditPhotosCommand}"/>
+        <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}"/>
+        <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
+        <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}"/>
+        <Button Text="Family" Command="{Binding EditFamilyCommand}"/>
+        <Button Text="Friends" Command="{Binding EditFriendsCommand}"/>
+        <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}"/>
+        <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}"/>
+        <Button Text="Documents" Command="{Binding EditDocumentsCommand}"/>
+        <Button Text="Photos" Command="{Binding EditPhotosCommand}"/>
+        <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}"/>
     </StackLayout>
 </ContentPage>

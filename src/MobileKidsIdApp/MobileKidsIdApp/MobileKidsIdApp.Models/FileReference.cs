@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class FileReference : BusinessBase<FileReference>
+    public class FileReference : BaseTypes.BusinessBase<FileReference>
     {
         public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
         public string Id
