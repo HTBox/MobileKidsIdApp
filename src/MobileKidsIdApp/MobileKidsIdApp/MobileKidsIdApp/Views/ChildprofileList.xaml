@@ -5,6 +5,7 @@
              Title="Child list">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Save" Command="{Binding SaveItemCommand}"/>
+        <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
     <ListView ItemsSource="{Binding Model}" Margin="5" ItemTapped="ShowChild">
         <ListView.ItemTemplate>

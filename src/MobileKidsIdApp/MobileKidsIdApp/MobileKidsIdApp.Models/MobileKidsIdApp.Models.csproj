@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationData.cs" />
+    <Compile Include="BaseTypes\BusinessBase.cs" />
     <Compile Include="CareProvider.cs" />
     <Compile Include="CareProviderList.cs" />
     <Compile Include="Child.cs" />

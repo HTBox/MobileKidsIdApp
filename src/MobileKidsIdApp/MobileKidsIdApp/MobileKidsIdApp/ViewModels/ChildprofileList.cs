@@ -12,11 +12,13 @@ namespace MobileKidsIdApp.ViewModels
     public class ChildProfileList : Csla.Xaml.ViewModelBase<Models.Family>
     {
         public ICommand SaveItemCommand { get; private set; }
+        public ICommand NewItemCommand { get; private set; }
 
         public ChildProfileList()
         {
 
             SaveItemCommand = new Command(async () => await SaveAsync());
+            NewItemCommand = new Command(() => BeginAddNew());
         }
 
         protected async override Task<Family> DoInitAsync()

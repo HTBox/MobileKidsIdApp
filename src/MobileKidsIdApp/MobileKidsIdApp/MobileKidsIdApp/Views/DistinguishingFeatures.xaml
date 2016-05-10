@@ -3,5 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.DistinguishingFeatures"
              Title="Features">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ListView ItemsSource="{Binding Model}" Margin="5">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="Description"/>
+                        <Entry Text="{Binding Description}"/>
+                        <Label Text="Photo"/>
+                        <Image Source="{Binding PhotoReference}" />
+                        <Button Text="Select photo" Command="{Binding NewItemCommand}" CommandParameter="{Binding Id}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

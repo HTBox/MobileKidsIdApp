@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class CareProvider : BusinessBase<CareProvider>
+    public class CareProvider : BaseTypes.BusinessBase<CareProvider>
     {
         public static readonly PropertyInfo<string> ClinicNameProperty = RegisterProperty<string>(c => c.ClinicName);
         public string ClinicName
