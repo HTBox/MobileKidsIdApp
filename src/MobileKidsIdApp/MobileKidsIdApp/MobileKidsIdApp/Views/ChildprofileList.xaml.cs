@@ -14,5 +14,12 @@ namespace MobileKidsIdApp.Views
         {
             InitializeComponent();
         }
+
+        private void ShowChild(object sender, EventArgs e)
+        {
+            var child = (Models.Child)((ListView)sender).SelectedItem;
+            var vm = (ViewModels.ChildProfileList)BindingContext;
+            vm.ShowChild(child);
+        }
     }
 }
