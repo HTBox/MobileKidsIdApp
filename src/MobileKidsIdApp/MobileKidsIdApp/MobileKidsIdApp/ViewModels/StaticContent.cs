@@ -11,6 +11,10 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class StaticContent : BindableObject
     {
+        private string _title;
+        public string Title
+        { get { return _title; } set { _title = value; OnPropertyChanged("Title"); } }
+
         private HtmlWebViewSource _htmlSource;
         public HtmlWebViewSource HtmlSource
         {
@@ -29,6 +33,7 @@ namespace MobileKidsIdApp.ViewModels
             switch (contentName)
             {
                 case "abduction":
+                    Title = "Abduction";
                     SetSource(@"
 <div>
   <p>If an estranged parent or former spouse has abducted your child, call the police immediately.</p>
@@ -54,6 +59,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "amberalert":
+                    Title = "Amber alert";
                     SetSource(@"
 <div>
   <p>AMBER Alerts can only be requested by Law Enforcement. A very small percentage of missing child cases qualify for an AMBER Alert.</p>
@@ -71,6 +77,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "disasterprep":
+                    Title = "Disaster prep";
                     SetSource(@"
 <div>
   <p>Here are some resources to help you and your family know what to do should your family become separated in a disaster.</p>
@@ -95,6 +102,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "dna":
+                    Title = "DNA samples";
                     SetSource(@"
 <div>
   <p>A DNA sample is one of the best tools you can have in an identification kit. DNA is the accepted standard for identifying people who cannot or will not identify themselves. Fingerprints are great to have, but should be taken by a trained professional. It is fairly easy to take and prepare a DNA sample, and if properly collected and stored, it will last indefinitely.</p>
@@ -124,6 +132,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "international":
+                    Title = "International abduction";
                     SetSource(@"
 <div>
   <p>If you believe that your child may be taken out of the country by their abductor, you will want to have these resources at the ready:</p>
@@ -158,6 +167,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "missing":
+                    Title = "Missing child";
                     SetSource(@"
 <div>
   <ol>
@@ -183,6 +193,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "runaway":
+                    Title = "Runaway child";
                     SetSource(@"
 <div>
   <div>Definition of runaway Youth:</div>
@@ -214,6 +225,7 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 case "safety":
+                    Title = "Child safety";
                     SetSource(@"
 <div>
   <div>
@@ -299,7 +311,8 @@ namespace MobileKidsIdApp.ViewModels
 ");
                     break;
                 default:
-                    SetSource(@"<div><p>ERROR: content not found</p></div>");
+                    Title = "ERROR";
+                    SetSource(@"<div><p>Content not found</p></div>");
                     break;
             }
         }
