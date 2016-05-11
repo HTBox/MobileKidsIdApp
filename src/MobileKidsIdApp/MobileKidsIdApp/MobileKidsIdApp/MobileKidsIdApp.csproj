@@ -43,8 +43,9 @@
     <Compile Include="ViewModels\About.cs" />
     <Compile Include="ViewModels\BasicDetails.cs" />
     <Compile Include="ViewModels\BindableObject.cs" />
-    <Compile Include="ViewModels\ChildprofileItem.cs" />
-    <Compile Include="ViewModels\ChildprofileList.cs" />
+    <Compile Include="ViewModels\ChildProfileItem.cs" />
+    <Compile Include="ViewModels\ChildProfileList.cs" />
+    <Compile Include="ViewModels\ContactPicker.cs" />
     <Compile Include="ViewModels\DistinguishingFeatures.cs" />
     <Compile Include="ViewModels\ForgotPassword.cs" />
     <Compile Include="ViewModels\IdChecklist.cs" />
@@ -68,6 +69,9 @@
     </Compile>
     <Compile Include="Views\ChildProfileList.xaml.cs">
       <DependentUpon>ChildProfileList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactPicker.xaml.cs">
+      <DependentUpon>ContactPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DistinguishingFeatures.xaml.cs">
       <DependentUpon>DistinguishingFeatures.xaml</DependentUpon>
@@ -108,8 +112,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16050801\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
+    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16050904\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Csla.Xaml, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-XamarinForms.4.6.400-Beta-16050904\lib\portable-net45+win8+wpa81\Csla.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Contacts, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Contacts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Contacts.Abstractions, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Contacts.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -228,7 +244,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16050801\analyzers\c#\Csla.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16050904\analyzers\c#\Csla.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ContactPicker.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

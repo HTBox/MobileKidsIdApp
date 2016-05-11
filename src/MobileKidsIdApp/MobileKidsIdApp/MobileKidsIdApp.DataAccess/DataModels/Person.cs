@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileKidsIdApp.Models.DataModels
+namespace MobileKidsIdApp.DataAccess.DataModels
 {
     public class Person 
     {
         public string Id { get; set; }
-        public IContactReference ContactReference { get; set; }
+        public string ContactId { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class CareProvider : BusinessBase<CareProvider>
+    public class CareProvider : BaseTypes.BusinessBase<CareProvider>
     {
         public static readonly PropertyInfo<string> ClinicNameProperty = RegisterProperty<string>(c => c.ClinicName);
         public string ClinicName
@@ -22,6 +22,26 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(CareRoleDescriptionProperty); }
             set { SetProperty(CareRoleDescriptionProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.CareProvider provider)
+        {
+            using (BypassPropertyChecks)
+            {
+                ClinicName = provider.ClinicName;
+                CareRoleDescription = provider.CareRoleDescription;
+            }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.CareProvider> list)
+        {
+            var provider = new DataAccess.DataModels.CareProvider();
+            using (BypassPropertyChecks)
+            {
+                provider.ClinicName = ClinicName;
+                provider.CareRoleDescription = CareRoleDescription;
+            }
+            list.Add(provider);
         }
     }
 }

@@ -1,7 +1,11 @@
 ﻿{
   "dependencies": {
-    "CSLA-Core": "4.6.400-Beta-16050801",
+    "CSLA-Core": "4.6.400-Beta-16050904",
+    "CSLA-XamarinForms": "4.6.400-Beta-16050904",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Newtonsoft.Json": "8.0.3",
+    "PCLStorage": "1.0.2",
+    "Xam.Plugin.Contacts": "2.0.2-beta1",
     "Xamarin.Forms": "2.2.0.31"
   },
   "frameworks": {

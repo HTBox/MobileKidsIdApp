@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class PhysicalDetails : BusinessBase<PhysicalDetails>
+    public class PhysicalDetails : BaseTypes.BusinessBase<PhysicalDetails>
     {
         public static readonly PropertyInfo<string> HeightProperty = RegisterProperty<string>(c => c.Height);
         public string Height
@@ -28,7 +28,7 @@ namespace MobileKidsIdApp.Models
         public DateTime? MeasurementDate
         {
             get { return GetProperty(MeasurementDateProperty); }
-            private set { LoadProperty(MeasurementDateProperty, value); }
+            set { LoadProperty(MeasurementDateProperty, value); }
         }
 
         public static readonly PropertyInfo<string> HairColorProperty = RegisterProperty<string>(c => c.HairColor);
@@ -92,6 +92,45 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(GenderIdentityProperty); }
             set { SetProperty(GenderIdentityProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.PhysicalDetails details)
+        {
+            if (details == null) return;
+            using (BypassPropertyChecks)
+            {
+                Height = details.Height;
+                Weight = details.Weight;
+                MeasurementDate = details.MeasurementDate;
+                HairColor = details.HairColor;
+                HairStyle = details.HairStyle;
+                EyeColor = details.EyeColor;
+                EyeGlasses = details.EyeGlasses;
+                EyeContacts = details.EyeContacts;
+                SkinTone = details.SkinTone;
+                RacialEthnicIdentity = details.RacialEthnicIdentity;
+                Gender = details.Gender;
+                GenderIdentity = details.GenderIdentity;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.PhysicalDetails details)
+        {
+            using (BypassPropertyChecks)
+            {
+                details.Height = Height;
+                details.Weight = Weight;
+                details.MeasurementDate = MeasurementDate;
+                details.HairColor = HairColor;
+                details.HairStyle = HairStyle;
+                details.EyeColor = EyeColor;
+                details.EyeGlasses = EyeGlasses;
+                details.EyeContacts = EyeContacts;
+                details.SkinTone = SkinTone;
+                details.RacialEthnicIdentity = RacialEthnicIdentity;
+                details.Gender = Gender;
+                details.GenderIdentity = GenderIdentity;
+            }
         }
     }
 }

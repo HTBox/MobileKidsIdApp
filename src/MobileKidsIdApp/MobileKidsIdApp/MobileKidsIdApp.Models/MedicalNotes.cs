@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class MedicalNotes : BusinessBase<MedicalNotes>
+    public class MedicalNotes : BaseTypes.BusinessBase<MedicalNotes>
     {
         public static readonly PropertyInfo<string> MedicalAlertInfoProperty = RegisterProperty<string>(c => c.MedicalAlertInfo);
         public string MedicalAlertInfo
@@ -57,6 +57,35 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(DiabeticProperty); }
             set { SetProperty(DiabeticProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.MedicalNotes notes)
+        {
+            if (notes == null) return;
+            using (BypassPropertyChecks)
+            {
+                MedicalAlertInfo = notes.MedicAlertInfo;
+                Allergies = notes.Allergies;
+                RegularMedications = notes.RegularMedications;
+                PsychMedications = notes.PsychMedications;
+                Notes = notes.Notes;
+                Inhaler = notes.Inhaler;
+                Diabetic = notes.Diabetic;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.MedicalNotes notes)
+        {
+            using (BypassPropertyChecks)
+            {
+                notes.MedicAlertInfo = MedicalAlertInfo;
+                notes.Allergies = Allergies;
+                notes.RegularMedications = RegularMedications;
+                notes.PsychMedications = PsychMedications;
+                notes.Notes = Notes;
+                notes.Inhaler = Inhaler;
+                notes.Diabetic = Diabetic;
+            }
         }
     }
 }

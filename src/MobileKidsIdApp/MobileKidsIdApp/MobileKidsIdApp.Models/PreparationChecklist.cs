@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
         [Serializable]
-    public class PreparationChecklist : BusinessBase<PreparationChecklist>
+    public class PreparationChecklist : BaseTypes.BusinessBase<PreparationChecklist>
     {
         public static readonly PropertyInfo<bool> ChildPhotoProperty = RegisterProperty<bool>(c => c.ChildPhoto);
         public bool ChildPhoto
@@ -78,6 +78,41 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(OtherParentsAndFamilyProperty); }
             set { SetProperty(OtherParentsAndFamilyProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.PreparationChecklist list)
+        {
+            if (list == null) return;
+            using (BypassPropertyChecks)
+            {
+                ChildPhoto = list.ChildPhoto;
+                BirthCertificate = list.BirthCertificate;
+                SocialSecurityCard = list.SocialSecurityCard;
+                PhysicalDetails = list.PhysicalDetails;
+                DistinguishingFeatures = list.DistinguishingFeatures;
+                Friends = list.Friends;
+                DNA = list.DNA;
+                Mementos = list.Mementos;
+                DivorceCustodyPapers = list.DivorceCustodyPapers;
+                OtherParentsAndFamily = list.OtherParentsAndFamily;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.PreparationChecklist list)
+        {
+            using (BypassPropertyChecks)
+            {
+                list.ChildPhoto = ChildPhoto;
+                list.BirthCertificate = BirthCertificate;
+                list.SocialSecurityCard = SocialSecurityCard;
+                list.PhysicalDetails = PhysicalDetails;
+                list.DistinguishingFeatures = DistinguishingFeatures;
+                list.Friends = Friends;
+                list.DNA = DNA;
+                list.Mementos = Mementos;
+                list.DivorceCustodyPapers = DivorceCustodyPapers;
+                list.OtherParentsAndFamily = OtherParentsAndFamily;
+            }
         }
     }
 }

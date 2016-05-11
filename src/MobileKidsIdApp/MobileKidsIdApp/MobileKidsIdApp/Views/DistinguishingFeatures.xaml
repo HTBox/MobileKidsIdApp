@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileKidsIdApp.Views.DistinguishingFeatures">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="MobileKidsIdApp.Views.DistinguishingFeatures"
+             Title="Features">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ListView ItemsSource="{Binding Model}" Margin="5">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="Description"/>
+                        <Entry Text="{Binding Description}"/>
+                        <Label Text="Photo"/>
+                        <Image Source="{Binding PhotoReference}" />
+                        <Button Text="Select photo" Command="{Binding NewItemCommand}" CommandParameter="{Binding Id}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

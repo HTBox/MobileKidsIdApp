@@ -1,10 +1,8 @@
 Mobile Kids ID Kit
 ==================
 
-| CI build | HockeyApp deploy |
-| --- | --- |
-| ![Build status](https://ci.appveyor.com/api/projects/status/enlx8nkvk93g30x7?svg=true) | ![Build status](https://ci.appveyor.com/api/projects/status/0y0b8ctdaesjbomq?svg=true) |
-| [History](https://ci.appveyor.com/project/HTBox/mobilekidsidapp/history) | [History](https://ci.appveyor.com/project/HTBox/mobilekidsidapp-i1cep/history) |
+[![Build status](https://ci.appveyor.com/api/projects/status/ir2p0gpr7ew41idm?svg=true)](https://ci.appveyor.com/project/rockfordlhotka/mobilekidsidapp)
+
 
 The intent of the app is to help parents keep up to date information on their kids, and to provide parents with relevant information to keep their kids safe and what to do if they can’t find their child.
 

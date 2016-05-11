@@ -8,7 +8,7 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class Child : BusinessBase<Child>
+    public class Child : BaseTypes.BusinessBase<Child>
     {
         public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
         public string Id
@@ -31,29 +31,29 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(PhysicalDetailsProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<DistinguishingFeature>> DistinguishingFeaturesProperty = RegisterProperty<List<DistinguishingFeature>>(c => c.DistinguishingFeatures);
-        public List<DistinguishingFeature> DistinguishingFeatures
+        public static readonly PropertyInfo<DistinguishingFeatureList> DistinguishingFeaturesProperty = RegisterProperty<DistinguishingFeatureList>(c => c.DistinguishingFeatures);
+        public DistinguishingFeatureList DistinguishingFeatures
         {
             get { return GetProperty(DistinguishingFeaturesProperty); }
             private set { LoadProperty(DistinguishingFeaturesProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<CareProvider>> ProfessionalCareProvidersProperty = RegisterProperty<List<CareProvider>>(c => c.ProfessionalCareProviders);
-        public List<CareProvider> ProfessionalCareProviders
+        public static readonly PropertyInfo<CareProviderList> ProfessionalCareProvidersProperty = RegisterProperty<CareProviderList>(c => c.ProfessionalCareProviders);
+        public CareProviderList ProfessionalCareProviders
         {
             get { return GetProperty(ProfessionalCareProvidersProperty); }
             private set { LoadProperty(ProfessionalCareProvidersProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<FamilyMember>> FamilyMembersProperty = RegisterProperty<List<FamilyMember>>(c => c.FamilyMembers);
-        public List<FamilyMember> FamilyMembers
+        public static readonly PropertyInfo<FamilyMemberList> FamilyMembersProperty = RegisterProperty<FamilyMemberList>(c => c.FamilyMembers);
+        public FamilyMemberList FamilyMembers
         {
             get { return GetProperty(FamilyMembersProperty); }
             private set { LoadProperty(FamilyMembersProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<Person>> FriendsProperty = RegisterProperty<List<Person>>(c => c.Friends);
-        public List<Person> Friends
+        public static readonly PropertyInfo<FriendList> FriendsProperty = RegisterProperty<FriendList>(c => c.Friends);
+        public FriendList Friends
         {
             get { return GetProperty(FriendsProperty); }
             private set { LoadProperty(FriendsProperty, value); }
@@ -73,18 +73,71 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(ChecklistProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<FileReference>> DocumentsProperty = RegisterProperty<List<FileReference>>(c => c.Documents);
-        public List<FileReference> Documents
+        public static readonly PropertyInfo<FileReferenceList> DocumentsProperty = RegisterProperty<FileReferenceList>(c => c.Documents);
+        public FileReferenceList Documents
         {
             get { return GetProperty(DocumentsProperty); }
             private set { LoadProperty(DocumentsProperty, value); }
         }
 
-        public static readonly PropertyInfo<List<FileReference>> PhotosProperty = RegisterProperty<List<FileReference>>(c => c.Photos);
-        public List<FileReference> Photos
+        public static readonly PropertyInfo<FileReferenceList> PhotosProperty = RegisterProperty<FileReferenceList>(c => c.Photos);
+        public FileReferenceList Photos
         {
             get { return GetProperty(PhotosProperty); }
             private set { LoadProperty(PhotosProperty, value); }
+        }
+
+        public static int LastId = -1;
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                LastId++;
+                Id = LastId.ToString();
+            }
+            base.Child_Create();
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.Child child)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = child.Id;
+                ChildDetails = DataPortal.FetchChild<ChildDetails>(child.ChildDetails);
+                PhysicalDetails = DataPortal.FetchChild<PhysicalDetails>(child.PhysicalDetails);
+                DistinguishingFeatures = DataPortal.FetchChild<DistinguishingFeatureList>(child.DistinguishingFeatures);
+                ProfessionalCareProviders = DataPortal.FetchChild<CareProviderList>(child.ProfessionalCareProviders);
+                FamilyMembers = DataPortal.FetchChild<FamilyMemberList>(child.FamilyMembers);
+                Friends = DataPortal.FetchChild<FriendList>(child.Friends);
+                MedicalNotes = DataPortal.FetchChild<MedicalNotes>(child.MedicalNotes);
+                Checklist = DataPortal.FetchChild<PreparationChecklist>(child.Checklist);
+                Documents = DataPortal.FetchChild<FileReferenceList>(child.Documents);
+                Photos = DataPortal.FetchChild<FileReferenceList>(child.Photos);
+            }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.Child> list)
+        {
+            var child = new DataAccess.DataModels.Child();
+            using (BypassPropertyChecks)
+            {
+                child.Id = Id;
+                child.ChildDetails = new DataAccess.DataModels.ChildDetails();
+                DataPortal.UpdateChild(ChildDetails, child.ChildDetails);
+                child.PhysicalDetails = new DataAccess.DataModels.PhysicalDetails();
+                DataPortal.UpdateChild(PhysicalDetails, child.PhysicalDetails);
+                DataPortal.UpdateChild(DistinguishingFeatures, child.DistinguishingFeatures);
+                DataPortal.UpdateChild(ProfessionalCareProviders, child.ProfessionalCareProviders);
+                DataPortal.UpdateChild(FamilyMembers, child.FamilyMembers);
+                DataPortal.UpdateChild(Friends, child.Friends);
+                child.MedicalNotes = new DataAccess.DataModels.MedicalNotes();
+                DataPortal.UpdateChild(MedicalNotes, child.MedicalNotes);
+                child.Checklist = new DataAccess.DataModels.PreparationChecklist();
+                DataPortal.UpdateChild(Checklist, child.Checklist);
+                DataPortal.UpdateChild(Documents, child.Documents);
+                DataPortal.UpdateChild(Photos, child.Photos);
+            }
+            list.Add(child);
         }
     }
 }

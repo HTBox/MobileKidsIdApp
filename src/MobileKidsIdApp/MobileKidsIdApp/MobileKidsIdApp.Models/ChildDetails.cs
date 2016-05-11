@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Csla; 
+using Csla;
 
 namespace MobileKidsIdApp.Models
 {
-        [Serializable]
-    public class ChildDetails : BusinessBase<ChildDetails>
+    [Serializable]
+    public class ChildDetails : BaseTypes.BusinessBase<ChildDetails>
     {
         public static readonly PropertyInfo<string> GivenNameProperty = RegisterProperty<string>(c => c.GivenName);
         public string GivenName
@@ -38,11 +38,36 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(BirthdayProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> ContactReferenceProperty = RegisterProperty<string>(c => c.ContactReference);
-        public string ContactReference
+        public static readonly PropertyInfo<string> ContactIdProperty = RegisterProperty<string>(c => c.ContactId);
+        public string ContactId
         {
-            get { return GetProperty(ContactReferenceProperty); }
-            set { SetProperty(ContactReferenceProperty, value); }
+            get { return GetProperty(ContactIdProperty); }
+            set { SetProperty(ContactIdProperty, value); }
+        }
+
+        private void Child_Fetch(DataAccess.DataModels.ChildDetails details)
+        {
+            if (details == null) return;
+            using (BypassPropertyChecks)
+            {
+                GivenName = details.GivenName;
+                AdditionalName = details.AdditonalName;
+                FamilyName = details.FamilyName;
+                Birthday = details.Birthday;
+                ContactId = details.ContactId;
+            }
+        }
+
+        private void Child_Update(DataAccess.DataModels.ChildDetails details)
+        {
+            using (BypassPropertyChecks)
+            {
+                details.GivenName = GivenName;
+                details.AdditonalName = AdditionalName;
+                details.FamilyName = FamilyName;
+                details.Birthday = Birthday;
+                details.ContactId = ContactId;
+            }
         }
     }
 }

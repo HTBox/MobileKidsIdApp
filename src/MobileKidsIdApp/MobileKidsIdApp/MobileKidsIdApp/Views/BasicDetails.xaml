@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileKidsIdApp.Views.BasicDetails">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="MobileKidsIdApp.Views.BasicDetails"
+             Title="Basic details">
+    <TableView Intent="Form">
+        <TableView.Root>
+            <TableSection Title="Name">
+                <EntryCell Label="Given" Text="{Binding Model.GivenName}"/>
+                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}"/>
+                <EntryCell Label="Family" Text="{Binding Model.FamilyName}"/>
+            </TableSection>
+            <TableSection Title="Birthday">
+                <ViewCell>
+                    <DatePicker Date="{Binding Model.Birthday}"/>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Contact">
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="{Binding ContactId}"/>
+                        <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableView.Root>
+    </TableView>
 </ContentPage>
