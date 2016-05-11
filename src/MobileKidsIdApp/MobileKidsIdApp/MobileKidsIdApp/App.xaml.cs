@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp
 {
-    public class App : Application
+    public partial class App : Application
     {
         public static NavigationPage RootPage { private set; get; }
 
         public App()
         {
-            // The root page of your application
+            InitializeComponent();
+
             RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
             MainPage = RootPage;
         }
