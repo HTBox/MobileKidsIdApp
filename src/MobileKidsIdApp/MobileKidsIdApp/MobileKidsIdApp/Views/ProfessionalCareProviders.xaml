@@ -20,10 +20,16 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Style="{StaticResource RepeaterItem}">
-                            <Label Text="Clinic name"/>
-                            <Entry Text="{Binding ClinicName}"/>
+                            <Label Text="Provider name"/>
+                            <Entry Text="{Binding ProviderName}" Placeholder="example: Dr. Julia Khan"/>
                             <Label Text="Role"/>
-                            <Entry Text="{Binding CareRoleDescription}" />
+                            <Entry Text="{Binding CareRoleDescription}" Placeholder="example: doctor, therapist, ..."/>
+                            <Label Text="Clinic name"/>
+                            <Entry Text="{Binding ClinicName}" Placeholder="example: Southside Clinic"/>
+                            <Label Text="Address"/>
+                            <Entry Text="{Binding ClinicName}"/>
+                            <Label Text="Phone"/>
+                            <Entry Text="{Binding ClinicName}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
