@@ -1,12 +1,23 @@
-﻿using System;
+﻿using Csla.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    class ProfessionalCareProviders
+    public class ProfessionalCareProviders : ViewModelBase<Models.CareProviderList>
     {
+        public ICommand NewItemCommand { get; private set; }
+
+        public ProfessionalCareProviders(Models.CareProviderList list)
+        {
+            NewItemCommand = new Command(() => BeginAddNew());
+
+            Model = list;
+        }
     }
 }

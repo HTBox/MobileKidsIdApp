@@ -14,6 +14,7 @@ namespace MobileKidsIdApp.ViewModels
     {
         public ICommand EditChildDetailsCommand { get; private set; }
         public ICommand EditFeaturesCommand { get; private set; }
+        public ICommand EditCareProvidersCommand { get; private set; }
 
         public ChildProfileItem(Models.Child child)
         {
@@ -26,6 +27,11 @@ namespace MobileKidsIdApp.ViewModels
             {
                 await App.RootPage.Navigation.PushAsync(
                     new Views.DistinguishingFeatures { BindingContext = await new DistinguishingFeatures(Model.DistinguishingFeatures).InitAsync() });
+            });
+            EditCareProvidersCommand = new Command(async () =>
+            {
+                await App.RootPage.Navigation.PushAsync(
+                    new Views.ProfessionalCareProviders { BindingContext = await new ProfessionalCareProviders(Model.ProfessionalCareProviders).InitAsync() });
             });
 
             Model = child;
