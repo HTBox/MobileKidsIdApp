@@ -8,20 +8,12 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-        RelativeLayout.WidthConstraint=
-                "{ConstraintExpression Type=RelativeToParent, 
-                                    Property=Width,
-                                    Factor=1}"
-        RelativeLayout.HeightConstraint=
-                "{ConstraintExpression Type=RelativeToParent,
-                                    Property=Height,
-                                    Factor=1}">
+    <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <controls:RepeaterView x:TypeArguments="models:DistinguishingFeature" x:Name="Repeater" Spacing="10" Orientation="Vertical" ItemsSource="{Binding Model}"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <controls:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout Style="{StaticResource RepeaterItem}">
                             <Label Text="Description"/>
                             <Entry Text="{Binding Description}"/>
                             <Label Text="Photo"/>
