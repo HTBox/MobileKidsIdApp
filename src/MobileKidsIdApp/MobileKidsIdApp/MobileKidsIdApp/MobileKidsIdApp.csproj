@@ -39,6 +39,7 @@
     <Compile Include="Controls\PhoneContact.xaml.cs">
       <DependentUpon>PhoneContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RepeaterView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\About.cs" />
     <Compile Include="ViewModels\BasicDetails.cs" />
