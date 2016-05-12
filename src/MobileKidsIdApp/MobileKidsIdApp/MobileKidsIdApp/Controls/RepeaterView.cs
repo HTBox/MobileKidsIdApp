@@ -17,7 +17,9 @@ namespace MobileKidsIdApp.Controls
         }
 
         public static readonly BindableProperty ItemsSourceProperty =
+#pragma warning disable CS0618 // Type or member is obsolete
             BindableProperty.Create<RepeaterView<T>, ObservableCollection<T>>(p => p.ItemsSource, new ObservableCollection<T>(), BindingMode.OneWay, null, ItemsChanged);
+#pragma warning restore CS0618 // Type or member is obsolete
 
         private static void ItemsChanged(BindableObject bindable, ObservableCollection<T> oldValue, ObservableCollection<T> newValue)
         {
@@ -59,7 +61,9 @@ namespace MobileKidsIdApp.Controls
         }
 
         public static readonly BindableProperty ItemTemplateProperty =
+#pragma warning disable CS0618 // Type or member is obsolete
             BindableProperty.Create<RepeaterView<T>, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
+#pragma warning restore CS0618 // Type or member is obsolete
 
         public DataTemplate ItemTemplate
         {
