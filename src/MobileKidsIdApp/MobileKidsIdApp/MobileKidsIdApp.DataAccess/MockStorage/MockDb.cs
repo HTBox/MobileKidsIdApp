@@ -26,6 +26,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
                 Birthday=new DateTime(2010, 4, 20),
             };
             child.PhysicalDetails = new DataModels.PhysicalDetails { MeasurementDate = DateTime.Now };
+            child.Checklist = new DataModels.PreparationChecklist();
 
             Family.Children.Add(child);
 
@@ -39,6 +40,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
                 Birthday = new DateTime(2012, 11, 2)
             };
             child.PhysicalDetails = new DataModels.PhysicalDetails { MeasurementDate = DateTime.Now };
+            child.Checklist = new DataModels.PreparationChecklist();
 
             Family.Children.Add(child);
         }

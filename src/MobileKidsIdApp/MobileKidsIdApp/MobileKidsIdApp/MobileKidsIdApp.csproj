@@ -61,6 +61,7 @@
     <Compile Include="ViewModels\PhoneContact.cs" />
     <Compile Include="ViewModels\Photos.cs" />
     <Compile Include="ViewModels\PhysicalDetails.cs" />
+    <Compile Include="ViewModels\PreparationChecklist.cs" />
     <Compile Include="ViewModels\ProfessionalCareProviders.cs" />
     <Compile Include="ViewModels\Settings.cs" />
     <Compile Include="ViewModels\StaticContent.cs" />
@@ -114,6 +115,9 @@
     </Compile>
     <Compile Include="Views\ProfessionalCareProviders.xaml.cs">
       <DependentUpon>ProfessionalCareProviders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PreparationChecklist.xaml.cs">
+      <DependentUpon>PreparationChecklist.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -287,6 +291,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MedicalNotes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PreparationChecklist.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
