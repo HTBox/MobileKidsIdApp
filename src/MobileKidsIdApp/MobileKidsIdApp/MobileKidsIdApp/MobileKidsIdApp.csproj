@@ -52,6 +52,7 @@
     <Compile Include="ViewModels\DistinguishingFeatures.cs" />
     <Compile Include="ViewModels\FamilyMemberList.cs" />
     <Compile Include="ViewModels\ForgotPassword.cs" />
+    <Compile Include="ViewModels\FriendList.cs" />
     <Compile Include="ViewModels\IdChecklist.cs" />
     <Compile Include="ViewModels\InstructionIndex.cs" />
     <Compile Include="ViewModels\Landing.cs" />
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="Views\DistinguishingFeatures.xaml.cs">
       <DependentUpon>DistinguishingFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FriendList.xaml.cs">
+      <DependentUpon>FriendList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FamilyMemberList.xaml.cs">
       <DependentUpon>FamilyMemberList.xaml</DependentUpon>
@@ -267,6 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\FamilyMemberList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FriendList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
