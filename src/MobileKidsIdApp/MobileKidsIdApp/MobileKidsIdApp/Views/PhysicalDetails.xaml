@@ -5,16 +5,22 @@
              Title="Physical details">
   <TableView Intent="Form">
     <TableView.Root>
-      <TableSection Title="Physical">
+      <TableSection Title="Size">
         <EntryCell Label="Height" Text="{Binding Model.Height}" />
         <EntryCell Label="Weight" Text="{Binding Model.Weight}"/>
-        <!--<ViewCell>
+      </TableSection>
+      <TableSection Title="Last Measured">
+        <ViewCell>
           <DatePicker Date="{Binding Model.MeasurementDate}"/>
-        </ViewCell>-->
-        <EntryCell Label="Skin Tone" Text="{Binding Model.SkinTone}" />
-        <EntryCell Label="Racial / Ethnic Identity" Text="{Binding Model.RacialEthnicIdentity}" />
+        </ViewCell>
+      </TableSection>
+      <TableSection Title="Sex">
         <EntryCell Label="Gender" Text="{Binding Model.Gender}" />
         <EntryCell Label="Gender Identity" Text="{Binding Model.GenderIdentity}" />
+      </TableSection>
+      <TableSection Title="Skin">
+          <EntryCell Label="Skin Tone" Text="{Binding Model.SkinTone}" />
+          <EntryCell Label="Racial / Ethnic Identity" Text="{Binding Model.RacialEthnicIdentity}" />
       </TableSection>
       <TableSection Title="Hair">
         <EntryCell Label="Color" Text="{Binding Model.HairColor}"/>

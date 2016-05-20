@@ -24,8 +24,8 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(WeightProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime?> MeasurementDateProperty = RegisterProperty<DateTime?>(c => c.MeasurementDate);
-        public DateTime? MeasurementDate
+        public static readonly PropertyInfo<DateTime> MeasurementDateProperty = RegisterProperty<DateTime>(c => c.MeasurementDate);
+        public DateTime MeasurementDate
         {
             get { return GetProperty(MeasurementDateProperty); }
             set { LoadProperty(MeasurementDateProperty, value); }
