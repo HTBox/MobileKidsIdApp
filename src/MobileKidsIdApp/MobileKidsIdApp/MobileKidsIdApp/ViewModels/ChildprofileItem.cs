@@ -18,6 +18,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditFamilyCommand { get; private set; }
         public ICommand EditFriendsCommand { get; private set; }
         public ICommand EditMedicalNotesCommand { get; private set; }
+        public ICommand EditPhysicalDetailsCommand { get; private set; }
 
         public ChildProfileItem(Models.Child child)
         {
@@ -49,6 +50,10 @@ namespace MobileKidsIdApp.ViewModels
             EditMedicalNotesCommand = new Command(async () => {
                 await App.RootPage.Navigation.PushAsync(
                     new Views.MedicalNotes { BindingContext = await new MedicalNotes(Model.MedicalNotes).InitAsync() });
+            });
+            EditPhysicalDetailsCommand = new Command(async () => {
+                await App.RootPage.Navigation.PushAsync(
+                    new Views.PhysicalDetails { BindingContext = await new PhysicalDetails(Model.PhysicalDetails).InitAsync() });
             });
 
             Model = child;
