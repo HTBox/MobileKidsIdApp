@@ -3,5 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.MedicalNotes"
              Title="Medical notes">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <TableView Intent="Form">
+    <TableView.Root>
+      <TableSection Title="Conditions">
+        <EntryCell Label="Allergies" Text="{Binding Model.Allergies}" />
+        <EntryCell Label="Medical Alert" Text="{Binding Model.MedicalAlertInfo}"/>
+        <SwitchCell Text="Diabetic" On="{Binding Model.Diabetic}" />
+      </TableSection>
+      <TableSection Title="Medication">
+        <EntryCell Label="Regular Medications" Text="{Binding Model.RegularMedications}"/>
+        <EntryCell Label="Psych Medications" Text="{Binding Model.PsychMedications}"/>
+        <SwitchCell Text="Inhaler" On="{Binding Model.Inhaler}" />
+      </TableSection>
+      <TableSection Title="Other">
+        <EntryCell Label="Notes" Text="{Binding Model.Notes}" />
+      </TableSection>
+    </TableView.Root>
+  </TableView>    
 </ContentPage>
