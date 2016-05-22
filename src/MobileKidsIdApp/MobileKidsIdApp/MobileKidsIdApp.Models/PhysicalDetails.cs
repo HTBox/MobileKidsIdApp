@@ -94,6 +94,11 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(GenderIdentityProperty, value); }
         }
 
+        protected override void Child_Create()
+        {
+            MeasurementDate = DateTime.Today;
+        }
+
         private void Child_Fetch(DataAccess.DataModels.PhysicalDetails details)
         {
             if (details == null) return;
