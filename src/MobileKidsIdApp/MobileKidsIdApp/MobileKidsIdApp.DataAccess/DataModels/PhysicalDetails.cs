@@ -10,7 +10,7 @@ namespace MobileKidsIdApp.DataAccess.DataModels
     {
         public string Height { get; set; }
         public string Weight { get; set; }
-        public DateTime? MeasurementDate { get; set; }
+        public DateTime MeasurementDate { get; set; }
         public string HairColor { get; set; }
         public string HairStyle { get; set; }
         public string EyeColor { get; set; }

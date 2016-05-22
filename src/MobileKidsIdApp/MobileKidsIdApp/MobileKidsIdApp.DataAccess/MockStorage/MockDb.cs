@@ -23,8 +23,11 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             child.ChildDetails = new DataModels.ChildDetails
             {
                 GivenName = "Amaria", AdditonalName = "Jusui", FamilyName="Johnson",
-                Birthday=new DateTime(2010, 4, 20)
+                Birthday=new DateTime(2010, 4, 20),
             };
+            child.PhysicalDetails = new DataModels.PhysicalDetails { MeasurementDate = DateTime.Now };
+            child.Checklist = new DataModels.PreparationChecklist();
+
             Family.Children.Add(child);
 
             child = new DataModels.Child();
@@ -36,6 +39,9 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
                 FamilyName = "Kumarick",
                 Birthday = new DateTime(2012, 11, 2)
             };
+            child.PhysicalDetails = new DataModels.PhysicalDetails { MeasurementDate = DateTime.Now };
+            child.Checklist = new DataModels.PreparationChecklist();
+
             Family.Children.Add(child);
         }
 
