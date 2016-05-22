@@ -50,11 +50,14 @@
     <Compile Include="ViewModels\ChildProfileList.cs" />
     <Compile Include="ViewModels\ContactPicker.cs" />
     <Compile Include="ViewModels\DistinguishingFeatures.cs" />
+    <Compile Include="ViewModels\FamilyMemberList.cs" />
     <Compile Include="ViewModels\ForgotPassword.cs" />
+    <Compile Include="ViewModels\FriendList.cs" />
     <Compile Include="ViewModels\IdChecklist.cs" />
     <Compile Include="ViewModels\InstructionIndex.cs" />
     <Compile Include="ViewModels\Landing.cs" />
     <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\MedicalNotes.cs" />
     <Compile Include="ViewModels\PhoneContact.cs" />
     <Compile Include="ViewModels\Photos.cs" />
     <Compile Include="ViewModels\PhysicalDetails.cs" />
@@ -79,6 +82,12 @@
     <Compile Include="Views\DistinguishingFeatures.xaml.cs">
       <DependentUpon>DistinguishingFeatures.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FriendList.xaml.cs">
+      <DependentUpon>FriendList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FamilyMemberList.xaml.cs">
+      <DependentUpon>FamilyMemberList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ForgotPassword.xaml.cs">
       <DependentUpon>ForgotPassword.xaml</DependentUpon>
     </Compile>
@@ -96,6 +105,9 @@
     </Compile>
     <Compile Include="Views\Photos.xaml.cs">
       <DependentUpon>Photos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MedicalNotes.xaml.cs">
+      <DependentUpon>MedicalNotes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PhysicalDetails.xaml.cs">
       <DependentUpon>PhysicalDetails.xaml</DependentUpon>
@@ -260,6 +272,22 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16052001\analyzers\c#\Csla.Analyzers.dll" />
+    <EmbeddedResource Include="Views\FamilyMemberList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FriendList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MedicalNotes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
