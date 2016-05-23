@@ -3,5 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.Login"
              Title="Login">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <StackLayout>
+        <Label Text="Login" FontSize="40" BackgroundColor="Silver"/>
+        <Button Text="Facebook" Command="{Binding FacebookLoginCommand}"/>
+        <Button Text="Microsoft" Command="{Binding MicrosoftLoginCommand}"/>
+        <Button Text="Google" Command="{Binding GoogleLoginCommand}"/>
+        <Button Text="Test login" Command="{Binding TestLoginCommand}" IsVisible="{Binding Testing}"/>
+    </StackLayout>
 </ContentPage>

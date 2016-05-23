@@ -10,6 +10,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
     {
         public async Task<ApplicationData> Get()
         {
+            //TODO: user Csla.ApplicationContext.User identity info to decrypt data
             ApplicationData result;
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
@@ -29,6 +30,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
 
         public async Task Save(ApplicationData data)
         {
+            //TODO: user Csla.ApplicationContext.User identity info to encrypt data
             var json = JsonConvert.SerializeObject(data);
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
