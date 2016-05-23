@@ -6,7 +6,7 @@
     <StackLayout>
         <Button Text="Content" Command="{Binding DisplayContentMenuCommand}"/>
         <Button Text="My kids" Command="{Binding ChildProfileListCommand}"/>
-        <Button Text="Options"/>
-        <Button Text="Logout"/>
+        <Button Text="Options" Command="{Binding OptionsCommand}"/>
+        <Button Text="Logout" Command="{Binding LogoutCommand}"/>
     </StackLayout>
 </ContentPage>

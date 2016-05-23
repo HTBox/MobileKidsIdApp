@@ -36,11 +36,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationData.cs" />
+    <Compile Include="AppPrincipal.cs" />
     <Compile Include="BaseTypes\BusinessBase.cs" />
     <Compile Include="CareProvider.cs" />
     <Compile Include="CareProviderList.cs" />
     <Compile Include="Child.cs" />
     <Compile Include="ChildDetails.cs" />
+    <Compile Include="AppIdentity.cs" />
     <Compile Include="DistinguishingFeature.cs" />
     <Compile Include="DistinguishingFeatureList.cs" />
     <Compile Include="Family.cs" />
