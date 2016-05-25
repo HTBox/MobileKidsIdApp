@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Csla;
+using System.ComponentModel.DataAnnotations;
 
 namespace MobileKidsIdApp.Models
 {
@@ -11,6 +12,7 @@ namespace MobileKidsIdApp.Models
     public class ChildDetails : BaseTypes.BusinessBase<ChildDetails>
     {
         public static readonly PropertyInfo<string> GivenNameProperty = RegisterProperty<string>(c => c.GivenName);
+        [Required]
         public string GivenName
         {
             get { return GetProperty(GivenNameProperty); }
@@ -25,6 +27,7 @@ namespace MobileKidsIdApp.Models
         }
 
         public static readonly PropertyInfo<string> FamilyNameProperty = RegisterProperty<string>(c => c.FamilyName);
+        [Required]
         public string FamilyName
         {
             get { return GetProperty(FamilyNameProperty); }
