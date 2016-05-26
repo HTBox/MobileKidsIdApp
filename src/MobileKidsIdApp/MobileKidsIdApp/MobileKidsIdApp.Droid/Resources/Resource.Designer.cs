@@ -26,6 +26,8 @@ namespace MobileKidsIdApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Csla.Resource.String.ApplicationName = global::MobileKidsIdApp.Droid.Resource.String.ApplicationName;
+			global::Csla.Resource.String.Hello = global::MobileKidsIdApp.Droid.Resource.String.Hello;
 			global::PCLStorage.Resource.String.ApplicationName = global::MobileKidsIdApp.Droid.Resource.String.ApplicationName;
 			global::PCLStorage.Resource.String.Hello = global::MobileKidsIdApp.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::MobileKidsIdApp.Droid.Resource.Attribute.actionBarSize;
