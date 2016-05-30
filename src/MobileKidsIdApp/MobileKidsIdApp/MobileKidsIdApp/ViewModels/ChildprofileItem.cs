@@ -19,6 +19,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditFriendsCommand { get; private set; }
         public ICommand EditMedicalNotesCommand { get; private set; }
         public ICommand EditPhysicalDetailsCommand { get; private set; }
+        public ICommand EditPhotosCommand { get; private set; }
         public ICommand EditChecklistCommand { get; private set; }
         public ChildProfileItem(Models.Child child)
         {
@@ -54,6 +55,10 @@ namespace MobileKidsIdApp.ViewModels
             EditPhysicalDetailsCommand = new Command(async () => {
                 await App.RootPage.Navigation.PushAsync(
                     new Views.PhysicalDetails { BindingContext = await new PhysicalDetails(Model.PhysicalDetails).InitAsync() });
+            });
+            EditPhotosCommand = new Command(async () => {
+                await App.RootPage.Navigation.PushAsync(
+                    new Views.Photos { BindingContext = await new Photos(Model.Photos).InitAsync() });
             });
             EditChecklistCommand = new Command(async () => {
                 await App.RootPage.Navigation.PushAsync(
