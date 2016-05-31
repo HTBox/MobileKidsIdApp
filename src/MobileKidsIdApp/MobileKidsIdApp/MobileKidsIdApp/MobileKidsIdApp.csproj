@@ -43,6 +43,7 @@
     </Compile>
     <Compile Include="Controls\RepeaterView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IPhotoPicker.cs" />
     <Compile Include="ViewModels\About.cs" />
     <Compile Include="ViewModels\BasicDetails.cs" />
     <Compile Include="ViewModels\BindableObject.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ViewModels\MedicalNotes.cs" />
     <Compile Include="ViewModels\PhoneContact.cs" />
     <Compile Include="ViewModels\Photos.cs" />
+    <Compile Include="ViewModels\PhotoViewModel.cs" />
     <Compile Include="ViewModels\PhysicalDetails.cs" />
     <Compile Include="ViewModels\PreparationChecklist.cs" />
     <Compile Include="ViewModels\ProfessionalCareProviders.cs" />
@@ -132,11 +134,19 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16052001\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
+      <HintPath>..\..\packages\CSLA-Core.4.6.400-Beta-16052505\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Csla.Xaml, Version=4.6.400.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-XamarinForms.4.6.400-Beta-16052001\lib\portable-net45+win8+wpa81\Csla.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\CSLA-XamarinForms.4.6.400-Beta-16052505\lib\portable-net45+win8+wpa81\Csla.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Plugin.Contacts, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -275,7 +285,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16052001\analyzers\c#\Csla.Analyzers.dll" />
     <EmbeddedResource Include="Views\FamilyMemberList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -298,6 +307,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400-Beta-16052505\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.31\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
