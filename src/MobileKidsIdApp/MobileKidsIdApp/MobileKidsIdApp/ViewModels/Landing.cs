@@ -31,9 +31,9 @@ namespace MobileKidsIdApp.ViewModels
                 var vm = await new Settings().InitAsync();
                 await NavigateTo(new Views.Settings { BindingContext = vm });
             });
-            LogoutCommand = new Command(() =>
+            LogoutCommand = new Command(async () =>
             {
-                App.Logout();
+                await App.Logout();
             });
         }
 

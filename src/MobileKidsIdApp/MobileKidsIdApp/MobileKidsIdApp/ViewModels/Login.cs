@@ -22,21 +22,24 @@ namespace MobileKidsIdApp.ViewModels
                 //TODO: implement FB login here
                 var identity = await Models.AppIdentity.GetAppIdentityAsync("FB:1", "blahblahblah");
                 Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                await App.RootPage.Navigation.PopModalAsync();
+                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+                    await App.RootPage.Navigation.PopModalAsync();
             });
             MicrosoftLoginCommand = new Command(async () =>
             {
                 //TODO: implement Microsoft login here
                 var identity = await Models.AppIdentity.GetAppIdentityAsync("Live:1", "blahblahblah");
                 Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                await App.RootPage.Navigation.PopModalAsync();
+                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+                    await App.RootPage.Navigation.PopModalAsync();
             });
             GoogleLoginCommand = new Command(async () =>
             {
                 //TODO: implement Google login here
                 var identity = await Models.AppIdentity.GetAppIdentityAsync("Google:1", "blahblahblah");
                 Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                await App.RootPage.Navigation.PopModalAsync();
+                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+                    await App.RootPage.Navigation.PopModalAsync();
             });
 #if DEBUG
             Testing = true;
@@ -44,7 +47,8 @@ namespace MobileKidsIdApp.ViewModels
             {
                 var identity = await Models.AppIdentity.GetAppIdentityAsync("test:1", "blahblahblah");
                 Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                await App.RootPage.Navigation.PopModalAsync();
+                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+                    await App.RootPage.Navigation.PopModalAsync();
             });
 #endif
         }
