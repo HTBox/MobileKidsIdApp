@@ -9,7 +9,7 @@
     <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
   </ContentPage.ToolbarItems>
   <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-    <controls:RepeaterView x:TypeArguments="models:Person" x:Name="Repeater" Spacing="10" Orientation="Vertical" ItemsSource="{Binding Model}"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <controls:RepeaterView x:TypeArguments="models:Friend" x:Name="Repeater" Spacing="10" Orientation="Vertical" ItemsSource="{Binding Model}"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <controls:RepeaterView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

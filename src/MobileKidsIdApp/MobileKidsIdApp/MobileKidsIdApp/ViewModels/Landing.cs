@@ -23,7 +23,8 @@ namespace MobileKidsIdApp.ViewModels
             });
             ChildProfileListCommand = new Command(async () =>
             {
-                var vm = await new ChildProfileList().InitAsync();
+                var vm = new ChildProfileList();
+                await vm.InitAsync();
                 await NavigateTo(new Views.ChildProfileList { BindingContext = vm });
             });
             OptionsCommand = new Command(async () =>

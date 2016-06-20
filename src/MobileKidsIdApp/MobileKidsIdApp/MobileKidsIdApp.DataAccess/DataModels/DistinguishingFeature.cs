@@ -8,7 +8,7 @@ namespace MobileKidsIdApp.DataAccess.DataModels
 {
     public class DistinguishingFeature
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public FileReference FileReference { get; set; }
     }

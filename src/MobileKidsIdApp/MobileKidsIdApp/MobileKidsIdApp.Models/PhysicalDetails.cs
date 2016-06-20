@@ -119,6 +119,11 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(DataAccess.DataModels.PhysicalDetails details)
+        {
+            Child_Update(details);
+        }
+
         private void Child_Update(DataAccess.DataModels.PhysicalDetails details)
         {
             using (BypassPropertyChecks)

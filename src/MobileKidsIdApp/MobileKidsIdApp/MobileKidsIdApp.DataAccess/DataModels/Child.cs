@@ -18,7 +18,7 @@ namespace MobileKidsIdApp.DataAccess.DataModels
             Photos = new List<FileReference>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public ChildDetails ChildDetails { get; set; }
         public PhysicalDetails PhysicalDetails { get; set; }
         public List<DistinguishingFeature> DistinguishingFeatures { get; set; }

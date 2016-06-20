@@ -8,10 +8,10 @@ using Csla;
 namespace MobileKidsIdApp.Models
 {
     [Serializable]
-    public class Person : BaseTypes.BusinessBase<Person>
+    public class Friend : BaseTypes.BusinessBase<Friend>
     {
-        public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
-        public string Id
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
+        public int Id
         {
             get { return GetProperty(IdProperty); }
             private set { LoadProperty(IdProperty, value); }
@@ -24,17 +24,6 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(ContactIdProperty, value); }
         }
 
-        public static int LastId = -1;
-        protected override void Child_Create()
-        {
-            using (BypassPropertyChecks)
-            {
-                LastId++;
-                Id = LastId.ToString();
-            }
-            base.Child_Create();
-        }
-
         private void Child_Fetch(DataAccess.DataModels.Person person)
         {
             using (BypassPropertyChecks)
@@ -44,15 +33,21 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(List<DataAccess.DataModels.Person> list)
+        {
+            Id = ((FriendList)Parent).Max(_ => _.Id) + 1;
+            Child_Update(list);
+        }
+
         private void Child_Update(List<DataAccess.DataModels.Person> list)
         {
-            var person = new DataAccess.DataModels.Person();
             using (BypassPropertyChecks)
             {
+                var person = new DataAccess.DataModels.Person();
                 person.Id = Id;
                 person.ContactId = ContactId;
+                list.Add(person);
             }
-            list.Add(person);
         }
     }
 }

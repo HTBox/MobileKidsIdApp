@@ -33,21 +33,17 @@ namespace MobileKidsIdApp.ViewModels
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
         }
         
-        protected override Task<FileReferenceList> DoInitAsync()
+        protected override async Task<FileReferenceList> DoInitAsync()
         {
-            //Alright, so this is very ugly. Why not use async/await?  Well calling base.DoInitAsync is
-            //throwing a NotImplementedException for some reason so anything that comes after awaiting
-            //on that never runs. By not using async/await the error still happens but the ContinueWith still runs.
-            var baseInitTask = base.DoInitAsync();
-            return baseInitTask.ContinueWith(tsk => {
-                if (tsk.Exception!= null)
-                    System.Diagnostics.Debug.WriteLine("Error from DoInitAsync task: " + tsk.Exception.Message);
-                var photoViewModels = Model.Select(f => new PhotoViewModel(f)).ToList();
-                foreach (var f in photoViewModels)
-                    PhotoViewModels.Add(f);
-                return Task.WhenAll(photoViewModels.Select(f => f.InitializeAsync()).ToArray());
-            }, TaskScheduler.FromCurrentSynchronizationContext()).Unwrap()
-            .ContinueWith(tsk => baseInitTask.Result, TaskScheduler.FromCurrentSynchronizationContext());
+            var photoViewModels = Model.Select(_ => new PhotoViewModel(_)).ToList();
+            var initTasks = new List<Task>();
+            foreach (var viewModel in photoViewModels)
+            {
+                PhotoViewModels.Add(viewModel);
+                initTasks.Add(viewModel.InitializeAsync());
+            }
+            await Task.WhenAll(initTasks);
+            return Model;
         }
 
         private readonly ICommand _choosePhotoCommand;
@@ -55,26 +51,44 @@ namespace MobileKidsIdApp.ViewModels
         
         public ObservableCollection<PhotoViewModel> PhotoViewModels { get; private set; }
 
-        private async void ChoosePhoto()
+        private void ChoosePhoto()
         {
-            BeginAddNew();
-            var itm = Model.Last();
-            var rootFolder = FileSystem.Current.LocalStorage;
-            var path = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(rootFolder.Path, itm.Id);
-            if (path == null)
+            Model.AddedNew += (async (o, e) => 
             {
-                Model.Remove(itm);
-                return;
-            }
-            itm.FileName = path;
-            var newFileReference = Model.Last();
-            var photoVM = new PhotoViewModel(newFileReference);
-            await photoVM.InitializeAsync();
-            PhotoViewModels.Add(photoVM);
+                var newItem = e.NewObject;
+                var rootFolder = FileSystem.Current.LocalStorage;
+                var fileName = await GenerateUniqueFileNameFor(FileSystem.Current.LocalStorage);
+
+                var path = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(rootFolder.Path, fileName);
+                if (path == null)
+                {
+                    Model.Remove(newItem);
+                    return;
+                }
+                newItem.FileName = path;
+                var photoVM = new PhotoViewModel(newItem);
+                await photoVM.InitializeAsync();
+                PhotoViewModels.Add(photoVM);
+            });
+            BeginAddNew();
         }
 
         private readonly ICommand _deletePhotoCommand;
         public ICommand DeletePhotoCommand { get { return _deletePhotoCommand; } }
+
+        private static Random _rnd = new Random();
+        private static async Task<string> GenerateUniqueFileNameFor(IFolder folder)
+        {
+            string result;
+            var files = await folder.GetFilesAsync();
+            do
+            {
+                result = string.Empty;
+                for (int i = 0; i < 6; i++)
+                    result += Convert.ToChar(_rnd.Next(97, 122));
+            } while (files.Count(_ => _.Name == result) > 0);
+            return result;
+        }
     }
 
 }

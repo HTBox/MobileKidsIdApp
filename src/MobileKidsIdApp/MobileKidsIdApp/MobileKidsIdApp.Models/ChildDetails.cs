@@ -49,6 +49,14 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(ContactIdProperty, value); }
         }
 
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                Birthday = DateTime.Today;
+            }
+        }
+
         private void Child_Fetch(DataAccess.DataModels.ChildDetails details)
         {
             if (details == null) return;
@@ -60,6 +68,11 @@ namespace MobileKidsIdApp.Models
                 Birthday = details.Birthday;
                 ContactId = details.ContactId;
             }
+        }
+
+        private void Child_Insert(DataAccess.DataModels.ChildDetails details)
+        {
+            Child_Update(details);
         }
 
         private void Child_Update(DataAccess.DataModels.ChildDetails details)

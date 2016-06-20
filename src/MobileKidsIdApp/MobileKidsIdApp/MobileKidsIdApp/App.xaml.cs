@@ -18,13 +18,11 @@ namespace MobileKidsIdApp
 
             RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
             MainPage = RootPage;
-
-            CheckUserLogin();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
-            CheckUserLogin();
+            await CheckUserLogin();
         }
 
         protected override void OnSleep()
@@ -32,12 +30,12 @@ namespace MobileKidsIdApp
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
-            CheckUserLogin();
+            await CheckUserLogin();
         }
 
-        private static async void CheckUserLogin()
+        private static async Task CheckUserLogin()
         {
             if (Csla.ApplicationContext.User == null)
                 Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
@@ -48,10 +46,10 @@ namespace MobileKidsIdApp
             }
         }
 
-        internal static void Logout()
+        internal static async Task Logout()
         {
             Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
-            CheckUserLogin();
+            await CheckUserLogin();
         }
     }
 }

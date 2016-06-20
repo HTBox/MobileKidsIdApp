@@ -74,6 +74,11 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(DataAccess.DataModels.MedicalNotes notes)
+        {
+            Child_Update(notes);
+        }
+
         private void Child_Update(DataAccess.DataModels.MedicalNotes notes)
         {
             using (BypassPropertyChecks)
