@@ -16,7 +16,6 @@ namespace MobileKidsIdApp.ViewModels
 
         public ChildProfileList()
         {
-
             SaveItemCommand = new Command(async () => await SaveAsync());
             NewItemCommand = new Command(() => BeginAddNew());
         }
@@ -26,7 +25,25 @@ namespace MobileKidsIdApp.ViewModels
             return await Csla.DataPortal.FetchAsync<Models.Family>();
         }
 
-        public async void ShowChild(Child child)
+        protected override void OnModelChanged(Family oldValue, Family newValue)
+        {
+            //TODO: remove this OnPropertyChanged call when updating CSLA -
+            // it is a workaround for a bug that's fixed in future versions
+            OnPropertyChanged("Model");
+
+            if (oldValue != null)
+                oldValue.AddedNew -= Model_AddedNew;
+            if (newValue != null)
+                newValue.AddedNew += Model_AddedNew;
+            base.OnModelChanged(oldValue, newValue);
+        }
+
+        private async void Model_AddedNew(object sender, Csla.Core.AddedNewEventArgs<Child> e)
+        {
+            await ShowChild(e.NewObject);
+        }
+
+        public async Task ShowChild(Child child)
         {
             await App.RootPage.Navigation.PushAsync(
                 new Views.ChildProfileItem { BindingContext = await new ChildProfileItem(child).InitAsync() });

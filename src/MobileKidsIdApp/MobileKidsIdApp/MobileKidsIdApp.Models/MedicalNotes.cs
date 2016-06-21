@@ -45,15 +45,15 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(NotesProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool?> InhalerProperty = RegisterProperty<bool?>(c => c.Inhaler);
-        public bool? Inhaler
+        public static readonly PropertyInfo<bool> InhalerProperty = RegisterProperty<bool>(c => c.Inhaler);
+        public bool Inhaler
         {
             get { return GetProperty(InhalerProperty); }
             set { SetProperty(InhalerProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool?> DiabeticProperty = RegisterProperty<bool?>(c => c.Diabetic);
-        public bool? Diabetic
+        public static readonly PropertyInfo<bool> DiabeticProperty = RegisterProperty<bool>(c => c.Diabetic);
+        public bool Diabetic
         {
             get { return GetProperty(DiabeticProperty); }
             set { SetProperty(DiabeticProperty, value); }
@@ -72,6 +72,11 @@ namespace MobileKidsIdApp.Models
                 Inhaler = notes.Inhaler;
                 Diabetic = notes.Diabetic;
             }
+        }
+
+        private void Child_Insert(DataAccess.DataModels.MedicalNotes notes)
+        {
+            Child_Update(notes);
         }
 
         private void Child_Update(DataAccess.DataModels.MedicalNotes notes)

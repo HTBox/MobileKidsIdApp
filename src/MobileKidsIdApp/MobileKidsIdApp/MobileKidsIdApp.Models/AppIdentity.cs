@@ -35,6 +35,7 @@ namespace MobileKidsIdApp.Models
         {
             ProviderId = criteria.ProviderId;
             ProviderToken = criteria.ProviderToken;
+            IsAuthenticated = true;
         }
 
         [Serializable]

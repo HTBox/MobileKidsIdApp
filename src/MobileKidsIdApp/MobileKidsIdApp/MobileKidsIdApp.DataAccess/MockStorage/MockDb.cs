@@ -19,7 +19,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             ApplicationData.PermittedLoginIdentities.Add(new DataModels.UserIdentity { ProviderName = "Facebook", UserIdFromProvider = "fb123" });
 
             var child = new DataModels.Child();
-            child.Id = "1";
+            child.Id = 1;
             child.ChildDetails = new DataModels.ChildDetails
             {
                 GivenName = "Amaria", AdditonalName = "Jusui", FamilyName="Johnson",
@@ -31,7 +31,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             Family.Children.Add(child);
 
             child = new DataModels.Child();
-            child.Id = "2";
+            child.Id = 2;
             child.ChildDetails = new DataModels.ChildDetails
             {
                 GivenName = "Mario",

@@ -8,18 +8,9 @@ namespace MobileKidsIdApp.DataAccess.DataModels
 {
     public class FileReference
     {
-        public string Id
-        {
-            get;set;
-        }
-
-        public string ResourceType
-        {
-            get; set;
-        }
-
+        public int Id { get; set; }
+        public string ResourceType { get; set; }
         public string Description { get; set; }
         public string FileName { get; set; }
-
     }
 }

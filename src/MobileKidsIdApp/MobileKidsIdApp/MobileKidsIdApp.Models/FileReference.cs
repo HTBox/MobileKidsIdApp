@@ -10,8 +10,8 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class FileReference : BaseTypes.BusinessBase<FileReference>
     {
-        public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
-        public string Id
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
+        public int Id
         {
             get { return GetProperty(IdProperty); }
             private set { LoadProperty(IdProperty, value); }
@@ -38,17 +38,6 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(FileNameProperty, value); }
         }
 
-        public static int LastId = -1;
-        protected override void Child_Create()
-        {
-            using (BypassPropertyChecks)
-            {
-                LastId++;
-                Id = LastId.ToString();
-            }
-            base.Child_Create();
-        }
-
         private void Child_Fetch(DataAccess.DataModels.FileReference reference)
         {
             using (BypassPropertyChecks)
@@ -60,22 +49,23 @@ namespace MobileKidsIdApp.Models
             }
         }
 
-        private void Child_Update(DataAccess.DataModels.FileReference reference)
+        private void Child_Insert(List<DataAccess.DataModels.FileReference> list)
+        {
+
+            Id = ((FileReferenceList)Parent).Max(_ => _.Id) + 1;
+            Child_Update(list);
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.FileReference> list)
         {
             using (BypassPropertyChecks)
             {
+                var reference = new DataAccess.DataModels.FileReference();
                 reference.Id = Id;
                 reference.ResourceType = ResourceType;
                 reference.Description = Description;
                 reference.FileName = FileName;
             }
-        }
-
-        private void Child_Update(List<DataAccess.DataModels.FileReference> list)
-        {
-            var reference = new DataAccess.DataModels.FileReference();
-            Child_Update(reference);
-            list.Add(reference);
         }
     }
 }

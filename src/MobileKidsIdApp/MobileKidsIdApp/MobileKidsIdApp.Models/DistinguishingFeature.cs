@@ -10,8 +10,8 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class DistinguishingFeature : BaseTypes.BusinessBase<DistinguishingFeature>
     {
-        public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
-        public string Id
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
+        public int Id
         {
             get { return GetProperty(IdProperty); }
             private set { LoadProperty(IdProperty, value); }
@@ -31,13 +31,12 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(PhotoReference, value); }
         }
 
-        public static int LastId = -1;
         protected override void Child_Create()
         {
             using (BypassPropertyChecks)
             {
-                LastId++;
-                Id = LastId.ToString();
+                var list = (List<DataAccess.DataModels.DistinguishingFeature>)Parent;
+                Id = list.Max(_ => _.Id) + 1;
             }
             base.Child_Create();
         }
@@ -52,11 +51,16 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(List<DataAccess.DataModels.DistinguishingFeature> list)
+        {
+            Child_Update(list);
+        }
+
         private void Child_Update(List<DataAccess.DataModels.DistinguishingFeature> list)
         {
-            var feature = new DataAccess.DataModels.DistinguishingFeature();
             using (BypassPropertyChecks)
             {
+                var feature = new DataAccess.DataModels.DistinguishingFeature();
                 feature.Id = Id;
                 feature.Description = Description;
                 if (FieldManager.FieldExists(PhotoReference))
@@ -64,8 +68,8 @@ namespace MobileKidsIdApp.Models
                     feature.FileReference = new DataAccess.DataModels.FileReference();
                     DataPortal.UpdateChild(FileReference, feature.FileReference);
                 }
+                list.Add(feature);
             }
-            list.Add(feature);
         }
     }
 }
