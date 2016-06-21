@@ -23,7 +23,8 @@ namespace MobileKidsIdApp.ViewModels
             });
             ChildProfileListCommand = new Command(async () =>
             {
-                var vm = await new ChildProfileList().InitAsync();
+                var vm = new ChildProfileList();
+                await vm.InitAsync();
                 await NavigateTo(new Views.ChildProfileList { BindingContext = vm });
             });
             OptionsCommand = new Command(async () =>
@@ -31,9 +32,9 @@ namespace MobileKidsIdApp.ViewModels
                 var vm = await new Settings().InitAsync();
                 await NavigateTo(new Views.Settings { BindingContext = vm });
             });
-            LogoutCommand = new Command(() =>
+            LogoutCommand = new Command(async () =>
             {
-                App.Logout();
+                await App.Logout();
             });
         }
 

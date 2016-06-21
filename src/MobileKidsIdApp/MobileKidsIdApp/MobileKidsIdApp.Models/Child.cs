@@ -10,8 +10,8 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class Child : BaseTypes.BusinessBase<Child>
     {
-        public static readonly PropertyInfo<string> IdProperty = RegisterProperty<string>(c => c.Id);
-        public string Id
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
+        public int Id
         {
             get { return GetProperty(IdProperty); }
             private set { LoadProperty(IdProperty, value); }
@@ -87,15 +87,23 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(PhotosProperty, value); }
         }
 
-        public static int LastId = -1;
         protected override void Child_Create()
         {
             using (BypassPropertyChecks)
             {
-                LastId++;
-                Id = LastId.ToString();
+                ChildDetails = DataPortal.CreateChild<ChildDetails>();
+                PhysicalDetails = DataPortal.CreateChild<PhysicalDetails>();
+                DistinguishingFeatures = DataPortal.CreateChild<DistinguishingFeatureList>();
+                ProfessionalCareProviders = DataPortal.CreateChild<CareProviderList>();
+                FamilyMembers = DataPortal.CreateChild<FamilyMemberList>();
+                Friends = DataPortal.CreateChild<FriendList>();
+                MedicalNotes = DataPortal.CreateChild<MedicalNotes>();
+                Checklist = DataPortal.CreateChild<PreparationChecklist>();
+                Documents = DataPortal.CreateChild<FileReferenceList>();
+                Photos = DataPortal.CreateChild<FileReferenceList>();
             }
             base.Child_Create();
+            return;
         }
 
         private void Child_Fetch(DataAccess.DataModels.Child child)
@@ -116,11 +124,17 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(List<DataAccess.DataModels.Child> list)
+        {
+            Id = ((Family)Parent).Max(_ => _.Id) + 1;
+            Child_Update(list);
+        }
+
         private void Child_Update(List<DataAccess.DataModels.Child> list)
         {
-            var child = new DataAccess.DataModels.Child();
             using (BypassPropertyChecks)
             {
+                var child = new DataAccess.DataModels.Child();
                 child.Id = Id;
                 child.ChildDetails = new DataAccess.DataModels.ChildDetails();
                 DataPortal.UpdateChild(ChildDetails, child.ChildDetails);
@@ -136,8 +150,8 @@ namespace MobileKidsIdApp.Models
                 DataPortal.UpdateChild(Checklist, child.Checklist);
                 DataPortal.UpdateChild(Documents, child.Documents);
                 DataPortal.UpdateChild(Photos, child.Photos);
+                list.Add(child);
             }
-            list.Add(child);
         }
     }
 }

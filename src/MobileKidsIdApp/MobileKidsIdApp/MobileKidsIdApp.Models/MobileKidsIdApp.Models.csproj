@@ -52,7 +52,7 @@
     <Compile Include="FileReferenceList.cs" />
     <Compile Include="FriendList.cs" />
     <Compile Include="MedicalNotes.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Friend.cs" />
     <Compile Include="PhysicalDetails.cs" />
     <Compile Include="PreparationChecklist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

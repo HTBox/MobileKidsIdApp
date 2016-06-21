@@ -35,8 +35,8 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(FamilyNameProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime?> BirthdayProperty = RegisterProperty<DateTime?>(c => c.Birthday);
-        public DateTime? Birthday
+        public static readonly PropertyInfo<DateTime> BirthdayProperty = RegisterProperty<DateTime>(c => c.Birthday);
+        public DateTime Birthday
         {
             get { return GetProperty(BirthdayProperty); }
             set { SetProperty(BirthdayProperty, value); }
@@ -47,6 +47,14 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(ContactIdProperty); }
             set { SetProperty(ContactIdProperty, value); }
+        }
+
+        protected override void Child_Create()
+        {
+            using (BypassPropertyChecks)
+            {
+                Birthday = DateTime.Today;
+            }
         }
 
         private void Child_Fetch(DataAccess.DataModels.ChildDetails details)
@@ -60,6 +68,11 @@ namespace MobileKidsIdApp.Models
                 Birthday = details.Birthday;
                 ContactId = details.ContactId;
             }
+        }
+
+        private void Child_Insert(DataAccess.DataModels.ChildDetails details)
+        {
+            Child_Update(details);
         }
 
         private void Child_Update(DataAccess.DataModels.ChildDetails details)

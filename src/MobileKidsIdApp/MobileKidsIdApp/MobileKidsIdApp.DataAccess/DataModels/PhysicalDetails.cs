@@ -14,8 +14,8 @@ namespace MobileKidsIdApp.DataAccess.DataModels
         public string HairColor { get; set; }
         public string HairStyle { get; set; }
         public string EyeColor { get; set; }
-        public bool? EyeGlasses { get; set; }
-        public bool? EyeContacts { get; set; }
+        public bool EyeGlasses { get; set; }
+        public bool EyeContacts { get; set; }
         public string SkinTone { get; set; }
         public string RacialEthnicIdentity { get; set; }
         public string Gender { get; set; }
