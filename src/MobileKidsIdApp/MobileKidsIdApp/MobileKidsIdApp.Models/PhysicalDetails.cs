@@ -52,15 +52,15 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(EyeColorProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool?> EyeContactsProperty = RegisterProperty<bool?>(c => c.EyeContacts);
-        public bool? EyeContacts
+        public static readonly PropertyInfo<bool> EyeContactsProperty = RegisterProperty<bool>(c => c.EyeContacts);
+        public bool EyeContacts
         {
             get { return GetProperty(EyeContactsProperty); }
             set { SetProperty(EyeContactsProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool?> EyeGlassesProperty = RegisterProperty<bool?>(c => c.EyeGlasses);
-        public bool? EyeGlasses
+        public static readonly PropertyInfo<bool> EyeGlassesProperty = RegisterProperty<bool>(c => c.EyeGlasses);
+        public bool EyeGlasses
         {
             get { return GetProperty(EyeGlassesProperty); }
             set { SetProperty(EyeGlassesProperty, value); }

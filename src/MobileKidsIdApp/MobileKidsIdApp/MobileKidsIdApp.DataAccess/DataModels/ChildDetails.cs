@@ -11,7 +11,7 @@ namespace MobileKidsIdApp.DataAccess.DataModels
         public string GivenName { get; set; }
         public string AdditonalName { get; set; }
         public string FamilyName { get; set; }
-        public DateTime? Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         public string ContactId { get; set; }
     }
 }

@@ -35,8 +35,8 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(FamilyNameProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime?> BirthdayProperty = RegisterProperty<DateTime?>(c => c.Birthday);
-        public DateTime? Birthday
+        public static readonly PropertyInfo<DateTime> BirthdayProperty = RegisterProperty<DateTime>(c => c.Birthday);
+        public DateTime Birthday
         {
             get { return GetProperty(BirthdayProperty); }
             set { SetProperty(BirthdayProperty, value); }
