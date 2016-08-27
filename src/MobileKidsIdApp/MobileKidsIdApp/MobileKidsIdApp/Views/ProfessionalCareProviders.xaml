@@ -19,7 +19,7 @@
             <controls:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Style="{StaticResource RepeaterItem}">
+                        <StackLayout>
                             <Label Text="Provider name"/>
                             <Entry Text="{Binding ProviderName}" Placeholder="example: Dr. Julia Khan"/>
                             <Label Text="Role"/>

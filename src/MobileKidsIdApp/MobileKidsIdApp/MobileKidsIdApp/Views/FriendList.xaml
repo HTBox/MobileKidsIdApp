@@ -13,7 +13,7 @@
       <controls:RepeaterView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Style="{StaticResource RepeaterItem}">
+            <StackLayout>
               <Label Text="{Binding ContactId}"/>
               <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
             </StackLayout>
