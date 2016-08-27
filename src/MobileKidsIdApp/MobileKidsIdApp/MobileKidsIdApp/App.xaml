@@ -40,6 +40,10 @@
 			<Style TargetType="Grid">
 				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
 			</Style>
+			<!-- ListView -->
+			<Style TargetType="ListView">
+				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" /> 
+			</Style>
 			
 			<!-- StackLayout -->
 			<Style TargetType="StackLayout">
@@ -49,6 +53,8 @@
 			<!-- ScrollView -->
 			<Style TargetType="ScrollView">
 				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+				<Setter Property="VerticalOptions" Value="FillAndExpand" />
+				<Setter Property="HorizontalOptions" Value="FillAndExpand" />
 			</Style>
 
 			<!-- TableView -->
@@ -74,7 +80,6 @@
 				<Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
 				<Setter Property="Margin" Value="5" />
 			</Style>
-			
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -7,21 +7,23 @@
         <ToolbarItem Name="Save" Command="{Binding SaveItemCommand}"/>
         <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
-  <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-      <ListView ItemsSource="{Binding Model}" ItemTapped="ShowChild" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-          <ListView.ItemTemplate>
-              <DataTemplate>
-                  <ViewCell>
-                      <StackLayout Orientation="Vertical" Margin="3">
-                          <StackLayout Orientation="Horizontal">
-                              <Label Text="{Binding ChildDetails.GivenName}" Margin="0,5,0,0"/>
-                              <Label Text="{Binding ChildDetails.AdditionalName}" Margin="0,5,0,0"/>
-                              <Label Text="{Binding ChildDetails.FamilyName}" Margin="0,5,0,0"/>
-                          </StackLayout>
-                      </StackLayout>
-                  </ViewCell>
-              </DataTemplate>
-          </ListView.ItemTemplate>
-      </ListView>
-    </ScrollView>
+	<StackLayout>
+		<ScrollView MinimumHeightRequest="100">
+		  <ListView ItemsSource="{Binding Model}" ItemTapped="ShowChild">
+		      <ListView.ItemTemplate>
+		          <DataTemplate>
+		              <ViewCell>
+		                  <StackLayout Orientation="Vertical" Margin="3">
+		                      <StackLayout Orientation="Horizontal">
+		                          <Label Text="{Binding ChildDetails.GivenName}" Margin="0,5,0,0"/>
+		                          <Label Text="{Binding ChildDetails.AdditionalName}" Margin="0,5,0,0"/>
+		                          <Label Text="{Binding ChildDetails.FamilyName}" Margin="0,5,0,0"/>
+		                      </StackLayout>
+		                  </StackLayout>
+		              </ViewCell>
+		          </DataTemplate>
+		      </ListView.ItemTemplate>
+		  </ListView>
+		</ScrollView>
+	</StackLayout>
 </ContentPage>
