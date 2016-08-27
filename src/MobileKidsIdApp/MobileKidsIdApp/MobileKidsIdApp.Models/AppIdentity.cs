@@ -34,6 +34,7 @@ namespace MobileKidsIdApp.Models
         private void DataPortal_Fetch(AppIdentityCriteria criteria)
         {
             ProviderId = criteria.ProviderId;
+            Name = ProviderId;
             ProviderToken = criteria.ProviderToken;
             IsAuthenticated = true;
         }

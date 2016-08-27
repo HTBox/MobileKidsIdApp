@@ -20,13 +20,6 @@ namespace MobileKidsIdApp.ViewModels
             GoogleLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Google); });
 #if DEBUG
             TestLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Test); });
-            //TestLoginCommand = new Command(async () =>
-            //{
-            //    var identity = await Models.AppIdentity.GetAppIdentityAsync("test:1", "blahblahblah");
-            //    Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-            //    if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
-            //        await App.RootPage.Navigation.PopModalAsync();
-            //});
 #endif
         }
 
