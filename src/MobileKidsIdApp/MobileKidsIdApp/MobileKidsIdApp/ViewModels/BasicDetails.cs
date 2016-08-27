@@ -1,4 +1,5 @@
 ﻿using Csla.Xaml;
+using MobileKidsIdApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             ChangeContactCommand = new Command(async () =>
             {
-                var vm = await new ContactPicker().InitAsync();
-                var picker = new Views.ContactPicker { BindingContext = vm };
-                await App.RootPage.Navigation.PushModalAsync(picker);
-                var contact = vm.Contact;
+                var contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
                 if (contact == null)
                     Model.ContactId = string.Empty;
                 else
@@ -37,6 +35,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             if (e.PropertyName == "ContactId" && !string.IsNullOrEmpty(Model.ContactId))
             {
+                // TODO : Verify this still works if we are selecting the contact via the native facilities.
                 var contactList = Plugin.Contacts.CrossContacts.Current;
                 contactList.PreferContactAggregation = true;
                 var contact = contactList.Contacts.Where(_ => _.Id == Model.ContactId).FirstOrDefault();
