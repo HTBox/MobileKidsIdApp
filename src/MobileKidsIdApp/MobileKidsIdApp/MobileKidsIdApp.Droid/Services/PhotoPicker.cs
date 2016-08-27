@@ -47,6 +47,7 @@ namespace MobileKidsIdApp.Droid.Services
                     tcs.SetResult(null);
             };
             MainActivity.Instance.ActivityResult += handler;
+            tcs.Task.ContinueWith(t => MainActivity.Instance.ActivityResult -= handler);
             const int photoPickerCode = 82372;
             try
             {
@@ -54,7 +55,6 @@ namespace MobileKidsIdApp.Droid.Services
             }
             catch (Exception ex)
             {
-                MainActivity.Instance.ActivityResult -= handler;
                 tcs.SetException(ex);
             }
             return tcs.Task;
