@@ -11,6 +11,7 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class StaticContent : BindableObject
     {
+		private string WebStyles = "<style>body{Background-Color: #7dacb4; Color: #FFF;} </style>";
         private string _title;
         public string Title
         { get { return _title; } set { _title = value; OnPropertyChanged("Title"); } }
@@ -25,7 +26,7 @@ namespace MobileKidsIdApp.ViewModels
         private void SetSource(string html)
         {
             HtmlSource = new HtmlWebViewSource();
-            HtmlSource.Html = html;
+			HtmlSource.Html = String.Format("{0}{1}", WebStyles, html);
         }
 
         public StaticContent(string contentName)

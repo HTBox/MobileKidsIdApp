@@ -17,10 +17,8 @@
             </TableSection>
             <TableSection Title="Contact">
                 <ViewCell>
-                    <StackLayout>
-                        <Label Text="{Binding ContactId}"/>
-                        <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
-                    </StackLayout>
+                    <Label Text="{Binding ContactId}"/>
+                    <Button Text="Change" Command="{Binding ChangeContactCommand}" />
                 </ViewCell>
             </TableSection>
         </TableView.Root>

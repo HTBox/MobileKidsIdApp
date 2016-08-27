@@ -3,5 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.About"
              Title="About">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource AboutText}" />
 </ContentPage>

@@ -42,7 +42,7 @@ namespace MobileKidsIdApp
 
             if (!Csla.ApplicationContext.User.Identity.IsAuthenticated)
             {
-                await RootPage.Navigation.PushModalAsync(new Views.Login { BindingContext = new ViewModels.Login() });
+				await RootPage.Navigation.PushModalAsync(new NavigationPage(new Views.Login { BindingContext = new ViewModels.Login() }));
             }
         }
 
