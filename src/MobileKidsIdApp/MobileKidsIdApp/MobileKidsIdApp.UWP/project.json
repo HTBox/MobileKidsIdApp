@@ -2,6 +2,7 @@
   "dependencies": {
     "CSLA-Core": "4.6.400",
     "CSLA-XamarinForms": "4.6.400",
+    "Microsoft.Azure.Mobile.Client": "2.1.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Newtonsoft.Json": "8.0.3",
     "PCLStorage": "1.0.2",

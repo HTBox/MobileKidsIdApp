@@ -38,6 +38,12 @@ namespace MobileKidsIdApp.Models
             IsAuthenticated = true;
         }
 
+        public static async Task<AppIdentity> CreateIdentity(string providerId, string providerToken)
+        {
+            return await DataPortal.FetchAsync<AppIdentity>(
+                new AppIdentityCriteria { ProviderId = providerId, ProviderToken = providerToken });
+        }
+
         [Serializable]
         public class AppIdentityCriteria : CriteriaBase<AppIdentityCriteria>
         {
