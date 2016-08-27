@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using MobileKidsIdApp.Models;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -18,31 +19,33 @@ namespace MobileKidsIdApp.ViewModels
         {
             ChangeContactCommand = new Command(async () =>
             {
-                var contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
+                ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
                 if (contact == null)
-                    Model.ContactId = string.Empty;
+                {
+                    //Do nothing, user must have cancelled.
+                }
                 else
+                {
                     Model.ContactId = contact.Id;
+
+                    //Only overwrite name fields if they were blank.
+                    if (string.IsNullOrEmpty(Model.FamilyName))
+                        Model.FamilyName = contact.FamilyName;
+                    if (string.IsNullOrEmpty(Model.AdditionalName))
+                        Model.AdditionalName = contact.AdditionalName;
+                    if (string.IsNullOrEmpty(Model.GivenName))
+                        Model.GivenName = contact.GivenName;
+                }
             });
 
             Model = details;
-            Model.PropertyChanged += Model_PropertyChanged;
         }
+        
 
-        public string ContactName { get; private set; }
-
-        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override Task<ChildDetails> DoInitAsync()
         {
-            if (e.PropertyName == "ContactId" && !string.IsNullOrEmpty(Model.ContactId))
-            {
-                // TODO : Verify this still works if we are selecting the contact via the native facilities.
-                var contactList = Plugin.Contacts.CrossContacts.Current;
-                contactList.PreferContactAggregation = true;
-                var contact = contactList.Contacts.Where(_ => _.Id == Model.ContactId).FirstOrDefault();
-                if (contact != null)
-                    ContactName = contact.DisplayName;
-                OnPropertyChanged("ContactName");
-            }
+            //Must override default implmentation that throws NotImplementedException.
+            return Task.FromResult(Model);
         }
     }
 }
