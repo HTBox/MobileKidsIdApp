@@ -10,6 +10,13 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class CareProvider : BaseTypes.BusinessBase<CareProvider>
     {
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
+        public int Id
+        {
+            get { return GetProperty(IdProperty); }
+            private set { LoadProperty(IdProperty, value); }
+        }
+
         public static readonly PropertyInfo<string> ProviderNameProperty = RegisterProperty<string>(c => c.ProviderName);
         public string ProviderName
         {
@@ -49,6 +56,7 @@ namespace MobileKidsIdApp.Models
         {
             using (BypassPropertyChecks)
             {
+                Id = provider.Id;
                 ProviderName = provider.ProviderName;
                 ClinicName = provider.ClinicName;
                 CareRoleDescription = provider.CareRoleDescription;
@@ -57,11 +65,18 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(List<DataAccess.DataModels.CareProvider> list)
+        {
+            Id = ((CareProviderList)Parent).Max(_ => _.Id) + 1;
+            Child_Update(list);
+        }
+
         private void Child_Update(List<DataAccess.DataModels.CareProvider> list)
         {
             var provider = new DataAccess.DataModels.CareProvider();
             using (BypassPropertyChecks)
             {
+                provider.Id = Id;
                 provider.ProviderName = ProviderName;
                 provider.ClinicName = ClinicName;
                 provider.CareRoleDescription = CareRoleDescription;

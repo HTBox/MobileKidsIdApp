@@ -33,7 +33,7 @@ namespace MobileKidsIdApp.Models
             }
         }
 
-        private void Child_Update(List<DataAccess.DataModels.UserIdentity> list)
+        private void Child_Insert(List<DataAccess.DataModels.UserIdentity> list)
         {
             var identity = new DataAccess.DataModels.UserIdentity();
             using (BypassPropertyChecks)
@@ -42,6 +42,16 @@ namespace MobileKidsIdApp.Models
                 identity.UserIdFromProvider = UserIdFromProvider;
             }
             list.Add(identity);
+        }
+
+        private void Child_Delete(List<DataAccess.DataModels.UserIdentity> list)
+        {
+            using (BypassPropertyChecks)
+            {
+                var item = list.Where(_ => _.ProviderName == ProviderName && _.UserIdFromProvider == UserIdFromProvider).FirstOrDefault();
+                if (item != null)
+                    list.Remove(item);
+            }
         }
     }
 }

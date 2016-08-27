@@ -33,6 +33,11 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(DataAccess.DataModels.UserApplicationProfile profile)
+        {
+            Child_Update(profile);
+        }
+
         private void Child_Update(DataAccess.DataModels.UserApplicationProfile profile)
         {
             using (BypassPropertyChecks)

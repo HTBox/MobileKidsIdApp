@@ -1,5 +1,5 @@
-﻿using Android.Content;
-using MobileKidsIdApp.Services;
+﻿using MobileKidsIdApp.Services;
+using Plugin.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,32 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.iOS.Services
 {
-    public class PhotoPicker
+    public class PhotoPicker : IPhotoPicker
     {
-
-        public Task<string> GetCopiedFilePath(string copyToDirectory, string fileNameWithoutExtension)
+        public async Task<string> GetCopiedFilePath(string copyToDirectory, string fileNameWithoutExtension)
         {
-            //Look here for how this might work: https://developer.xamarin.com/recipes/ios/media/video_and_photos/choose_a_photo_from_the_gallery/
-            throw new NotImplementedException("PhotoPicker not implemented for iOS yet.");
+            string targetPath = null;
+            var originalPath = await GetPhotoPath();
+            if (!string.IsNullOrWhiteSpace(originalPath))
+            {
+                var extension = System.IO.Path.GetExtension(originalPath);
+                targetPath = System.IO.Path.Combine(copyToDirectory, fileNameWithoutExtension) + extension;
+                System.IO.File.Copy(originalPath, targetPath);
+            }
+            return targetPath;
         }
 
-
+        private async Task<string> GetPhotoPath()
+        {
+            string result = null;
+            var picker = CrossMedia.Current;
+            if (picker.IsPickPhotoSupported)
+            {
+                var photo = await picker.PickPhotoAsync();
+                if (photo != null)
+                    result = photo.Path;
+            }
+            return result;
+        }
     }
-    
 }

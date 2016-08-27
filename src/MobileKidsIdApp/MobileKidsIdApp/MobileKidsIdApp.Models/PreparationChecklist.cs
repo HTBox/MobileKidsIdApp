@@ -98,6 +98,11 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(DataAccess.DataModels.PreparationChecklist list)
+        {
+            Child_Update(list);
+        }
+
         private void Child_Update(DataAccess.DataModels.PreparationChecklist list)
         {
             using (BypassPropertyChecks)
