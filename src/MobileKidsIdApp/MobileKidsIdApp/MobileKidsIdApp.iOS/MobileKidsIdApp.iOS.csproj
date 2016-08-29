@@ -91,6 +91,10 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\ContactPicker.cs" />
+    <Compile Include="Services\ContactPickerController.cs" />
+    <Compile Include="Services\ContactPickerDelegate.cs" />
+    <Compile Include="Services\ContactPickerImplementation.cs" />
+    <Compile Include="Services\ContactPickerPopoverDelegate.cs" />
     <Compile Include="Services\PhotoPicker.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
