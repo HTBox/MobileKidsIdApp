@@ -36,10 +36,15 @@ namespace MobileKidsIdApp.iOS.Services
 
             pickerDelegate.ContactSelected += (contact) =>
             {
-                tcs.SetResult(new ContactInfo { Id = contact.Identifier, FamilyName = contact.FamilyName, AdditionalName = contact.MiddleName, GivenName = contact.GivenName });
+                tcs.TrySetResult(new ContactInfo { Id = contact.Identifier, FamilyName = contact.FamilyName, AdditionalName = contact.MiddleName, GivenName = contact.GivenName });
             };
 
-            // Display as modal dialog on main view.
+            pickerDelegate.SelectionCanceled += () =>
+            {
+                tcs.TrySetResult(null);
+            };
+
+            // Display as modal dialog on current ViewController
             UIWindow window = UIApplication.SharedApplication.KeyWindow;
             UIViewController viewController = window.RootViewController;
             if (viewController == null)
@@ -71,10 +76,13 @@ namespace MobileKidsIdApp.iOS.Services
 
         public override void DidSelectContact(CNContactPickerViewController picker, CNContact contact)
         {
-            // Raise the contact selected event
             RaiseContactSelected(contact);
         }
 
+        public override void ContactPickerDidCancel(CNContactPickerViewController picker)
+        {
+            RaiseSelectionCanceled();
+        }
 
         #region Events
         public delegate void SelectionCanceledDelegate();
@@ -93,13 +101,6 @@ namespace MobileKidsIdApp.iOS.Services
             if (this.ContactSelected != null) this.ContactSelected(contact);
         }
 
-        public delegate void ContactPropertySelectedDelegate(CNContactProperty property);
-        public event ContactPropertySelectedDelegate ContactPropertySelected;
-
-        internal void RaiseContactPropertySelected(CNContactProperty property)
-        {
-            if (this.ContactPropertySelected != null) this.ContactPropertySelected(property);
-        }
         #endregion
     }
 
