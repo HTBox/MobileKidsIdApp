@@ -1,15 +1,15 @@
-﻿using MobileKidsIdApp.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MobileKidsIdApp.ViewModels;
 using System.Threading.Tasks;
 using ContactsUI;
 using Contacts;
 using Foundation;
 using UIKit;
-using System.Threading;
+
+using MobileKidsIdApp.Services;
+using MobileKidsIdApp.ViewModels;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.iOS.Services.ContactPicker))]
 namespace MobileKidsIdApp.iOS.Services
