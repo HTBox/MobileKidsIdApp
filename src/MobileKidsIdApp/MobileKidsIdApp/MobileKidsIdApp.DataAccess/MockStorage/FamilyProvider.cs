@@ -8,20 +8,18 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
 {
     public class FamilyProvider : IFamilyProvider
     {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<Family> Get()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            await MockDb.Init();
-            var json = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, MockDb.FamilyFile);
-            var result = JsonConvert.DeserializeObject<Family>(json);
-            return result;
+            return MockDb.Family;
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task Save(Family data)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            await MockDb.Init();
-            var json = JsonConvert.SerializeObject(data);
-            var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
-            MockDb.FamilyFile = dataBlob;
+            MockDb.Family = data;
         }
     }
 }

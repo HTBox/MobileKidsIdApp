@@ -30,7 +30,6 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
         public async Task Save(Family data)
         {
             var json = JsonConvert.SerializeObject(data);
-            var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
             var file = await rootFolder.CreateFileAsync("Family.txt", CreationCollisionOption.ReplaceExisting);
