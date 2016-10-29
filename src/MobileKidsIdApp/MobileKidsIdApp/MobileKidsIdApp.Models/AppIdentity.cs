@@ -34,8 +34,15 @@ namespace MobileKidsIdApp.Models
         private void DataPortal_Fetch(AppIdentityCriteria criteria)
         {
             ProviderId = criteria.ProviderId;
+            Name = ProviderId;
             ProviderToken = criteria.ProviderToken;
             IsAuthenticated = true;
+        }
+
+        public static async Task<AppIdentity> CreateIdentity(string providerId, string providerToken)
+        {
+            return await DataPortal.FetchAsync<AppIdentity>(
+                new AppIdentityCriteria { ProviderId = providerId, ProviderToken = providerToken });
         }
 
         [Serializable]
