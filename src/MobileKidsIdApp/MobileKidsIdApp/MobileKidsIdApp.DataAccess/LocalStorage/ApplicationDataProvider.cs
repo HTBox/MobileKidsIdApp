@@ -10,7 +10,6 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
     {
         public async Task<ApplicationData> Get()
         {
-            //TODO: user Csla.ApplicationContext.User identity info to decrypt data
             ApplicationData result;
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
@@ -18,7 +17,8 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             if (file != null)
             {
                 await file.OpenAsync(FileAccess.Read);
-                var json = await file.ReadAllTextAsync();
+                var dataBlob = await file.ReadAllTextAsync();
+                var json = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, dataBlob);
                 result = JsonConvert.DeserializeObject<ApplicationData>(json);
             }
             else
@@ -30,12 +30,12 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
 
         public async Task Save(ApplicationData data)
         {
-            //TODO: user Csla.ApplicationContext.User identity info to encrypt data
             var json = JsonConvert.SerializeObject(data);
+            var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
             var fileSystem = FileSystem.Current;
             var rootFolder = fileSystem.LocalStorage;
             var file = await rootFolder.CreateFileAsync("ApplicationData.txt", CreationCollisionOption.ReplaceExisting);
-            await file.WriteAllTextAsync(json);
+            await file.WriteAllTextAsync(dataBlob);
         }
     }
 }
