@@ -12,10 +12,8 @@ using Android.Content;
 
 namespace MobileKidsIdApp.Droid
 {
-    [Activity(Label = "MobileKidsIdApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : 
-        global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, 
-        MobileKidsIdApp.Services.IAuthenticate
+    [Activity(Label = "MobileKidsIdApp", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
 
         protected override void OnCreate(Bundle bundle)

@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.Login"
-             Title="Login">
+             Title="Missing Kids Minnesota">
     <StackLayout>
-        <Label Text="Login" FontSize="40" BackgroundColor="Silver"/>
-        <Button Text="Facebook" Command="{Binding FacebookLoginCommand}"/>
-        <Button Text="Microsoft" Command="{Binding MicrosoftLoginCommand}"/>
-        <Button Text="Google" Command="{Binding GoogleLoginCommand}"/>
-        <Button Text="Test login" Command="{Binding TestLoginCommand}" IsVisible="{Binding Testing}"/>
+		<Label Text="Login" Style="{StaticResource HeaderLabel}" />
+        <Button Text="Facebook" Command="{Binding FacebookLoginCommand}" Style="{StaticResource LoginButton}" />
+        <Button Text="Microsoft" Command="{Binding MicrosoftLoginCommand}" Style="{StaticResource LoginButton}" />
+        <Button Text="Google" Command="{Binding GoogleLoginCommand}" Style="{StaticResource LoginButton}" />
+        <Button Text="Test login" Command="{Binding TestLoginCommand}" IsVisible="{Binding Testing}" Style="{StaticResource LoginButton}" />
     </StackLayout>
 </ContentPage>
