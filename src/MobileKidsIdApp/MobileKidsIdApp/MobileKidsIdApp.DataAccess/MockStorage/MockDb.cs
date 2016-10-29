@@ -8,25 +8,15 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
 {
     public static class MockDb
     {
-        private static DataModels.ApplicationData ApplicationData = new DataModels.ApplicationData();
-        private static DataModels.Family Family = new DataModels.Family();
-        public static string ApplicationDataFile;
-        public static string FamilyFile;
-        private static bool _isInitialized;
+        public static DataModels.ApplicationData ApplicationData = new DataModels.ApplicationData();
+        public static DataModels.Family Family = new DataModels.Family();
 
-        public static async Task Init()
+        static MockDb()
         {
-            if (!_isInitialized)
-                _isInitialized = true;
-            else
-                return;
-
             ApplicationData.UserApplicationProfile = new DataModels.UserApplicationProfile();
             ApplicationData.UserApplicationProfile.FirstUse = DateTime.Now;
             ApplicationData.UserApplicationProfile.LegalAcknowlegeDataSecurityPolicy = false;
             ApplicationData.PermittedLoginIdentities.Add(new DataModels.UserIdentity { ProviderName = "Facebook", UserIdFromProvider = "fb123" });
-            var provider = new ApplicationDataProvider();
-            await provider.Save(ApplicationData);
 
             var child = new DataModels.Child();
             child.Id = 1;
@@ -53,9 +43,6 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             child.Checklist = new DataModels.PreparationChecklist();
 
             Family.Children.Add(child);
-
-            var familyProvider = new FamilyProvider();
-            await familyProvider.Save(Family);
         }
 
     }
