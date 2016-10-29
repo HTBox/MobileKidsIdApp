@@ -4,6 +4,7 @@
     "CSLA-XamarinForms": "4.6.400",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Newtonsoft.Json": "8.0.3",
+    "PCLCrypto": "2.0.147",
     "PCLStorage": "1.0.2",
     "Xam.Plugin.Contacts": "2.0.2-beta1",
     "Xamarin.Forms": "2.3.1.114"
