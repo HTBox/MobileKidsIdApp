@@ -4,6 +4,10 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+using MobileKidsIdApp.Models;
+using MobileKidsIdApp.Services;
 
 namespace MobileKidsIdApp.iOS
 {
@@ -11,7 +15,7 @@ namespace MobileKidsIdApp.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, MobileKidsIdApp.Services.IAuthenticate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -25,7 +29,46 @@ namespace MobileKidsIdApp.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            MobileKidsIdApp.App.Init(this);
+
             return base.FinishedLaunching(app, options);
+        }
+
+        public async Task<AppIdentity> Authenticate(LoginProviders provider)
+        {
+            Models.AppIdentity result = null;
+            try
+            {
+#if DEBUG
+                if (provider == MobileKidsIdApp.Services.LoginProviders.Test)
+                {
+                    result = await Models.AppIdentity.GetAppIdentityAsync("test:1", "blahblahblah");
+                    return result;
+                }
+#endif
+                var client = new MobileServiceClient("https://mobilekidsidapp.azurewebsites.net");
+                MobileServiceUser authnResult = null;
+                switch (provider)
+                {
+                    case MobileKidsIdApp.Services.LoginProviders.Google:
+                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Google);
+                        break;
+                    case MobileKidsIdApp.Services.LoginProviders.Microsoft:
+                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.MicrosoftAccount);
+                        break;
+                    case MobileKidsIdApp.Services.LoginProviders.Facebook:
+                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Facebook);
+                        break;
+                    default:
+                        throw new ArgumentException("LoginProvider");
+                }
+                result = await Models.AppIdentity.GetAppIdentityAsync(authnResult.UserId, authnResult.MobileServiceAuthenticationToken);
+            }
+            catch
+            {
+                result = new Models.AppIdentity();
+            }
+            return result;
         }
     }
 }
