@@ -1,5 +1,4 @@
-﻿using MobileKidsIdApp.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,13 +50,6 @@ namespace MobileKidsIdApp
         {
             Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
             await CheckUserLogin();
-        }
-
-        public static IAuthenticate Authenticator { get; private set; }
-
-        public static void Init(IAuthenticate authenticator)
-        {
-            Authenticator = authenticator;
         }
     }
 }
