@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileKidsIdApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,42 +18,20 @@ namespace MobileKidsIdApp.ViewModels
 
         public Login()
         {
-            FacebookLoginCommand = new Command(async () =>
-            {
-                //TODO: implement FB login here
-                var identity = await Models.AppIdentity.GetAppIdentityAsync("FB:1", "blahblahblah");
-                Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
-                    await App.RootPage.Navigation.PopModalAsync();
-            });
-            MicrosoftLoginCommand = new Command(async () =>
-            {
-                //TODO: implement Microsoft login here
-                var identity = await Models.AppIdentity.GetAppIdentityAsync("Live:1", "blahblahblah");
-                Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
-                    await App.RootPage.Navigation.PopModalAsync();
-            });
-            GoogleLoginCommand = new Command(async () =>
-            {
-                //TODO: implement Google login here
-                var identity = await Models.AppIdentity.GetAppIdentityAsync("Google:1", "blahblahblah");
-                Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
-                    await App.RootPage.Navigation.PopModalAsync();
-            });
+            FacebookLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Facebook); });
+            MicrosoftLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Microsoft); });
+            GoogleLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Google); });
 #if DEBUG
-            Testing = true;
-            TestLoginCommand = new Command(async () =>
-            {
-                var identity = await Models.AppIdentity.GetAppIdentityAsync("test:1", "blahblahblah");
-                Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
-                if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
-                    await App.RootPage.Navigation.PopModalAsync();
-            });
+            TestLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Test); });
 #endif
         }
 
-        public bool Testing { get; set; }
+        private async Task DoAuthentication(LoginProviders provider)
+        {
+            var identity = await App.Authenticator.Authenticate(provider);
+            Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
+            if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+                await App.RootPage.Navigation.PopModalAsync();
+        }
     }
 }
