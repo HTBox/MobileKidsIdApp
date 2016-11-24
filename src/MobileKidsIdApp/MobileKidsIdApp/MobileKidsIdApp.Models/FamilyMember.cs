@@ -14,7 +14,7 @@ namespace MobileKidsIdApp.Models
         public int Id
         {
             get { return GetProperty(IdProperty); }
-            private set { LoadProperty(IdProperty, value); }
+            set { LoadProperty(IdProperty, value); }
         }
 
         public static readonly PropertyInfo<string> ContactIdProperty = RegisterProperty<string>(c => c.ContactId);
