@@ -51,13 +51,6 @@ namespace MobileKidsIdApp.Droid.Services
                 // Make sure the request was successful
                 if (e.resultCode == Android.App.Result.Ok)
                 {
-                    //var uri = ContactsContract.Contacts.ContentUri;
-                    string[] projection = {
-                       ContactsContract.Contacts.InterfaceConsts.Id,
-                       ContactsContract.Contacts.InterfaceConsts.DisplayName,
-                       ContactsContract.Contacts.InterfaceConsts.PhotoId,
-                    };
-
                     var loader = new CursorLoader(MainActivity.Instance, e.data.Data, projection, null, null, null);
                     var cursor = (Android.Database.ICursor)loader.LoadInBackground();
 
@@ -66,16 +59,7 @@ namespace MobileKidsIdApp.Droid.Services
                     {
                         do
                         {
-                            var displayName = cursor.GetString(cursor.GetColumnIndex(projection[1]));
-                            var nameParts = displayName.Split(' ');
-                            var lastName = nameParts.Length > 1 ? nameParts[1] : null;
-                            contactList.Add(new ContactInfo()
-                            {
-                                Id = cursor.GetLong(cursor.GetColumnIndex(projection[0])).ToString(),
-                                GivenName = nameParts[0],
-                                AdditionalName = null,
-                                FamilyName = lastName
-                            });
+                            contactList.Add(GetContactInfoFromCursor(cursor));
                         } while (cursor.MoveToNext());
                     }
                     tcs.SetResult(contactList.FirstOrDefault());
@@ -85,6 +69,48 @@ namespace MobileKidsIdApp.Droid.Services
 
             tcs.SetResult(null);
         }
-        
+
+        private ContactInfo GetContactInfoFromCursor(Android.Database.ICursor cursor)
+        {
+            var displayName = cursor.GetString(cursor.GetColumnIndex(projection[1]));
+            var nameParts = displayName.Split(' ');
+            var lastName = nameParts.Length > 1 ? nameParts[1] : null;
+            return new ContactInfo()
+            {
+                Id = cursor.GetString(cursor.GetColumnIndex(ContactsContract.ContactsColumns.LookupKey)),
+                GivenName = nameParts[0],
+                AdditionalName = null,
+                FamilyName = lastName
+            };
+        }
+
+        private static readonly string[] projection = {
+            ContactsContract.Contacts.InterfaceConsts.Id,
+            ContactsContract.Contacts.InterfaceConsts.DisplayName,
+            ContactsContract.Contacts.InterfaceConsts.PhotoId,
+            ContactsContract.Contacts.InterfaceConsts.LookupKey,
+        };
+
+        public Task<ContactInfo> GetContactInfoForId(string id)
+        {
+            var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
+
+            ContactInfo contact = null;
+            var cursor = Application.Context
+                .ContentResolver.Query(uri, projection, null, null, null);
+            if ((cursor != null) && (cursor.Count > 0))
+            {
+                cursor.MoveToFirst();
+                while ((cursor != null) && (cursor.IsAfterLast == false))
+                {
+                    contact = GetContactInfoFromCursor(cursor);
+                    cursor.MoveToNext();
+                }
+            }
+            if (cursor != null)
+                cursor.Close();
+            
+            return Task.FromResult(contact);
+        }
     }
 }

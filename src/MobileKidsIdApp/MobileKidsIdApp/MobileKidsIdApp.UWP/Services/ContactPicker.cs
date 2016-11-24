@@ -12,6 +12,7 @@ namespace MobileKidsIdApp.UWP.Services
 {
     public class ContactPicker : IContactPicker
     {
+
         public async Task<ContactInfo> GetSelectedContactInfo()
         {
 
@@ -25,18 +26,32 @@ namespace MobileKidsIdApp.UWP.Services
 
             if (contact != null)
             {
-                return new ContactInfo() {
-                    Id = contact.Id,
-                    FamilyName = contact.LastName,
-                    AdditionalName = contact.MiddleName,
-                    GivenName = contact.FirstName
-                };
+                return CreateContactInfo(contact);
             }
             else
             {
                 return null;
             }
         }
-        
+
+        private ContactInfo CreateContactInfo(WinContacts.Contact contact)
+        {
+            return new ContactInfo()
+            {
+                Id = contact.Id,
+                FamilyName = contact.LastName,
+                AdditionalName = contact.MiddleName,
+                GivenName = contact.FirstName
+            };
+        }
+
+        public async Task<ContactInfo> GetContactInfoForId(string id)
+        {
+            var store = await WinContacts.ContactManager
+                    .RequestStoreAsync(WinContacts.ContactStoreAccessType.AllContactsReadOnly);
+            var contact = await store.GetContactAsync(id);
+            return CreateContactInfo(contact);
+        }
+
     }
 }

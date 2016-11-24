@@ -13,6 +13,8 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class BasicDetails : ViewModelBase<Models.ChildDetails>
     {
+        private ContactInfo _contact;
+
         public ICommand ChangeContactCommand { get; private set; }
 
         public BasicDetails(Models.ChildDetails details)
@@ -26,6 +28,7 @@ namespace MobileKidsIdApp.ViewModels
                 }
                 else
                 {
+                    _contact = contact;
                     Model.ContactId = contact.Id;
 
                     //Only overwrite name fields if they were blank.
@@ -35,6 +38,8 @@ namespace MobileKidsIdApp.ViewModels
                         Model.AdditionalName = contact.AdditionalName;
                     if (string.IsNullOrEmpty(Model.GivenName))
                         Model.GivenName = contact.GivenName;
+                    
+                    OnPropertyChanged(nameof(Contact));
                 }
             });
 
@@ -42,10 +47,12 @@ namespace MobileKidsIdApp.ViewModels
         }
         
 
-        protected override Task<ChildDetails> DoInitAsync()
+        protected override async Task<ChildDetails> DoInitAsync()
         {
-            //Must override default implmentation that throws NotImplementedException.
-            return Task.FromResult(Model);
+            _contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(Model.ContactId);
+            return Model;
         }
+
+        public ContactInfo Contact { get { return _contact; } }
     }
 }
