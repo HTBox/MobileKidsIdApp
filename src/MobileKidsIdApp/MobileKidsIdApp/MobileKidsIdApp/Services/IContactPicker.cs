@@ -9,5 +9,7 @@ namespace MobileKidsIdApp.Services
     public interface IContactPicker
     {
         Task<ViewModels.ContactInfo> GetSelectedContactInfo();
+
+        Task<ViewModels.ContactInfo> GetContactInfoForId(string id);
     }
 }

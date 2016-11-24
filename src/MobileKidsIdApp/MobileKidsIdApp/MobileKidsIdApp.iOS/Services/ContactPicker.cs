@@ -22,6 +22,7 @@ namespace MobileKidsIdApp.iOS.Services
     /// </remarks>
     public class ContactPicker :  IContactPicker
     {
+
         public Task<ContactInfo> GetSelectedContactInfo()
         {
             var picker = new CNContactPickerViewController()
@@ -57,6 +58,11 @@ namespace MobileKidsIdApp.iOS.Services
 
             return tcs.Task;
             
+        }
+
+        public Task<ContactInfo> GetContactInfoForId(string id)
+        {
+            throw new NotImplementedException($"{nameof(GetContactInfoForId)} not yet implemented for iOS.");
         }
     }
 

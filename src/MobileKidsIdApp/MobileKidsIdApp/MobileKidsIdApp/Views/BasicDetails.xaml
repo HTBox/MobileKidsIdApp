@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.BasicDetails"
+             xmlns:controls="clr-namespace:MobileKidsIdApp.Controls;assembly=MobileKidsIdApp"
              Title="Basic details">
     <TableView Intent="Form">
         <TableView.Root>
@@ -16,10 +17,12 @@
                 </ViewCell>
             </TableSection>
             <TableSection Title="Contact">
-                <ViewCell>
-                    <Label Text="{Binding ContactId}"/>
-                    <Button Text="Change" Command="{Binding ChangeContactCommand}" />
-                </ViewCell>
+                  <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                      <Button Text="Change" Command="{Binding ChangeContactCommand}" />
+                      <controls:PhoneContact BindingContext="{Binding Contact}" Margin="3" />
+                    </StackLayout>
+                  </ViewCell>
             </TableSection>
         </TableView.Root>
     </TableView>

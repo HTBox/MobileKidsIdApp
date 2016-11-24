@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Controls
 {
-    public partial class PhoneContact : ContentPage
+    public partial class PhoneContact : Grid
     {
         public PhoneContact()
         {

@@ -40,13 +40,19 @@ namespace MobileKidsIdApp.ViewModels
 
         private async void Model_AddedNew(object sender, Csla.Core.AddedNewEventArgs<Child> e)
         {
-            await ShowChild(e.NewObject);
+            await ShowChild(e.NewObject, true);
         }
 
-        public async Task ShowChild(Child child)
+        public async Task ShowChild(Child child, bool? isNew = false)
         {
-            await App.RootPage.Navigation.PushAsync(
-                new Views.ChildProfileItem { BindingContext = await new ChildProfileItem(child).InitAsync() });
+            var childProfileItemVM = new ChildProfileItem(child);
+            await childProfileItemVM.InitAsync();
+            await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+            if (isNew == true)
+            {
+                //Go directly to the basic details page for a new child.
+                childProfileItemVM.EditChildDetailsCommand.Execute(null);
+            }
         }
     }
 }
