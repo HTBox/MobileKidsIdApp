@@ -26,7 +26,7 @@ namespace MobileKidsIdApp.Models
         public string ContactId
         {
             get { return GetProperty(ContactIdProperty); }
-            private set { LoadProperty(ContactIdProperty, value); }
+            set { SetProperty(ContactIdProperty, value); }
         }
 
         private void Child_Fetch(DataAccess.DataModels.Person person)

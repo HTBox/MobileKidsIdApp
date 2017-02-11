@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Csla.Core;
 using MobileKidsIdApp.Models;
+using MobileKidsIdApp.Services;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -18,10 +19,14 @@ namespace MobileKidsIdApp.ViewModels
 
         public FriendList(Models.FriendList list)
         {
-            NewItemCommand = new Command(() => BeginAddNew());
-
+            NewItemCommand = new Command(() =>
+            {
+                BeginAddNew();
+            });
             Model = list;
         }
+
+
 
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
         {
@@ -41,7 +46,19 @@ namespace MobileKidsIdApp.ViewModels
         private async void Model_AddedNew(object sender, AddedNewEventArgs<Friend> e)
         {
             // TODO : Invoke a platform specific contact picker here.
+            ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
+            if (contact == null)
+            {
+                //Do nothing, user must have cancelled.
+            }
+            else
+            {
+                // contact
+                // TODO : Add a friend view model of some sort for use in display.
 
+                e.NewObject.ContactId = contact.Id;
+                OnPropertyChanged("Model");
+            }
         }
     }
 }
