@@ -29,6 +29,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             //TODO: remove this OnPropertyChanged call when updating CSLA -
             // it is a workaround for a bug that's fixed in future versions
+            // 2-11-2017 : Still necessary.
             OnPropertyChanged("Model");
 
             if (oldValue != null)
@@ -46,13 +47,13 @@ namespace MobileKidsIdApp.ViewModels
         public async Task ShowChild(Child child, bool? isNew = false)
         {
             var childProfileItemVM = new ChildProfileItem(child);
-            await childProfileItemVM.InitAsync();
-            await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+            await childProfileItemVM.InitAsync();            
             if (isNew == true)
             {
                 //Go directly to the basic details page for a new child.
                 childProfileItemVM.EditChildDetailsCommand.Execute(null);
-            }
+            }else
+                await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
         }
     }
 }
