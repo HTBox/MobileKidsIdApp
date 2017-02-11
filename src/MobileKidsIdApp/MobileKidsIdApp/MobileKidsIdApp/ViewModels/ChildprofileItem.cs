@@ -15,6 +15,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditChildDetailsCommand { get; private set; }
         public ICommand EditFeaturesCommand { get; private set; }
         public ICommand EditCareProvidersCommand { get; private set; }
+        public ICommand EditDocumentsCommand { get; private set; }
         public ICommand EditFamilyCommand { get; private set; }
         public ICommand EditFriendsCommand { get; private set; }
         public ICommand EditMedicalNotesCommand { get; private set; }
@@ -37,6 +38,11 @@ namespace MobileKidsIdApp.ViewModels
             {
                 await App.RootPage.Navigation.PushAsync(
                     new Views.ProfessionalCareProviders { BindingContext = await new ProfessionalCareProviders(Model.ProfessionalCareProviders).InitAsync() });
+            });
+            EditDocumentsCommand = new Command(async () => {
+                await App.RootPage.Navigation.PushAsync(
+                    new Views.Documents { BindingContext = await new Documents().InitAsync() });
+
             });
             EditFamilyCommand = new Command(async () => 
             {
