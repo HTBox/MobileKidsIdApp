@@ -14,8 +14,10 @@ namespace MobileKidsIdApp.Models
             var maxId = this.OrderByDescending(fr => fr.Id).FirstOrDefault();
             if (maxId != null)
                 nextId = maxId.Id + 1;
+            var newFriend = new Friend { Id = nextId };
 
-            Add(new Friend { Id = nextId });
+            Add(newFriend);
+            OnAddedNew(newFriend);
         }
         private void Child_Fetch(List<DataAccess.DataModels.Person> list)
         {

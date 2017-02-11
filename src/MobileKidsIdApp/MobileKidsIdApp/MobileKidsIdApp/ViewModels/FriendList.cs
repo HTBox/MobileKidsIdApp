@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Csla.Core;
+using MobileKidsIdApp.Models;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -13,11 +15,33 @@ namespace MobileKidsIdApp.ViewModels
     {
         public ICommand NewItemCommand { get; private set; }
 
+
         public FriendList(Models.FriendList list)
         {
             NewItemCommand = new Command(() => BeginAddNew());
 
             Model = list;
+        }
+
+        protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
+        {
+            //TODO: remove this OnPropertyChanged call when updating CSLA -
+            // it is a workaround for a bug that's fixed in future versions
+            // 2-11-2017 : Still necessary.
+            OnPropertyChanged("Model");
+
+            if (oldValue != null)
+                oldValue.AddedNew -= Model_AddedNew;
+            if (newValue != null)
+                newValue.AddedNew += Model_AddedNew;
+
+            base.OnModelChanged(oldValue, newValue);
+        }
+
+        private async void Model_AddedNew(object sender, AddedNewEventArgs<Friend> e)
+        {
+            // TODO : Invoke a platform specific contact picker here.
+
         }
     }
 }

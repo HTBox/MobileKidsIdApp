@@ -10,6 +10,11 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class Friend : BaseTypes.BusinessBase<Friend>
     {
+        public Friend()
+        {
+            MarkAsChild();
+        }
+
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
         public int Id
         {
