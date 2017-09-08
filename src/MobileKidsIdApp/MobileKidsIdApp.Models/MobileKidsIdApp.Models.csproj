@@ -67,16 +67,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-Core.4.6.400\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Csla, Version=4.7.100.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-Core.4.7.100-Beta\lib\portable-net45+win8+wpa81\Csla.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
