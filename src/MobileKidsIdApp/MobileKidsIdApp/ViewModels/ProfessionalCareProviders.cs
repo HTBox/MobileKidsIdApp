@@ -19,5 +19,10 @@ namespace MobileKidsIdApp.ViewModels
 
             Model = list;
         }
+
+        public async Task SaveDataAsync()
+        {
+            await App.CurrentFamily.SaveFamilyAsync();
+        }
     }
 }

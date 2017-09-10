@@ -13,5 +13,10 @@ namespace MobileKidsIdApp.ViewModels
         {
             Model = medicalNotes;
         }
+
+        public async Task SaveDataAsync()
+        {
+            await App.CurrentFamily.SaveFamilyAsync();
+        }
     }
 }

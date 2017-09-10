@@ -11,12 +11,11 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class ChildProfileList : Csla.Xaml.ViewModelBase<Models.Family>
     {
-        public ICommand SaveItemCommand { get; private set; }
         public ICommand NewItemCommand { get; private set; }
 
         public ChildProfileList()
         {
-            SaveItemCommand = new Command(async () => await SaveAsync());
+            App.CurrentFamily = this;
             NewItemCommand = new Command(() => BeginAddNew());
         }
 
@@ -54,6 +53,13 @@ namespace MobileKidsIdApp.ViewModels
                 childProfileItemVM.EditChildDetailsCommand.Execute(null);
             }else
                 await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+        }
+
+        public async Task SaveFamilyAsync()
+        {
+            var saved = await SaveAsync();
+            var merger = new Csla.Core.GraphMerger();
+            merger.MergeBusinessListGraph<Family, Child>(Model, saved);
         }
     }
 }

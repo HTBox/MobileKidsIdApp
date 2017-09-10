@@ -26,7 +26,10 @@ namespace MobileKidsIdApp.ViewModels
             Model = list;
         }
 
-
+        public async Task SaveDataAsync()
+        {
+            await App.CurrentFamily.SaveFamilyAsync();
+        }
 
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
         {

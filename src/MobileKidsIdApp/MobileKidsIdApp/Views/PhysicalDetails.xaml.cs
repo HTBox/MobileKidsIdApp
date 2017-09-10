@@ -14,5 +14,11 @@ namespace MobileKidsIdApp.Views
         {
             InitializeComponent();
         }
+
+        protected override async void OnDisappearing()
+        {
+            base.OnDisappearing();
+            await ((ViewModels.PhysicalDetails)BindingContext).SaveDataAsync();
+        }
     }
 }
