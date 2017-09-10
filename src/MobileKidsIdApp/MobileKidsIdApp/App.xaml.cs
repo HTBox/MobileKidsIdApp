@@ -12,6 +12,7 @@ namespace MobileKidsIdApp
     public partial class App : Application
     {
         public static NavigationPage RootPage { private set; get; }
+        public static ViewModels.ChildProfileList CurrentFamily { get; set; }
 
         public App()
         {

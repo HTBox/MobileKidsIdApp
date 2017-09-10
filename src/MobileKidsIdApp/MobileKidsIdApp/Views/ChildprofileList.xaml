@@ -4,8 +4,7 @@
              x:Class="MobileKidsIdApp.Views.ChildProfileList"
              Title="Child list">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Save" Command="{Binding SaveItemCommand}"/>
-        <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
+        <ToolbarItem Name="Add child" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
 	<StackLayout>
 		<ScrollView MinimumHeightRequest="100">
