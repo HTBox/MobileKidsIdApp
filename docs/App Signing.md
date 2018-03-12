@@ -1,9 +1,9 @@
-#Configuring Automated Release App Signing
+# Configuring Automated Release App Signing
 
-##Android
+## Android
 Android requires a keystore called release.keystore to be generated and stored in an encrypted form in the root of the Cordova project (**release.keystore.enc**).
 
-###Configuring the build
+### Configuring the build
 There are two environment variables that need to be set for the build to succeed.
 
 - ANDROID_PWD - Password to the Java keystore and alias of the certificate.
@@ -19,7 +19,7 @@ gulp build-android-release
 
 **NOTE:** You may need to remove the android platform to get a debug build to work again after doing a release build.  You can do this by installing the Cordova CLI (npm install -g cordova) and typing "cordova platform remove android"
 
-###Generating the offical Android signing certificates
+### Generating the offical Android signing certificates
 Currently there is a self-signed bogus one in the repo. See **[Android documentation](http://developer.android.com/tools/publishing/app-signing.html)** for details on generating an offical one. Use **droid-mkid** as the key alias when doing so.
 
 You can then encrypt the new / updated keychain using the following command with the Git command line tools installed and in the path:
@@ -29,7 +29,7 @@ openssl des3 -in release.keystore -out release.keystore
 
 Take note of the keystore password (use the same one for the alias) and the encryption passphrase and update the environment variables above.
 
-##iOS
+## iOS
 iOS requires a "signing certificate" tied to a "signing identity" and a "provisioning proflie" tied to that cert to be installed on a Mac in order to build.  There are three combinations:
 
 1. Development
@@ -45,7 +45,7 @@ The "Signing" directory currently contains:
 
 These files have been encrypted for security since they are in a public github repo.
 
-###Configuring a build
+### Configuring a build
 There are two environment variables that need to be set for the build to succeed.
 
 - P12_PWD - Password to the P12 file containing the certificate. Use the same password for both p12 files.
@@ -61,7 +61,7 @@ gulp build-ios-release
 
 **Possible Gotcha:** Apple's "WWDR" certificate expired on Feb 14th. If you hit signing errors, follow the steps under ["Xcode unable to create distribution builds for App Store submissions or Enterprise apps" in the Apple notice](https://developer.apple.com/support/certificates/expiration/index.html). **Be sure to remove the old certificate!**
 
-###Updating the certificates and provisioning profiles
+### Updating the certificates and provisioning profiles
 You will need to edit the provisioning profile any time one of the following happens:
 
 1. You want to add a new device for beta testing

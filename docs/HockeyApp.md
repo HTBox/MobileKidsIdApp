@@ -1,6 +1,6 @@
-#Configuring CI for an automated HockeyApp deployment
+# Configuring CI for an automated HockeyApp deployment
 
-##Setting up HockeyApp
+## Setting up HockeyApp
 
 1. Go into the HockeyApp portal and manually setup a new app (click new app and then click manual setup)
     1. Give the app a descriptive name and use the ID from the "id" attribute of the "widget" element in config.xml (src/MCM.KidsIdApp/config.xml)
@@ -14,11 +14,11 @@
 
 Finally, **if you update widget/@id in config.xml** you will need to edit the ID above. In addition, **if you update the name of the app (contents of the name element in config.xml), be sure to update appName** in gulpfile.js.
 
-##Configuring the CI build
+## Configuring the CI build
 
 1. If you have not already, generate an [API token](https://rink.hockeyapp.net/manage/auth_tokens) in the account menu on the HockeyApp portal.
 2. Set an environment variable called HOCKEYAPP_API_TOKEN with this value. **This environment variable should be filtered from CI output**.
-3. [Configure the build to generate a release build](./App Signing.md) and then call the HockeyApp task.
+3. [Configure the build to generate a release build](App-Signing.md) and then call the HockeyApp task.
 
     Android:
     ```
