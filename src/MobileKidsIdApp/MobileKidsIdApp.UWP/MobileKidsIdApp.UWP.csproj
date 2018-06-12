@@ -116,9 +116,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Assets\default.css">
+    <Content Include="default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </BundleResource>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
