@@ -134,6 +134,7 @@
     <Compile Include="Views\StaticContent.xaml.cs">
       <DependentUpon>StaticContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\IWebViewContentHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -191,6 +192,14 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\abduction.html" />
+    <EmbeddedResource Include="Resources\amberalert.html" />
+    <EmbeddedResource Include="Resources\disasterprep.html" />
+    <EmbeddedResource Include="Resources\dna.html" />
+    <EmbeddedResource Include="Resources\international.html" />
+    <EmbeddedResource Include="Resources\missing.html" />
+    <EmbeddedResource Include="Resources\runaway.html" />
+    <EmbeddedResource Include="Resources\safety.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\PhoneContact.xaml">
@@ -331,6 +340,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

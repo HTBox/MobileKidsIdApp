@@ -21,18 +21,22 @@ namespace MobileKidsIdApp.iOS.Services
         {
             var assembly = IntrospectionExtensions
                 .GetTypeInfo(typeof(MobileKidsIdApp.App)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("MobileKidsIdApp.Resources.abduction.html");
+            
+            var embeddedResourceName = string.Format("MobileKidsIdApp.Resources.{0}.html", contentResourceName);
+
+            var stream = assembly.GetManifestResourceStream(embeddedResourceName);
+
+            if(stream == null)
+            {
+                throw new FileNotFoundException();
+            }
+
             string text = "";
             using (var reader = new System.IO.StreamReader(stream))
             {
                 text = reader.ReadToEnd();
             }
             return text;
-            //string path = CreatePathToFile(filename);
-            //using (var sr = File.OpenText(path))
-            //{
-            //    return await sr.ReadToEndAsync();
-            //}
         }
     }
 }
