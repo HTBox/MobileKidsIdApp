@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Services\ContactPicker.cs" />
     <Compile Include="Services\PhotoPicker.cs" />
+    <Compile Include="Services\WebViewContentHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -115,6 +116,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Assets\default.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
