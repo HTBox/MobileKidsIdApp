@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,16 @@ namespace MobileKidsIdApp.ViewModels
             var contentHelper = DependencyService.Get<IWebViewContentHelper>();
 
             HtmlSource = new HtmlWebViewSource();
-            var html = contentHelper.LoadContentString(contentName);
-            //TODO : Add File Not Found / error view.
-            HtmlSource.Html = html;
+
+            try
+            {
+                HtmlSource.Html = contentHelper.LoadContentString(contentName);
+            }
+            catch (FileNotFoundException)
+            {
+                HtmlSource.Html = "<html><body><div><h1>Topic Not Found</h1><p>The requested topic was not found.</p></div></body></html>";
+            }
+
             HtmlSource.BaseUrl = contentHelper.GetBaseUrl();
         }
 

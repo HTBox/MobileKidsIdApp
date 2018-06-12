@@ -135,6 +135,7 @@
       <DependentUpon>StaticContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\IWebViewContentHelper.cs" />
+    <Compile Include="Services\WebViewContentHelperBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
