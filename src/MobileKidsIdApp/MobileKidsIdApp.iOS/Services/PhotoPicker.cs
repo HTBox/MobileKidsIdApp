@@ -1,5 +1,4 @@
 ﻿using MobileKidsIdApp.Services;
-using Plugin.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +28,14 @@ namespace MobileKidsIdApp.iOS.Services
         private async Task<string> GetPhotoPath()
         {
             string result = null;
-            var picker = CrossMedia.Current;
-            if (picker.IsPickPhotoSupported)
-            {
-                var photo = await picker.PickPhotoAsync();
-                if (photo != null)
-                    result = photo.Path;
-            }
+            //TODO: plugin no longer supported - needs to be updated
+            //var picker = CrossMedia.Current;
+            //if (picker.IsPickPhotoSupported)
+            //{
+            //    var photo = await picker.PickPhotoAsync();
+            //    if (photo != null)
+            //        result = photo.Path;
+            //}
             return result;
         }
     }
