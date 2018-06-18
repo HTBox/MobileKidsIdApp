@@ -48,9 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CSLA-Core-NS">
-      <Version>4.7.200-R18051402</Version>
-    </PackageReference>
     <PackageReference Include="CSLA-XamarinForms">
       <Version>4.7.200-R18051402</Version>
     </PackageReference>
@@ -62,6 +59,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityResultEventArgs.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,8 +98,12 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
+      <Project>{a6d14000-2f57-46fa-9378-6a2f1a6713e9}</Project>
+      <Name>MobileKidsIdApp.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MobileKidsIdApp\MobileKidsIdApp.csproj">
-      <Project>{BAC7D892-1C11-47CA-8932-9F4018C816B6}</Project>
+      <Project>{c16814ae-85b2-4df5-89ab-957d6d68d946}</Project>
       <Name>MobileKidsIdApp</Name>
     </ProjectReference>
   </ItemGroup>

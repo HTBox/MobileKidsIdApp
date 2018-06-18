@@ -23,11 +23,11 @@ namespace MobileKidsIdApp.Droid.Services
         public Task<ContactInfo> GetSelectedContactInfo()
         {
             var tcs = new TaskCompletionSource<ContactInfo>();
-            Intent pickContactIntent =
-                new Intent(Intent.ActionPick, Android.Net.Uri.Parse("content://contacts"));
-            pickContactIntent.SetType(Android.Provider.ContactsContract.CommonDataKinds.Phone.ContentType); // Show user only contacts w/ phone numbers
-
             //TODO: Update to replace no-longer-supported plugin
+            //Intent pickContactIntent =
+            //    new Intent(Intent.ActionPick, Android.Net.Uri.Parse("content://contacts"));
+            //pickContactIntent.SetType(Android.Provider.ContactsContract.CommonDataKinds.Phone.ContentType); // Show user only contacts w/ phone numbers
+
             //var handler = new EventHandler<ActivityResultEventArgs>((sender, e) => OnActivityResult(tcs, e));
             //MainActivity.Instance.ActivityResult += handler;
             //tcs.Task.ContinueWith(t => MainActivity.Instance.ActivityResult -= handler);
@@ -46,28 +46,28 @@ namespace MobileKidsIdApp.Droid.Services
         
         protected void OnActivityResult(TaskCompletionSource<ContactInfo> tcs, ActivityResultEventArgs e) //int requestCode, Android.App.Result resultCode, Intent data)
         {
-            // Check which request it is that we're responding to
-            if (e.requestCode == PICK_CONTACT_REQUEST)
-            {
-                // Make sure the request was successful
-                if (e.resultCode == Android.App.Result.Ok)
-                {
-                    //TODO: Update to replace no-longer-supported plugin
-                    //var loader = new CursorLoader(MainActivity.Instance, e.data.Data, projection, null, null, null);
-                    //var cursor = (Android.Database.ICursor)loader.LoadInBackground();
+            //TODO: Update to replace no-longer-supported plugin
+            //// Check which request it is that we're responding to
+            //if (e.requestCode == PICK_CONTACT_REQUEST)
+            //{
+            //    // Make sure the request was successful
+            //    if (e.resultCode == Android.App.Result.Ok)
+            //    {
+            //        var loader = new CursorLoader(MainActivity.Instance, e.data.Data, projection, null, null, null);
+            //        var cursor = (Android.Database.ICursor)loader.LoadInBackground();
 
-                    //var contactList = new List<ContactInfo>();
-                    //if (cursor.MoveToFirst())
-                    //{
-                    //    do
-                    //    {
-                    //        contactList.Add(GetContactInfoFromCursor(cursor));
-                    //    } while (cursor.MoveToNext());
-                    //}
-                    //tcs.SetResult(contactList.FirstOrDefault());
-                    return;
-                }
-            }
+            //        var contactList = new List<ContactInfo>();
+            //        if (cursor.MoveToFirst())
+            //        {
+            //            do
+            //            {
+            //                contactList.Add(GetContactInfoFromCursor(cursor));
+            //            } while (cursor.MoveToNext());
+            //        }
+            //        tcs.SetResult(contactList.FirstOrDefault());
+            //        return;
+            //    }
+            //}
 
             tcs.SetResult(null);
         }

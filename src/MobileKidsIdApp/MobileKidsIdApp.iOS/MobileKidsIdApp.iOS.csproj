@@ -150,9 +150,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CSLA-Core-NS">
-      <Version>4.7.200-R18051402</Version>
-    </PackageReference>
     <PackageReference Include="CSLA-XamarinForms">
       <Version>4.7.200-R18051402</Version>
     </PackageReference>
