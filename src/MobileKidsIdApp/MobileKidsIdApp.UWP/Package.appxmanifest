@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="f736c883-f105-4d30-a719-4bf328872f5e" Publisher="CN=HTBox" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="f736c883-f105-4d30-a719-4bf328872f5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="d71203cb-6cdd-4962-8fd0-26eb752b4ec7" Publisher="CN=HTBox" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Mobile Kids Id App</DisplayName>
-    <PublisherDisplayName>Humanitarian Toolbox</PublisherDisplayName>
+    <DisplayName>MobileKidsIdApp.UWP</DisplayName>
+    <PublisherDisplayName>e86f0349-1b0f-4755-97fd-386280c04413</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -14,9 +14,14 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="FPCL.WIndows.App">
-      <uap:VisualElements DisplayName="Mobile Kids Id App" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Mobile Kids Id App by Humanitarian Toolbox" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Kids Id App">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MobileKidsIdApp.UWP.App">
+      <uap:VisualElements DisplayName="MobileKidsIdApp.UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="MobileKidsIdApp.UWP" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
@@ -24,6 +29,5 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <uap:Capability Name="contacts" />
   </Capabilities>
 </Package>

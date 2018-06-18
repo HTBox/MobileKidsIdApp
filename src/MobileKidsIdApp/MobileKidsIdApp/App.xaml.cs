@@ -1,39 +1,37 @@
-﻿using MobileKidsIdApp.Services;
+using MobileKidsIdApp.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace MobileKidsIdApp
 {
-    public partial class App : Application
-    {
+	public partial class App : Application
+	{
         public static NavigationPage RootPage { private set; get; }
         public static ViewModels.ChildProfileList CurrentFamily { get; set; }
 
-        public App()
-        {
-            InitializeComponent();
+        public App ()
+		{
+			InitializeComponent();
 
             RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
             MainPage = RootPage;
         }
 
-        protected override async void OnStart()
-        {
+        protected override async void OnStart ()
+		{
             await CheckUserLogin();
         }
 
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
+        protected override void OnSleep ()
+		{
+			// Handle when your app sleeps
+		}
 
-        protected override async void OnResume()
-        {
+		protected override async void OnResume ()
+		{
             await CheckUserLogin();
         }
 
@@ -44,7 +42,7 @@ namespace MobileKidsIdApp
 
             if (!Csla.ApplicationContext.User.Identity.IsAuthenticated)
             {
-				await RootPage.Navigation.PushModalAsync(new NavigationPage(new Views.Login { BindingContext = new ViewModels.Login() }));
+                await RootPage.Navigation.PushModalAsync(new NavigationPage(new Views.Login { BindingContext = new ViewModels.Login() }));
             }
         }
 
