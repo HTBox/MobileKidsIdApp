@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Foundation;
-using UIKit;
-using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
+using Foundation;
 using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
+using UIKit;
 
 namespace MobileKidsIdApp.iOS
 {
@@ -46,23 +44,24 @@ namespace MobileKidsIdApp.iOS
                     return result;
                 }
 #endif
-                var client = new MobileServiceClient("https://mobilekidsidapp.azurewebsites.net");
-                MobileServiceUser authnResult = null;
-                switch (provider)
-                {
-                    case MobileKidsIdApp.Services.LoginProviders.Google:
-                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Google);
-                        break;
-                    case MobileKidsIdApp.Services.LoginProviders.Microsoft:
-                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.MicrosoftAccount);
-                        break;
-                    case MobileKidsIdApp.Services.LoginProviders.Facebook:
-                        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Facebook);
-                        break;
-                    default:
-                        throw new ArgumentException("LoginProvider");
-                }
-                result = await Models.AppIdentity.GetAppIdentityAsync(authnResult.UserId, authnResult.MobileServiceAuthenticationToken);
+                //TODO: switch to latest authentication model
+                //var client = new MobileServiceClient("https://mobilekidsidapp.azurewebsites.net");
+                //MobileServiceUser authnResult = null;
+                //switch (provider)
+                //{
+                //    case MobileKidsIdApp.Services.LoginProviders.Google:
+                //        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Google);
+                //        break;
+                //    case MobileKidsIdApp.Services.LoginProviders.Microsoft:
+                //        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.MicrosoftAccount);
+                //        break;
+                //    case MobileKidsIdApp.Services.LoginProviders.Facebook:
+                //        authnResult = await client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, MobileServiceAuthenticationProvider.Facebook);
+                //        break;
+                //    default:
+                //        throw new ArgumentException("LoginProvider");
+                //}
+                //result = await Models.AppIdentity.GetAppIdentityAsync(authnResult.UserId, authnResult.MobileServiceAuthenticationToken);
             }
             catch
             {

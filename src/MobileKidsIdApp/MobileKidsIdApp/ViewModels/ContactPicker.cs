@@ -18,22 +18,23 @@ namespace MobileKidsIdApp.ViewModels
 
         public async Task<ContactPicker> InitAsync()
         {
-            if (await Plugin.Contacts.CrossContacts.Current.RequestPermission())
-            {
-                await Task.Run(() =>
-                {
-                    var contactList = Plugin.Contacts.CrossContacts.Current;
-                    contactList.PreferContactAggregation = true;
-                    var contacts = contactList.Contacts;
-                    if (contacts != null)
-                    {
-                        Contacts = contactList.Contacts.
-                            Where(_ => !string.IsNullOrWhiteSpace(_.LastName)).
-                            Select(_ => new ContactInfo { Id = _.Id, DisplayName = _.DisplayName }).ToList();
-                        OnPropertyChanged("Contacts");
-                    }
-                });
-            }
+            //TODO: This old plugin is no longer supported - needs replacing
+            //if (await Plugin.Contacts.CrossContacts.Current.RequestPermission())
+            //{
+            //    await Task.Run(() =>
+            //    {
+            //        var contactList = Plugin.Contacts.CrossContacts.Current;
+            //        contactList.PreferContactAggregation = true;
+            //        var contacts = contactList.Contacts;
+            //        if (contacts != null)
+            //        {
+            //            Contacts = contactList.Contacts.
+            //                Where(_ => !string.IsNullOrWhiteSpace(_.LastName)).
+            //                Select(_ => new ContactInfo { Id = _.Id, DisplayName = _.DisplayName }).ToList();
+            //            OnPropertyChanged("Contacts");
+            //        }
+            //    });
+            //}
             return this;
         }
 

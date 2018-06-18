@@ -2,84 +2,83 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.App">
-    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
     <Application.Resources>
         <ResourceDictionary>
-			<!-- Colors -->
-			<Color x:Key="DarkTeal">#005D6E</Color>
-			<Color x:Key="DarkTeal-40">#7DACB4</Color>
-			<Color x:Key="DarkTeal-80">#337D8A</Color>
-			<Color x:Key="KelleyGreen">#449C45</Color>
-			<Color x:Key="KelleyGreen-40">#9FCD9F</Color>
-			<Color x:Key="KelleyGreen-60">#86C086</Color>
-			<Color x:Key="KelleyGreen-80">#69b168</Color>
-			<Color x:Key="Orange-80">#EEB54E</Color>
-			<Color x:Key="SkyBlue">#5EC9CF</Color>
-			<Color x:Key="SkyBlue-40">#ADE5E6</Color>
-			
-			<!-- Fonts -->
-			<OnPlatform x:Key="BodyCustomFont" x:TypeArguments="x:String" iOS="OpenSans-Regular" Android="" WinPhone="\Assets\Fonts\OpenSans-Regular.ttf#OpenSans-Regular" />
-			<OnPlatform x:Key="HeaderCustomFont" x:TypeArguments="x:String" iOS="OpenSans-Bold" Android="" WinPhone="\Assets\Fonts\OpenSans-Bold.ttf#OpenSans-Bold" />
+            <!-- Colors -->
+            <Color x:Key="DarkTeal">#005D6E</Color>
+            <Color x:Key="DarkTeal-40">#7DACB4</Color>
+            <Color x:Key="DarkTeal-80">#337D8A</Color>
+            <Color x:Key="KelleyGreen">#449C45</Color>
+            <Color x:Key="KelleyGreen-40">#9FCD9F</Color>
+            <Color x:Key="KelleyGreen-60">#86C086</Color>
+            <Color x:Key="KelleyGreen-80">#69b168</Color>
+            <Color x:Key="Orange-80">#EEB54E</Color>
+            <Color x:Key="SkyBlue">#5EC9CF</Color>
+            <Color x:Key="SkyBlue-40">#ADE5E6</Color>
 
-			<!-- Navigation -->
-	      	<Style TargetType="NavigationPage">
-        		<Setter Property="BarBackgroundColor" Value="{StaticResource DarkTeal-80}"/>
-        		<Setter Property="BarTextColor" Value="{StaticResource Orange-80}"/>
-  			</Style>
-			
-			<!-- Label -->
-			<Style x:Key="HeaderLabel" TargetType="Label">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="HorizontalOptions" Value="Center" />
-				<Setter Property="FontFamily" Value="{StaticResource HeaderCustomFont}" />
-				<Setter Property="FontSize" Value="Large" />
-				<Setter Property="Margin" Value="25, 25, 25, 15" />
-			</Style>
+            <!-- Fonts -->
+            <OnPlatform x:Key="BodyCustomFont" x:TypeArguments="x:String" iOS="OpenSans-Regular" Android=""/>
+            <OnPlatform x:Key="HeaderCustomFont" x:TypeArguments="x:String" iOS="OpenSans-Bold" Android=""/>
 
-			<!-- Grid -->
-			<Style TargetType="Grid">
-				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
-			</Style>
-			<!-- ListView -->
-			<Style TargetType="ListView">
-				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" /> 
-			</Style>
-			
-			<!-- StackLayout -->
-			<Style TargetType="StackLayout">
-				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
-			</Style>
+            <!-- Navigation -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource DarkTeal-80}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource Orange-80}"/>
+            </Style>
 
-			<!-- ScrollView -->
-			<Style TargetType="ScrollView">
-				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
-				<Setter Property="VerticalOptions" Value="FillAndExpand" />
-				<Setter Property="HorizontalOptions" Value="FillAndExpand" />
-			</Style>
+            <!-- Label -->
+            <Style x:Key="HeaderLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource HeaderCustomFont}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="Margin" Value="25, 25, 25, 15" />
+            </Style>
 
-			<!-- TableView -->
-			<Style TargetType="TableView">
-				<Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
-			</Style>
-			
-			<!-- Button -->
-			<Style TargetType="Button">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-				<Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-			</Style>
-			<Style x:Key="LoginButton" TargetType="Button">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-				<Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-				<Setter Property="Margin" Value="25,5" />
-			</Style>
-			<Style x:Key="GridButton" TargetType="Button">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-				<Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-				<Setter Property="Margin" Value="5" />
-			</Style>
+            <!-- Grid -->
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            </Style>
+            <!-- ListView -->
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            </Style>
+
+            <!-- StackLayout -->
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            </Style>
+
+            <!-- ScrollView -->
+            <Style TargetType="ScrollView">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
+            <!-- TableView -->
+            <Style TargetType="TableView">
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            </Style>
+
+            <!-- Button -->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+            </Style>
+            <Style x:Key="LoginButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+                <Setter Property="Margin" Value="25,5" />
+            </Style>
+            <Style x:Key="GridButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
