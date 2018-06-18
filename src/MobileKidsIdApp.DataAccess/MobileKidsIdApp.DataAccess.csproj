@@ -7,7 +7,6 @@
   <ItemGroup>
     <PackageReference Include="CSLA-Core-NS" Version="4.7.200-R18051402" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="PCLCrypto" Version="2.1.17-alpha-g5b1e8dff8c" />
   </ItemGroup>
 
 </Project>

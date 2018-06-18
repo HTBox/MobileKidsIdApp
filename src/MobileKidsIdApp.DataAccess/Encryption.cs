@@ -1,4 +1,5 @@
-﻿using PCLCrypto;
+﻿//TODO: the PCLCrypto component doesn't seem to work, we need a replacement
+//using PCLCrypto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,15 @@ namespace MobileKidsIdApp.DataAccess
 
         public static byte[] CreateDerivedKey(string password, byte[] salt, int keyLengthInBytes = 32, int iterations = 1000)
         {
-            byte[] key = NetFxCrypto.DeriveBytes.GetBytes(password, salt, iterations, keyLengthInBytes);
+            byte[] key = null; // NetFxCrypto.DeriveBytes.GetBytes(password, salt, iterations, keyLengthInBytes);
             return key;
         }
 
         public static byte[] Encrypt(byte[] keyMaterial, byte[] data)
         {
-            var provider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesEcbPkcs7);
-            var key = provider.CreateSymmetricKey(keyMaterial);
-            byte[] cipherText = WinRTCrypto.CryptographicEngine.Encrypt(key, data);
+            //var provider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesEcbPkcs7);
+            //var key = provider.CreateSymmetricKey(keyMaterial);
+            byte[] cipherText = null; //WinRTCrypto.CryptographicEngine.Encrypt(key, data);
             return cipherText;
         }
 
@@ -58,9 +59,9 @@ namespace MobileKidsIdApp.DataAccess
 
         public static byte[] Decrypt(byte[] keyMaterial, byte[] cipherText)
         {
-            var provider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesEcbPkcs7);
-            var key = provider.CreateSymmetricKey(keyMaterial);
-            byte[] plainText = WinRTCrypto.CryptographicEngine.Decrypt(key, cipherText);
+            //var provider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesEcbPkcs7);
+            //var key = provider.CreateSymmetricKey(keyMaterial);
+            byte[] plainText = null; //WinRTCrypto.CryptographicEngine.Decrypt(key, cipherText);
             return plainText;
         }
     }

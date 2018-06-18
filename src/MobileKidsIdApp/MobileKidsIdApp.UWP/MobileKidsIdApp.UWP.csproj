@@ -18,6 +18,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>MobileKidsIdApp.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>D7AC2930E4E03233B64F375D025980F242C5BA57</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -146,9 +147,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CSLA-Core-NS">
-      <Version>4.7.200-R18051402</Version>
-    </PackageReference>
     <PackageReference Include="CSLA-XamarinForms">
       <Version>4.7.200-R18051402</Version>
     </PackageReference>
@@ -156,10 +154,17 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
+      <Project>{a6d14000-2f57-46fa-9378-6a2f1a6713e9}</Project>
+      <Name>MobileKidsIdApp.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MobileKidsIdApp\MobileKidsIdApp.csproj">
       <Project>{BAC7D892-1C11-47CA-8932-9F4018C816B6}</Project>
       <Name>MobileKidsIdApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MobileKidsIdApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
