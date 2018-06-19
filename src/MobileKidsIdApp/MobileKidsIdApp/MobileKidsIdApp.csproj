@@ -13,4 +13,24 @@
         <ProjectReference Include="..\..\MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj" />
         <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <None Remove="Resources\abduction.html" />
+      <None Remove="Resources\amberalert.html" />
+      <None Remove="Resources\disasterprep.html" />
+      <None Remove="Resources\dna.html" />
+      <None Remove="Resources\international.html" />
+      <None Remove="Resources\missing.html" />
+      <None Remove="Resources\runaway.html" />
+      <None Remove="Resources\safety.html" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\abduction.html" />
+      <EmbeddedResource Include="Resources\amberalert.html" />
+      <EmbeddedResource Include="Resources\disasterprep.html" />
+      <EmbeddedResource Include="Resources\dna.html" />
+      <EmbeddedResource Include="Resources\international.html" />
+      <EmbeddedResource Include="Resources\missing.html" />
+      <EmbeddedResource Include="Resources\runaway.html" />
+      <EmbeddedResource Include="Resources\safety.html" />
+    </ItemGroup>
 </Project>

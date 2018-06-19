@@ -245,3 +245,6 @@ src/MCM.KidsIdApp/www/scripts/appBundle.js
 src/MCM.KidsIdApp/www/lib/ionic-datepicker
 /src/MCM.KidsIdApp/www/lib/blob-util
 src/MCM.KidsIdApp.MobileApi/Web.Debug.config
+
+# Mac OS Hidden directories
+.DS_Store
