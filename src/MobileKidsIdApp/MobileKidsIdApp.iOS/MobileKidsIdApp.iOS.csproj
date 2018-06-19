@@ -166,4 +166,7 @@
       <Name>MobileKidsIdApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\default.css" />
+  </ItemGroup>
 </Project>
