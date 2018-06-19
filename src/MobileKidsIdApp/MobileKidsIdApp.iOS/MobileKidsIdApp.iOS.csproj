@@ -162,7 +162,7 @@
       <Name>MobileKidsIdApp.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\MobileKidsIdApp\MobileKidsIdApp.csproj">
-      <Project>{BAC7D892-1C11-47CA-8932-9F4018C816B6}</Project>
+      <Project>{C16814AE-85B2-4DF5-89AB-957D6D68D946}</Project>
       <Name>MobileKidsIdApp</Name>
     </ProjectReference>
   </ItemGroup>
