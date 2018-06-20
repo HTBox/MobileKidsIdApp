@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/teneresa/MobileKidsIdApp/master/resources/KidsID_icon/Android/Google_Play_store.png" width="150"/>
+
 [![Build status](https://ci.appveyor.com/api/projects/status/0y0b8ctdaesjbomq/branch/master?svg=true)](https://ci.appveyor.com/project/HTBox/mobilekidsidapp-i1cep)
 
 Mobile Kids ID Kit
