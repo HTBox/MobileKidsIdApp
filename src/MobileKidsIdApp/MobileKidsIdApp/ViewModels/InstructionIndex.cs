@@ -18,6 +18,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand MissingCommand { get; private set; }
         public ICommand RunawaysCommand { get; private set; }
         public ICommand ChildSafetyCommand { get; private set; }
+        public ICommand HTBoxCommand { get; private set; }
 
         public InstructionIndex()
         {
@@ -29,6 +30,7 @@ namespace MobileKidsIdApp.ViewModels
             MissingCommand = new Command(() => ShowContent("missing"));
             RunawaysCommand = new Command(() => ShowContent("runaway"));
             ChildSafetyCommand = new Command(() => ShowContent("safety"));
+            HTBoxCommand = new Command(() => ShowContent("abouthtbox"));
         }
 
         private void ShowContent(string contentLabel)
