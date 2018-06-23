@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +24,6 @@ namespace MobileKidsIdApp.UWP
             this.InitializeComponent();
 
             MobileKidsIdApp.App.Init(this);
-
             LoadApplication(new MobileKidsIdApp.App());
         }
 
@@ -38,25 +38,25 @@ namespace MobileKidsIdApp.UWP
                     result = await Models.AppIdentity.GetAppIdentityAsync("test:1", "blahblahblah");
                     return result;
                 }
-#endif
-                //TODO: update authentication implementation
-                //var client = new MobileServiceClient("https://mobilekidsidapp.azurewebsites.net");
-                //MobileServiceUser authnResult = null;
-                //switch (provider)
-                //{
-                //    case MobileKidsIdApp.Services.LoginProviders.Google:
-                //        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.Google);
-                //        break;
-                //    case MobileKidsIdApp.Services.LoginProviders.Microsoft:
-                //        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
-                //        break;
-                //    case MobileKidsIdApp.Services.LoginProviders.Facebook:
-                //        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                //        break;
-                //    default:
-                //        throw new ArgumentException("LoginProvider");
-                //}
-                //result = await Models.AppIdentity.GetAppIdentityAsync(authnResult.UserId, authnResult.MobileServiceAuthenticationToken);
+                #endif
+                
+                var client = new MobileServiceClient(Constants.ApplicationURL);
+                MobileServiceUser authnResult = null;
+                switch (provider)
+                {
+                    case MobileKidsIdApp.Services.LoginProviders.Google:
+                        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.Google, Constants.URLScheme);
+                        break;
+                    case MobileKidsIdApp.Services.LoginProviders.Microsoft:
+                        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount,Constants.URLScheme);
+                        break;
+                    case MobileKidsIdApp.Services.LoginProviders.Facebook:
+                        authnResult = await client.LoginAsync(MobileServiceAuthenticationProvider.Facebook, Constants.URLScheme);
+                        break;
+                    default:
+                        throw new ArgumentException("LoginProvider");
+                }
+                result = await Models.AppIdentity.GetAppIdentityAsync(authnResult.UserId, authnResult.MobileServiceAuthenticationToken);
             }
             catch
             {
