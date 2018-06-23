@@ -2,13 +2,12 @@
 
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using System.Threading.Tasks;
 using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
+using MobileKidsIdApp.Droid.Services;
+using Android.Content;
 
 namespace MobileKidsIdApp.Droid
 {
@@ -22,11 +21,35 @@ namespace MobileKidsIdApp.Droid
 
             base.OnCreate(bundle);
 
+            Instance = this;
+
             MobileKidsIdApp.App.Init(this);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (ContactPicker.IsShowContactPickerIntent(requestCode))
+            {
+                if (ShowContactPicker != null)
+                {
+                    var args = new ActivityResultEventArgs
+                    {
+                        data = data,
+                        requestCode = requestCode,
+                        resultCode = resultCode
+                    };
+                    ShowContactPicker(null, args);
+                }
+            }
+        }
+
+        internal static MainActivity Instance { get; private set; }
+
+        public event EventHandler<ActivityResultEventArgs> ShowContactPicker;
 
         public async Task<AppIdentity> Authenticate(LoginProviders provider)
         {
