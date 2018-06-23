@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\default.css" />
+    <AndroidAsset Include="Assets\ht-logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />

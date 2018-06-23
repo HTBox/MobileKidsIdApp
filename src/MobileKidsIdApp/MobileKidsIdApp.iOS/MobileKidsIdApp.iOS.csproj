@@ -171,5 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\default.css" />
+    <BundleResource Include="Resources\ht-logo.png" />
   </ItemGroup>
 </Project>
