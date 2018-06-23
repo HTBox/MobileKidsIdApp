@@ -103,19 +103,45 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_60.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_20.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_76.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_152.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_167.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
