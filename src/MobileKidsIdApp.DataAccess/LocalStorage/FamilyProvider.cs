@@ -20,13 +20,26 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             {
                 if (isoStore.FileExists(FileName))
                 {
-                    using (var isoStream = new IsolatedStorageFileStream(FileName, FileMode.Open, FileAccess.Read))
+                    try
                     {
-                        using (var reader = new StreamReader(isoStream))
+                        using (var isoStream = new IsolatedStorageFileStream(FileName, FileMode.Open, FileAccess.Read))
                         {
-                            var json = await reader.ReadLineAsync();
-                            var dataBlob = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, json);
-                            result = JsonConvert.DeserializeObject<Family>(dataBlob);
+                            using (var reader = new StreamReader(isoStream))
+                            {
+                                var json = await reader.ReadLineAsync();
+                                var dataBlob = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, json);
+                                result = JsonConvert.DeserializeObject<Family>(dataBlob);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // in case of failure, try to restore a backup if it exists
+                        if (isoStore.FileExists(BackupFileName))
+                        {
+                            isoStore.DeleteFile(FileName);
+                            isoStore.CopyFile(BackupFileName, FileName);
+                            result = await Get();
                         }
                     }
                 }
