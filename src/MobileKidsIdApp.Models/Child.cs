@@ -155,7 +155,7 @@ namespace MobileKidsIdApp.Models
         }
         private void Child_DeleteSelf()
         {
-            base.MarkDeleted();
+           
         }
     }
 }
