@@ -25,6 +25,7 @@
       <None Remove="Resources\runaway.html" />
       <None Remove="Resources\safety.html" />
       <None Remove="Resources\abouthtbox.html" />
+      <None Remove="Resources\aboutmcm.html" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Include="Resources\abduction.html" />
@@ -36,5 +37,6 @@
       <EmbeddedResource Include="Resources\runaway.html" />
       <EmbeddedResource Include="Resources\safety.html" />
       <EmbeddedResource Include="Resources\abouthtbox.html" />
+      <EmbeddedResource Include="Resources\aboutmcm.html" />
     </ItemGroup>
 </Project>

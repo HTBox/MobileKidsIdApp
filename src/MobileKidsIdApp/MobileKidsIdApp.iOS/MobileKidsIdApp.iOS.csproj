@@ -172,5 +172,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\default.css" />
     <BundleResource Include="Resources\ht-logo.png" />
+    <BundleResource Include="Resources\mcm-logo.jpg" />
+    <BundleResource Include="Resources\csmn-logo.png" />
+    <BundleResource Include="Resources\ameco-logo.jpg" />
   </ItemGroup>
 </Project>

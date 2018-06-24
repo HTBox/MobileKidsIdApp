@@ -12,6 +12,7 @@
         <Button Text="Missing" Command="{Binding MissingCommand}" />
         <Button Text="Runaways" Command="{Binding RunawaysCommand}" />
         <Button Text="Child Safety" Command="{Binding ChildSafetyCommand}" />
+        <Button Text="About Missing Children Minnesota" Command="{Binding MCMCommand}" />
         <Button Text="About Humanitarian Toolbox" Command="{Binding HTBoxCommand}" />
     </StackLayout>
 </ContentPage>
