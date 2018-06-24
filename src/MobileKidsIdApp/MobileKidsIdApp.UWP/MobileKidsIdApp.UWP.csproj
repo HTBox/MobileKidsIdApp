@@ -160,6 +160,9 @@
     <Content Include="default.css" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="ht-logo.png" />
+    <Content Include="csmn-logo.png" />
+    <Content Include="ameco-logo.jpg" />
+    <Content Include="mcm-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
@@ -19,6 +20,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand RunawaysCommand { get; private set; }
         public ICommand ChildSafetyCommand { get; private set; }
         public ICommand HTBoxCommand { get; private set; }
+        public ICommand MCMCommand { get; private set; }
 
         public InstructionIndex()
         {
@@ -31,6 +33,7 @@ namespace MobileKidsIdApp.ViewModels
             RunawaysCommand = new Command(() => ShowContent("runaway"));
             ChildSafetyCommand = new Command(() => ShowContent("safety"));
             HTBoxCommand = new Command(() => ShowContent("abouthtbox"));
+            MCMCommand = new Command(() => ShowContent("aboutmcm"));
         }
 
         private void ShowContent(string contentLabel)

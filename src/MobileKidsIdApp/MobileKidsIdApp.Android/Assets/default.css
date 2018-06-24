@@ -3,3 +3,8 @@
     padding: 10;
     font-family: sans-serif;
 }
+.logo {
+    height: auto;
+    width: auto;
+    max-width: 90%;
+}

@@ -109,6 +109,9 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\default.css" />
     <AndroidAsset Include="Assets\ht-logo.png" />
+    <AndroidAsset Include="Assets\ameco-logo.jpg" />
+    <AndroidAsset Include="Assets\csmn-logo.png" />
+    <AndroidAsset Include="Assets\mcm-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
