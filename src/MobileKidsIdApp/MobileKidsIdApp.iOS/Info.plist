@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>MobileKidsIdApp</string>
+	<string>MobileKidsIdKit</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.MissingChildrenMinnesota.MobileKidsIdApp</string>
+	<string>com.MissingChildrenMinnesota.MobileKidsIdKit</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
