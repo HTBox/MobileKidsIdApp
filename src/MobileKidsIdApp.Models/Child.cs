@@ -153,5 +153,9 @@ namespace MobileKidsIdApp.Models
                 list.Add(child);
             }
         }
+        private void Child_DeleteSelf()
+        {
+           
+        }
     }
 }
