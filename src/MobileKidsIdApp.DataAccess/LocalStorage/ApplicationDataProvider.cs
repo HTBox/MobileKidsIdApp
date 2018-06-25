@@ -11,53 +11,52 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
     {
         private static readonly string FileName = "ApplicationData.txt";
         private static readonly string BackupFileName = "ApplicationData.bak";
-        private static readonly IsolatedStorageScope FileScope = IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Roaming;
+        private static readonly string LocalFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         public async Task<ApplicationData> Get()
         {
             ApplicationData result = null;
-            using (var isoStore = IsolatedStorageFile.GetStore(FileScope, null))
+            if (File.Exists(Path.Combine(LocalFolder, FileName)))
             {
-                if (isoStore.FileExists(FileName))
+                try
                 {
-                    using (var isoStream = new IsolatedStorageFileStream(FileName, FileMode.Open, FileAccess.Read))
+                    var json = File.ReadAllText(Path.Combine(LocalFolder, FileName));
+                    var dataBlob = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, json);
+                    result = JsonConvert.DeserializeObject<ApplicationData>(dataBlob);
+
+                }
+                catch
+                {
+                    if (File.Exists(Path.Combine(LocalFolder, BackupFileName)))
                     {
-                        using (var reader = new StreamReader(isoStream))
-                        {
-                            var json = await reader.ReadLineAsync();
-                            var dataBlob = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, json);
-                            result = JsonConvert.DeserializeObject<ApplicationData>(dataBlob);
-                        }
+                        File.Delete(Path.Combine(LocalFolder, FileName));
+                        File.Copy(Path.Combine(LocalFolder, BackupFileName), Path.Combine(LocalFolder, FileName));
+                        result = await Get();
                     }
                 }
-                else
-                {
-                    result = new ApplicationData();
-                }
+            }
+            else
+            {
+                result = new ApplicationData();
             }
             return result;
         }
 
         public async Task Save(ApplicationData data)
         {
-            using (var isoStore = IsolatedStorageFile.GetStore(FileScope, null))
+            if (File.Exists(Path.Combine(LocalFolder, FileName)))
             {
-                if (isoStore.FileExists(FileName))
+                if (File.Exists(Path.Combine(LocalFolder, BackupFileName)))
                 {
-                    if (isoStore.FileExists(BackupFileName))
-                        isoStore.DeleteFile(BackupFileName);
-                    isoStore.CopyFile(FileName, BackupFileName);
+                    await Task.Run(() => File.Delete(Path.Combine(LocalFolder, BackupFileName)));
+
                 }
-                using (var isoStream = new IsolatedStorageFileStream(FileName, FileMode.Create, FileAccess.Write))
-                {
-                    using (var writer = new StreamWriter(isoStream))
-                    {
-                        var json = JsonConvert.SerializeObject(data);
-                        var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
-                        await writer.WriteLineAsync(dataBlob);
-                    }
-                }
+                File.Copy(Path.Combine(LocalFolder, FileName), Path.Combine(LocalFolder, BackupFileName));
             }
+            var json = JsonConvert.SerializeObject(data);
+            var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
+            await Task.Run(() => File.WriteAllText(Path.Combine(LocalFolder, FileName), dataBlob));
+
         }
     }
 }
