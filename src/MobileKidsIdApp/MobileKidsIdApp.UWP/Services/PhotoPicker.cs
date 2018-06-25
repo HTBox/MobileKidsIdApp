@@ -1,8 +1,5 @@
 ﻿using MobileKidsIdApp.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.UWP.Services.PhotoPicker))]
@@ -11,7 +8,6 @@ namespace MobileKidsIdApp.UWP.Services
 {
     public class PhotoPicker : IPhotoPicker
     {
-
         public async Task<string> GetCopiedFilePath(string copyToDirectory, string fileNameWithoutExtension)
         {
             var picker = new Windows.Storage.Pickers.FileOpenPicker();

@@ -15,8 +15,8 @@ namespace MobileKidsIdApp.Models
             if (maxId != null)
                 nextId = maxId.Id + 1;
 
-            var result = new FileReference { Id = nextId };
-            Add(result);
+            var result = DataPortal.CreateChild<FileReference>();
+            result.Id = nextId;
             return result;
         }
 
