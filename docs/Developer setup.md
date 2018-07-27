@@ -29,3 +29,6 @@ Android apps can be compiled on a PC or Mac or Linux. Emulators exist for all pl
 The emulators for PC generally require VirtualBox and so can't run if you have HyperV installed (for Docker, or other reasons).
 
 Again, the _best_ solution is to connect a real Android device to your computer and deploy to that device. No special licenses, software, or hardware is required, though you do need to enable developer mode on your Android device.
+
+### Windows
+Windows UWP apps require Windows 10. You can run and debug the UWP app on your Win10 device, or in an emulator on Win10. These features are enabled when you have Visual Studio installed on your Win10 dev PC.
