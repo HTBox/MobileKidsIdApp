@@ -62,7 +62,7 @@ namespace MobileKidsIdApp.iOS.Services
                 using (System.IO.Stream stream = data.AsStream())
                 {
                     string extension = ".jpg";
-                    targetPath = System.IO.Path.Combine(CopyToDirectory, FileNameWithoutExtension, extension);
+                    targetPath = System.IO.Path.Combine(CopyToDirectory, FileNameWithoutExtension + extension);
 
                     // copy the file to the destination and set the completion of the Task
                     using (var copiedFileStream = new System.IO.FileStream(targetPath, System.IO.FileMode.OpenOrCreate))
