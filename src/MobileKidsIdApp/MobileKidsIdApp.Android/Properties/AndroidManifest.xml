@@ -2,5 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.HumanitarianToolbox.KidsIdKit" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.READ_CONTACTS" />
-	<application android:label="MobileKidsIdApp.Droid" android:icon="@mipmap/icon"></application>
+	<application android:label="Kids Id Kit" android:icon="@mipmap/icon"></application>
 </manifest>
