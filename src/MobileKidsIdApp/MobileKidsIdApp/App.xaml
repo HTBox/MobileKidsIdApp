@@ -51,7 +51,7 @@
 
             <!-- Label -->
             <Style x:Key="HeaderLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-DarkTeal-2}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="FontFamily" Value="{StaticResource HeaderCustomFont}" />
                 <Setter Property="FontSize" Value="Large" />
