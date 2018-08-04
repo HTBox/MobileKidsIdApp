@@ -7,7 +7,12 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
 {
     public class FamilyProvider : IFamilyProvider
     {
-        public async Task<bool> TestGetAsync(string password)
+        public bool DataExists()
+        {
+            return true;
+        }
+
+        public async Task<bool> VerifyPasswordAsync(string password)
         {
             await Task.Delay(0);
             return true;

@@ -5,8 +5,12 @@
              Title="Missing Kids Minnesota">
     <StackLayout>
 		<Label Text="Login" Style="{StaticResource HeaderLabel}" />
-        <Label Text="Password"/>
-        <Entry IsPassword="True" Placeholder="Password" Text="{Binding Path=Password}"/>
+        <Label Text="Password" Style="{StaticResource EntryLabel}"/>
+        <Entry IsPassword="True" Placeholder="Password" Text="{Binding Path=Password}" Style="{StaticResource EntryText}"/>
+        <Label IsVisible="{Binding InvalidPassword}" Text="Invalid password" Style="{StaticResource ErrorLabel}"/>
+        <Label IsVisible="{Binding FirstRun}" Text="Re-enter password" Style="{StaticResource EntryLabel}"/>
+        <Entry IsVisible="{Binding FirstRun}" IsPassword="True" Placeholder="Password" Text="{Binding Path=PasswordConfirm}" Style="{StaticResource EntryText}"/>
+        <Label IsVisible="{Binding PasswordsMustMatch}" Text="Passwords must match" Style="{StaticResource ErrorLabel}"/>
         <Button Text="Sign in" Command="{Binding SigninCommand}" Style="{StaticResource LoginButton}" />
     </StackLayout>
 </ContentPage>

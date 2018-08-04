@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp.iOS", "Mobi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp.UWP", "MobileKidsIdApp\MobileKidsIdApp.UWP\MobileKidsIdApp.UWP.csproj", "{10997245-A694-4AB3-9766-299F2CCD8F1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp", "MobileKidsIdApp\MobileKidsIdApp\MobileKidsIdApp.csproj", "{C16814AE-85B2-4DF5-89AB-957D6D68D946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileKidsIdApp", "MobileKidsIdApp\MobileKidsIdApp\MobileKidsIdApp.csproj", "{C16814AE-85B2-4DF5-89AB-957D6D68D946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp.DataAccess", "MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj", "{90A002BB-4CD4-42BA-BAB6-56C8A2217E7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileKidsIdApp.DataAccess", "MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj", "{90A002BB-4CD4-42BA-BAB6-56C8A2217E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp.Models", "MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj", "{A6D14000-2F57-46FA-9378-6A2F1A6713E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileKidsIdApp.Models", "MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj", "{A6D14000-2F57-46FA-9378-6A2F1A6713E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,6 +188,7 @@ Global
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|ARM.Build.0 = Debug|ARM
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|ARM.Deploy.0 = Debug|ARM
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|iPhone.ActiveCfg = Debug|x86
+		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|iPhone.Build.0 = Debug|x86
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|x64.ActiveCfg = Debug|x64
 		{10997245-A694-4AB3-9766-299F2CCD8F1C}.Debug|x64.Build.0 = Debug|x64
