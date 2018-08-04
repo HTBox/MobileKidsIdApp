@@ -5,10 +5,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CSLA-XamarinForms" Version="4.7.200-R18062401" />
+      <Compile Remove="MobileKidsIdApp.DataAccess\**" />
+      <Compile Remove="MobileKidsIdApp.Droid\**" />
+      <Compile Remove="MobileKidsIdApp.iOS\**" />
+      <Compile Remove="MobileKidsIdApp.UWP\**" />
+      <Compile Remove="MobileKidsIdApp.WinPhone\**" />
+      <Compile Remove="MobileKidsIdApp\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp.DataAccess\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp.Droid\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp.iOS\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp.UWP\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp.WinPhone\**" />
+      <EmbeddedResource Remove="MobileKidsIdApp\**" />
+      <None Remove="MobileKidsIdApp.DataAccess\**" />
+      <None Remove="MobileKidsIdApp.Droid\**" />
+      <None Remove="MobileKidsIdApp.iOS\**" />
+      <None Remove="MobileKidsIdApp.UWP\**" />
+      <None Remove="MobileKidsIdApp.WinPhone\**" />
+      <None Remove="MobileKidsIdApp\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CSLA-XamarinForms" Version="4.7.200" />
         <PackageReference Include="Microsoft.Azure.Mobile.Client" Version="4.0.2" />
         <PackageReference Include="PCLCrypto" Version="2.0.147" />
-        <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
+        <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
     </ItemGroup>
 
     <ItemGroup>
