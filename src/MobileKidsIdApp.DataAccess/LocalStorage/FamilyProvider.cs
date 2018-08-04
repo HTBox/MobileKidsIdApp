@@ -12,7 +12,51 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
         private static readonly string FileName = "Family.txt";
         private static readonly string BackupFileName = "Family.bak";
         private static readonly string LocalFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        public async Task<Family> Get()
+
+        public bool DataExists()
+        {
+            return (File.Exists(Path.Combine(LocalFolder, FileName)));
+        }
+
+        public async Task<bool> VerifyPasswordAsync(string password)
+        {
+            return await TestGetAsync(password, FileName);
+        }
+
+        private async Task<bool> TestGetAsync(string password, string fileName)
+        {
+            bool result = false;
+            string filePath = Path.Combine(LocalFolder, fileName);
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    var json = File.ReadAllText(filePath);
+                    var dataBlob = Encryption.Decrypt(password, json);
+                    // read and decrypted file, pw is good
+                    result = true;
+
+                }
+                catch
+                {
+                    var backupPath = Path.Combine(LocalFolder, BackupFileName);
+                    if (backupPath != filePath)
+                    {
+                        // see if pw works on backup file
+                        if (File.Exists(backupPath))
+                            result = await TestGetAsync(password, BackupFileName);
+                    }
+                }
+            }
+            else
+            {
+                // no file, new user, any pw is good
+                result = true;
+            }
+            return result;
+        }
+
+        public async Task<Family> GetAsync()
         {
             Family result = null;
             if(File.Exists(Path.Combine(LocalFolder,FileName)))
@@ -30,7 +74,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
                     {
                         File.Delete(Path.Combine(LocalFolder, FileName));
                         File.Copy(Path.Combine(LocalFolder, BackupFileName), Path.Combine(LocalFolder, FileName));
-                        result = await Get();
+                        result = await GetAsync();
                     }
                 }
             }
@@ -41,7 +85,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             return result;
         }
 
-        public async Task Save(Family data)
+        public async Task SaveAsync(Family data)
         {
             if(File.Exists(Path.Combine(LocalFolder,FileName)))
             {

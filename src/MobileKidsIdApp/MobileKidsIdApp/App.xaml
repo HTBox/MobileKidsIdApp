@@ -1,20 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.App">
     <Application.Resources>
         <ResourceDictionary>
             <!-- Colors -->
-            <Color x:Key="DarkTeal">#005D6E</Color>
-            <Color x:Key="DarkTeal-40">#7DACB4</Color>
-            <Color x:Key="DarkTeal-80">#337D8A</Color>
-            <Color x:Key="KelleyGreen">#449C45</Color>
-            <Color x:Key="KelleyGreen-40">#9FCD9F</Color>
-            <Color x:Key="KelleyGreen-60">#86C086</Color>
-            <Color x:Key="KelleyGreen-80">#69b168</Color>
-            <Color x:Key="Orange-80">#EEB54E</Color>
-            <Color x:Key="SkyBlue">#5EC9CF</Color>
-            <Color x:Key="SkyBlue-40">#ADE5E6</Color>
+            <!-- 
+            See MCM Brand Inspriation Board for usage guidelines on color pallette.
+            https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
+            -->
+            <Color x:Key="MCM-DarkTeal-1">#084150</Color>
+            <Color x:Key="MCM-DarkTeal-2">#245e6b</Color>
+            <Color x:Key="MCM-DarkTeal-3">#437985</Color>
+            <Color x:Key="MCM-DarkTeal-4">#437985</Color>
+
+            <Color x:Key="MCM-LightBlue-1">#46b6bc</Color>
+            <Color x:Key="MCM-LightBlue-2">#64c4ca</Color>
+            <Color x:Key="MCM-LightBlue-3">#7cd0d3</Color>
+            <Color x:Key="MCM-LightBlue-4">#94d9da</Color>
+            
+            <Color x:Key="MCM-Orange-1">#df8319</Color>
+            <Color x:Key="MCM-Orange-2">#e59c36</Color>
+            <Color x:Key="MCM-Orange-3">#e9ad52</Color>
+            <Color x:Key="MCM-Orange-4">#f0bc70</Color>
+            
+            <Color x:Key="MCM-Green-1">#31812e</Color>
+            <Color x:Key="MCM-Green-2">#4e9a4a</Color>
+            <Color x:Key="MCM-Green-3">#69ac67</Color>
+            <Color x:Key="MCM-Green-4">#84bc82</Color>
+
+            <Color x:Key="MCM-Black-1">#212121</Color>
+            <Color x:Key="MCM-Black-2">#404040</Color>
+            <Color x:Key="MCM-Black-3">#5e5e5e</Color>
+            <Color x:Key="MCM-Black-4">#797979</Color>
+
+            <Color x:Key="MCM-Yellow-1">#ede493</Color>
+            <Color x:Key="MCM-Yellow-2">#f1e9a6</Color>
+            <Color x:Key="MCM-Yellow-3">#f2ecb5</Color>
+            <Color x:Key="MCM-Yellow-4">#f6efc5</Color>
 
             <!-- Fonts -->
             <OnPlatform x:Key="BodyCustomFont" x:TypeArguments="x:String" iOS="OpenSans-Regular" Android=""/>
@@ -22,56 +45,67 @@
 
             <!-- Navigation -->
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource DarkTeal-80}"/>
-                <Setter Property="BarTextColor" Value="{StaticResource Orange-80}"/>
+                <Setter Property="BarBackgroundColor" Value="{StaticResource MCM-DarkTeal-2}"/>
+                <Setter Property="BarTextColor" Value="White"/>
             </Style>
 
             <!-- Label -->
             <Style x:Key="HeaderLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-DarkTeal-2}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="FontFamily" Value="{StaticResource HeaderCustomFont}" />
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="Margin" Value="25, 25, 25, 15" />
             </Style>
 
-            <!-- Grid -->
-            <Style TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
-            </Style>
-            <!-- ListView -->
-            <Style TargetType="ListView">
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            <Style x:Key="EntryLabel" TargetType="Label">
+                <Setter Property="Margin" Value="25, 0, 25, 0" />
             </Style>
 
-            <!-- StackLayout -->
-            <Style TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
+            <Style x:Key="ErrorLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="25, 25, 25, 15" />
             </Style>
+            
+            <!-- Entry -->
+            <Style x:Key="EntryText" TargetType="Entry">
+                <Setter Property="Margin" Value="25, 0, 25, 0" />
+            </Style>
+
+            <!-- Grid -->
+            <Style TargetType="Grid">
+            </Style>
+            
+            <!-- ListView -->
+            <Style TargetType="ListView">
+            </Style>
+                        
+            <!-- StackLayout -->
+<!--            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-DarkTeal-1}" />
+            </Style>-->
 
             <!-- ScrollView -->
             <Style TargetType="ScrollView">
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
             <!-- TableView -->
             <Style TargetType="TableView">
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
             </Style>
-
+            
             <!-- Button -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Green-2}" />
             </Style>
             <Style x:Key="LoginButton" TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-                <Setter Property="Margin" Value="25,5" />
+                <Setter Property="Margin" Value="400, 25, 400, 25" />
             </Style>
             <Style x:Key="GridButton" TargetType="Button">
                 <Setter Property="TextColor" Value="White" />

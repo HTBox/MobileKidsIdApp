@@ -9,29 +9,55 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class Login
+    public class Login : BindableObject
     {
-        public ICommand FacebookLoginCommand { get; private set; }
-        public ICommand MicrosoftLoginCommand { get; private set; }
-        public ICommand GoogleLoginCommand { get; private set; }
-        public ICommand TestLoginCommand { get; private set; }
+        public ICommand SigninCommand { get; private set; }
+        public string Password { get; set; }
+        public string PasswordConfirm { get; set; }
+        public bool FirstRun { get; set; }
+        public bool InvalidPassword { get; set; }
+        public bool PasswordsMustMatch { get; set; }
 
         public Login()
         {
-            FacebookLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Facebook); });
-            MicrosoftLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Microsoft); });
-            GoogleLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Google); });
-#if DEBUG
-            TestLoginCommand = new Command(async () => { await DoAuthentication(LoginProviders.Test); });
-#endif
+            SigninCommand = new Command(async () => { await DoAuthentication(); });
+            SetFirstRun();
         }
 
-        private async Task DoAuthentication(LoginProviders provider)
+        private void SetFirstRun()
         {
-            var identity = await App.Authenticator.Authenticate(provider);
+            var cmd = Csla.DataPortal.Fetch<Models.FamilyExists>();
+            FirstRun = !cmd.Exists;
+            OnPropertyChanged("FirstRun");
+        }
+
+        private async Task DoAuthentication()
+        {
+            if (FirstRun)
+            {
+                if (Password != PasswordConfirm)
+                {
+                    PasswordsMustMatch = true;
+                    OnPropertyChanged("PasswordsMustMatch");
+                    return;
+                }
+                else
+                {
+                    PasswordsMustMatch = true;
+                    OnPropertyChanged("PasswordsMustMatch");
+                }
+            }
+            var identity = await Models.AppIdentity.LoginAsync(Password);
             Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
             if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
+            {
                 await App.RootPage.Navigation.PopModalAsync();
+            }
+            else
+            {
+                InvalidPassword = true;
+                OnPropertyChanged("InvalidPassword");
+            }
         }
     }
 }

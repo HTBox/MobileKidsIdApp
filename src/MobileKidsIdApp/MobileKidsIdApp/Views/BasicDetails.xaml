@@ -7,9 +7,9 @@
     <TableView Intent="Form">
         <TableView.Root>
             <TableSection Title="Name">
-                <EntryCell Label="Given" Text="{Binding Model.GivenName}"/>
-                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}"/>
-                <EntryCell Label="Family" Text="{Binding Model.FamilyName}"/>
+                <EntryCell Label="Given" Text="{Binding Model.GivenName}" />
+                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}" />
+                <EntryCell Label="Family" Text="{Binding Model.FamilyName}" />
             </TableSection>
             <TableSection Title="Birthday">
                 <ViewCell>
@@ -19,7 +19,7 @@
             <TableSection Title="Contact">
                   <ViewCell>
                     <StackLayout Orientation="Vertical">
-                      <Button Text="Change" Command="{Binding ChangeContactCommand}" />
+                      <Button Text="Change" Command="{Binding ChangeContactCommand}" Margin="300, 25, 300, 25"/>
                       <controls:PhoneContact BindingContext="{Binding Contact}" Margin="3" />
                     </StackLayout>
                   </ViewCell>
