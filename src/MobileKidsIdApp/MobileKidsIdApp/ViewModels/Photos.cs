@@ -20,7 +20,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             Model = fileReferenceList;
             _choosePhotoCommand = new Command(ChoosePhoto);
-            _deletePhotoCommand = new Command(async obj =>
+            _deletePhotoCommand = new Command(obj =>
             {
                 var photoVM = (PhotoViewModel)obj;
                 PhotoViewModels.Remove(photoVM);
@@ -58,7 +58,7 @@ namespace MobileKidsIdApp.ViewModels
 
         private void ChoosePhoto()
         {
-            Model.AddedNew += (async (o, e) => 
+            Model.AddedNew += ((o, e) => 
             {
                 //TODO: change to use System.IO.File
                 //var newItem = e.NewObject;

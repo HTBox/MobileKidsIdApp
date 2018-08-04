@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSLA-Core-NS" Version="4.7.200-R18062401" />
+    <PackageReference Include="CSLA-Core-NS" Version="4.7.200" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
   </ItemGroup>
