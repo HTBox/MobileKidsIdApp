@@ -11,49 +11,22 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class AppIdentity : CslaIdentityBase<AppIdentity>
     {
-        public static readonly PropertyInfo<string> ProviderIdProperty = RegisterProperty<string>(c => c.ProviderId);
-        public string ProviderId
+        public static async Task<AppIdentity> LoginAsync(string password)
         {
-            get { return GetProperty(ProviderIdProperty); }
-            private set { LoadProperty(ProviderIdProperty, value); }
+            return await DataPortal.FetchAsync<AppIdentity>(password);
         }
 
-        public static readonly PropertyInfo<string> ProviderTokenProperty = RegisterProperty<string>(c => c.ProviderToken);
-        public string ProviderToken
+#pragma warning disable CSLA0010 // Find Operation Arguments That Are Not Serializable
+        private async Task DataPortal_Fetch(string password)
+#pragma warning restore CSLA0010 // Find Operation Arguments That Are Not Serializable
         {
-            get { return GetProperty(ProviderTokenProperty); }
-            private set { LoadProperty(ProviderTokenProperty, value); }
-        }
-
-        public static async Task<AppIdentity> GetAppIdentityAsync(string providerId, string providerToken)
-        {
-            return await DataPortal.FetchAsync<AppIdentity>(
-                new AppIdentityCriteria { ProviderId = providerId, ProviderToken = providerToken });
-        }
-
-        private void DataPortal_Fetch(AppIdentityCriteria criteria)
-        {
-            Name = criteria.ProviderId;
-            ProviderId = criteria.ProviderId;
-            ProviderToken = criteria.ProviderToken;
-            IsAuthenticated = true;
-        }
-
-        [Serializable]
-        public class AppIdentityCriteria : CriteriaBase<AppIdentityCriteria>
-        {
-            public static readonly PropertyInfo<string> ProviderIdProperty = RegisterProperty<string>(c => c.ProviderId);
-            public string ProviderId
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetFamilyProvider();
+            var verified = await dal.TestGetAsync(password);
+            if (verified)
             {
-                get { return ReadProperty(ProviderIdProperty); }
-                set { LoadProperty(ProviderIdProperty, value); }
-            }
-
-            public static readonly PropertyInfo<string> ProviderTokenProperty = RegisterProperty<string>(c => c.ProviderToken);
-            public string ProviderToken
-            {
-                get { return ReadProperty(ProviderTokenProperty); }
-                set { LoadProperty(ProviderTokenProperty, value); }
+                Name = password;
+                IsAuthenticated = true;
             }
         }
     }
