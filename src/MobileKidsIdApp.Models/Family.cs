@@ -14,7 +14,7 @@ namespace MobileKidsIdApp.Models
         {
             var provider = new DataAccess.DataProviderFactory().GetDataProvider();
             var dal = provider.GetFamilyProvider();
-            var data = await dal.Get();
+            var data = await dal.GetAsync();
             foreach (var item in data.Children)
                 Add(DataPortal.FetchChild<Child>(item));
         }
@@ -25,7 +25,7 @@ namespace MobileKidsIdApp.Models
             var dal = provider.GetFamilyProvider();
             var dtoRoot = new DataAccess.DataModels.Family();
             Child_Update(dtoRoot.Children);
-            await dal.Save(dtoRoot);
+            await dal.SaveAsync(dtoRoot);
         }
     }
 }

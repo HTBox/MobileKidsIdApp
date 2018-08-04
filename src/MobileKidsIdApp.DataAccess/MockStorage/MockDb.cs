@@ -55,7 +55,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             Family.Children.Add(child);
 
             var familyProvider = new FamilyProvider();
-            await familyProvider.Save(Family);
+            await familyProvider.SaveAsync(Family);
         }
 
     }
