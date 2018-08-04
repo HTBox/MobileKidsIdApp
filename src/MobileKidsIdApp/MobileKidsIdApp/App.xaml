@@ -39,11 +39,12 @@
             <Style TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
             </Style>
+            
             <!-- ListView -->
             <Style TargetType="ListView">
                 <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
             </Style>
-
+                        
             <!-- StackLayout -->
             <Style TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
@@ -60,7 +61,7 @@
             <Style TargetType="TableView">
                 <Setter Property="BackgroundColor" Value="{StaticResource DarkTeal-80}" />
             </Style>
-
+            
             <!-- Button -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
@@ -71,13 +72,25 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-                <Setter Property="Margin" Value="25,5" />
+                <Setter Property="Margin" Value="400, 25, 400, 25" />
             </Style>
             <Style x:Key="GridButton" TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
-                <Setter Property="Margin" Value="5" />
+                <Setter Property="Margin" Value="50, 25, 50, 25" />
+            </Style>
+            <Style x:Key="InstructionButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+                <Setter Property="Margin" Value="300, 25, 300, 25" />
+            </Style>
+            <Style x:Key="ChildProfileEditButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource KelleyGreen-80}" />
+                <Setter Property="Margin" Value="300, 25, 300, 25" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
