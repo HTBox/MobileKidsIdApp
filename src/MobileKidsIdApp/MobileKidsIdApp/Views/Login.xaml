@@ -5,9 +5,8 @@
              Title="Missing Kids Minnesota">
     <StackLayout>
 		<Label Text="Login" Style="{StaticResource HeaderLabel}" />
-        <Button Text="Facebook" Command="{Binding FacebookLoginCommand}" Style="{StaticResource LoginButton}" />
-        <Button Text="Microsoft" Command="{Binding MicrosoftLoginCommand}" Style="{StaticResource LoginButton}" />
-        <Button Text="Google" Command="{Binding GoogleLoginCommand}" Style="{StaticResource LoginButton}" />
-        <Button Text="Test login" Command="{Binding TestLoginCommand}" IsVisible="{Binding Testing}" Style="{StaticResource LoginButton}" />
+        <Label Text="Password"/>
+        <Entry IsPassword="True" Placeholder="Password" Text="{Binding Path=Password}"/>
+        <Button Text="Sign in" Command="{Binding SigninCommand}" Style="{StaticResource LoginButton}" />
     </StackLayout>
 </ContentPage>
