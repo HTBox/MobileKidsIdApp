@@ -13,7 +13,12 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
         private static readonly string BackupFileName = "Family.bak";
         private static readonly string LocalFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        public async Task<bool> TestGetAsync(string password)
+        public bool DataExists()
+        {
+            return (File.Exists(Path.Combine(LocalFolder, FileName)));
+        }
+
+        public async Task<bool> VerifyPasswordAsync(string password)
         {
             return await TestGetAsync(password, FileName);
         }
@@ -34,9 +39,13 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
                 }
                 catch
                 {
-                    // see if pw works on backup file
-                    if (File.Exists(Path.Combine(LocalFolder, BackupFileName)))
-                        result = await TestGetAsync(password, BackupFileName);
+                    var backupPath = Path.Combine(LocalFolder, BackupFileName);
+                    if (backupPath != filePath)
+                    {
+                        // see if pw works on backup file
+                        if (File.Exists(backupPath))
+                            result = await TestGetAsync(password, BackupFileName);
+                    }
                 }
             }
             else

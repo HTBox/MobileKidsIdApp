@@ -22,7 +22,7 @@ namespace MobileKidsIdApp.Models
         {
             var provider = new DataAccess.DataProviderFactory().GetDataProvider();
             var dal = provider.GetFamilyProvider();
-            var verified = await dal.TestGetAsync(password);
+            var verified = await dal.VerifyPasswordAsync(password);
             if (verified)
             {
                 Name = password;
