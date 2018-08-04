@@ -113,6 +113,18 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="5" />
             </Style>
+            <Style x:Key="InstructionButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style x:Key="ChildProfileEditButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
