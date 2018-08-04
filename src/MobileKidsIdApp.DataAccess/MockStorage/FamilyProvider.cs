@@ -7,7 +7,13 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
 {
     public class FamilyProvider : IFamilyProvider
     {
-        public async Task<Family> Get()
+        public async Task<bool> TestGetAsync(string password)
+        {
+            await Task.Delay(0);
+            return true;
+        }
+
+        public async Task<Family> GetAsync()
         {
             await MockDb.Init();
             var json = Encryption.Decrypt(Csla.ApplicationContext.User.Identity.Name, MockDb.FamilyFile);
@@ -15,7 +21,7 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             return result;
         }
 
-        public async Task Save(Family data)
+        public async Task SaveAsync(Family data)
         {
             await MockDb.Init();
             var json = JsonConvert.SerializeObject(data);

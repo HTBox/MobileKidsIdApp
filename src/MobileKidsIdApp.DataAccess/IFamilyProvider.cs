@@ -8,7 +8,8 @@ namespace MobileKidsIdApp.DataAccess
 {
     public interface IFamilyProvider
     {
-        Task<DataModels.Family> Get();
-        Task Save(DataModels.Family data);
+        Task<bool> TestGetAsync(string password);
+        Task<DataModels.Family> GetAsync();
+        Task SaveAsync(DataModels.Family data);
     }
 }
