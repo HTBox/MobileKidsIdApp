@@ -4,7 +4,10 @@
              x:Class="MobileKidsIdApp.Views.Login"
              Title="Missing Kids Minnesota">
     <StackLayout>
-		<Label Text="Login" Style="{StaticResource HeaderLabel}" />
+        <StackLayout Orientation="Horizontal">
+            <Image Source="icon.png" Margin="25"/>
+            <Label Text="Login" Style="{StaticResource HeaderLabel}" />
+        </StackLayout>
         <Label Text="Password" Style="{StaticResource EntryLabel}"/>
         <Entry IsPassword="True" Placeholder="Password" Text="{Binding Path=Password}" Style="{StaticResource EntryText}"/>
         <Label IsVisible="{Binding InvalidPassword}" Text="Invalid password" Style="{StaticResource ErrorLabel}"/>

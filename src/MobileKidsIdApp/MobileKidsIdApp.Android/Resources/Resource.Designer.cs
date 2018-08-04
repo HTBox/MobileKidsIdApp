@@ -2358,26 +2358,26 @@ namespace MobileKidsIdApp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020131
-			public const int avd_hide_password_1 = 2130837809;
-			
 			// aapt resource value: 0x7f020132
-			public const int avd_hide_password_2 = 2130837810;
+			public const int avd_hide_password_1 = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int avd_hide_password_3 = 2130837811;
+			public const int avd_hide_password_2 = 2130837811;
+			
+			// aapt resource value: 0x7f020134
+			public const int avd_hide_password_3 = 2130837812;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020134
-			public const int avd_show_password_1 = 2130837812;
-			
 			// aapt resource value: 0x7f020135
-			public const int avd_show_password_2 = 2130837813;
+			public const int avd_show_password_1 = 2130837813;
 			
 			// aapt resource value: 0x7f020136
-			public const int avd_show_password_3 = 2130837814;
+			public const int avd_show_password_2 = 2130837814;
+			
+			// aapt resource value: 0x7f020137
+			public const int avd_show_password_3 = 2130837815;
 			
 			// aapt resource value: 0x7f020055
 			public const int design_bottom_navigation_item_background = 2130837589;
@@ -3021,11 +3021,11 @@ namespace MobileKidsIdApp.Droid
 			// aapt resource value: 0x7f02012a
 			public const int notification_icon_background = 2130837802;
 			
-			// aapt resource value: 0x7f02012f
-			public const int notification_template_icon_bg = 2130837807;
-			
 			// aapt resource value: 0x7f020130
-			public const int notification_template_icon_low_bg = 2130837808;
+			public const int notification_template_icon_bg = 2130837808;
+			
+			// aapt resource value: 0x7f020131
+			public const int notification_template_icon_low_bg = 2130837809;
 			
 			// aapt resource value: 0x7f02012b
 			public const int notification_tile_bg = 2130837803;
@@ -3034,10 +3034,13 @@ namespace MobileKidsIdApp.Droid
 			public const int notify_panel_notification_icon_bg = 2130837804;
 			
 			// aapt resource value: 0x7f02012d
-			public const int tooltip_frame_dark = 2130837805;
+			public const int plusbutton = 2130837805;
 			
 			// aapt resource value: 0x7f02012e
-			public const int tooltip_frame_light = 2130837806;
+			public const int tooltip_frame_dark = 2130837806;
+			
+			// aapt resource value: 0x7f02012f
+			public const int tooltip_frame_light = 2130837807;
 			
 			static Drawable()
 			{
