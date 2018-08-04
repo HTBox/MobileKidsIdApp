@@ -11,9 +11,10 @@ namespace MobileKidsIdApp.Models
         protected override FileReference AddNewCore()
         {
             var nextId = 0;
-            var maxId = this.OrderByDescending(fr => fr.Id).FirstOrDefault();
-            if (maxId != null)
-                nextId = maxId.Id + 1;
+            if (this.Count > 0)
+            {
+                nextId = this.Max(fr => fr.Id) + 1;
+            }
 
             var result = DataPortal.CreateChild<FileReference>();
             result.Id = nextId;
