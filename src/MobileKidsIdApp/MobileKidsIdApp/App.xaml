@@ -75,10 +75,11 @@
             <!-- Grid -->
             <Style TargetType="Grid">
             </Style>
+            
             <!-- ListView -->
             <Style TargetType="ListView">
             </Style>
-
+                        
             <!-- StackLayout -->
 <!--            <Style TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-DarkTeal-1}" />
@@ -93,7 +94,7 @@
             <!-- TableView -->
             <Style TargetType="TableView">
             </Style>
-
+            
             <!-- Button -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />

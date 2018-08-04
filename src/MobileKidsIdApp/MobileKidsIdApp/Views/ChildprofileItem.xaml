@@ -5,16 +5,16 @@
              Title="{Binding Model.ChildDetails.GivenName}">
   <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <StackLayout>
-      <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}"/>
-      <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
-      <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}"/>
-      <Button Text="Family" Command="{Binding EditFamilyCommand}"/>
-      <Button Text="Friends" Command="{Binding EditFriendsCommand}"/>
-      <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}"/>
-      <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}"/>
-      <Button Text="Documents" Command="{Binding EditDocumentsCommand}"/>
-      <Button Text="Photos" Command="{Binding EditPhotosCommand}"/>
-      <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}"/>
+      <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Family" Command="{Binding EditFamilyCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Friends" Command="{Binding EditFriendsCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Documents" Command="{Binding EditDocumentsCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Photos" Command="{Binding EditPhotosCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+      <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}" Style="{StaticResource ChildProfileEditButton}"/>
     </StackLayout>
   </ScrollView>
 </ContentPage>
