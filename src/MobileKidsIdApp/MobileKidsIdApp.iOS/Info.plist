@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>MobileKidsIdKit</string>
+	<string>Kids Id Kit</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.HumanitarianToolbox.KidsIdKit</string>
 	<key>CFBundleVersion</key>
