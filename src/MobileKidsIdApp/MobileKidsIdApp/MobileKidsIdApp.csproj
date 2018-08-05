@@ -60,4 +60,14 @@
       <EmbeddedResource Include="Resources\abouthtbox.html" />
       <EmbeddedResource Include="Resources\aboutmcm.html" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Views\DocumentRender.xaml.cs">
+        <DependentUpon>DocumentRender.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Update="Views\DocumentRender.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+    </ItemGroup>
 </Project>

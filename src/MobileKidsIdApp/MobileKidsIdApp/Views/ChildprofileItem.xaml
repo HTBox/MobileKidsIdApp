@@ -15,6 +15,7 @@
       <Button Text="Documents" Command="{Binding EditDocumentsCommand}" Style="{StaticResource ChildProfileEditButton}"/>
       <Button Text="Photos" Command="{Binding EditPhotosCommand}" Style="{StaticResource ChildProfileEditButton}"/>
       <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}" Style="{StaticResource ChildProfileEditButton}"/>
-    </StackLayout>
+      <Button Text="Export Child Profile" Command="{Binding ExportChildProdfileCommand}" Style="{StaticResource ChildProfileEditButton}"/>
+   </StackLayout>
   </ScrollView>
 </ContentPage>

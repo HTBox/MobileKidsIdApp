@@ -13,11 +13,10 @@ namespace MobileKidsIdApp.Models
         protected override DistinguishingFeature AddNewCore()
         {
             var nextId = 0;
-            var maxId = this.OrderByDescending(df => df.Id).FirstOrDefault();
-            if (maxId != null)
-                nextId = maxId.Id + 1;
+            if (this.Count > 0)
+                nextId = this.Max(r => r.Id) + 1;
 
-            var result = new DistinguishingFeature { Id = nextId };
+            var result = DataPortal.CreateChild<DistinguishingFeature>(nextId);
             Add(result);
             return result;
         }

@@ -48,20 +48,41 @@ namespace MobileKidsIdApp.ViewModels
         public async Task ShowChild(Child child, bool? isNew = false)
         {
             var childProfileItemVM = new ChildProfileItem(child);
-            await childProfileItemVM.InitAsync();            
+            await childProfileItemVM.InitAsync();
             if (isNew == true)
             {
                 //Go directly to the basic details page for a new child.
                 childProfileItemVM.EditChildDetailsCommand.Execute(null);
-            }else
+            }
+            else
+            {
                 await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+            }
         }
 
         public async Task SaveFamilyAsync()
         {
-            var saved = await SaveAsync();
-            var merger = new Csla.Core.GraphMerger();
-            merger.MergeBusinessListGraph<Family, Child>(Model, saved);
+            try
+            {
+                var savable = Model as Csla.Core.ISavable;
+
+                Error = null;
+                IsBusy = true;
+                OnSaving(Model);
+
+                var saved = (Family)await savable.SaveAsync();
+                var merger = new Csla.Core.GraphMerger();
+                merger.MergeBusinessListGraph<Family, Child>(Model, saved);
+
+                IsBusy = false;
+                OnSaved();
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                Error = ex;
+                OnSaved();
+            }
         }
     }
 }

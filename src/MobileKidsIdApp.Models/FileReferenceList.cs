@@ -12,12 +12,12 @@ namespace MobileKidsIdApp.Models
         {
             var nextId = 0;
             if (this.Count > 0)
-            {
-                nextId = this.Max(fr => fr.Id) + 1;
+            {    
+                nextId = this.Max(r => r.Id) + 1;
             }
 
-            var result = DataPortal.CreateChild<FileReference>();
-            result.Id = nextId;
+            var result = DataPortal.CreateChild<FileReference>(nextId);
+            Add(result);
             return result;
         }
 
