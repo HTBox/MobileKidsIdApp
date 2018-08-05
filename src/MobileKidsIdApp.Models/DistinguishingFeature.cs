@@ -31,12 +31,11 @@ namespace MobileKidsIdApp.Models
             private set { LoadProperty(PhotoReference, value); }
         }
 
-        protected override void Child_Create()
+        protected void Child_Create(int id)
         {
             using (BypassPropertyChecks)
             {
-                var list = (List<DataAccess.DataModels.DistinguishingFeature>)Parent;
-                Id = list.Max(_ => _.Id) + 1;
+                Id = id;
             }
             base.Child_Create();
         }
