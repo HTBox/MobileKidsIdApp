@@ -11,11 +11,10 @@ namespace MobileKidsIdApp.Models
         protected override CareProvider AddNewCore()
         {
             var nextId = 0;
-            var maxId = this.OrderByDescending(fr => fr.Id).FirstOrDefault();
-            if (maxId != null)
-                nextId = maxId.Id + 1;
+            if (this.Count > 0)
+                nextId = this.Max(r => r.Id) + 1;
 
-            var result = new CareProvider { Id = nextId };
+            var result = DataPortal.CreateChild<CareProvider>(nextId);
             Add(result);
             return result;
         }

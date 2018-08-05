@@ -16,11 +16,11 @@
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Remove" Command="{Binding Source={x:Reference childProfileList}, Path=BindingContext.RemoveItemCommand}" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
-		                  <StackLayout Orientation="Vertical" Margin="3">
+		                  <StackLayout Orientation="Vertical" Margin="20,0,20,0">
 		                      <StackLayout Orientation="Horizontal">
-		                          <Label Text="{Binding ChildDetails.GivenName}" Margin="0,5,0,0"/>
-		                          <Label Text="{Binding ChildDetails.AdditionalName}" Margin="0,5,0,0"/>
-		                          <Label Text="{Binding ChildDetails.FamilyName}" Margin="0,5,0,0"/>
+		                          <Label Text="{Binding ChildDetails.GivenName}" Margin="3,10,3,10"/>
+		                          <Label Text="{Binding ChildDetails.AdditionalName}" Margin="3,10,3,10"/>
+		                          <Label Text="{Binding ChildDetails.FamilyName}" Margin="3,10,3,10"/>
 		                      </StackLayout>
 		                  </StackLayout>
 		              </ViewCell>

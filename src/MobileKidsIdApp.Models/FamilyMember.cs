@@ -31,6 +31,15 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(RelationProperty, value); }
         }
 
+        private void Child_Create(int id)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = id;
+            }
+            base.Child_Create();
+        }
+
         private void Child_Fetch(DataAccess.DataModels.FamilyMember member)
         {
             using (BypassPropertyChecks)
