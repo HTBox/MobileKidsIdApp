@@ -18,6 +18,7 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditPhysicalDetailsCommand { get; private set; }
         public ICommand EditPhotosCommand { get; private set; }
         public ICommand EditChecklistCommand { get; private set; }
+        public ICommand ExportChildProdfileCommand { get; private set; }
         public ChildProfileItem(Models.Child child)
         {
             EditChildDetailsCommand = new Command(async () =>
@@ -65,6 +66,11 @@ namespace MobileKidsIdApp.ViewModels
             EditChecklistCommand = new Command(async () => {
                 await App.RootPage.Navigation.PushAsync(
                     new Views.PreparationChecklist { BindingContext = await new PreparationChecklist(Model.Checklist).InitAsync() });
+            });
+            ExportChildProdfileCommand = new Command(async () =>
+            {
+                await App.RootPage.Navigation.PushAsync(
+                    new Views.DocumentRender { BindingContext = await new BasicDetails(Model.ChildDetails).InitAsync() });
             });
 
             Model = child;
