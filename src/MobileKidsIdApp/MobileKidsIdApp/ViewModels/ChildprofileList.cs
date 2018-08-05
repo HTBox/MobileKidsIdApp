@@ -62,9 +62,27 @@ namespace MobileKidsIdApp.ViewModels
 
         public async Task SaveFamilyAsync()
         {
-            var saved = await SaveAsync();
-            var merger = new Csla.Core.GraphMerger();
-            merger.MergeBusinessListGraph<Family, Child>(Model, saved);
+            try
+            {
+                var savable = Model as Csla.Core.ISavable;
+
+                Error = null;
+                IsBusy = true;
+                OnSaving(Model);
+
+                var saved = (Family)await savable.SaveAsync();
+                var merger = new Csla.Core.GraphMerger();
+                merger.MergeBusinessListGraph<Family, Child>(Model, saved);
+
+                IsBusy = false;
+                OnSaved();
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                Error = ex;
+                OnSaved();
+            }
         }
     }
 }
