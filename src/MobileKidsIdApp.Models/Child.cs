@@ -10,6 +10,9 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class Child : BaseTypes.BusinessBase<Child>
     {
+        public Child()
+        { }
+
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
         public int Id
         {
@@ -126,7 +129,11 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Insert(List<DataAccess.DataModels.Child> list)
         {
-            Id = ((Family)Parent).Max(_ => _.Id) + 1;
+            var parent = (Family)Parent;
+            if (parent.Count > 0)
+                Id = parent.Max(_ => _.Id) + 1;
+            else
+                Id = 0;
             Child_Update(list);
         }
 
@@ -134,19 +141,14 @@ namespace MobileKidsIdApp.Models
         {
             using (BypassPropertyChecks)
             {
-                var child = new DataAccess.DataModels.Child();
-                child.Id = Id;
-                child.ChildDetails = new DataAccess.DataModels.ChildDetails();
+                var child = new DataAccess.DataModels.Child { Id = this.Id };
                 DataPortal.UpdateChild(ChildDetails, child.ChildDetails);
-                child.PhysicalDetails = new DataAccess.DataModels.PhysicalDetails();
                 DataPortal.UpdateChild(PhysicalDetails, child.PhysicalDetails);
                 DataPortal.UpdateChild(DistinguishingFeatures, child.DistinguishingFeatures);
                 DataPortal.UpdateChild(ProfessionalCareProviders, child.ProfessionalCareProviders);
                 DataPortal.UpdateChild(FamilyMembers, child.FamilyMembers);
                 DataPortal.UpdateChild(Friends, child.Friends);
-                child.MedicalNotes = new DataAccess.DataModels.MedicalNotes();
                 DataPortal.UpdateChild(MedicalNotes, child.MedicalNotes);
-                child.Checklist = new DataAccess.DataModels.PreparationChecklist();
                 DataPortal.UpdateChild(Checklist, child.Checklist);
                 DataPortal.UpdateChild(Documents, child.Documents);
                 DataPortal.UpdateChild(Photos, child.Photos);
