@@ -118,7 +118,9 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\pdfjs\build\pdf.js" />
+    <Content Include="Assets\pdfjs\build\pdf.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\pdfjs\build\pdf.worker.js" />
     <Content Include="Assets\pdfjs\web\debugger.js" />
     <Content Include="Assets\pdfjs\web\images\annotation-check.svg" />
