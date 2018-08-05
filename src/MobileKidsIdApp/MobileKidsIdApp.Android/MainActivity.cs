@@ -3,14 +3,11 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using System.Threading.Tasks;
-using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
 using Android.Content;
 
 namespace MobileKidsIdApp.Droid
 {
-    [Activity(Label = "MobileKidsIdApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Kids Id Kit", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

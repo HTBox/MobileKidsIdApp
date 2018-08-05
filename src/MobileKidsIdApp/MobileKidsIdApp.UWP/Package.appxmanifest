@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="d71203cb-6cdd-4962-8fd0-26eb752b4ec7" Publisher="CN=HTBox" Version="1.0.0.0" />
+  <Identity Name="com.HumanitarianToolbox.KidsIdKit" Publisher="CN=HTBox" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>MobileKidsIdApp.UWP</DisplayName>
+    <DisplayName>com.HumanitarianToolbox.KidsIdKit</DisplayName>
     <PublisherDisplayName>e86f0349-1b0f-4755-97fd-386280c04413</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

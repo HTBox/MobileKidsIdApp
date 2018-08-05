@@ -5,7 +5,7 @@
              Title="Child list"
              x:Name="childProfileList">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add child" Command="{Binding NewItemCommand}"/>
+        <ToolbarItem Name="Add child" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
 	<StackLayout>
 		<ScrollView MinimumHeightRequest="100">

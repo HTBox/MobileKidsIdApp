@@ -8,7 +8,7 @@
              Title="Photos">
     <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Add Photo" Command="{Binding ChoosePhotoCommand}"/>
+    <ToolbarItem Name="Add Photo" Icon="plusbutton.png" Command="{Binding ChoosePhotoCommand}"/>
   </ContentPage.ToolbarItems>
 
   <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
