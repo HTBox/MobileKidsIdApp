@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CSLA-XamarinForms">
-      <Version>4.7.200</Version>
+      <Version>4.8.1</Version>
     </PackageReference>
     <PackageReference Include="PCLCrypto">
       <Version>2.0.147</Version>
