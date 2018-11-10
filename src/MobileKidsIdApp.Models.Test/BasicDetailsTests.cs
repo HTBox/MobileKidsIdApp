@@ -8,13 +8,6 @@ namespace MobileKidsIdApp.Models.Test
     [TestClass]
     public class BasicDetailsTests
     {
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
-        {
-            ApplicationContext.ContextManager = new ApplicationContextManager();
-            ApplicationContext.User = new AppPrincipal(new AppIdentity(true));
-        }
-
         [TestCleanup]
         public async Task TestCleanup()
         {
