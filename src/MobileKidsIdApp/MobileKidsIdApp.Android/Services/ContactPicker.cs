@@ -22,8 +22,8 @@ namespace MobileKidsIdApp.Droid.Services
             pickContactIntent.SetType(Android.Provider.ContactsContract.CommonDataKinds.Phone.ContentType); // Show user only contacts w/ phone numbers
 
             var handler = new EventHandler<ActivityResultEventArgs>((sender, e) => OnActivityResult(tcs, e));
-            MainActivity.Instance.ShowContactPicker += handler;
-            tcs.Task.ContinueWith(t => MainActivity.Instance.ShowContactPicker -= handler);
+            MainActivity.Instance.ActivityResult += handler;
+            tcs.Task.ContinueWith(t => MainActivity.Instance.ActivityResult -= handler);
             try
             {
                 MainActivity.Instance.StartActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
@@ -36,19 +36,6 @@ namespace MobileKidsIdApp.Droid.Services
         }
         
         static int PICK_CONTACT_REQUEST = 42; // The request code
-
-        static Activity CurrentActivity
-        {
-            get
-            {
-                return MainActivity.Instance;
-            }
-        }
-
-        public static bool IsShowContactPickerIntent(int requestCode)
-        {
-            return requestCode == PICK_CONTACT_REQUEST;
-        }
 
         protected void OnActivityResult(TaskCompletionSource<ContactInfo> tcs, ActivityResultEventArgs e)
          {
