@@ -26,5 +26,10 @@ namespace MobileKidsIdApp.Models
             foreach (var item in list)
                 Add(DataPortal.FetchChild<DistinguishingFeature>(item));
         }
+
+        protected override void Child_Update(params object[] parameters)
+        {
+            base.Child_Update(parameters);
+        }
     }
 }

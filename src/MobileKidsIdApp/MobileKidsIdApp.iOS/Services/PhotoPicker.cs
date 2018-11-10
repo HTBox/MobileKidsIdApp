@@ -1,10 +1,6 @@
-﻿using MobileKidsIdApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using MobileKidsIdApp.Services;
+using Plugin.Media;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.iOS.Services.PhotoPicker))]
 
@@ -28,14 +24,14 @@ namespace MobileKidsIdApp.iOS.Services
         private async Task<string> GetPhotoPath()
         {
             string result = null;
-            //TODO: plugin no longer supported - needs to be updated
-            //var picker = CrossMedia.Current;
-            //if (picker.IsPickPhotoSupported)
-            //{
-            //    var photo = await picker.PickPhotoAsync();
-            //    if (photo != null)
-            //        result = photo.Path;
-            //}
+
+            var picker = CrossMedia.Current;
+            if (picker.IsPickPhotoSupported)
+            {
+                var photo = await picker.PickPhotoAsync();
+                if (photo != null)
+                    result = photo.Path;
+            }
             return result;
         }
     }

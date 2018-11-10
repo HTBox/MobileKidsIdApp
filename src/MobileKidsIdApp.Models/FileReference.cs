@@ -58,23 +58,44 @@ namespace MobileKidsIdApp.Models
             }
         }
 
+        private void Child_Insert(DataAccess.DataModels.FileReference reference)
+        {
+            Id = 0;
+            var parent = Parent as FileReferenceList;
+            if (parent != null && parent.Count > 0)
+            {
+                Id = parent.Max(_ => _.Id) + 1;
+            }
+            Child_Update(reference);
+        }
+
         private void Child_Insert(List<DataAccess.DataModels.FileReference> list)
         {
-
-            Id = ((FileReferenceList)Parent).Max(_ => _.Id) + 1;
+            Id = 0;
+            var parent = Parent as FileReferenceList;
+            if (parent != null && parent.Count > 0)
+            {
+                Id = parent.Max(_ => _.Id) + 1;
+            }
             Child_Update(list);
         }
 
-        private void Child_Update(List<DataAccess.DataModels.FileReference> list)
+        private void Child_Update(DataAccess.DataModels.FileReference reference)
         {
             using (BypassPropertyChecks)
             {
-                var reference = new DataAccess.DataModels.FileReference();
                 reference.Id = Id;
                 reference.ResourceType = ResourceType;
                 reference.Description = Description;
                 reference.FileName = FileName;
             }
+        }
+
+        private void Child_Update(List<DataAccess.DataModels.FileReference> list)
+        {
+            var reference = new DataAccess.DataModels.FileReference();
+            Child_Update(reference);
+            list.Add(reference);
         }
     }
 }

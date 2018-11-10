@@ -24,11 +24,11 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(DescriptionProperty, value); }
         }
 
-        public static readonly PropertyInfo<FileReference> PhotoReference = RegisterProperty<FileReference>(c => c.FileReference);
+        public static readonly PropertyInfo<FileReference> FileReferenceProperty = RegisterProperty<FileReference>(c => c.FileReference);
         public FileReference FileReference
         {
-            get { return GetProperty(PhotoReference); }
-            private set { LoadProperty(PhotoReference, value); }
+            get { return GetProperty(FileReferenceProperty); }
+            private set { LoadProperty(FileReferenceProperty, value); }
         }
 
         protected void Child_Create(int id)
@@ -36,6 +36,7 @@ namespace MobileKidsIdApp.Models
             using (BypassPropertyChecks)
             {
                 Id = id;
+                FileReference = DataPortal.CreateChild<FileReference>();
             }
             base.Child_Create();
         }
@@ -59,14 +60,14 @@ namespace MobileKidsIdApp.Models
         {
             using (BypassPropertyChecks)
             {
-                var feature = new DataAccess.DataModels.DistinguishingFeature();
-                feature.Id = Id;
-                feature.Description = Description;
-                if (FieldManager.FieldExists(PhotoReference))
+
+                var feature = new DataAccess.DataModels.DistinguishingFeature
                 {
-                    feature.FileReference = new DataAccess.DataModels.FileReference();
-                    DataPortal.UpdateChild(FileReference, feature.FileReference);
-                }
+                    Id = Id,
+                    Description = Description,
+                    FileReference = new DataAccess.DataModels.FileReference()
+                };
+                DataPortal.UpdateChild(FileReference, feature.FileReference);
                 list.Add(feature);
             }
         }

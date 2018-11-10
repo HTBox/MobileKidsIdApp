@@ -51,7 +51,9 @@ namespace MobileKidsIdApp.ViewModels
             Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
             if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
             {
-                await App.RootPage.Navigation.PopModalAsync();
+                App.RootPage.Navigation.InsertPageBefore(new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() }),
+                                                         App.RootPage.Navigation.NavigationStack.First());
+                await App.RootPage.Navigation.PopAsync();
             }
             else
             {
