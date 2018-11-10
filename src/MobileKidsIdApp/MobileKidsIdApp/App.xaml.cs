@@ -16,6 +16,8 @@ namespace MobileKidsIdApp
 		{
 			InitializeComponent();
 
+            Csla.ApplicationContext.ContextManager = new Models.ApplicationContextManager();
+
             RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
             MainPage = RootPage;
         }
