@@ -21,6 +21,11 @@ namespace MobileKidsIdApp.ViewModels
 
         }
 
+        internal async Task SaveDataAsync()
+        {
+            await App.CurrentFamily.SaveFamilyAsync();
+        }
+
         protected async override Task<Family> DoInitAsync()
         {
             return await Csla.DataPortal.FetchAsync<Models.Family>();

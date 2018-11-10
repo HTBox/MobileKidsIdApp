@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MobileKidsIdApp.Models;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -12,6 +13,12 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditFeaturesCommand { get; private set; }
         public ICommand EditCareProvidersCommand { get; private set; }
         public ICommand EditDocumentsCommand { get; private set; }
+
+        internal async Task SaveDataAsync()
+        {
+            await App.CurrentFamily.SaveFamilyAsync();
+        }
+
         public ICommand EditFamilyCommand { get; private set; }
         public ICommand EditFriendsCommand { get; private set; }
         public ICommand EditMedicalNotesCommand { get; private set; }

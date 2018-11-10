@@ -17,5 +17,11 @@ namespace MobileKidsIdApp.Views
             var vm = (ViewModels.ChildProfileList)BindingContext;
             await vm.ShowChild(child);
         }
+
+        protected override async void OnDisappearing()
+        {
+            base.OnDisappearing();
+            await ((ViewModels.ChildProfileList)BindingContext).SaveDataAsync();
+        }
     }
 }
