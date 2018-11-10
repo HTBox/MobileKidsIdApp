@@ -21,7 +21,7 @@ namespace MobileKidsIdApp.Models.Test
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
-            var child = DataPortal.CreateChild<Child>();
+            var child = family.AddNew();
             family.Add(child);
             var details = child.ChildDetails;
 
@@ -29,6 +29,7 @@ namespace MobileKidsIdApp.Models.Test
             details.FamilyName = "Zang";
             details.AdditionalName = "Harry";
             details.Birthday = DateTime.Parse("10/5/2012");
+            details.ContactId = "id";
             
             var newFamily = await family.SaveAsync();
             new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
@@ -41,7 +42,7 @@ namespace MobileKidsIdApp.Models.Test
             Assert.AreEqual("Zang", details.FamilyName, "FamilyName");
             Assert.AreEqual("Harry", details.AdditionalName, "AdditionalName");
             Assert.AreEqual(DateTime.Parse("10/5/2012"), details.Birthday, "Birthday");
-
+            Assert.AreEqual("id", details.ContactId, "ContactId");
         }
     }
 }
