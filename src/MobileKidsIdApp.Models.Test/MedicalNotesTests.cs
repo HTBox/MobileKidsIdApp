@@ -17,7 +17,7 @@ namespace MobileKidsIdApp.Models.Test
         }
 
         [TestMethod]
-        public async Task AddChild()
+        public async Task MedicalNotesPersistence()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
@@ -34,7 +34,10 @@ namespace MobileKidsIdApp.Models.Test
             medical.RegularMedications = "regular";
 
             var newFamily = await family.SaveAsync();
-            new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+
+            child = family[0];
+            medical = child.MedicalNotes;
 
             Assert.AreEqual("some", medical.Allergies, "Allergies");
             Assert.AreEqual(true, medical.Diabetic, "Diabetic");

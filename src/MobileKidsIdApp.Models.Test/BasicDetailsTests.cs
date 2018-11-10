@@ -33,6 +33,9 @@ namespace MobileKidsIdApp.Models.Test
             var newFamily = await family.SaveAsync();
             new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
 
+            child = family[0];
+            details = child.ChildDetails;
+
             details = family[0].ChildDetails;
             Assert.AreEqual("Johan", details.GivenName, "GivenName");
             Assert.AreEqual("Zang", details.FamilyName, "FamilyName");
