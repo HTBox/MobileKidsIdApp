@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace MobileKidsIdApp.Models.Test
 {
     [TestClass]
-    public class PhotosTests
+    public class FriendsTests
     {
         [TestCleanup]
         public async Task TestCleanup()
@@ -17,26 +17,23 @@ namespace MobileKidsIdApp.Models.Test
         }
 
         [TestMethod]
-        public async Task PhotosPersistence()
+        public async Task FriendsPersistence()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
             var child = family.AddNew();
-            var photos = child.Photos;
+            var friends = child.Friends;
+            var friend = friends.AddNew();
 
-            var photo = photos.AddNew();
-
-            photo.Description = "desc";
-            photo.FileName = "file";
+            friend.ContactId = "id";
 
             var newFamily = await family.SaveAsync();
             family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
             child = family[0];
-            photos = child.Photos;
+            friend = child.Friends[0];
+            Assert.AreEqual("id", friend.ContactId, "ContactId");
 
-            Assert.AreEqual("desc", photo.Description, "Description");
-            Assert.AreEqual("file", photo.FileName, "FileName");
         }
     }
 }
