@@ -47,5 +47,21 @@ namespace MobileKidsIdApp.Models.Test
 
             Assert.AreNotSame(child, family[0]);
         }
+
+        [TestMethod]
+        public async Task ClearFamily()
+        {
+            var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            var child = DataPortal.CreateChild<Child>();
+            family.Add(child);
+            await family.SaveAsync();
+
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            family.Clear();
+            await family.SaveAsync();
+
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            Assert.IsTrue(family.Count == 0);
+        }
     }
 }
