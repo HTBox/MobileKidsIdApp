@@ -17,7 +17,7 @@ namespace MobileKidsIdApp.Models.Test
         }
 
         [TestMethod]
-        public async Task MedicalNotesPersistence()
+        public async Task PhysicalDetailsPersistence()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
