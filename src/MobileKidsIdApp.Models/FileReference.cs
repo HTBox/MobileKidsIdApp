@@ -60,8 +60,12 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Insert(List<DataAccess.DataModels.FileReference> list)
         {
-
-            Id = ((FileReferenceList)Parent).Max(_ => _.Id) + 1;
+            Id = 0;
+            var parent = (FileReferenceList)Parent;
+            if (parent.Count > 0)
+            {
+                Id = parent.Max(_ => _.Id) + 1;
+            }
             Child_Update(list);
         }
 

@@ -3,7 +3,6 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MobileKidsIdApp.Droid.Services;
 using Android.Content;
 
 namespace MobileKidsIdApp.Droid
@@ -27,24 +26,23 @@ namespace MobileKidsIdApp.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if (ContactPicker.IsShowContactPickerIntent(requestCode))
+
+            if (ActivityResult != null)
             {
-                if (ShowContactPicker != null)
+                var args = new ActivityResultEventArgs
                 {
-                    var args = new ActivityResultEventArgs
-                    {
-                        data = data,
-                        requestCode = requestCode,
-                        resultCode = resultCode
-                    };
-                    ShowContactPicker(null, args);
-                }
+                    data = data,
+                    requestCode = requestCode,
+                    resultCode = resultCode
+                };
+
+                ActivityResult(this, args);
             }
         }
 
         internal static MainActivity Instance { get; private set; }
 
-        public event EventHandler<ActivityResultEventArgs> ShowContactPicker;
+        public event EventHandler<ActivityResultEventArgs> ActivityResult;
     }
 }
 
