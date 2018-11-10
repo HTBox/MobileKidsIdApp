@@ -14,8 +14,11 @@ namespace MobileKidsIdApp.ViewModels
 {
     public class Photos : ViewModelBase<Models.FileReferenceList>
     {
+        private bool IsAdding { get; set; }
+
         public Photos(FileReferenceList fileReferenceList)
         {
+            IsAdding = false;
             Model = fileReferenceList;
             _choosePhotoCommand = new Command(ChoosePhoto);
             _deletePhotoCommand = new Command(async obj =>
@@ -30,7 +33,7 @@ namespace MobileKidsIdApp.ViewModels
                 }
             });
 
-            Model.AddedNew += (async (o, e) =>
+            Model.AddedNew += async (o, e) =>
             {
                 var newItem = e.NewObject;
                 var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -46,7 +49,7 @@ namespace MobileKidsIdApp.ViewModels
                 var photoVM = new PhotoViewModel(newItem);
                 await photoVM.InitializeAsync();
                 PhotoViewModels.Add(photoVM);
-            });
+            };
 
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
         }
@@ -75,8 +78,13 @@ namespace MobileKidsIdApp.ViewModels
         public ObservableCollection<PhotoViewModel> PhotoViewModels { get; private set; }
 
         private void ChoosePhoto()
-        {           
-            BeginAddNew();
+        {
+            if (!IsAdding)
+            {
+                IsAdding = true;
+                BeginAddNew();
+                IsAdding = false;
+            }
         }
 
         private readonly ICommand _deletePhotoCommand;
