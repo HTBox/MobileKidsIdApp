@@ -11,6 +11,25 @@ namespace MobileKidsIdApp.Models
     [Serializable]
     public class AppIdentity : CslaIdentityBase<AppIdentity>
     {
+        /// <summary>
+        /// Creates an identity instance for runtime use.
+        /// </summary>
+        public AppIdentity() { }
+
+        /// <summary>
+        /// Creates an identity instance for unit testing
+        /// scenarios.
+        /// </summary>
+        /// <param name="testing"></param>
+        public AppIdentity(bool testing)
+        {
+            if (testing)
+            {
+                Name = "test";
+                IsAuthenticated = true;
+            }
+        }
+
         public static async Task<AppIdentity> LoginAsync(string password)
         {
             return await DataPortal.FetchAsync<AppIdentity>(password);
