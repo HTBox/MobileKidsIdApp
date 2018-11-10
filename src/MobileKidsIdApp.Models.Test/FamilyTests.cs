@@ -1,5 +1,7 @@
 using Csla;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MobileKidsIdApp.Models.Test
@@ -11,7 +13,7 @@ namespace MobileKidsIdApp.Models.Test
         public static void AssemblyInitialize(TestContext context)
         {
             ApplicationContext.ContextManager = new ApplicationContextManager();
-            ApplicationContext.User = new AppPrincipal(new AppIdentity(true));
+            ApplicationContext.User = new AppPrincipal(new AppIdentity("test"));
         }
 
         [TestCleanup]
@@ -62,6 +64,71 @@ namespace MobileKidsIdApp.Models.Test
 
             family = await Csla.DataPortal.FetchAsync<Models.Family>();
             Assert.IsTrue(family.Count == 0);
+        }
+
+        [TestMethod]
+        public async Task VerifyNewPassword()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetFamilyProvider();
+            // reset data to make sure there's no existing data file
+            await dal.ResetData();
+            // this should always be true b/c there's no existing file
+            var verified = await dal.VerifyPasswordAsync("abcdef");
+            Assert.IsTrue(verified);
+        }
+
+        [TestMethod]
+        public async Task VerifyBadPassword()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetFamilyProvider();
+            await dal.ResetData();
+            var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            family.AddNew().ChildDetails.FamilyName = "Smith";
+            await family.SaveAsync();
+            var verified = await dal.VerifyPasswordAsync("abcdef");
+            Assert.IsFalse(verified);
+        }
+
+        [TestMethod]
+        public async Task VerifyBackup()
+        {
+            var provider = new DataAccess.DataProviderFactory().GetDataProvider();
+            var dal = provider.GetFamilyProvider();
+            try
+            {
+                string FileName = "Family.txt";
+                string BackupFileName = "Family.bak";
+                string LocalFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string PrimaryPath = Path.Combine(LocalFolder, FileName);
+                string BackupPath = Path.Combine(LocalFolder, BackupFileName);
+
+                await dal.ResetData();
+                var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+                family.AddNew().ChildDetails.FamilyName = "Smith";
+                family = await family.SaveAsync();
+                family[0].ChildDetails.FamilyName = "Jones";
+                family = await family.SaveAsync();
+
+                Assert.IsTrue(File.Exists(PrimaryPath));
+                Assert.IsTrue(File.Exists(BackupPath));
+
+                family = await Csla.DataPortal.FetchAsync<Models.Family>();
+                Assert.AreEqual("Jones", family[0].ChildDetails.FamilyName);
+
+                // corrupt primary file
+                File.WriteAllText(PrimaryPath, "foobar");
+
+                // now backup file should be restored
+                family = await Csla.DataPortal.FetchAsync<Models.Family>();
+                Assert.AreEqual("Smith", family[0].ChildDetails.FamilyName);
+
+            }
+            finally
+            {
+                await dal.ResetData();
+            }
         }
     }
 }

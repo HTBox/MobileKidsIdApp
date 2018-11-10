@@ -12,12 +12,12 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
         private static DataModels.Family Family = new DataModels.Family();
         public static string ApplicationDataFile;
         public static string FamilyFile;
-        private static bool _isInitialized;
+        public static bool IsInitialized { get; set; }
 
         public static async Task Init()
         {
-            if (!_isInitialized)
-                _isInitialized = true;
+            if (!IsInitialized)
+                IsInitialized = true;
             else
                 return;
 

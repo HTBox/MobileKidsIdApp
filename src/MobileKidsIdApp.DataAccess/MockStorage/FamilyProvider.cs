@@ -33,5 +33,11 @@ namespace MobileKidsIdApp.DataAccess.MockStorage
             var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
             MockDb.FamilyFile = dataBlob;
         }
+
+        public async Task ResetData()
+        {
+            MockDb.IsInitialized = false;
+            await MockDb.Init();
+        }
     }
 }

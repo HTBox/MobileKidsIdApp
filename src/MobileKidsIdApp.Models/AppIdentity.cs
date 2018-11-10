@@ -21,11 +21,11 @@ namespace MobileKidsIdApp.Models
         /// scenarios.
         /// </summary>
         /// <param name="testing"></param>
-        public AppIdentity(bool testing)
+        public AppIdentity(string name)
         {
-            if (testing)
+            if (!string.IsNullOrEmpty(name))
             {
-                Name = "test";
+                Name = name;
                 IsAuthenticated = true;
             }
         }
