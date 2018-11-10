@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add" Command="{Binding NewItemCommand}"/>
+        <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
     <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <controls:RepeaterView x:TypeArguments="models:CareProvider" x:Name="Repeater" Spacing="10" Orientation="Vertical" ItemsSource="{Binding Model}"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">

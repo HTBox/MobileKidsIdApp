@@ -2,8 +2,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0y0b8ctdaesjbomq/branch/master?svg=true)](https://ci.appveyor.com/project/HTBox/mobilekidsidapp-i1cep)
 
-Mobile Kids ID Kit
-==================
+Kids ID Kit App
+===============
 The intent of the app is to help parents keep up to date information on their kids, and to provide parents with relevant information to keep their kids safe and what to do if they can’t find their child.
 
 This app is created in collaboration with [Missing Children Minnesota](http://missingchildrenmn.com/).

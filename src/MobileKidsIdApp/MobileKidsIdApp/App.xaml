@@ -51,20 +51,35 @@
 
             <!-- Label -->
             <Style x:Key="HeaderLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-DarkTeal-2}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="FontFamily" Value="{StaticResource HeaderCustomFont}" />
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="Margin" Value="25, 25, 25, 15" />
             </Style>
 
+            <Style x:Key="EntryLabel" TargetType="Label">
+                <Setter Property="Margin" Value="25, 0, 25, 0" />
+            </Style>
+
+            <Style x:Key="ErrorLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="25, 25, 25, 15" />
+            </Style>
+            
+            <!-- Entry -->
+            <Style x:Key="EntryText" TargetType="Entry">
+                <Setter Property="Margin" Value="25, 0, 25, 0" />
+            </Style>
+
             <!-- Grid -->
             <Style TargetType="Grid">
             </Style>
+            
             <!-- ListView -->
             <Style TargetType="ListView">
             </Style>
-
+                        
             <!-- StackLayout -->
 <!--            <Style TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-DarkTeal-1}" />
@@ -78,25 +93,38 @@
 
             <!-- TableView -->
             <Style TargetType="TableView">
+                <Setter Property="Margin" Value="15,0,15,0"/>
             </Style>
-
+            
             <!-- Button -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Green-2}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
             </Style>
             <Style x:Key="LoginButton" TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Green-2}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="25,5" />
             </Style>
             <Style x:Key="GridButton" TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Green-2}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style x:Key="InstructionButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="25,5" />
+            </Style>
+            <Style x:Key="ChildProfileEditButton" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="Margin" Value="25,5" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
