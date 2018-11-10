@@ -42,7 +42,7 @@ namespace MobileKidsIdApp.Models.Test
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
-            var child = DataPortal.CreateChild<Child>();
+            var child = family.AddNew();
             family.Add(child);
             var newFamily = await family.SaveAsync();
             new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
@@ -54,7 +54,7 @@ namespace MobileKidsIdApp.Models.Test
         public async Task ClearFamily()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
-            var child = DataPortal.CreateChild<Child>();
+            var child = family.AddNew();
             family.Add(child);
             await family.SaveAsync();
 

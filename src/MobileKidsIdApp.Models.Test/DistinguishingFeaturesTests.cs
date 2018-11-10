@@ -21,7 +21,7 @@ namespace MobileKidsIdApp.Models.Test
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
-            var child = DataPortal.CreateChild<Child>();
+            var child = family.AddNew();
             family.Add(child);
             var features = child.DistinguishingFeatures;
             var feature = features.AddNew();
