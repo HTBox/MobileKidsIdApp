@@ -14,11 +14,6 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditCareProvidersCommand { get; private set; }
         public ICommand EditDocumentsCommand { get; private set; }
 
-        internal async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-        }
-
         public ICommand EditFamilyCommand { get; private set; }
         public ICommand EditFriendsCommand { get; private set; }
         public ICommand EditMedicalNotesCommand { get; private set; }
