@@ -59,7 +59,6 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Fetch(DataAccess.DataModels.ChildDetails details)
         {
-            if (details == null) return;
             using (BypassPropertyChecks)
             {
                 GivenName = details.GivenName;
