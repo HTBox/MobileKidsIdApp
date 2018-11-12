@@ -17,6 +17,12 @@ namespace MobileKidsIdApp.Views
             await ((ViewModels.ChildProfileList)BindingContext).ShowChild(child);
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((ViewModels.IViewModel)BindingContext).SetActiveView();
+        }
+
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();

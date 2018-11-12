@@ -56,7 +56,7 @@ namespace MobileKidsIdApp.ViewModels
             }
             else
             {
-                await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+                await ShowPage(typeof(Views.ChildProfileItem), childProfileItemVM);
             }
         }
 
