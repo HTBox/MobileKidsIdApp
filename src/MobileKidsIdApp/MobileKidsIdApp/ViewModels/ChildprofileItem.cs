@@ -1,7 +1,4 @@
-﻿using Csla.Xaml;
-using System.Threading.Tasks;
-using MobileKidsIdApp.Models;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
@@ -19,67 +16,44 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand EditPhotosCommand { get; private set; }
         public ICommand EditChecklistCommand { get; private set; }
         public ICommand ExportChildProdfileCommand { get; private set; }
+
         public ChildProfileItem(Models.Child child)
         {
-            EditChildDetailsCommand = new Command(async () =>
-            {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.BasicDetails { BindingContext = await new BasicDetails(Model.ChildDetails).InitAsync() });
+            EditChildDetailsCommand = new Command(async () => {
+                await ShowPage(typeof(Views.BasicDetails), await new BasicDetails(Model.ChildDetails).InitAsync());
             });
-            EditFeaturesCommand = new Command(async () =>
-            {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.DistinguishingFeatures { BindingContext = await new DistinguishingFeatures(Model.DistinguishingFeatures).InitAsync() });
+            EditFeaturesCommand = new Command(async () => {
+                await ShowPage(typeof(Views.DistinguishingFeatures), await new DistinguishingFeatures(Model.DistinguishingFeatures).InitAsync());
             });
-            EditCareProvidersCommand = new Command(async () =>
-            {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.ProfessionalCareProviders { BindingContext = await new ProfessionalCareProviders(Model.ProfessionalCareProviders).InitAsync() });
+            EditCareProvidersCommand = new Command(async () => {
+                await ShowPage(typeof(Views.ProfessionalCareProviders), await new ProfessionalCareProviders(Model.ProfessionalCareProviders).InitAsync());
             });
             EditDocumentsCommand = new Command(async () => {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.Documents { BindingContext = await new Documents().InitAsync() });
-
+                await ShowPage(typeof(Views.Documents), await new Documents().InitAsync());
             });
-            EditFamilyCommand = new Command(async () => 
-            {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.FamilyMemberList { BindingContext = await new FamilyMemberList(Model.FamilyMembers).InitAsync() });
+            EditFamilyCommand = new Command(async () => {
+                await ShowPage(typeof(Views.FamilyMemberList), await new FamilyMemberList(Model.FamilyMembers).InitAsync());
             });
-            EditFriendsCommand = new Command(async () => 
-            {
-            await App.RootPage.Navigation.PushAsync(
-                new Views.FriendList { BindingContext = await new FriendList(Model.Friends).InitAsync() });
+            EditFriendsCommand = new Command(async () => {
+                await ShowPage(typeof(Views.FriendList), await new FriendList(Model.Friends).InitAsync());
             });
             EditMedicalNotesCommand = new Command(async () => {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.MedicalNotes { BindingContext = await new MedicalNotes(Model.MedicalNotes).InitAsync() });
+                await ShowPage(typeof(Views.MedicalNotes), await new MedicalNotes(Model.MedicalNotes).InitAsync());
             });
             EditPhysicalDetailsCommand = new Command(async () => {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.PhysicalDetails { BindingContext = await new PhysicalDetails(Model.PhysicalDetails).InitAsync() });
+                await ShowPage(typeof(Views.PhysicalDetails), await new PhysicalDetails(Model.PhysicalDetails).InitAsync());
             });
             EditPhotosCommand = new Command(async () => {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.Photos { BindingContext = await new Photos(Model.Photos).InitAsync() });
+                await ShowPage(typeof(Views.Photos), await new Photos(Model.Photos).InitAsync());
             });
             EditChecklistCommand = new Command(async () => {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.PreparationChecklist { BindingContext = await new PreparationChecklist(Model.Checklist).InitAsync() });
+                await ShowPage(typeof(Views.PreparationChecklist), await new PreparationChecklist(Model.Checklist).InitAsync());
             });
-            ExportChildProdfileCommand = new Command(async () =>
-            {
-                await App.RootPage.Navigation.PushAsync(
-                    new Views.DocumentRender { BindingContext = await new BasicDetails(Model.ChildDetails).InitAsync() });
+            ExportChildProdfileCommand = new Command(async () => {
+                await ShowPage(typeof(Views.DocumentRender), await new BasicDetails(Model.ChildDetails).InitAsync());
             });
 
             Model = child;
-        }
-
-        protected override Task<Child> DoInitAsync()
-        {
-            //Must override default implmentation that throws NotImplementedException.
-            return Task.FromResult(Model);
         }
     }
 }

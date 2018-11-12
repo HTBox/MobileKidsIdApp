@@ -1,5 +1,4 @@
-﻿using Csla.Xaml;
-using MobileKidsIdApp.Services;
+﻿using MobileKidsIdApp.Services;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -42,11 +41,6 @@ namespace MobileKidsIdApp.ViewModels
             Model = details;
         }
         
-        public async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-        }
-
         protected override async Task<ChildDetails> DoInitAsync()
         {
             _contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(Model.ContactId);

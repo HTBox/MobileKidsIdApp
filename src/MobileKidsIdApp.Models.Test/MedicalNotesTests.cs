@@ -2,6 +2,7 @@
 using Csla;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MobileKidsIdApp.Models.Test
 {
@@ -22,7 +23,6 @@ namespace MobileKidsIdApp.Models.Test
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
             var child = family.AddNew();
-            family.Add(child);
             var medical = child.MedicalNotes;
 
             medical.Allergies = "some";
@@ -46,6 +46,29 @@ namespace MobileKidsIdApp.Models.Test
             Assert.AreEqual("some notes", medical.Notes, "Notes");
             Assert.AreEqual("psych", medical.PsychMedications, "PsychMedications");
             Assert.AreEqual("regular", medical.RegularMedications, "RegularMedications");
+        }
+
+        [TestMethod]
+        public async Task MedicalNotesAddEditSave()
+        {
+            var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+
+            var child = family.AddNew();
+            child.ChildDetails.GivenName = "a";
+            child.ChildDetails.FamilyName = "z";
+            await family.SaveAsync();
+
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            child = family.First();
+            var med = child.MedicalNotes;
+            med.Allergies = "bad";
+
+            await family.SaveAsync();
+
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            child = family.First();
+            med = child.MedicalNotes;
+            Assert.AreEqual("bad", med.Allergies);
         }
     }
 }

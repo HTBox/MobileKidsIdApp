@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileKidsIdApp.Models", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsId.PdfGenerationAppService", "MobileKidsId.PdfGenerationAppService\MobileKidsId.PdfGenerationAppService.csproj", "{8309B5A6-93DB-4C37-9FA6-A63A6206AE50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileKidsIdApp.Models.Test", "MobileKidsIdApp.Models.Test\MobileKidsIdApp.Models.Test.csproj", "{D4BF6E89-1418-43BD-BE8B-F04F44DFFECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileKidsIdApp.Models.Test", "MobileKidsIdApp.Models.Test\MobileKidsIdApp.Models.Test.csproj", "{D4BF6E89-1418-43BD-BE8B-F04F44DFFECA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

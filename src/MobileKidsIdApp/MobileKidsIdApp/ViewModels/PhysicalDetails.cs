@@ -13,10 +13,5 @@ namespace MobileKidsIdApp.ViewModels
         {
             Model = physicalDetails;
         }
-
-        public async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-        }
     }
 }

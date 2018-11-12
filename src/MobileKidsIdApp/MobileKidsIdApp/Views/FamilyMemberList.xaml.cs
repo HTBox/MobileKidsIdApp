@@ -15,10 +15,16 @@ namespace MobileKidsIdApp.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((ViewModels.IViewModel)BindingContext).SetActiveView();
+        }
+
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
-            await ((ViewModels.FamilyMemberList)BindingContext).SaveDataAsync();
+            await ((ViewModels.IViewModel)BindingContext).CloseView();
         }
     }
 }

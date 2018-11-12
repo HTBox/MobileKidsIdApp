@@ -104,14 +104,14 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             var json = JsonConvert.SerializeObject(data);
             var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
             File.WriteAllText(PrimaryPath, dataBlob);
-            // prevent warning about no await in an async method
-            await Task.Delay(0);
+            
+            await Task.Delay(0); // prevent warning about no await in an async method
         }
 
         public async Task ResetData()
         {
-            // prevent warning about no await in an async method
-            await Task.Delay(0);
+            await Task.Delay(0); // prevent warning about no await in an async method
+
             if (File.Exists(BackupPath))
                 File.Delete(BackupPath);
             if (File.Exists(PrimaryPath))

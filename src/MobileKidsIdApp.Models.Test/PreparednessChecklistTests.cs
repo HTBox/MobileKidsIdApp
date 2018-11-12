@@ -22,7 +22,6 @@ namespace MobileKidsIdApp.Models.Test
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
             var child = family.AddNew();
-            family.Add(child);
             var list = child.Checklist;
 
             list.BirthCertificate = true;
@@ -35,11 +34,21 @@ namespace MobileKidsIdApp.Models.Test
             list.OtherParentsAndFamily = true;
             list.PhysicalDetails = true;
             list.SocialSecurityCard = true;
+            Assert.IsTrue(list.IsDirty, "list isdirty");
+
+            var originalFamily = family;
+            var originalChild = family[0];
+            var originalList = list;
 
             await family.SaveAsync();
-            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            var newFamily = await Csla.DataPortal.FetchAsync<Models.Family>();
+            new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
             child = family[0];
             list = child.Checklist;
+
+            Assert.AreSame(originalFamily, family);
+            Assert.AreSame(originalChild, family[0]);
+            Assert.AreSame(originalList, list);
 
             Assert.AreEqual(true, list.BirthCertificate, "BirthCertificate");
             Assert.AreEqual(true, list.ChildPhoto, "ChildPhoto");

@@ -101,7 +101,6 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Fetch(DataAccess.DataModels.PhysicalDetails details)
         {
-            if (details == null) return;
             using (BypassPropertyChecks)
             {
                 Height = details.Height;

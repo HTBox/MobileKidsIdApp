@@ -7,7 +7,7 @@ using Csla;
 
 namespace MobileKidsIdApp.Models
 {
-        [Serializable]
+    [Serializable]
     public class PreparationChecklist : BaseTypes.BusinessBase<PreparationChecklist>
     {
         public static readonly PropertyInfo<bool> ChildPhotoProperty = RegisterProperty<bool>(c => c.ChildPhoto);
@@ -82,7 +82,6 @@ namespace MobileKidsIdApp.Models
 
         private void Child_Fetch(DataAccess.DataModels.PreparationChecklist list)
         {
-            if (list == null) return;
             using (BypassPropertyChecks)
             {
                 ChildPhoto = list.ChildPhoto;

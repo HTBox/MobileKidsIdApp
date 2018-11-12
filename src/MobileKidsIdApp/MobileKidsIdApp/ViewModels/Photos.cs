@@ -54,11 +54,6 @@ namespace MobileKidsIdApp.ViewModels
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
         }
 
-        public async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-        }
-
         protected override async Task<FileReferenceList> DoInitAsync()
         {
             var photoViewModels = Model.Select(_ => new PhotoViewModel(_)).ToList();

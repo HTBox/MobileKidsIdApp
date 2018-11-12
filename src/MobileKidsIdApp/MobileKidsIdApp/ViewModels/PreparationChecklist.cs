@@ -1,4 +1,5 @@
 ﻿using Csla.Xaml;
+using MobileKidsIdApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

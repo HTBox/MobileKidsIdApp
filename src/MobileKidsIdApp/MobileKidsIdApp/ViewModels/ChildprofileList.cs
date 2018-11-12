@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class ChildProfileList : Csla.Xaml.ViewModelBase<Models.Family>
+    public class ChildProfileList : ViewModelBase<Models.Family>
     {
         public ICommand NewItemCommand { get; private set; }
         public ICommand RemoveItemCommand { get; private set; }
@@ -56,7 +56,7 @@ namespace MobileKidsIdApp.ViewModels
             }
             else
             {
-                await App.RootPage.Navigation.PushAsync(new Views.ChildProfileItem { BindingContext = childProfileItemVM });
+                await ShowPage(typeof(Views.ChildProfileItem), childProfileItemVM);
             }
         }
 
