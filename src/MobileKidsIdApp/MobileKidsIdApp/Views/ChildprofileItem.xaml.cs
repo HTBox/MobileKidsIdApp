@@ -14,11 +14,5 @@ namespace MobileKidsIdApp.Views
         {
             InitializeComponent();
         }
-
-        protected override async void OnDisappearing()
-        {
-            base.OnDisappearing();
-            await ((ViewModels.ChildProfileItem)BindingContext).SaveDataAsync();
-        }
     }
 }
