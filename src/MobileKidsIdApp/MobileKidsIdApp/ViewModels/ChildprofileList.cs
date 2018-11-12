@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class ChildProfileList : Csla.Xaml.ViewModelBase<Models.Family>
+    public class ChildProfileList : ViewModelBase<Models.Family>
     {
         public ICommand NewItemCommand { get; private set; }
         public ICommand RemoveItemCommand { get; private set; }

@@ -1,9 +1,5 @@
-﻿using Csla.Xaml;
-using System.Threading.Tasks;
-using MobileKidsIdApp.Models;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
-using System;
 
 namespace MobileKidsIdApp.ViewModels
 {

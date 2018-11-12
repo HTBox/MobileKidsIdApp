@@ -26,12 +26,6 @@ namespace MobileKidsIdApp.ViewModels
             Model = list;
         }
 
-        public async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-            Model = null;
-        }
-
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
         {
             //TODO: remove this OnPropertyChanged call when updating CSLA -

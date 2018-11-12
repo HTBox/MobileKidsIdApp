@@ -11,11 +11,5 @@ namespace MobileKidsIdApp.ViewModels
     {
         public string MainText
         { get { return "Coming Soon"; }}
-
-        internal async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-            Model = null;
-        }
     }
 }

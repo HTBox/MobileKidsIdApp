@@ -18,7 +18,7 @@ namespace MobileKidsIdApp.Views
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
-            await ((ViewModels.BasicDetails)BindingContext).SaveDataAsync();
+            await ((ViewModels.IViewModel)BindingContext).CloseView();
         }
     }
 }

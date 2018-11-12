@@ -14,11 +14,5 @@ namespace MobileKidsIdApp.ViewModels
         {
             Model = preparationChecklist;
         }
-
-        internal async Task SaveDataAsync()
-        {
-            await App.CurrentFamily.SaveFamilyAsync();
-            Model = null;
-        }
     }
 }

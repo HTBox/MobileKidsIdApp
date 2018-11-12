@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Views
@@ -14,8 +14,13 @@ namespace MobileKidsIdApp.Views
         private async void ShowChild(object sender, EventArgs e)
         {
             var child = (Models.Child)((ListView)sender).SelectedItem;
-            var vm = (ViewModels.ChildProfileList)BindingContext;
-            await vm.ShowChild(child);
+            await ((ViewModels.ChildProfileList)BindingContext).ShowChild(child);
+        }
+
+        protected override async void OnDisappearing()
+        {
+            base.OnDisappearing();
+            await ((ViewModels.IViewModel)BindingContext).CloseView(true);
         }
     }
 }
