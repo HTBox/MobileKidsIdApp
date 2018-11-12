@@ -77,11 +77,5 @@ namespace MobileKidsIdApp.ViewModels
 
             Model = child;
         }
-
-        protected override Task<Child> DoInitAsync()
-        {
-            //Must override default implmentation that throws NotImplementedException.
-            return Task.FromResult(Model);
-        }
     }
 }

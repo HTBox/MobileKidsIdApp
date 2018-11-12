@@ -1,4 +1,5 @@
 ﻿using Csla.Xaml;
+using MobileKidsIdApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MobileKidsIdApp.ViewModels
         internal async Task SaveDataAsync()
         {
             await App.CurrentFamily.SaveFamilyAsync();
+            Model = null;
         }
     }
 }

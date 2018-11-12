@@ -57,6 +57,7 @@ namespace MobileKidsIdApp.ViewModels
         public async Task SaveDataAsync()
         {
             await App.CurrentFamily.SaveFamilyAsync();
+            Model = null;
         }
 
         protected override async Task<FileReferenceList> DoInitAsync()

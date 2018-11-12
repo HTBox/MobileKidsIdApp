@@ -15,6 +15,7 @@ namespace MobileKidsIdApp.ViewModels
         internal async Task SaveDataAsync()
         {
             await App.CurrentFamily.SaveFamilyAsync();
+            Model = null;
         }
     }
 }
