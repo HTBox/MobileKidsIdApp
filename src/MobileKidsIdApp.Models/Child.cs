@@ -130,10 +130,13 @@ namespace MobileKidsIdApp.Models
         private void Child_Insert(List<DataAccess.DataModels.Child> list)
         {
             var parent = (Family)Parent;
-            if (parent.Count > 0)
-                Id = parent.Max(_ => _.Id) + 1;
-            else
-                Id = 0;
+            using (BypassPropertyChecks)
+            {
+                if (parent.Count > 0)
+                    Id = parent.Max(_ => _.Id) + 1;
+                else
+                    Id = 0;
+            }
             Child_Update(list);
         }
 

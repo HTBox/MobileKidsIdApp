@@ -43,10 +43,15 @@ namespace MobileKidsIdApp.Models.Test
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
 
             var child = family.AddNew();
+            Assert.IsTrue(((Csla.Core.IBusinessObject)child).Identity > 0);
+
             var newFamily = await family.SaveAsync();
+            //Assert.AreEqual(((Csla.Core.IBusinessObject)child).Identity, ((Csla.Core.IBusinessObject)newFamily[0]).Identity);
+
             new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, newFamily);
 
-            Assert.AreNotSame(child, family[0]);
+            //Assert.AreEqual(((Csla.Core.IBusinessObject)child).Identity, ((Csla.Core.IBusinessObject)family[0]).Identity);
+            //Assert.IsTrue(ReferenceEquals(child, family[0]));
         }
 
         [TestMethod]
