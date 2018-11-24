@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using MobileKidsIdApp.Models;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
@@ -54,6 +56,36 @@ namespace MobileKidsIdApp.ViewModels
             });
 
             Model = child;
+        }
+
+        protected override void OnModelChanged(Child oldValue, Child newValue)
+        {
+            base.OnModelChanged(oldValue, newValue);
+        }
+
+        public bool FirstAdd { get; set; }
+
+        public override void SetActiveView()
+        {
+            base.SetActiveView();
+
+            Model = ChildProfileList.CurrentChild;
+
+            if (FirstAdd)
+            {
+                FirstAdd = false;
+                EditChildDetailsCommand.Execute(null);
+            }
+        }
+
+        public override async Task CloseView()
+        {
+            await base.CloseView();
+        }
+
+        public override async Task CloseView(bool withoutSave)
+        {
+            await base.CloseView(withoutSave);
         }
     }
 }

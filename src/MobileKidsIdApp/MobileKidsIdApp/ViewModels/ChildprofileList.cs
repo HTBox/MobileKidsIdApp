@@ -42,22 +42,18 @@ namespace MobileKidsIdApp.ViewModels
 
         private async void Model_AddedNew(object sender, Csla.Core.AddedNewEventArgs<Child> e)
         {
-            await ShowChild(e.NewObject, true);
+            await ShowChild((Child)e.NewObject, true);
         }
+
+        public static Child CurrentChild { get; set; }
 
         public async Task ShowChild(Child child, bool? isNew = false)
         {
+            CurrentChild = child;
             var childProfileItemVM = new ChildProfileItem(child);
-            await childProfileItemVM.InitAsync();
-            if (isNew == true)
-            {
-                //Go directly to the basic details page for a new child.
-                childProfileItemVM.EditChildDetailsCommand.Execute(null);
-            }
-            else
-            {
-                await ShowPage(typeof(Views.ChildProfileItem), childProfileItemVM);
-            }
+            if (isNew.Value)
+                childProfileItemVM.FirstAdd = true;
+            await ShowPage(typeof(Views.ChildProfileItem), childProfileItemVM);
         }
 
         public async Task SaveFamilyAsync()
@@ -73,6 +69,23 @@ namespace MobileKidsIdApp.ViewModels
                 var saved = (Family)await savable.SaveAsync();
                 var merger = new Csla.Core.GraphMerger();
                 merger.MergeBusinessListGraph<Family, Child>(Model, saved);
+
+                // reset CurrentChild
+                if (CurrentChild != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        var itemDetails = item.ChildDetails;
+                        var curDetails = CurrentChild.ChildDetails;
+                        if (itemDetails.GivenName == curDetails.GivenName &&
+                            itemDetails.FamilyName == curDetails.FamilyName &&
+                            itemDetails.Birthday == curDetails.Birthday)
+                        {
+                            CurrentChild = item;
+                            break;
+                        }
+                    }
+                }
 
                 IsBusy = false;
                 OnSaved();
