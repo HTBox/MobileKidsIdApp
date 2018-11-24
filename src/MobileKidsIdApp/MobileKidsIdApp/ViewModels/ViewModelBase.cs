@@ -22,12 +22,12 @@ namespace MobileKidsIdApp.ViewModels
             await App.RootPage.Navigation.PushAsync(page);
         }
 
-        public void SetActiveView()
+        public virtual void SetActiveView()
         {
             _forwardNavigation = false;
         }
 
-        public async Task CloseView(bool withoutSave)
+        public virtual async Task CloseView(bool withoutSave)
         {
             if (_forwardNavigation) return;
             if (withoutSave)
@@ -36,7 +36,7 @@ namespace MobileKidsIdApp.ViewModels
                 await CloseView();
         }
 
-        public async Task CloseView()
+        public virtual async Task CloseView()
         {
             if (_forwardNavigation) return;
             // save data
