@@ -16,23 +16,43 @@ namespace MobileKidsIdApp.Controls
             set { SetValue(ItemsSourceProperty, value); }
         }
 
+        public DataTemplate ItemTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+            set { SetValue(ItemTemplateProperty, value); }
+        }
+
         public static readonly BindableProperty ItemsSourceProperty =
 #pragma warning disable CS0618 // Type or member is obsolete
-            BindableProperty.Create<RepeaterView<T>, ObservableCollection<T>>(p => p.ItemsSource, new ObservableCollection<T>(), BindingMode.OneWay, null, ItemsChanged);
+            BindableProperty.Create<RepeaterView<T>, ObservableCollection<T>>(
+                p => p.ItemsSource, new ObservableCollection<T>(), BindingMode.OneWay, null, ItemSourceChanged);
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        private static void ItemsChanged(BindableObject bindable, ObservableCollection<T> oldValue, ObservableCollection<T> newValue)
-        {
-            var control = bindable as RepeaterView<T>;
-            control.ItemsSource.CollectionChanged += control.ItemsSource_CollectionChanged;
-            control.Children.Clear();
+        public static readonly BindableProperty ItemTemplateProperty =
+#pragma warning disable CS0618 // Type or member is obsolete
+            BindableProperty.Create<RepeaterView<T>, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
+#pragma warning restore CS0618 // Type or member is obsolete
 
-            foreach (var item in newValue)
+        private static void ItemSourceChanged(BindableObject bindable, ObservableCollection<T> oldValue, ObservableCollection<T> newValue)
+        {
+            if (bindable is RepeaterView<T> control)
             {
-                var cell = control.ItemTemplate.CreateContent();
-                var view = ((ViewCell)cell).View;
-                view.BindingContext = item;
-                control.Children.Add(view);
+                if (oldValue != null)
+                    oldValue.CollectionChanged -= control.ItemsSource_CollectionChanged;
+
+                control.Children.Clear();
+
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += control.ItemsSource_CollectionChanged;
+                    foreach (var item in newValue)
+                    {
+                        var cell = control.ItemTemplate.CreateContent();
+                        var view = ((ViewCell)cell).View;
+                        view.BindingContext = item;
+                        control.Children.Add(view);
+                    }
+                }
             }
         }
 
@@ -54,21 +74,9 @@ namespace MobileKidsIdApp.Controls
                     view.BindingContext = item;
                     this.Children.Insert(ItemsSource.IndexOf(item), view);
                 }
-
                 this.UpdateChildrenLayout();
                 this.InvalidateLayout();
             }
-        }
-
-        public static readonly BindableProperty ItemTemplateProperty =
-#pragma warning disable CS0618 // Type or member is obsolete
-            BindableProperty.Create<RepeaterView<T>, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
-#pragma warning restore CS0618 // Type or member is obsolete
-
-        public DataTemplate ItemTemplate
-        {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
         }
     }
 }
