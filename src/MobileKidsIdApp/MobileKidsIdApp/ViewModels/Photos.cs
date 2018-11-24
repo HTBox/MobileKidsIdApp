@@ -1,5 +1,4 @@
-﻿using Csla.Xaml;
-using MobileKidsIdApp.Models;
+﻿using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
 using System;
 using System.Collections.Generic;
@@ -35,6 +34,12 @@ namespace MobileKidsIdApp.ViewModels
 
             Model.AddedNew += async (o, e) =>
             {
+                if (IsAdding)
+                {
+                    return;
+                }
+
+                IsAdding = true;
                 var newItem = e.NewObject;
                 var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 var fileName = GenerateUniqueFileNameFor(destinationDirectory);
@@ -42,13 +47,18 @@ namespace MobileKidsIdApp.ViewModels
                 var path = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
                 if (path == null)
                 {
-                    Model.Remove(newItem);
+                    if (newItem != null)
+                    {
+                        Model.Remove(newItem);
+                    }
                     return;
                 }
                 newItem.FileName = path;
                 var photoVM = new PhotoViewModel(newItem);
                 await photoVM.InitializeAsync();
                 PhotoViewModels.Add(photoVM);
+                IsAdding = false;
+                
             };
 
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
@@ -76,9 +86,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             if (!IsAdding)
             {
-                IsAdding = true;
                 BeginAddNew();
-                IsAdding = false;
             }
         }
 
