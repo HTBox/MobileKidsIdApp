@@ -25,10 +25,10 @@ namespace MobileKidsIdApp.UWP.Services
             //We only have temporary access to the file we get from the file picker, so need to copy it to
             //our new location inside this method instead of doing it later in the shared code.
             var copyToFolder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(copyToDirectory);
-            var copiedFile = await file.CopyAsync(copyToFolder, fileNameWithoutExtension + System.IO.Path.GetExtension(file.Path), 
-                    Windows.Storage.NameCollisionOption.ReplaceExisting);
+            string fullFileName = fileNameWithoutExtension + System.IO.Path.GetExtension(file.Path);
+            var copiedFile = await file.CopyAsync(copyToFolder, fullFileName, Windows.Storage.NameCollisionOption.ReplaceExisting);
             var listToken = Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(copiedFile);
-            return copiedFile.Path;
+            return fullFileName;
         }
     }
 }

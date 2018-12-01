@@ -26,9 +26,11 @@ namespace MobileKidsIdApp.ViewModels
                 PhotoViewModels.Remove(photoVM);
                 var fileRef = photoVM.FileReference;
                 Model.Remove(fileRef);
-                if (File.Exists(fileRef.FileName))
+                var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var fullPath = Path.Combine(documentsPath, fileRef.FileName);
+                if (File.Exists(fullPath))
                 {
-                    await Task.Run(() => File.Delete(fileRef.FileName));
+                    await Task.Run(() => File.Delete(fullPath));
                 }
             });
 
@@ -44,8 +46,9 @@ namespace MobileKidsIdApp.ViewModels
                 var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 var fileName = GenerateUniqueFileNameFor(destinationDirectory);
 
-                var path = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
-                if (path == null)
+                PrepareToShowModal();
+                var fullFileName = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
+                if (fullFileName == null)
                 {
                     if (newItem != null)
                     {
@@ -53,7 +56,7 @@ namespace MobileKidsIdApp.ViewModels
                     }
                     return;
                 }
-                newItem.FileName = path;
+                newItem.FileName = fullFileName;
                 var photoVM = new PhotoViewModel(newItem);
                 await photoVM.InitializeAsync();
                 PhotoViewModels.Add(photoVM);

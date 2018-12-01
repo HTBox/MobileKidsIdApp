@@ -24,8 +24,7 @@ namespace MobileKidsIdApp.iOS.Services
             ImagePicker = new UIImagePickerController
             {
                 SourceType = UIImagePickerControllerSourceType.PhotoLibrary,
-                MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary),
-                ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen // Please do not remove; necessary for save of the selected photo to work
+                MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary)
             };
 
             // Set event handlers
@@ -63,14 +62,16 @@ namespace MobileKidsIdApp.iOS.Services
                 using (System.IO.Stream stream = data.AsStream())
                 {
                     string extension = ".jpg";
-                    targetPath = System.IO.Path.Combine(CopyToDirectory, FileNameWithoutExtension + extension);
+
+                    string fullFileName = FileNameWithoutExtension + extension;
+                    targetPath = System.IO.Path.Combine(CopyToDirectory, fullFileName);
 
                     // copy the file to the destination and set the completion of the Task
                     using (var copiedFileStream = new System.IO.FileStream(targetPath, System.IO.FileMode.OpenOrCreate))
                     {
                         stream.CopyTo(copiedFileStream);
                     }
-                    TaskCompletionSource.SetResult(targetPath);
+                    TaskCompletionSource.SetResult(fullFileName); // we'll reconstruct the path at runtime
                 }
             }
             else
