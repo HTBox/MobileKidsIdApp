@@ -10,12 +10,9 @@ namespace MobileKidsIdApp.Models.BaseTypes
     public class BusinessBase<T> : Csla.BusinessBase<T> 
         where T: BusinessBase<T>
     {
-        public override bool IsDirty
+        public override bool IsSelfDirty
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

@@ -27,9 +27,9 @@
                             <Label Text="Clinic name"/>
                             <Entry Text="{Binding ClinicName}" Placeholder="example: Southside Clinic"/>
                             <Label Text="Address"/>
-                            <Entry Text="{Binding ClinicName}"/>
+                            <Entry Text="{Binding Address}"/>
                             <Label Text="Phone"/>
-                            <Entry Text="{Binding ClinicName}"/>
+                            <Entry Text="{Binding Phone}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
