@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.BasicDetails"
@@ -19,7 +19,7 @@
             <TableSection Title="Contact">
                   <ViewCell>
                     <StackLayout Orientation="Vertical">
-                      <Button Text="Change" Command="{Binding ChangeContactCommand}" Margin="300, 25, 300, 25"/>
+                      <Button Text="Change" Command="{Binding ChangeContactCommand}" />
                       <controls:PhoneContact BindingContext="{Binding Contact}" Margin="3" />
                     </StackLayout>
                   </ViewCell>
