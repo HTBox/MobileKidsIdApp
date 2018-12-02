@@ -24,6 +24,10 @@ namespace MobileKidsIdApp.Controls
         private static void ItemsChanged(BindableObject bindable, ObservableCollection<T> oldValue, ObservableCollection<T> newValue)
         {
             var control = bindable as RepeaterView<T>;
+            if (control.ItemsSource == null)
+            {
+                return;
+            }
             control.ItemsSource.CollectionChanged += control.ItemsSource_CollectionChanged;
             control.Children.Clear();
 
