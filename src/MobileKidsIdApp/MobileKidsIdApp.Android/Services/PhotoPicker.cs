@@ -46,7 +46,8 @@ namespace MobileKidsIdApp.Droid.Services
                     }
                     else
                     {
-                        var copiedPath = System.IO.Path.Combine(copyToDirectory, fileNameWithoutExtension, extension);
+                        var fullFileName = fileNameWithoutExtension + extension;
+                        var copiedPath = System.IO.Path.Combine(copyToDirectory, fullFileName);
                         using (var stream = MainActivity.Instance.ContentResolver.OpenInputStream(e.data.Data))
                         {
                             using (var copiedFileStream = new System.IO.FileStream(copiedPath, System.IO.FileMode.OpenOrCreate))
@@ -54,7 +55,7 @@ namespace MobileKidsIdApp.Droid.Services
                                 stream.CopyTo(copiedFileStream);
                             }
                         }
-                        tcs.SetResult(copiedPath);
+                        tcs.SetResult(fullFileName); // we'll reconstruct the path at runtime
                     }
                     return;
                 }

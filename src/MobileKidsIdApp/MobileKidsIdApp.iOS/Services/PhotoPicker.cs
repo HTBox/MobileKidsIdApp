@@ -1,38 +1,84 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Foundation;
 using MobileKidsIdApp.Services;
-using Plugin.Media;
+using UIKit;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.iOS.Services.PhotoPicker))]
-
 namespace MobileKidsIdApp.iOS.Services
 {
     public class PhotoPicker : IPhotoPicker
     {
-        public async Task<string> GetCopiedFilePath(string copyToDirectory, string fileNameWithoutExtension)
+        TaskCompletionSource<string> TaskCompletionSource { get; set; }
+        UIImagePickerController ImagePicker { get; set; }
+        string CopyToDirectory { get; set; }
+        string FileNameWithoutExtension { get; set; }
+
+        public Task<string> GetCopiedFilePath(string copyToDirectory, string fileNameWithoutExtension)
         {
-            string targetPath = null;
-            var originalPath = await GetPhotoPath();
-            if (!string.IsNullOrWhiteSpace(originalPath))
+            CopyToDirectory = copyToDirectory;
+            FileNameWithoutExtension = fileNameWithoutExtension;
+            TaskCompletionSource = new TaskCompletionSource<string>();
+
+            // Create and define UIImagePickerController
+            ImagePicker = new UIImagePickerController
             {
-                var extension = System.IO.Path.GetExtension(originalPath);
-                targetPath = System.IO.Path.Combine(copyToDirectory, fileNameWithoutExtension) + extension;
-                System.IO.File.Copy(originalPath, targetPath);
-            }
-            return targetPath;
+                SourceType = UIImagePickerControllerSourceType.PhotoLibrary,
+                MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary)
+            };
+
+            // Set event handlers
+            ImagePicker.FinishedPickingMedia += OnImagePickerFinishedPickingMedia;
+            ImagePicker.Canceled += OnImagePickerCancelled;
+            TaskCompletionSource.Task.ContinueWith(t =>
+            {
+                ImagePicker.FinishedPickingMedia -= OnImagePickerFinishedPickingMedia;
+                ImagePicker.Canceled -= OnImagePickerCancelled;
+            });
+
+            // Present UIImagePickerController;
+            UIWindow window = UIApplication.SharedApplication.KeyWindow;
+            var viewController = window.RootViewController;
+            viewController.PresentViewController(ImagePicker, true, null);
+
+            return TaskCompletionSource.Task;
         }
 
-        private async Task<string> GetPhotoPath()
+        private void OnImagePickerCancelled(object sender, EventArgs args)
         {
-            string result = null;
+            TaskCompletionSource.SetResult(null);
+            ImagePicker.DismissViewController(true, null);
+        }
 
-            var picker = CrossMedia.Current;
-            if (picker.IsPickPhotoSupported)
+        private void OnImagePickerFinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs args)
+        {
+            string targetPath = null;
+            UIImage image = args.EditedImage ?? args.OriginalImage;
+
+            if (image != null)
             {
-                var photo = await picker.PickPhotoAsync();
-                if (photo != null)
-                    result = photo.Path;
+                // Convert UIImage to .NET Stream object
+                NSData data = image.AsJPEG(1);
+                using (System.IO.Stream stream = data.AsStream())
+                {
+                    string extension = ".jpg";
+
+                    string fullFileName = FileNameWithoutExtension + extension;
+                    targetPath = System.IO.Path.Combine(CopyToDirectory, fullFileName);
+
+                    // copy the file to the destination and set the completion of the Task
+                    using (var copiedFileStream = new System.IO.FileStream(targetPath, System.IO.FileMode.OpenOrCreate))
+                    {
+                        stream.CopyTo(copiedFileStream);
+                    }
+                    TaskCompletionSource.SetResult(fullFileName); // we'll reconstruct the path at runtime
+                }
             }
-            return result;
+            else
+            {
+                TaskCompletionSource.SetResult(null);
+            }
+            ImagePicker.DismissViewController(true, null);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Csla.Xaml;
-using MobileKidsIdApp.Models;
+﻿using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
 using System;
 using System.Collections.Generic;
@@ -27,28 +26,42 @@ namespace MobileKidsIdApp.ViewModels
                 PhotoViewModels.Remove(photoVM);
                 var fileRef = photoVM.FileReference;
                 Model.Remove(fileRef);
-                if (File.Exists(fileRef.FileName))
+                var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var fullPath = Path.Combine(documentsPath, fileRef.FileName);
+                if (File.Exists(fullPath))
                 {
-                    await Task.Run(() => File.Delete(fileRef.FileName));
+                    await Task.Run(() => File.Delete(fullPath));
                 }
             });
 
             Model.AddedNew += async (o, e) =>
             {
+                if (IsAdding)
+                {
+                    return;
+                }
+
+                IsAdding = true;
                 var newItem = e.NewObject;
                 var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 var fileName = GenerateUniqueFileNameFor(destinationDirectory);
 
-                var path = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
-                if (path == null)
+                PrepareToShowModal();
+                var fullFileName = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
+                if (fullFileName == null)
                 {
-                    Model.Remove(newItem);
+                    if (newItem != null)
+                    {
+                        Model.Remove(newItem);
+                    }
                     return;
                 }
-                newItem.FileName = path;
+                newItem.FileName = fullFileName;
                 var photoVM = new PhotoViewModel(newItem);
                 await photoVM.InitializeAsync();
                 PhotoViewModels.Add(photoVM);
+                IsAdding = false;
+                
             };
 
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
@@ -76,9 +89,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             if (!IsAdding)
             {
-                IsAdding = true;
                 BeginAddNew();
-                IsAdding = false;
             }
         }
 

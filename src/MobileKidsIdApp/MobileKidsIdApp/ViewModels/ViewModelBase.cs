@@ -8,6 +8,7 @@ namespace MobileKidsIdApp.ViewModels
         void SetActiveView();
         Task CloseView(bool withoutSave);
         Task CloseView();
+        void PrepareToShowModal();
     }
 
     public class ViewModelBase<T> : Csla.Xaml.ViewModelBase<T>, IViewModel
@@ -43,6 +44,16 @@ namespace MobileKidsIdApp.ViewModels
             await App.CurrentFamily.SaveFamilyAsync();
             // release event handlers from model
             Model = default(T);
+        }
+
+        /// <summary>
+        /// When we want to display some view (a picker via the OS, for example) 
+        /// but we don't want to (or can't) push it on to the navigation stack ourselves, and we also don't want to trigger a save 
+        /// upon leaving the current view via CloseView() being called. 
+        /// </summary>
+        public void PrepareToShowModal()
+        {
+            _forwardNavigation = true;
         }
     }
 }
