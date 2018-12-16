@@ -16,6 +16,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             ChangeContactCommand = new Command(async () =>
             {
+                PrepareToShowModal();
                 ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
                 if (contact == null)
                 {
