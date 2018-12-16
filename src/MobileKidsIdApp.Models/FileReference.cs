@@ -38,6 +38,11 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(FileNameProperty, value); }
         }
 
+        private void Child_DeleteSelf()
+        {
+            // left empty to allow processing with no errors; the actual deletion is done at the Collection level
+        }
+
         private void Child_Create(int id)
         {
             using (BypassPropertyChecks)
