@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MobileKidsIdApp.Models;
 using System.Windows.Input;
@@ -18,7 +15,6 @@ namespace MobileKidsIdApp.ViewModels
             App.CurrentFamily = this;
             NewItemCommand = new Command(() => BeginAddNew());
             RemoveItemCommand = new Command(async (item) => { DoRemove(item); await SaveFamilyAsync();  });
-
         }
 
         protected async override Task<Family> DoInitAsync()
@@ -94,6 +90,8 @@ namespace MobileKidsIdApp.ViewModels
             {
                 IsBusy = false;
                 Error = ex;
+                Console.WriteLine("Error while saving family.");
+                Console.WriteLine(ex);
                 OnSaved();
             }
         }

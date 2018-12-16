@@ -1,7 +1,7 @@
-﻿using System;
-using Csla;
+﻿using Csla;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MobileKidsIdApp.Models.Test
 {
@@ -37,6 +37,32 @@ namespace MobileKidsIdApp.Models.Test
 
             Assert.AreEqual("desc", photo.Description, "Description");
             Assert.AreEqual("file", photo.FileName, "FileName");
+        }
+
+        [TestMethod]
+        public async Task PhotoDelete()
+        {
+            var family = await DataPortal.FetchAsync<Models.Family>();
+
+            var child = family.AddNew();
+            var photos = child.Photos;
+
+            var photo = photos.AddNew();
+
+            photo.Description = "desc";
+            photo.FileName = "file";
+
+            var newFamily = await family.SaveAsync();
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            var savedChild = family[0];
+            var savedPhoto = savedChild.Photos[0];
+            savedChild.Photos.Remove(savedPhoto);
+
+            newFamily = await family.SaveAsync();
+            family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            child = family[0];
+
+            Assert.IsTrue(!child.Photos.Any());
         }
     }
 }
