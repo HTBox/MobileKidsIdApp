@@ -39,7 +39,6 @@ namespace MobileKidsIdApp.Models
         public override void SetUser(IPrincipal principal)
         {
             _principal = principal;
-            Thread.CurrentPrincipal = principal;
         }
     }
 }
