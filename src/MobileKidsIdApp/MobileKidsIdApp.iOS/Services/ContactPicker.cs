@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ContactsUI;
 using Contacts;
@@ -20,9 +18,8 @@ namespace MobileKidsIdApp.iOS.Services
     /// <remarks>
     /// See https://developer.xamarin.com/recipes/ios/shared_resources/contacts/choose_a_contact/
     /// </remarks>
-    public class ContactPicker :  IContactPicker
+    public class ContactPicker : IContactPicker
     {
-
         public Task<ContactInfo> GetSelectedContactInfo()
         {
             var picker = new CNContactPickerViewController()
@@ -62,7 +59,24 @@ namespace MobileKidsIdApp.iOS.Services
 
         public Task<ContactInfo> GetContactInfoForId(string id)
         {
-            throw new NotImplementedException($"{nameof(GetContactInfoForId)} not yet implemented for iOS.");
+            var predicate = CNContact.GetPredicateForContacts(new string[] { id });
+            var fetchKeys = new NSString[] { CNContactKey.GivenName, CNContactKey.FamilyName, CNContactKey.MiddleName };
+
+            var store = new CNContactStore();
+            var contacts = store.GetUnifiedContacts(predicate, fetchKeys, out NSError error);
+            ContactInfo foundContact = null;
+            if (contacts.Any())
+            {
+                var contact = contacts[0];
+                foundContact = new ContactInfo
+                {
+                    Id = id,
+                    FamilyName = contact.FamilyName,
+                    AdditionalName = contact.MiddleName,
+                    GivenName = contact.GivenName
+                };
+            }
+            return Task.FromResult(foundContact);
         }
     }
 
@@ -96,7 +110,7 @@ namespace MobileKidsIdApp.iOS.Services
 
         internal void RaiseSelectionCanceled()
         {
-            if (this.SelectionCanceled != null) this.SelectionCanceled();
+            this.SelectionCanceled?.Invoke();
         }
 
         public delegate void ContactSelectedDelegate(CNContact contact);
@@ -104,7 +118,7 @@ namespace MobileKidsIdApp.iOS.Services
 
         internal void RaiseContactSelected(CNContact contact)
         {
-            if (this.ContactSelected != null) this.ContactSelected(contact);
+            this.ContactSelected?.Invoke(contact);
         }
 
         #endregion
