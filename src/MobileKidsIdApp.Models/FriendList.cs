@@ -11,19 +11,23 @@ namespace MobileKidsIdApp.Models
         protected override Friend AddNewCore()
         {
             var nextId = 0;
-            var maxId = this.OrderByDescending(fr => fr.Id).FirstOrDefault();
-            if (maxId != null)
-                nextId = maxId.Id + 1;
-            var newFriend = new Friend { Id = nextId };
+            if (this.Count > 0)
+            {
+                nextId = this.Max(r => r.Id) + 1;
+            }
 
+            var newFriend = DataPortal.CreateChild<Friend>(nextId);
             Add(newFriend);
             OnAddedNew(newFriend);
             return newFriend;
         }
+
         private void Child_Fetch(List<DataAccess.DataModels.Person> list)
         {
             foreach (var item in list)
+            {
                 Add(DataPortal.FetchChild<Friend>(item));
+            }
         }
     }
 }
