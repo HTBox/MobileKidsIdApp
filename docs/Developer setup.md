@@ -23,6 +23,23 @@ The Mac can host an iOS _simulator_. This is not an emulator, and code that runs
 
 The _best_ solution is to connect a real device (iPhone or iPad) to your Mac and deploy to that device. However, that requires that you have a $99/yr Apple developer license.
 
+#### iOS Free Provisioning
+It _is_ possible to do limited dev testing on physical devices via free iOS provisioning. It is very limited, but it may be useful if you don't have or don't want to pay for the Apple developer license. 
+Note that it requires an Apple ID that is not already linked to an Apple Developer account. More information on free iOS provisioning is available from the [Microsoft Xamarin Documentation article.](https://docs.microsoft.com/en-us/xamarin/ios/get-started/installation/device-provisioning/free-provisioning)
+
+#### iOS Auto Provisioning
+If you do have a paid Apple developer license, you can make use of auto provisioning. This is the easiest method of code-signing the app and provisioning of a physical device; it allows Visual Studio to manage all this for you.
+
+You must first ensure that you have your developer account Apple ID added to Visual Studio (either Mac or Windows versions). Instructions on this can be performed via Microsoft's Xamarin documentation article on [Apple Account Management.](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/apple-account-management)
+
+Authentication of your Apple ID is performed via fastlane, as specified in the above article. Here is more information on how to install and use [fastlane](https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/provisioning/fastlane/index) on your Mac. Alternatively, Visual Studio for Mac will also help walk you through installation of fastlane, when it's required. 
+
+Follow the steps in the [iOS Automatic Provisioning article](https://docs.microsoft.com/en-us/xamarin/ios/get-started/installation/device-provisioning/automatic-provisioning) which includes a video explaining more about simplified iOS provisioning.
+
+Please make sure to _not_ check in the changes made to the iOS project by enabling auto provisioning into source control, as they will be specific to your developer information. This will cause the local build to fail for other developers.
+
+* Note that sometimes, even when you've previously provisioned an iOS device, you need to trust the (Mac) computer it's plugged into before it will display in VS (Mac or Windows) for debugging. The easiest way to do this is to run iTunes on the Mac while your provisioned device is plugged in. You can also do this via XCode. You will then be prompted to trust the Mac on the device and enter the passcode. After this step, if you're running VS for Windows you may also have to re-pair to the Mac for the device to then show up for debugging.
+
 ### Android
 Android apps can be compiled on a PC or Mac or Linux. Emulators exist for all platforms. 
 
