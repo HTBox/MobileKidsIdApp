@@ -248,3 +248,16 @@ src/MCM.KidsIdApp.MobileApi/Web.Debug.config
 
 # Mac OS Hidden directories
 .DS_Store
+src/.mfractor/MobileKidsId.PdfGenerationAppService.8309b5a6-93db-4c37-9fa6-a63a6206ae50.db
+
+src/.mfractor/MobileKidsIdApp.Android.29ca5279-e40b-4987-bd02-f690670825c8.db
+
+src/.mfractor/MobileKidsIdApp.c16814ae-85b2-4df5-89ab-957d6d68d946.db
+
+src/.mfractor/MobileKidsIdApp.DataAccess.90a002bb-4cd4-42ba-bab6-56c8a2217e7e.db
+
+src/.mfractor/MobileKidsIdApp.Models.a6d14000-2f57-46fa-9378-6a2f1a6713e9.db
+
+src/.mfractor/MobileKidsIdApp.Models.Test.d4bf6e89-1418-43bd-be8b-f04f44dffeca.db
+
+src/.mfractor/MobileKidsIdApp.UWP.10997245-a694-4ab3-9766-299f2ccd8f1c.db
