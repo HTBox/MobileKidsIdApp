@@ -4,12 +4,41 @@
              x:Class="MobileKidsIdApp.Views.BasicDetails"
              xmlns:controls="clr-namespace:MobileKidsIdApp.Controls;assembly=MobileKidsIdApp"
              Title="Basic details">
+   
     <TableView Intent="Form">
         <TableView.Root>
             <TableSection Title="Name">
-                <EntryCell Label="Given" Text="{Binding Model.GivenName}" />
-                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}" />
-                <EntryCell Label="Family" Text="{Binding Model.FamilyName}" />
+                
+                <EntryCell Label="Given" Text="{Binding Model.GivenName}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+                
+                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+                
+                <EntryCell Label="Family" Text="{Binding Model.FamilyName}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+                
             </TableSection>
             <TableSection Title="Birthday">
                 <ViewCell>
