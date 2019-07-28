@@ -48,9 +48,11 @@ namespace MobileKidsIdApp.Models
         {
             using (BypassPropertyChecks)
             {
-                var person = new DataAccess.DataModels.Person();
-                person.Id = Id;
-                person.ContactId = ContactId;
+                var person = new DataAccess.DataModels.Person
+                {
+                    Id = Id,
+                    ContactId = ContactId
+                };
                 list.Add(person);
             }
         }

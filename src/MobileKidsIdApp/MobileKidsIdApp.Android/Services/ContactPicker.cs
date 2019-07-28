@@ -7,6 +7,7 @@ using Android.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.Droid.Services.ContactPicker))]
 namespace MobileKidsIdApp.Droid.Services
@@ -35,7 +36,7 @@ namespace MobileKidsIdApp.Droid.Services
             return tcs.Task;
         }
         
-        static int PICK_CONTACT_REQUEST = 42; // The request code
+        static readonly int PICK_CONTACT_REQUEST = 42; // The request code
 
         protected void OnActivityResult(TaskCompletionSource<ContactInfo> tcs, ActivityResultEventArgs e)
          {
@@ -87,24 +88,55 @@ namespace MobileKidsIdApp.Droid.Services
 
         public Task<ContactInfo> GetContactInfoForId(string id)
         {
-            var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
+            var tcs = new TaskCompletionSource<ContactInfo>();
+            var handler = new EventHandler<ActivityResultEventArgs>((sender, e) => OnActivityResult(tcs, e));
+            MainActivity.Instance.ActivityResult += handler;
+            tcs.Task.ContinueWith(t => MainActivity.Instance.ActivityResult -= handler);
+            try
+            {
+                MainActivity.Instance.StartActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
 
             ContactInfo contact = null;
-            var cursor = Application.Context
-                .ContentResolver.Query(uri, projection, null, null, null);
-            if ((cursor != null) && (cursor.Count > 0))
+            if (await UserHasContactPermission())
             {
-                cursor.MoveToFirst();
-                while ((cursor != null) && (cursor.IsAfterLast == false))
+                var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
+
+                var cursor = Application.Context
+                    .ContentResolver.Query(uri, projection, null, null, null);
+                if ((cursor != null) && (cursor.Count > 0))
                 {
-                    contact = GetContactInfoFromCursor(cursor);
-                    cursor.MoveToNext();
+                    cursor.MoveToFirst();
+                    while ((cursor != null) && (cursor.IsAfterLast == false))
+                    {
+                        contact = GetContactInfoFromCursor(cursor);
+                        cursor.MoveToNext();
+                    }
                 }
+                if (cursor != null)
+                    cursor.Close();
             }
-            if (cursor != null)
-                cursor.Close();
-            
-            return Task.FromResult(contact);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+            return tcs.Task;
+            //return Task.FromResult(contact);
+        }
+
+        readonly string[] PermissionsLocation =
+          {
+            Manifest.Permission.ReadContacts
+          };
+        const int RequestPermissionId = 0;
+
+        private async Task<bool> UserHasContactPermission()
+        {
+            const string permission = Manifest.Permission.AccessFineLocation;
+            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
+                return true;
+            else
+                return false;
         }
     }
 }
