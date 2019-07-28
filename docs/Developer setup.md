@@ -25,7 +25,7 @@ To do iOS development you must have a Mac, because Apple doesn't allow compilati
 
 The Mac can host an iOS _simulator_. This is not an emulator, and code that runs in the simulator may not work on a real device. However, the simulator is adequate for a lot of dev/debugging work.
 
-The _best_ solution is to connect a real device (iPhone or iPad) to your Mac and deploy to that device. However, that requires that you have a $99/yr Apple developer license.
+The _best_ solution is to connect a real device (iPhone or iPad) to your Mac and deploy to that device. For full functionality, a $99/yr Apple developer license is required. However, there is a free option; see below.
 
 #### iOS Free Provisioning
 It _is_ possible to do limited dev testing on physical devices via free iOS provisioning. It is very limited, but it may be useful if you don't have or don't want to pay for the Apple developer license. 
