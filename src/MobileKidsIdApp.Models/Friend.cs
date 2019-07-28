@@ -44,6 +44,15 @@ namespace MobileKidsIdApp.Models
             Child_Update(list);
         }
 
+        private void Child_Create(int id)
+        {
+            using (BypassPropertyChecks)
+            {
+                Id = id;
+            }
+            base.Child_Create();
+        }
+
         private void Child_Update(List<DataAccess.DataModels.Person> list)
         {
             using (BypassPropertyChecks)

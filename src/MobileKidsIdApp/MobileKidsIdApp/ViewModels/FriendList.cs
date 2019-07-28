@@ -1,10 +1,4 @@
-﻿using Csla.Xaml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 using Csla.Core;
 using MobileKidsIdApp.Models;
@@ -27,6 +21,18 @@ namespace MobileKidsIdApp.ViewModels
                 BeginAddNew();
             });
             Model = list;
+            Contacts = new ObservableCollection<ContactInfo>();
+        }
+
+        protected override async Task<Models.FriendList> DoInitAsync()
+        {
+            var picker = DependencyService.Get<IContactPicker>();
+            var contacts = await Task.WhenAll(Model.Select(c => picker.GetContactInfoForId(c.ContactId)));
+            foreach (var c in contacts)
+            {
+                Contacts.Add(c);
+            }
+            return Model;
         }
 
         protected override async Task<Models.FriendList> DoInitAsync()
