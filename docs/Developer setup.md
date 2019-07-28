@@ -4,7 +4,7 @@ Developer Environment Setup
 Requirements:
 * Windows 10 Pro 1809 or later (unless on Mac or Linux)
 * IDE
-  * Visual Studio 2017.7.3 or higher
+  * Visual Studio 2017.7.3 or higher (Visual Studio 2019 recommended)
   * Visual Studio for Mac
   * Visual Studio Code
 * Xamarin Tools or the Cross-platform Mobile option for Visual Studio
