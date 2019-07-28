@@ -2,14 +2,18 @@ Developer Environment Setup
 ===========================
 
 Requirements:
+* Windows 10 Pro 1809 or later (unless on Mac or Linux)
 * IDE
   * Visual Studio 2017.7.3 or higher
   * Visual Studio for Mac
   * Visual Studio Code
 * Xamarin Tools or the Cross-platform Mobile option for Visual Studio
-* Windows 10 FCU or later (unless on Mac or Linux)
 
-This solution relies on the Xamarin tools and SDK for iOS, Android, UWP, and other platforms. The Xamarin tools are free, and you must add them to your Visual Studio installation before you can work with the projects in this solution.
+This solution relies on some Visual Studio workloads:
+
+* Xamarin cross-platform tools and SDK for iOS/Android
+* UWP
+* ASP.NET web server
 
 Other dependencies are pulled from NuGet, and that should automatically occur on first build.
 
@@ -43,9 +47,9 @@ Please make sure to _not_ check in the changes made to the iOS project by enabli
 ### Android
 Android apps can be compiled on a PC or Mac or Linux. Emulators exist for all platforms. 
 
-The emulators for PC generally require VirtualBox and so can't run if you have HyperV installed (for Docker, or other reasons).
+The current/latest Android emulator that comes with Visual Studio runs on Hyper-V, so to use it your device must have Hyper-V installed and enabled.
 
-Again, the _best_ solution is to connect a real Android device to your computer and deploy to that device. No special licenses, software, or hardware is required, though you do need to enable developer mode on your Android device.
+The _best_ solution is to connect a real Android device to your computer and deploy to that device. No special licenses, software, or hardware is required, though you do need to enable developer mode on your Android device.
 
 ### Windows
 Windows UWP apps require Windows 10. You can run and debug the UWP app on your Win10 device, or in an emulator on Win10. These features are enabled when you have Visual Studio installed on your Win10 dev PC.
