@@ -18,7 +18,7 @@ namespace MobileKidsIdApp.Droid.Services
         {
             var tcs = new TaskCompletionSource<ContactInfo>();
 
-            Intent pickContactIntent =
+            var pickContactIntent =
                 new Intent(Intent.ActionPick, Android.Net.Uri.Parse("content://contacts"));
             pickContactIntent.SetType(Android.Provider.ContactsContract.CommonDataKinds.Phone.ContentType); // Show user only contacts w/ phone numbers
 
@@ -35,11 +35,11 @@ namespace MobileKidsIdApp.Droid.Services
             }
             return tcs.Task;
         }
-        
-        static readonly int PICK_CONTACT_REQUEST = 42; // The request code
+
+        static int PICK_CONTACT_REQUEST = 42; // The request code
 
         protected void OnActivityResult(TaskCompletionSource<ContactInfo> tcs, ActivityResultEventArgs e)
-         {
+        {
             // Check which request it is that we're responding to
             if (e.requestCode == PICK_CONTACT_REQUEST)
             {
@@ -63,7 +63,7 @@ namespace MobileKidsIdApp.Droid.Services
             }
 
             tcs.SetResult(null);
-         }
+        }
 
         private ContactInfo GetContactInfoFromCursor(Android.Database.ICursor cursor)
         {
@@ -88,19 +88,11 @@ namespace MobileKidsIdApp.Droid.Services
 
         public Task<ContactInfo> GetContactInfoForId(string id)
         {
-            var tcs = new TaskCompletionSource<ContactInfo>();
-            var handler = new EventHandler<ActivityResultEventArgs>((sender, e) => OnActivityResult(tcs, e));
-            MainActivity.Instance.ActivityResult += handler;
-            tcs.Task.ContinueWith(t => MainActivity.Instance.ActivityResult -= handler);
-            try
-            {
-                MainActivity.Instance.StartActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
-
-            ContactInfo contact = null;
-            if (await UserHasContactPermission())
+            if (UserHasContactPermission())
             {
                 var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
 
+                ContactInfo contact = null;
                 var cursor = Application.Context
                     .ContentResolver.Query(uri, projection, null, null, null);
                 if ((cursor != null) && (cursor.Count > 0))
@@ -114,26 +106,21 @@ namespace MobileKidsIdApp.Droid.Services
                 }
                 if (cursor != null)
                     cursor.Close();
+
+                return Task.FromResult(contact);
             }
-            }
-            catch (Exception ex)
+            else
             {
-                tcs.SetException(ex);
+                return Task.FromResult(default(ContactInfo));
             }
-            return tcs.Task;
-            //return Task.FromResult(contact);
         }
 
-        readonly string[] PermissionsLocation =
-          {
-            Manifest.Permission.ReadContacts
-          };
-        const int RequestPermissionId = 0;
-
-        private async Task<bool> UserHasContactPermission()
+        private bool UserHasContactPermission()
         {
-            const string permission = Manifest.Permission.AccessFineLocation;
-            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
+            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) != (int)Android.Content.PM.Permission.Granted)
+                Android.Support.V4.App.ActivityCompat.RequestPermissions(MainActivity.Instance, new string[] { Manifest.Permission.ReadContacts }, PICK_CONTACT_REQUEST);
+
+            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) == (int)Android.Content.PM.Permission.Granted)
                 return true;
             else
                 return false;

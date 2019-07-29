@@ -4,25 +4,24 @@
              x:Class="MobileKidsIdApp.Views.FriendList" 
              xmlns:controls="clr-namespace:MobileKidsIdApp.Controls;assembly=MobileKidsIdApp"
              xmlns:models="clr-namespace:MobileKidsIdApp.Models;assembly=MobileKidsIdApp.Models"
-             xmlns:viewmodels="clr-namespace:MobileKidsIdApp.ViewModels;assembly=MobileKidsIdApp"
              Title="Friends">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
-  </ContentPage.ToolbarItems>
-  <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-    <controls:RepeaterView x:TypeArguments="models:Friend" x:Name="Repeater" Spacing="10" 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <controls:RepeaterView x:TypeArguments="models:Friend" x:Name="Repeater" Spacing="10" 
                            Orientation="Vertical" ItemsSource="{Binding List}"  
                            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-      <controls:RepeaterView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <StackLayout>
-              <Label Text="{Binding Display}"/>
-              <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </controls:RepeaterView.ItemTemplate>
-    </controls:RepeaterView>
-  </ScrollView>
+            <controls:RepeaterView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Display}"/>
+                            <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </controls:RepeaterView.ItemTemplate>
+        </controls:RepeaterView>
+    </ScrollView>
 </ContentPage>

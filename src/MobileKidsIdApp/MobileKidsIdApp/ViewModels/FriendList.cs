@@ -1,9 +1,11 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
-using Csla.Core;
+﻿using Csla.Core;
 using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -21,18 +23,6 @@ namespace MobileKidsIdApp.ViewModels
                 BeginAddNew();
             });
             Model = list;
-            Contacts = new ObservableCollection<ContactInfo>();
-        }
-
-        protected override async Task<Models.FriendList> DoInitAsync()
-        {
-            var picker = DependencyService.Get<IContactPicker>();
-            var contacts = await Task.WhenAll(Model.Select(c => picker.GetContactInfoForId(c.ContactId)));
-            foreach (var c in contacts)
-            {
-                Contacts.Add(c);
-            }
-            return Model;
         }
 
         protected override async Task<Models.FriendList> DoInitAsync()
@@ -42,7 +32,8 @@ namespace MobileKidsIdApp.ViewModels
                 try
                 {
                     ContactInfo contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(item.ContactId);
-                    List.Add(new FriendInfo(contact));
+                    if (contact != null)
+                        List.Add(new FriendInfo(contact));
                 }
                 catch (Exception ex)
                 {
@@ -54,11 +45,6 @@ namespace MobileKidsIdApp.ViewModels
 
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
         {
-            //TODO: remove this OnPropertyChanged call when updating CSLA -
-            // it is a workaround for a bug that's fixed in future versions
-            // 2-11-2017 : Still necessary.
-            //OnPropertyChanged("Model");
-
             if (oldValue != null)
                 oldValue.AddedNew -= Model_AddedNew;
             if (newValue != null)
@@ -84,6 +70,7 @@ namespace MobileKidsIdApp.ViewModels
                     e.NewObject.ContactId = contact.Id;
                     List.Add(new FriendInfo(contact));
                     OnPropertyChanged("Model");
+                    OnPropertyChanged("List");
                 }
                 _adding = false;
             }
