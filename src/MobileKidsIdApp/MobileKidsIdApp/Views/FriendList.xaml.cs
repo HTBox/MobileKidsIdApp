@@ -26,5 +26,19 @@ namespace MobileKidsIdApp.Views
             base.OnDisappearing();
             await ((ViewModels.IViewModel)BindingContext).CloseView();
         }
+
+        private void ChangeItem(object sender, EventArgs e)
+        {
+            var vm = ((ViewModels.FriendList)BindingContext);
+            vm.CurrentItem = (ViewModels.FriendInfo)((Button)sender).BindingContext;
+            vm.ChangeContact();
+        }
+
+        private void DeleteItem(object sender, EventArgs e)
+        {
+            var vm = ((ViewModels.FriendList)BindingContext);
+            vm.CurrentItem = (ViewModels.FriendInfo)((Button)sender).BindingContext;
+            vm.DeleteContact();
+        }
     }
 }

@@ -57,11 +57,18 @@ namespace MobileKidsIdApp.Models
         {
             using (BypassPropertyChecks)
             {
-                var person = new DataAccess.DataModels.Person();
-                person.Id = Id;
-                person.ContactId = ContactId;
+                var person = new DataAccess.DataModels.Person
+                {
+                    Id = Id,
+                    ContactId = ContactId
+                };
                 list.Add(person);
             }
+        }
+
+        private void Child_DeleteSelf()
+        {
+            // do nothing - if we don't re-add this item it won't exist
         }
     }
 }

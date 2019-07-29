@@ -33,7 +33,27 @@ namespace MobileKidsIdApp.Models.Test
             child = family[0];
             friend = child.Friends[0];
             Assert.AreEqual("id", friend.ContactId, "ContactId");
+        }
 
+        [TestMethod]
+        public async Task RemoveFriend()
+        {
+            var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+
+            var child = family.AddNew();
+            var friends = child.Friends;
+            var friend = friends.AddNew();
+
+            friend.ContactId = "id";
+
+            await family.SaveAndMergeAsync();
+
+            child = family[0];
+            friend = child.Friends[0];
+            child.Friends.Remove(friend);
+
+            await family.SaveAndMergeAsync();
+            Assert.AreEqual(0, child.Friends.Count, "Zero friends");
         }
     }
 }

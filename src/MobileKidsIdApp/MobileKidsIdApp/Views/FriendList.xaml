@@ -4,24 +4,37 @@
              x:Class="MobileKidsIdApp.Views.FriendList" 
              xmlns:controls="clr-namespace:MobileKidsIdApp.Controls;assembly=MobileKidsIdApp"
              xmlns:models="clr-namespace:MobileKidsIdApp.Models;assembly=MobileKidsIdApp.Models"
-             xmlns:viewmodels="clr-namespace:MobileKidsIdApp.ViewModels;assembly=MobileKidsIdApp"
              Title="Friends">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
-  </ContentPage.ToolbarItems>
-  <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-    <controls:RepeaterView x:TypeArguments="viewmodels:ContactInfo" x:Name="Repeater" Spacing="10" Orientation="Vertical" ItemsSource="{Binding Contacts}"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-      <controls:RepeaterView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <StackLayout>
-              <Label Text="{Binding FamilyName}" />
-              <Label Text="{Binding AdditionalName}" />
-              <Label Text="{Binding GivenName}" />
-            </StackLayout>
-          </ViewCell>
-        </DataTemplate>
-      </controls:RepeaterView.ItemTemplate>
-    </controls:RepeaterView>
-  </ScrollView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Path=Display}"/>
+                        <Button Text="Change" Clicked="ChangeItem" Style="{StaticResource ItemButton}" />
+                        <Button Text="Remove" Clicked="DeleteItem" Style="{StaticResource ItemButton}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    <!--<ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <controls:RepeaterView x:TypeArguments="models:Friend" x:Name="Repeater" Spacing="10" 
+                           Orientation="Vertical" ItemsSource="{Binding List}"  
+                           VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <controls:RepeaterView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Display}"/>
+                            <Button Text="Change" Command="{Binding ChangeContactCommand}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </controls:RepeaterView.ItemTemplate>
+        </controls:RepeaterView>
+    </ScrollView>-->
 </ContentPage>

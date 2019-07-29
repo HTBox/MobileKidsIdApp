@@ -31,19 +31,14 @@ namespace MobileKidsIdApp.ViewModels
         public virtual async Task CloseView(bool withoutSave)
         {
             if (_forwardNavigation) return;
-            if (withoutSave)
-                Model = default(T);
-            else
-                await CloseView();
+            if (!withoutSave)
+                await App.CurrentFamily.SaveFamilyAsync();
+            Model = default(T);
         }
 
         public virtual async Task CloseView()
         {
-            if (_forwardNavigation) return;
-            // save data
-            await App.CurrentFamily.SaveFamilyAsync();
-            // release event handlers from model
-            Model = default(T);
+            await CloseView(false);
         }
 
         /// <summary>

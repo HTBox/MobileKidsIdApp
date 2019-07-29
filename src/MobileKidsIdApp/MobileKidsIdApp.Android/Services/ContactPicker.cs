@@ -7,6 +7,7 @@ using Android.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.Droid.Services.ContactPicker))]
 namespace MobileKidsIdApp.Droid.Services
@@ -17,7 +18,7 @@ namespace MobileKidsIdApp.Droid.Services
         {
             var tcs = new TaskCompletionSource<ContactInfo>();
 
-            Intent pickContactIntent =
+            var pickContactIntent =
                 new Intent(Intent.ActionPick, Android.Net.Uri.Parse("content://contacts"));
             pickContactIntent.SetType(Android.Provider.ContactsContract.CommonDataKinds.Phone.ContentType); // Show user only contacts w/ phone numbers
 
@@ -34,11 +35,11 @@ namespace MobileKidsIdApp.Droid.Services
             }
             return tcs.Task;
         }
-        
+
         static int PICK_CONTACT_REQUEST = 42; // The request code
 
         protected void OnActivityResult(TaskCompletionSource<ContactInfo> tcs, ActivityResultEventArgs e)
-         {
+        {
             // Check which request it is that we're responding to
             if (e.requestCode == PICK_CONTACT_REQUEST)
             {
@@ -62,7 +63,7 @@ namespace MobileKidsIdApp.Droid.Services
             }
 
             tcs.SetResult(null);
-         }
+        }
 
         private ContactInfo GetContactInfoFromCursor(Android.Database.ICursor cursor)
         {
@@ -87,24 +88,42 @@ namespace MobileKidsIdApp.Droid.Services
 
         public Task<ContactInfo> GetContactInfoForId(string id)
         {
-            var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
-
-            ContactInfo contact = null;
-            var cursor = Application.Context
-                .ContentResolver.Query(uri, projection, null, null, null);
-            if ((cursor != null) && (cursor.Count > 0))
+            if (UserHasContactPermission())
             {
-                cursor.MoveToFirst();
-                while ((cursor != null) && (cursor.IsAfterLast == false))
+                var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, id);
+
+                ContactInfo contact = null;
+                var cursor = Application.Context
+                    .ContentResolver.Query(uri, projection, null, null, null);
+                if ((cursor != null) && (cursor.Count > 0))
                 {
-                    contact = GetContactInfoFromCursor(cursor);
-                    cursor.MoveToNext();
+                    cursor.MoveToFirst();
+                    while ((cursor != null) && (cursor.IsAfterLast == false))
+                    {
+                        contact = GetContactInfoFromCursor(cursor);
+                        cursor.MoveToNext();
+                    }
                 }
+                if (cursor != null)
+                    cursor.Close();
+
+                return Task.FromResult(contact);
             }
-            if (cursor != null)
-                cursor.Close();
-            
-            return Task.FromResult(contact);
+            else
+            {
+                return Task.FromResult(default(ContactInfo));
+            }
+        }
+
+        private bool UserHasContactPermission()
+        {
+            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) != (int)Android.Content.PM.Permission.Granted)
+                Android.Support.V4.App.ActivityCompat.RequestPermissions(MainActivity.Instance, new string[] { Manifest.Permission.ReadContacts }, PICK_CONTACT_REQUEST);
+
+            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) == (int)Android.Content.PM.Permission.Granted)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -7,6 +7,5 @@ namespace MobileKidsIdApp.ViewModels
         public string FamilyName { get; set; }
         public string AdditionalName { get; set; }
         public string GivenName { get; set; }
-        
     }
 }

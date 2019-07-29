@@ -1,48 +1,49 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
-using Csla.Core;
+﻿using Csla.Core;
 using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
-using System.Threading.Tasks;
-using System.Linq;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
     public class FriendList : ViewModelBase<Models.FriendList>
     {
         public ICommand NewItemCommand { get; private set; }
-        public ObservableCollection<ContactInfo> Contacts { get; private set; }
+
+        public ObservableCollection<FriendInfo> List { get; private set; }
+        public FriendInfo CurrentItem { get; set; }
 
         public FriendList(Models.FriendList list)
         {
-            NewItemCommand = new Command(() =>
-            {
-                BeginAddNew();
-            });
+            List = new ObservableCollection<FriendInfo>();
+            NewItemCommand = new Command(() => BeginAddNew());
             Model = list;
-            Contacts = new ObservableCollection<ContactInfo>();
         }
 
         protected override async Task<Models.FriendList> DoInitAsync()
         {
-            var picker = DependencyService.Get<IContactPicker>();
-            var contacts = await Task.WhenAll(Model.Select(c => picker.GetContactInfoForId(c.ContactId)));
-            foreach (var c in contacts)
+            foreach (var item in Model)
             {
-                Contacts.Add(c);
+                try
+                {
+                    ContactInfo contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(item.ContactId);
+                    if (contact != null)
+                        List.Add(new FriendInfo(contact));
+                }
+                catch (Exception ex)
+                {
+                    var x = ex;
+                }
             }
-            return Model;
+            return await base.DoInitAsync();
         }
 
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
         {
-            //TODO: remove this OnPropertyChanged call when updating CSLA -
-            // it is a workaround for a bug that's fixed in future versions
-            // 2-11-2017 : Still necessary.
-            OnPropertyChanged("Model");
-
             if (oldValue != null)
                 oldValue.AddedNew -= Model_AddedNew;
             if (newValue != null)
@@ -51,30 +52,49 @@ namespace MobileKidsIdApp.ViewModels
             base.OnModelChanged(oldValue, newValue);
         }
 
+        private bool _adding = false;
         private async void Model_AddedNew(object sender, AddedNewEventArgs<Friend> e)
         {
-            IContactPicker contactPicker = DependencyService.Get<IContactPicker>();
-            PrepareToShowModal();
-            ContactInfo contact = await contactPicker.GetSelectedContactInfo();
-            if (contact == null)
+            if (!_adding)
             {
-                //Do nothing, user must have cancelled.
-            }
-            else
-            {
-                var contactInfo = await contactPicker.GetContactInfoForId(contact.Id);
-                if (contactInfo != null)
+                _adding = true;
+                PrepareToShowModal();
+                ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
+                if (contact == null)
                 {
-                    Contacts.Add(contactInfo);
+                    Model.Remove(e.NewObject);
                 }
                 else
                 {
-                    throw new NullReferenceException($"Could not obtain contact details for contact ID {contact.Id}. Should never happen.");
+                    e.NewObject.ContactId = contact.Id;
+                    List.Add(new FriendInfo(contact));
                 }
-
-                e.NewObject.ContactId = contact.Id;
-                OnPropertyChanged(nameof(Model));
+                _adding = false;
             }
+        }
+
+        public async void ChangeContact()
+        {
+            if (CurrentItem == null) return;
+
+            PrepareToShowModal();
+            ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
+            if (contact != null && CurrentItem.ContactId != contact.Id)
+            {
+                var oldItem = Model.Where(m => m.ContactId == CurrentItem.ContactId).FirstOrDefault();
+                if (oldItem != null)
+                    oldItem.ContactId = contact.Id;
+                List[List.IndexOf(CurrentItem)] = new FriendInfo(contact);
+            }
+        }
+
+        public void DeleteContact()
+        {
+            if (CurrentItem == null) return;
+
+            var oldItem = Model.Where(m => m.ContactId == CurrentItem.ContactId).FirstOrDefault();
+            Model.Remove(oldItem);
+            List.RemoveAt(List.IndexOf(CurrentItem));
         }
     }
 }
