@@ -13,8 +13,9 @@
             <DataTemplate>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Path=Display}" Margin="0,0,10,0"/>
-                        <Button Text="Change" Clicked="ChangeItem" />
+                        <Label Text="{Binding Path=Display}"/>
+                        <Button Text="Change" Clicked="ChangeItem" Style="{StaticResource ItemButton}" />
+                        <Button Text="Remove" Clicked="DeleteItem" Style="{StaticResource ItemButton}" />
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

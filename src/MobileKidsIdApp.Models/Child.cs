@@ -160,7 +160,7 @@ namespace MobileKidsIdApp.Models
         }
         private void Child_DeleteSelf()
         {
-           
+            // do nothing - if we don't re-add this item it won't exist
         }
     }
 }

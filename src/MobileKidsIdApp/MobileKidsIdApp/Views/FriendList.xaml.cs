@@ -33,5 +33,12 @@ namespace MobileKidsIdApp.Views
             vm.CurrentItem = (ViewModels.FriendInfo)((Button)sender).BindingContext;
             vm.ChangeContact();
         }
+
+        private void DeleteItem(object sender, EventArgs e)
+        {
+            var vm = ((ViewModels.FriendList)BindingContext);
+            vm.CurrentItem = (ViewModels.FriendInfo)((Button)sender).BindingContext;
+            vm.DeleteContact();
+        }
     }
 }

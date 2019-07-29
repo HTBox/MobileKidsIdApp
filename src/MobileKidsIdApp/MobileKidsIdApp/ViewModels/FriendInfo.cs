@@ -15,7 +15,7 @@ namespace MobileKidsIdApp.ViewModels
             GivenName = contact.GivenName;
             AdditionalName = contact.AdditionalName;
 
-            Display = $"{GivenName} {FamilyName} ({ContactId})";
+            Display = $"{GivenName} {FamilyName}";
         }
 
         public string ContactId { get; }

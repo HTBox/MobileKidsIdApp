@@ -9,6 +9,8 @@
             See MCM Brand Inspriation Board for usage guidelines on color pallette.
             https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
             -->
+            <Color x:Key="MCM-White-1">#FFFFFF</Color>
+
             <Color x:Key="MCM-DarkTeal-1">#084150</Color>
             <Color x:Key="MCM-DarkTeal-2">#245e6b</Color>
             <Color x:Key="MCM-DarkTeal-3">#437985</Color>
@@ -46,7 +48,7 @@
             <!-- Navigation -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource MCM-DarkTeal-2}"/>
-                <Setter Property="BarTextColor" Value="White"/>
+                <Setter Property="BarTextColor" Value="{StaticResource MCM-White-1}"/>
             </Style>
 
             <!-- Label -->
@@ -97,34 +99,42 @@
             </Style>
             
             <!-- Button -->
-            <Style TargetType="Button">
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
-            </Style>
             <Style x:Key="LoginButton" TargetType="Button">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-White-1}" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="25,5" />
             </Style>
             <Style x:Key="GridButton" TargetType="Button">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-White-1}" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="5" />
             </Style>
             <Style x:Key="InstructionButton" TargetType="Button">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-White-1}" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="25,5" />
             </Style>
             <Style x:Key="ChildProfileEditButton" TargetType="Button">
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-White-1}" />
                 <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
                 <Setter Property="Margin" Value="25,5" />
+            </Style>
+            <Style x:Key="ItemButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-White-1}" />
+                <Setter Property="TextColor" Value="{StaticResource MCM-Orange-1}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource MCM-White-1}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyCustomFont}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCM-Orange-1}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

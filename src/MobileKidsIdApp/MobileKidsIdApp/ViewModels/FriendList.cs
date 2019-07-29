@@ -87,5 +87,14 @@ namespace MobileKidsIdApp.ViewModels
                 List[List.IndexOf(CurrentItem)] = new FriendInfo(contact);
             }
         }
+
+        public void DeleteContact()
+        {
+            if (CurrentItem == null) return;
+
+            var oldItem = Model.Where(m => m.ContactId == CurrentItem.ContactId).FirstOrDefault();
+            Model.Remove(oldItem);
+            List.RemoveAt(List.IndexOf(CurrentItem));
+        }
     }
 }
