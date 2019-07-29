@@ -3,6 +3,7 @@ using MobileKidsIdApp.Models;
 using MobileKidsIdApp.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,14 +15,12 @@ namespace MobileKidsIdApp.ViewModels
         public ICommand NewItemCommand { get; private set; }
 
         public ObservableCollection<FriendInfo> List { get; private set; }
+        public FriendInfo CurrentItem { get; set; }
 
         public FriendList(Models.FriendList list)
         {
             List = new ObservableCollection<FriendInfo>();
-            NewItemCommand = new Command(() =>
-            {
-                BeginAddNew();
-            });
+            NewItemCommand = new Command(() => BeginAddNew());
             Model = list;
         }
 
@@ -69,10 +68,23 @@ namespace MobileKidsIdApp.ViewModels
                 {
                     e.NewObject.ContactId = contact.Id;
                     List.Add(new FriendInfo(contact));
-                    OnPropertyChanged("Model");
-                    OnPropertyChanged("List");
                 }
                 _adding = false;
+            }
+        }
+
+        public async void ChangeContact()
+        {
+            if (CurrentItem == null) return;
+
+            PrepareToShowModal();
+            ContactInfo contact = await DependencyService.Get<IContactPicker>().GetSelectedContactInfo();
+            if (contact != null && CurrentItem.ContactId != contact.Id)
+            {
+                var oldItem = Model.Where(m => m.ContactId == CurrentItem.ContactId).FirstOrDefault();
+                if (oldItem != null)
+                    oldItem.ContactId = contact.Id;
+                List[List.IndexOf(CurrentItem)] = new FriendInfo(contact);
             }
         }
     }

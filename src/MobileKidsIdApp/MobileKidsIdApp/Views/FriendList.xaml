@@ -8,7 +8,19 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewItemCommand}"/>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Path=Display}" Margin="0,0,10,0"/>
+                        <Button Text="Change" Clicked="ChangeItem" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    <!--<ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <controls:RepeaterView x:TypeArguments="models:Friend" x:Name="Repeater" Spacing="10" 
                            Orientation="Vertical" ItemsSource="{Binding List}"  
                            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -23,5 +35,5 @@
                 </DataTemplate>
             </controls:RepeaterView.ItemTemplate>
         </controls:RepeaterView>
-    </ScrollView>
+    </ScrollView>-->
 </ContentPage>
