@@ -20,7 +20,7 @@ namespace MobileKidsIdApp.ViewModels
             IsAdding = false;
             Model = fileReferenceList;
             _choosePhotoCommand = new Command(ChoosePhoto);
-            _deletePhotoCommand = new Command(async obj =>
+            _deletePhotoCommand = new Command(obj =>
             {
                 var photoVM = (PhotoViewModel)obj;
                 PhotoViewModels.Remove(photoVM);
@@ -30,41 +30,50 @@ namespace MobileKidsIdApp.ViewModels
                 var fullPath = Path.Combine(documentsPath, fileRef.FileName);
                 if (File.Exists(fullPath))
                 {
-                    await Task.Run(() => File.Delete(fullPath));
+                    File.Delete(fullPath);
                 }
             });
 
-            Model.AddedNew += async (o, e) =>
-            {
-                if (IsAdding)
-                {
-                    return;
-                }
-
-                IsAdding = true;
-                var newItem = e.NewObject;
-                var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var fileName = GenerateUniqueFileNameFor(destinationDirectory);
-
-                PrepareToShowModal();
-                var fullFileName = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
-                if (fullFileName == null)
-                {
-                    if (newItem != null)
-                    {
-                        Model.Remove(newItem);
-                    }
-                    return;
-                }
-                newItem.FileName = fullFileName;
-                var photoVM = new PhotoViewModel(newItem);
-                await photoVM.InitializeAsync();
-                PhotoViewModels.Add(photoVM);
-                IsAdding = false;
-                
-            };
-
             PhotoViewModels = new ObservableCollection<PhotoViewModel>();
+        }
+
+        protected override void OnModelChanged(FileReferenceList oldValue, FileReferenceList newValue)
+        {
+            if (oldValue != null)
+                oldValue.AddedNew -= Model_AddedNew;
+            if (newValue != null)
+                newValue.AddedNew += Model_AddedNew;
+
+            base.OnModelChanged(oldValue, newValue);
+        }
+
+        private async void Model_AddedNew(object sender, Csla.Core.AddedNewEventArgs<FileReference> e)
+        {
+            if (IsAdding)
+            {
+                return;
+            }
+
+            IsAdding = true;
+            var newItem = e.NewObject;
+            var destinationDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var fileName = GenerateUniqueFileNameFor(destinationDirectory);
+
+            PrepareToShowModal();
+            var fullFileName = await DependencyService.Get<IPhotoPicker>().GetCopiedFilePath(destinationDirectory, fileName);
+            if (fullFileName == null)
+            {
+                if (newItem != null)
+                {
+                    Model.Remove(newItem);
+                }
+                return;
+            }
+            newItem.FileName = fullFileName;
+            var photoVM = new PhotoViewModel(newItem);
+            await photoVM.InitializeAsync();
+            PhotoViewModels.Add(photoVM);
+            IsAdding = false;
         }
 
         protected override async Task<FileReferenceList> DoInitAsync()
