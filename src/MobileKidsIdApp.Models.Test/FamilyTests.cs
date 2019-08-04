@@ -55,6 +55,21 @@ namespace MobileKidsIdApp.Models.Test
         }
 
         [TestMethod]
+        public async Task MergeSavedFamily()
+        {
+            var family = await Csla.DataPortal.FetchAsync<Models.Family>();
+            var child = family.AddNew();
+            var nextChild = family.AddNew();
+            child.Photos.AddNew();
+            nextChild.Photos.AddNew();
+
+            var saved = await family.SaveAsync();
+
+            new Csla.Core.GraphMerger().MergeBusinessListGraph<Family, Child>(family, saved);
+            Assert.AreEqual(saved.Count, family.Count);
+        }
+
+        [TestMethod]
         public async Task ClearFamily()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
