@@ -11,11 +11,12 @@ namespace MobileKidsId.PdfGenerationAppService.Controllers
 {   
     public class JsonToPdfController : ApiController
     {
-        /*Can test with local browser via http://localhost:[your locla IIS port]/api/JsonToPdf/GetMissingChildProfilePdf?missingChildJson=""*/
+        /*Can test with local browser via http://localhost:[your local IIS port]/api/JsonToPdf/GetMissingChildProfilePdf?missingChildJson=""*/
+        /* Not from GiveCamp 2019. This service works over a local IIS host when deployed using the Deploy Profile contained in settings. This is not ideal and will be replaced with a service Mock */ 
         [System.Web.Http.HttpGet]
         public ActionResult GetMissingChildProfilePdf(string missingChildJson)
         {
-            if(!string.IsNullOrWhiteSpace(missingChildJson))
+            if(string.IsNullOrWhiteSpace(missingChildJson))
             {
             missingChildJson = @"{
                             'FirstName': 'Jane',
