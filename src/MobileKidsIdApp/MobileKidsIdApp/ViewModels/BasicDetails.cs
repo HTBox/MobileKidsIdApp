@@ -36,7 +36,11 @@ namespace MobileKidsIdApp.ViewModels
                         Model.AdditionalName = contact.AdditionalName;
                     if (string.IsNullOrEmpty(Model.GivenName))
                         Model.GivenName = contact.GivenName;
-                    
+                    if (string.IsNullOrEmpty(Model.ContactNameManual))
+                        Model.ContactNameManual = contact.ContactNameManual;
+                    if (string.IsNullOrEmpty(Model.ContactPhoneManual))
+                        Model.ContactPhoneManual = contact.ContactPhoneManual;
+
                     OnPropertyChanged(nameof(Contact));
                 }
             });

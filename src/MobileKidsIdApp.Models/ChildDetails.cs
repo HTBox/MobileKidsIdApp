@@ -56,6 +56,20 @@ namespace MobileKidsIdApp.Models
             set { SetProperty(ContactIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> ContactNameManualProperty = RegisterProperty<string>(c => c.ContactNameManual);
+        public string ContactNameManual
+        {
+            get { return GetProperty(ContactNameManualProperty); }
+            set { SetProperty(ContactNameManualProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> ContactPhoneManualProperty = RegisterProperty<string>(c => c.ContactPhoneManual);
+        public string ContactPhoneManual
+        {
+            get { return GetProperty(NickNameProperty); }
+            set { SetProperty(NickNameProperty, value); }
+        }
+
         protected override void Child_Create()
         {
             using (BypassPropertyChecks)

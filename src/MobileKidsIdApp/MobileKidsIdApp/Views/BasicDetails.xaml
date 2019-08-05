@@ -56,9 +56,27 @@
                 </ViewCell>
             </TableSection>
             <TableSection Title="Contact">
-                  <ViewCell>
+                <EntryCell Label="ContactNameManual" Placeholder="Enter Contact Name" Text="{Binding Model.ContactNameManual}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+                <EntryCell Label="ContactPhoneManual" Placeholder="Enter Contact Phone" Text="{Binding Model.ContactPhoneManual}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+                <ViewCell>
                     <StackLayout Orientation="Vertical">
-                      <Button Text="Change" Command="{Binding ChangeContactCommand}" />
+                      <Button Text="Add/Change Contact from Contacts" Command="{Binding ChangeContactCommand}" />
                       <controls:PhoneContact BindingContext="{Binding Contact}" Margin="3" />
                     </StackLayout>
                   </ViewCell>
