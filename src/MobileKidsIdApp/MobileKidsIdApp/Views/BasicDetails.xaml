@@ -56,7 +56,7 @@
                 </ViewCell>
             </TableSection>
             <TableSection Title="Contact">
-                <EntryCell Label="ContactNameManual" Placeholder="Enter Contact Name" Text="{Binding Model.ContactNameManual}">
+                <EntryCell Label="Contact Name (Manual)" Placeholder="Enter Contact Name" Text="{Binding Model.ContactNameManual}">
                     <EntryCell.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -65,7 +65,7 @@
                         </Keyboard>
                     </EntryCell.Keyboard>
                 </EntryCell>
-                <EntryCell Label="ContactPhoneManual" Placeholder="Enter Contact Phone" Text="{Binding Model.ContactPhoneManual}">
+                <EntryCell Label="Contact Phone (Manual)" Placeholder="Enter Contact Phone" Text="{Binding Model.ContactPhoneManual}">
                     <EntryCell.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
