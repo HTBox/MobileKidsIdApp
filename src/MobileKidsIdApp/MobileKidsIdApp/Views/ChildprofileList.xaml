@@ -19,7 +19,8 @@
 		                  <StackLayout Orientation="Vertical" Margin="20,0,20,0">
 		                      <StackLayout Orientation="Horizontal">
 		                          <Label Text="{Binding ChildDetails.GivenName}" Margin="3,10,3,10"/>
-		                          <Label Text="{Binding ChildDetails.AdditionalName}" Margin="3,10,3,10"/>
+                                  <Label Text="{Binding ChildDetails.NickName}" Margin="3,10,3,10"/>
+                                  <Label Text="{Binding ChildDetails.AdditionalName}" Margin="3,10,3,10"/>
 		                          <Label Text="{Binding ChildDetails.FamilyName}" Margin="3,10,3,10"/>
 		                      </StackLayout>
 		                  </StackLayout>

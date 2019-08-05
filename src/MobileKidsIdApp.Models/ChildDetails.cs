@@ -12,12 +12,19 @@ namespace MobileKidsIdApp.Models
     public class ChildDetails : BaseTypes.BusinessBase<ChildDetails>
     {
         public static readonly PropertyInfo<string> GivenNameProperty = RegisterProperty<string>(c => c.GivenName);
-        [Display(Name = "Given name")]
+        [Display(Name = "Given/First Name")]
         [Required]
         public string GivenName
         {
             get { return GetProperty(GivenNameProperty); }
             set { SetProperty(GivenNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> NickNameProperty = RegisterProperty<string>(c => c.NickName);
+        public string NickName
+        {
+            get { return GetProperty(NickNameProperty); }
+            set { SetProperty(NickNameProperty, value); }
         }
 
         public static readonly PropertyInfo<string> AdditionalNameProperty = RegisterProperty<string>(c => c.AdditionalName);
@@ -47,6 +54,20 @@ namespace MobileKidsIdApp.Models
         {
             get { return GetProperty(ContactIdProperty); }
             set { SetProperty(ContactIdProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> ContactNameManualProperty = RegisterProperty<string>(c => c.ContactNameManual);
+        public string ContactNameManual
+        {
+            get { return GetProperty(ContactNameManualProperty); }
+            set { SetProperty(ContactNameManualProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> ContactPhoneManualProperty = RegisterProperty<string>(c => c.ContactPhoneManual);
+        public string ContactPhoneManual
+        {
+            get { return GetProperty(NickNameProperty); }
+            set { SetProperty(NickNameProperty, value); }
         }
 
         protected override void Child_Create()
