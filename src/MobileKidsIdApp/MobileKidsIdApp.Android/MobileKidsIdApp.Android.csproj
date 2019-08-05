@@ -71,6 +71,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AndroidDownloader.cs" />
     <Compile Include="Services\ContactPicker.cs" />
     <Compile Include="Services\PhotoPicker.cs" />
     <Compile Include="Services\WebViewContentHelper.cs" />
