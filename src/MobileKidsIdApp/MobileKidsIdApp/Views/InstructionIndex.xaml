@@ -3,16 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileKidsIdApp.Views.InstructionIndex"
              Title="CONTENT">
-    <StackLayout>
-        <Button Text="Abductions" Command="{Binding AbductionsCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="Amber Alerts" Command="{Binding AmberAlertsCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="Disaster Prep" Command="{Binding DisasterPrepCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="DNA" Command="{Binding DNACommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="International" Command="{Binding InternationalCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="Missing" Command="{Binding MissingCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="Runaways" Command="{Binding RunawaysCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="Child Safety" Command="{Binding ChildSafetyCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="About Missing Children Minnesota" Command="{Binding MCMCommand}" Style="{StaticResource InstructionButton}"/>
-        <Button Text="About Humanitarian Toolbox" Command="{Binding HTBoxCommand}" Style="{StaticResource InstructionButton}"/>
-    </StackLayout>
+    <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout>
+            <Button Text="Abductions" Command="{Binding AbductionsCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="Amber Alerts" Command="{Binding AmberAlertsCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="Disaster Prep" Command="{Binding DisasterPrepCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="DNA" Command="{Binding DNACommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="International" Command="{Binding InternationalCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="Missing" Command="{Binding MissingCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="Runaways" Command="{Binding RunawaysCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="Child Safety" Command="{Binding ChildSafetyCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="About Missing Children Minnesota" Command="{Binding MCMCommand}" Style="{StaticResource InstructionButton}"/>
+            <Button Text="About Humanitarian Toolbox" Command="{Binding HTBoxCommand}" Style="{StaticResource InstructionButton}"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
