@@ -8,8 +8,8 @@
     <TableView Intent="Form">
         <TableView.Root>
             <TableSection Title="Name">
-                
-                <EntryCell Label="Given" Text="{Binding Model.GivenName}">
+
+                <EntryCell Label="Given" Placeholder="Enter Given/First Name" Text="{Binding Model.GivenName}">
                     <EntryCell.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -19,7 +19,17 @@
                     </EntryCell.Keyboard>
                 </EntryCell>
                 
-                <EntryCell Label="Middle" Text="{Binding Model.AdditionalName}">
+                <EntryCell Label="Nickname" Placeholder="Enter Nickname" Text="{Binding Model.NickName}">
+                    <EntryCell.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>None</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </EntryCell.Keyboard>
+                </EntryCell>
+
+                <EntryCell Label="Middle" Placeholder="Enter Middle Name" Text="{Binding Model.AdditionalName}">
                     <EntryCell.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -29,7 +39,7 @@
                     </EntryCell.Keyboard>
                 </EntryCell>
                 
-                <EntryCell Label="Family" Text="{Binding Model.FamilyName}">
+                <EntryCell Label="Family" Placeholder="Enter Family/Last/Sur Name" Text="{Binding Model.FamilyName}">
                     <EntryCell.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>

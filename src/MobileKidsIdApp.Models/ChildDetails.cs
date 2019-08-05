@@ -12,12 +12,19 @@ namespace MobileKidsIdApp.Models
     public class ChildDetails : BaseTypes.BusinessBase<ChildDetails>
     {
         public static readonly PropertyInfo<string> GivenNameProperty = RegisterProperty<string>(c => c.GivenName);
-        [Display(Name = "Given name")]
+        [Display(Name = "Given/First Name")]
         [Required]
         public string GivenName
         {
             get { return GetProperty(GivenNameProperty); }
             set { SetProperty(GivenNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> NickNameProperty = RegisterProperty<string>(c => c.NickName);
+        public string NickName
+        {
+            get { return GetProperty(NickNameProperty); }
+            set { SetProperty(NickNameProperty, value); }
         }
 
         public static readonly PropertyInfo<string> AdditionalNameProperty = RegisterProperty<string>(c => c.AdditionalName);
