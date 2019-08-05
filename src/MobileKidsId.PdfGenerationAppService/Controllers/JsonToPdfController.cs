@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Http;
 
 namespace MobileKidsId.PdfGenerationAppService.Controllers
-{
+{   
     public class JsonToPdfController : ApiController
     {
-        public FileStreamResult GetMissingChildProfilePdf(string missingChildJson)
+        /*Can test with local browser via http://localhost:[your locla IIS port]/api/JsonToPdf/GetMissingChildProfilePdf?missingChildJson=""*/
+        [System.Web.Http.HttpGet]
+        public ActionResult GetMissingChildProfilePdf(string missingChildJson)
         {
             if(!string.IsNullOrWhiteSpace(missingChildJson))
             {
@@ -21,8 +23,7 @@ namespace MobileKidsId.PdfGenerationAppService.Controllers
                             'Sex': 'Female',
                             'Description': 'Dark hair, 5 foot dix inches'  
                             }";
-            }                     
-
+            }                
 
             string htmlContent = PopulateMissingChildProfileBody(JsonConvert.DeserializeObject<Models.ProfileModel>(missingChildJson));
             return RenderPdf(htmlContent);
