@@ -2,8 +2,8 @@
 using MobileKidsIdApp.DataAccess.DataModels;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.IO.IsolatedStorage;
 using System.IO;
+using System.Diagnostics;
 
 namespace MobileKidsIdApp.DataAccess.LocalStorage
 {
@@ -42,8 +42,9 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
                     result = true;
 
                 }
-                catch
+                catch(Exception e)
                 {
+                    Debug.WriteLine($"Exception caught in FamilyProvider.TestGetAsync(): {e}");
                     if (BackupPath != PrimaryPath)
                     {
                         // see if pw works on backup file
@@ -72,8 +73,9 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
                     result = JsonConvert.DeserializeObject<Family>(dataBlob);
                          
                 }
-                catch
+                catch(Exception e)
                 {
+                    Debug.WriteLine($"Exception caught in FamilyProvider.GetAsync(): {e}");
                     // if we can't read primary file, restore last backup
                     // and try again
                     if (File.Exists(BackupPath))
@@ -95,7 +97,7 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             return result;
         }
 
-        public async Task SaveAsync(Family data)
+        public Task SaveAsync(Family data)
         {
             if (File.Exists(PrimaryPath))
             {
@@ -104,18 +106,18 @@ namespace MobileKidsIdApp.DataAccess.LocalStorage
             var json = JsonConvert.SerializeObject(data);
             var dataBlob = Encryption.Encrypt(Csla.ApplicationContext.User.Identity.Name, json);
             File.WriteAllText(PrimaryPath, dataBlob);
-            
-            await Task.Delay(0); // prevent warning about no await in an async method
+
+            return Task.CompletedTask;
         }
 
-        public async Task ResetData()
+        public Task ResetData()
         {
-            await Task.Delay(0); // prevent warning about no await in an async method
-
             if (File.Exists(BackupPath))
                 File.Delete(BackupPath);
             if (File.Exists(PrimaryPath))
                 File.Delete(PrimaryPath);
+
+            return Task.CompletedTask;
         }
     }
 }
