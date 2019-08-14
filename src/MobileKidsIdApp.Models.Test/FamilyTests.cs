@@ -55,13 +55,18 @@ namespace MobileKidsIdApp.Models.Test
         }
 
         [TestMethod]
-        public async Task MergeSavedFamily()
+        public async Task MergeSavedFamilyWithOnePhotoAdded()
         {
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
-            var child = family.AddNew();
-            var nextChild = family.AddNew();
-            child.Photos.AddNew();
-            nextChild.Photos.AddNew();
+            for (int i = 0; i < 4; i++)
+            {
+                var child = family.AddNew();
+                // add photo to the last Child
+                if (i == 3)
+                {
+                    child.Photos.AddNew();
+                }
+            }
 
             var saved = await family.SaveAsync();
 
