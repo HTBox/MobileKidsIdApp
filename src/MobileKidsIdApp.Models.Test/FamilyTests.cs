@@ -60,12 +60,14 @@ namespace MobileKidsIdApp.Models.Test
             "the two collections are functionally equal.")]
         public async Task MergeSavedFamilyWithOnePhotoAdded()
         {
+            const int totalChildren = 4;
+
             var family = await Csla.DataPortal.FetchAsync<Models.Family>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < totalChildren; i++)
             {
                 var child = family.AddNew();
                 // add photo to the last Child
-                if (i == 3)
+                if (i == totalChildren - 1)
                 {
                     child.Photos.AddNew();
                 }
