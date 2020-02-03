@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using MobileKidsIdApp.Models;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MobileKidsIdApp.ViewModels
 {
@@ -10,16 +12,44 @@ namespace MobileKidsIdApp.ViewModels
     {
         public ICommand NewItemCommand { get; private set; }
         public ICommand RemoveItemCommand { get; private set; }
+        public Command LoadCommand { get; private set; }
+        public ObservableCollection<Family> Kids { get; set; }
+
         public ChildProfileList()
         {
             App.CurrentFamily = this;
             NewItemCommand = new Command(() => BeginAddNew());
-            RemoveItemCommand = new Command(async (item) => { DoRemove(item); await SaveFamilyAsync();  });
+            RemoveItemCommand = new Command(async (item) => { DoRemove(item); await SaveFamilyAsync(); });
+            LoadCommand = new Command(async () => await ExecuteLoadCommand(), () => !IsBusy);
         }
 
-        protected async override Task<Family> DoInitAsync()
+        private async Task ExecuteLoadCommand()
         {
-            return await Csla.DataPortal.FetchAsync<Models.Family>();
+            if (IsBusy)
+            {
+                return;
+            }
+
+            IsBusy = true;
+            try
+            {
+                await InitAsync();
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine($"Exception in ChildProfileList.ExecuteLoadCommand(): {e}");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+            LoadCommand.ChangeCanExecute();
+        }
+
+        protected override Task<Family> DoInitAsync()
+        {
+            return Csla.DataPortal.FetchAsync<Models.Family>();
         }
 
         protected override void OnModelChanged(Family oldValue, Family newValue)
@@ -38,7 +68,7 @@ namespace MobileKidsIdApp.ViewModels
 
         private async void Model_AddedNew(object sender, Csla.Core.AddedNewEventArgs<Child> e)
         {
-            await ShowChild((Child)e.NewObject, true);
+            await ShowChild(e.NewObject, true);
         }
 
         public static Child CurrentChild { get; set; }

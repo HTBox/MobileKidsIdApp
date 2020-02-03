@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Views
@@ -9,6 +8,7 @@ namespace MobileKidsIdApp.Views
         public ChildProfileList()
         {
             InitializeComponent();
+            BindingContext = new ViewModels.ChildProfileList();
         }
 
         private async void ShowChild(object sender, EventArgs e)
@@ -21,6 +21,11 @@ namespace MobileKidsIdApp.Views
         {
             base.OnAppearing();
             ((ViewModels.IViewModel)BindingContext).SetActiveView();
+
+            if (!(BindingContext is ViewModels.ChildProfileList viewModel) || viewModel.IsBusy)
+                return;
+
+            viewModel.LoadCommand.Execute(null);
         }
 
         protected override async void OnDisappearing()

@@ -1,8 +1,4 @@
-﻿using MobileKidsIdApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,10 +14,15 @@ namespace MobileKidsIdApp.ViewModels
         public bool InvalidPassword { get; set; }
         public bool PasswordsMustMatch { get; set; }
 
+        public Action SetRootPage { get; set; }
+
         public Login()
         {
             SigninCommand = new Command(async () => { await DoAuthentication(); });
-            SetFirstRun();
+            if (!DesignMode.IsDesignModeEnabled)
+            {
+                SetFirstRun();
+            }
         }
 
         private void SetFirstRun()
@@ -51,9 +52,7 @@ namespace MobileKidsIdApp.ViewModels
             Csla.ApplicationContext.User = new Models.AppPrincipal(identity);
             if (Csla.ApplicationContext.User.Identity.IsAuthenticated)
             {
-                App.RootPage.Navigation.InsertPageBefore(new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() }),
-                                                         App.RootPage.Navigation.NavigationStack.First());
-                await App.RootPage.Navigation.PopAsync();
+                SetRootPage?.Invoke();
             }
             else
             {

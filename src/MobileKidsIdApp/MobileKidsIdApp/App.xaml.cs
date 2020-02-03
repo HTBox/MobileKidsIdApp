@@ -1,46 +1,56 @@
-using MobileKidsIdApp.Services;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileKidsIdApp
 {
-	public partial class App : Application
-	{
-        public static NavigationPage RootPage { private set; get; }
+    public partial class App : Application
+    {
+        public static Page RootPage { private set; get; }
         public static ViewModels.ChildProfileList CurrentFamily { get; set; }
 
-
-        public App ()
-		{
-			InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
 
             Csla.ApplicationContext.ContextManager = new Models.ApplicationContextManager();
 
             if (Csla.ApplicationContext.User == null)
                 Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
 
+            SetRootPage();
+        }
+
+        private void SetRootPage()
+        {
+            if (RootPage is Views.Login page && page.BindingContext is ViewModels.Login vm)
+            {
+                vm.SetRootPage = null;
+            }
+
             if (!Csla.ApplicationContext.User.Identity.IsAuthenticated)
             {
-                RootPage = new NavigationPage(new Views.Login { BindingContext = new ViewModels.Login() });
+                ViewModels.Login loginViewModel = new ViewModels.Login
+                {
+                    SetRootPage = () => SetRootPage()
+                };
+                RootPage = new Views.Login { BindingContext = loginViewModel };
             }
             else
             {
-                RootPage = new NavigationPage(new Views.Landing { BindingContext = new ViewModels.Landing() });
+                RootPage = new AppShell { BindingContext = new ViewModels.Landing() };
             }
 
             MainPage = RootPage;
         }
 
-
-        internal static async Task Logout()
+        public void Logout()
         {
-            RootPage.Navigation.InsertPageBefore(new NavigationPage(new Views.Login { BindingContext = new ViewModels.Login() }),
-                                                 RootPage.Navigation.NavigationStack.First());
-            await RootPage.Navigation.PopAsync();
+            ViewModels.Login loginViewModel = new ViewModels.Login
+            {
+                SetRootPage = () => SetRootPage()
+            };
+            MainPage = RootPage = new Views.Login { BindingContext = loginViewModel };
         }
     }
 }

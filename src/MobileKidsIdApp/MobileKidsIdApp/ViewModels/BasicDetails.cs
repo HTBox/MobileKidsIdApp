@@ -50,7 +50,10 @@ namespace MobileKidsIdApp.ViewModels
         
         protected override async Task<ChildDetails> DoInitAsync()
         {
-            _contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(Model.ContactId);
+            if (!string.IsNullOrWhiteSpace(Model.ContactId))
+            {
+                _contact = await DependencyService.Get<IContactPicker>().GetContactInfoForId(Model.ContactId);
+            }
             return Model;
         }
 

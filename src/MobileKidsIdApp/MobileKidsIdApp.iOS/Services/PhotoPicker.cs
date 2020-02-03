@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Foundation;
 using MobileKidsIdApp.Services;
 using UIKit;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MobileKidsIdApp.iOS.Services.PhotoPicker))]
 namespace MobileKidsIdApp.iOS.Services
@@ -32,8 +33,11 @@ namespace MobileKidsIdApp.iOS.Services
             ImagePicker.Canceled += OnImagePickerCancelled;
             TaskCompletionSource.Task.ContinueWith(t =>
             {
-                ImagePicker.FinishedPickingMedia -= OnImagePickerFinishedPickingMedia;
-                ImagePicker.Canceled -= OnImagePickerCancelled;
+                Device.InvokeOnMainThreadAsync(() =>
+                {
+                    ImagePicker.FinishedPickingMedia -= OnImagePickerFinishedPickingMedia;
+                    ImagePicker.Canceled -= OnImagePickerCancelled;
+                });
             });
 
             // Present UIImagePickerController;

@@ -39,7 +39,7 @@ namespace MobileKidsIdApp.ViewModels
                     var x = ex;
                 }
             }
-            return await base.DoInitAsync();
+            return Model;
         }
 
         protected override void OnModelChanged(Models.FriendList oldValue, Models.FriendList newValue)
