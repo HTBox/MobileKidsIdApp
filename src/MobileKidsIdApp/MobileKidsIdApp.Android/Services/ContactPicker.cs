@@ -117,12 +117,14 @@ namespace MobileKidsIdApp.Droid.Services
 
         private bool UserHasContactPermission()
         {
-            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) != (int)Android.Content.PM.Permission.Granted)
-                Android.Support.V4.App.ActivityCompat.RequestPermissions(MainActivity.Instance, new string[] { Manifest.Permission.ReadContacts }, PICK_CONTACT_REQUEST);
+            // TODO: Need to rework all of this for updated persmissions API.
 
-            if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) == (int)Android.Content.PM.Permission.Granted)
-                return true;
-            else
+            //if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) != (int)Android.Content.PM.Permission.Granted)
+            //    Android.Support.V4.App.ActivityCompat.RequestPermissions(MainActivity.Instance, new string[] { Manifest.Permission.ReadContacts }, PICK_CONTACT_REQUEST);
+
+            //if (Android.Support.V4.Content.ContextCompat.CheckSelfPermission(Application.Context, Manifest.Permission.ReadContacts) == (int)Android.Content.PM.Permission.Granted)
+            //    return true;
+            //else
                 return false;
         }
     }
