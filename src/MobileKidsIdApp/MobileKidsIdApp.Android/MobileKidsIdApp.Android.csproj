@@ -114,13 +114,13 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
-      <Project>{a6d14000-2f57-46fa-9378-6a2f1a6713e9}</Project>
-      <Name>MobileKidsIdApp.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MobileKidsIdApp\MobileKidsIdApp.csproj">
       <Project>{c16814ae-85b2-4df5-89ab-957d6d68d946}</Project>
       <Name>MobileKidsIdApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
+      <Project>{A6D14000-2F57-46FA-9378-6A2F1A6713E9}</Project>
+      <Name>MobileKidsIdApp.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\plusbutton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProguardConfiguration Include="Proguard.cfg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
