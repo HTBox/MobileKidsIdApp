@@ -15,6 +15,10 @@ namespace MobileKidsIdApp
 
         protected override void InitializeContainer()
         {
+#if DEBUG
+            Container.AddExtension(new Diagnostic());
+#endif
+
             Container.RegisterSingleton<AuthenticationService>();
             Container.RegisterSingleton<FamilyRepository>();
             Container.RegisterSingleton<SettingsRepository>();
