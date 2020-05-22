@@ -23,8 +23,8 @@ namespace MobileKidsIdApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            SecureStorage.DefaultAccessible = SecAccessible.WhenUnlockedThisDeviceOnly;
-
+            SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
+ 
             global::Xamarin.Forms.Forms.Init();
 
             var formsApp = new App();
