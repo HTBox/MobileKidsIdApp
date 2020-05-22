@@ -1,8 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
-namespace MobileKidsIdApp.Controls
+namespace MobileKidsIdApp
 {
+    // TODO: Replace with Xamarin.Forms Bindable Layouts
     public sealed class RepeaterView<T> : StackLayout
     {
         public RepeaterView()
@@ -26,6 +27,7 @@ namespace MobileKidsIdApp.Controls
 #pragma warning disable CS0618 // Type or member is obsolete
             BindableProperty.Create<RepeaterView<T>, ObservableCollection<T>>(
                 p => p.ItemsSource, new ObservableCollection<T>(), BindingMode.OneWay, null, ItemSourceChanged);
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
         public static readonly BindableProperty ItemTemplateProperty =

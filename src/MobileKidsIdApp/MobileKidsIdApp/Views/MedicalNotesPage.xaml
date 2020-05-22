@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.MedicalNotesPage"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="Medical notes">
+
+  <TableView Intent="Form">
+    <TableView.Root>
+      <TableSection Title="Conditions">
+        <EntryCell Label="Allergies" Text="{Binding Child.Allergies}" />
+        <EntryCell Label="Medical Alert" Text="{Binding Child.MedicalAlertInfo}"/>
+        <SwitchCell Text="Diabetic" On="{Binding Child.Diabetic}" />
+      </TableSection>
+      <TableSection Title="Medication">
+        <EntryCell Label="Regular Medications" Text="{Binding Child.RegularMedications}"/>
+        <EntryCell Label="Psych Medications" Text="{Binding Child.PsychMedications}"/>
+        <SwitchCell Text="Inhaler" On="{Binding Child.Inhaler}" />
+      </TableSection>
+      <TableSection Title="Other">
+        <EntryCell Label="Notes" Text="{Binding Child.Notes}" />
+      </TableSection>
+    </TableView.Root>
+  </TableView>
+
+</app:ContentPageBase>

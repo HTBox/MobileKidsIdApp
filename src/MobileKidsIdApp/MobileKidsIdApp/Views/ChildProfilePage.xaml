@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.ChildProfilePage"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="{Binding Model.ChildDetails.GivenName}">
+
+  <ScrollView>
+    <StackLayout>
+      <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}"/>
+      <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
+      <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}"/>
+      <Button Text="Family" Command="{Binding EditFamilyCommand}"/>
+      <Button Text="Friends" Command="{Binding EditFriendsCommand}"/>
+      <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}"/>
+      <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}"/>
+      <Button Text="Documents" Command="{Binding EditDocumentsCommand}"/>
+      <Button Text="Photos" Command="{Binding EditPhotosCommand}"/>
+      <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}"/>
+      <Button Text="Export Child Profile" Command="{Binding ExportChildProdfileCommand}"/>
+   </StackLayout>
+  </ScrollView>
+
+</app:ContentPageBase>

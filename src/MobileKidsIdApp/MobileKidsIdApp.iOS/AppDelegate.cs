@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Foundation;
-using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
+﻿using Foundation;
+using MobileKidsIdApp.iOS.Platform;
+using MobileKidsIdApp.Platform;
+using Security;
 using UIKit;
+using Unity;
+using Xamarin.Essentials;
 
 namespace MobileKidsIdApp.iOS
 {
@@ -24,10 +23,22 @@ namespace MobileKidsIdApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            SecureStorage.DefaultAccessible = SecAccessible.WhenUnlockedThisDeviceOnly;
 
+            global::Xamarin.Forms.Forms.Init();
+
+            var formsApp = new App();
+            formsApp.Init(PlatformInitializeContainer);
+
+            LoadApplication(formsApp);
             return base.FinishedLaunching(app, options);
+        }
+
+        private void PlatformInitializeContainer(UnityContainer container)
+        {
+            container.RegisterType<IContactPicker, ContactPicker>();
+            container.RegisterType<IWebViewContentHelper, WebViewContentHelper>();
+            container.RegisterType<IPhotoPicker, PhotoPicker>();
         }
     }
 }

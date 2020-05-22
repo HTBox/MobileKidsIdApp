@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    x:Class="MobileKidsIdApp.Views.ChildProfileListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="childProfileList"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="MY KIDS">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Add child"
+            Command="{Binding AddChildCommand}"
+            Icon="plusbutton.png" />
+    </ContentPage.ToolbarItems>
+
+    <!-- TODO: Replace with collection view -->
+    <ListView
+        x:Name="childList"
+        ItemTapped="ShowChild"
+        ItemsSource="{Binding Model}"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+        RefreshCommand="{Binding RefreshCommand}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <!-- TODO: replace with swipe view -->
+                    <ViewCell.ContextActions>
+                        <MenuItem
+                            Command="{Binding Source={x:Reference childProfileList}, Path=BindingContext.RemoveChildCommand}"
+                            CommandParameter="{Binding .}"
+                            Text="Remove" />
+                    </ViewCell.ContextActions>
+                    <StackLayout Margin="20,0,20,0" Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.GivenName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.NickName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.AdditionalName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.FamilyName}" />
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</app:ContentPageBase>

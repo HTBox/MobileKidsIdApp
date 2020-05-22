@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.PreparationChecklistPage"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="Preparedness checklist">
+
+      <TableView Intent="Form">
+        <TableRoot>
+          <TableSection>
+            <SwitchCell Text="Child Photo" On="{Binding Child.ChildPhotoComplete}" />
+            <SwitchCell Text="Birth Certificate" On="{Binding Child.BirthCertificateComplete}" />
+            <SwitchCell Text="Social Security Card" On="{Binding Child.SocialSecurityCardComplete}" />
+            <SwitchCell Text="Physical Details" On="{Binding Child.PhysicalDetailsComplete}" />
+            <SwitchCell Text="Distinguishing Features" On="{Binding Child.DistinguishingFeaturesComplete}" />
+            <SwitchCell Text="Friends" On="{Binding Child.FriendsComplete}" />
+            <SwitchCell Text="DNA" On="{Binding Child.DNAComplete}" />
+            <SwitchCell Text="Mementos" On="{Binding Child.MementosComplete}" />
+            <SwitchCell Text="Divorce Custody Papers" On="{Binding Child.DivorceCustodyPapersComplete}" />
+            <SwitchCell Text="Other Parents and Family" On="{Binding Child.OtherParentsAndFamilyComplete}" />
+          </TableSection>
+        </TableRoot>
+      </TableView>
+
+  </app:ContentPageBase>

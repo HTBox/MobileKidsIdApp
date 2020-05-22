@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    x:Class="MobileKidsIdApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="Missing Kids Minnesota"
+    BackgroundColor="{StaticResource MCM-White-1}">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,30,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Image Margin="25" Source="icon.png" />
+            <Label Text="Login" />
+        </StackLayout>
+        <Label Text="Password" />
+        <Entry
+            IsPassword="True"
+            Placeholder="Password"
+            Text="{Binding Path=Password}" />
+        <Label
+            d:IsVisible="False"
+            IsVisible="{Binding InvalidPassword}"
+            Text="Invalid password" />
+        <Label
+            d:IsVisible="True"
+            IsVisible="{Binding SetPassword}"
+            Text="Re-enter password" />
+        <Entry
+            IsPassword="True"
+            IsVisible="{Binding SetPassword}"
+            Placeholder="Password"
+            Text="{Binding Path=PasswordConfirm}" />
+        <Label
+            IsVisible="{Binding PasswordsMustMatch}"
+            Text="Passwords must match" />
+        <Button
+            Command="{Binding SignInCommand}"
+            Text="Sign in" />
+    </StackLayout>
+</app:ContentPageBase>

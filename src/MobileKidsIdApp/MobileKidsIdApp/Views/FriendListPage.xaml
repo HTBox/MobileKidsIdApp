@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.FriendListPage" 
+             
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="Friends">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Icon="plusbutton.png" />
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding Friends}" SelectedItem="{Binding CurrentItem}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Display}"/>
+                        <Button Text="Change" Command="{Binding ChangeContactCommand}" CommandParameter="{Binding .}" />
+                        <Button Text="Remove" Command="{Binding DeleteContactCommand}" CommandParameter="{Binding .}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</app:ContentPageBase>
