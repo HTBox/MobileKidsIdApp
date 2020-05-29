@@ -23,6 +23,10 @@ namespace MobileKidsIdApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+#if ENABLE_TEST_CLOUD
+            Xamarin.Calabash.Start();
+#endif
+
             SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
  
             global::Xamarin.Forms.Forms.Init();
