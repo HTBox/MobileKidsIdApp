@@ -4,7 +4,6 @@ using MobileKidsIdApp.Models;
 
 namespace MobileKidsIdApp.Services
 {
-    // TODO: add calls to save from views
     public partial class FamilyRepository
     {
         private Lazy<List<Child>> _childCache;
