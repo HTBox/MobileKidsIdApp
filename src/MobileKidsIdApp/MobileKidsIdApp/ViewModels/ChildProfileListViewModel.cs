@@ -53,6 +53,10 @@ namespace MobileKidsIdApp.ViewModels
 
         private async Task AddChild()
         {
+            Child child = _family.NewChild();
+            _family.SetCurrentChild(child);
+            Kids.Add(child);
+
             await PushAsync<ChildProfilePage, ChildProfileViewModel>(false);
             await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
         }

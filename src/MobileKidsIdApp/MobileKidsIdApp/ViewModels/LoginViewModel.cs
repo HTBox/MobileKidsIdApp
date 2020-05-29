@@ -46,13 +46,13 @@ namespace MobileKidsIdApp.ViewModels
 
         public Command SignInCommand { get; private set; }
 
-        public LoginViewModel(AuthenticationService auth, SettingsRepository settings)
+        public LoginViewModel(AuthenticationService auth)
         {
             _auth = auth;
 
             SignInCommand = new Command(async () => await SignIn());
 
-            SetPassword = settings.AllowPasswordSetup;
+            SetPassword = Settings.AllowPasswordSetup;
         }
 
         private async Task SignIn()

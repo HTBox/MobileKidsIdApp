@@ -15,6 +15,9 @@ namespace MobileKidsIdApp.Services
             string hashedString = CreateHash(password);
 
             await SecureStorage.SetAsync(KeychainHash, hashedString);
+
+            Settings.AllowPasswordSetup = false;
+            Settings.Identity = Guid.NewGuid().ToString();
         }
 
         public async Task<bool> VerifyAppPassword(string password)

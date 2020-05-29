@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using MobileKidsIdApp.Models;
 
@@ -17,9 +16,11 @@ namespace MobileKidsIdApp.Services
         {
             if (File.Exists(FilePath))
             {
-                byte[] encrypted = File.ReadAllBytes(FilePath);
-                byte[] decrypted = Decrypt(encrypted);
-                string json = Encoding.UTF8.GetString(decrypted);
+                // TODO: Fix encryption. doesn't seem to be reading/writing all of the data. some is missing in the round trip
+                //byte[] encrypted = File.ReadAllBytes(FilePath);
+                //byte[] decrypted = Decrypt(encrypted);
+                //string json = Encoding.UTF8.GetString(decrypted);
+                string json = File.ReadAllText(FilePath);
                 return DeserializeChildren(json);
             }
 
@@ -31,10 +32,11 @@ namespace MobileKidsIdApp.Services
             File.WriteAllText(FilePath, SerializeChildren(Children));
 
             string json = SerializeChildren(Children);
-            byte[] decrypted = Encoding.UTF8.GetBytes(json);
-            byte[] encrypted = Encrypt(decrypted);
-            if (File.Exists(FilePath)) File.Delete(FilePath);
-            File.WriteAllBytes(FilePath, encrypted);
+            //byte[] decrypted = Encoding.UTF8.GetBytes(json);
+            //byte[] encrypted = Encrypt(decrypted);
+            //if (File.Exists(FilePath)) File.Delete(FilePath);
+            //File.WriteAllBytes(FilePath, encrypted);
+            File.WriteAllText(FilePath, json);
         }
 
         private string SerializeChildren(List<Child> children)

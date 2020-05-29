@@ -1,10 +1,13 @@
-﻿using MobileKidsIdApp.Views;
+﻿using MobileKidsIdApp.Services;
+using MobileKidsIdApp.Views;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
     public class ChildProfileViewModel : ViewModelBase
     {
+        private readonly FamilyRepository _family;
+
         public Command EditChildDetailsCommand { get; private set; }
         public Command EditFeaturesCommand { get; private set; }
         public Command EditCareProvidersCommand { get; private set; }
@@ -17,8 +20,10 @@ namespace MobileKidsIdApp.ViewModels
         public Command EditChecklistCommand { get; private set; }
         public Command ExportChildProdfileCommand { get; private set; }
 
-        public ChildProfileViewModel()
+        public ChildProfileViewModel(FamilyRepository family)
         {
+            _family = family;
+
             EditChildDetailsCommand = new Command(async () =>
                 await PushAsync<BasicDetailsPage, BasicDetailsViewModel>()
             );
@@ -53,5 +58,7 @@ namespace MobileKidsIdApp.ViewModels
                 await PushAsync<DocumentRenderPage, DocumentRenderViewModel>()
             );
         }
+
+        public override void OnAppearing() => _family.SaveChildren();
     }
 }

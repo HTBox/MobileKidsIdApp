@@ -19,7 +19,7 @@
     <ListView
         x:Name="childList"
         ItemTapped="ShowChild"
-        ItemsSource="{Binding Model}"
+        ItemsSource="{Binding Kids}"
         IsPullToRefreshEnabled="True"
         IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
         RefreshCommand="{Binding RefreshCommand}">
@@ -35,10 +35,10 @@
                     </ViewCell.ContextActions>
                     <StackLayout Margin="20,0,20,0" Orientation="Vertical">
                         <StackLayout Orientation="Horizontal">
-                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.GivenName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.NickName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.AdditionalName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding ChildDetails.FamilyName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding GivenName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding NickName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding AdditionalName}" />
+                            <Label Margin="3,10,3,10" Text="{Binding FamilyName}" />
                         </StackLayout>
                     </StackLayout>
                 </ViewCell>

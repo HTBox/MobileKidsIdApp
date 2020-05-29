@@ -21,7 +21,6 @@ namespace MobileKidsIdApp
 
             Container.RegisterSingleton<AuthenticationService>();
             Container.RegisterSingleton<FamilyRepository>();
-            Container.RegisterSingleton<SettingsRepository>();
         }
 
         protected override Task<Page> CreateMainPage()

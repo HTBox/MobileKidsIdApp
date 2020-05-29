@@ -19,10 +19,11 @@ namespace MobileKidsIdApp.Services
         public FamilyRepository()
             => _childCache = new Lazy<List<Child>>(LoadChildren);
 
-        public void AddChild(Child child)
+        public Child NewChild()
         {
+            var child = new Child();
             Children.Add(child);
-            SaveChildren();
+            return child;
         }
 
         public void RemoveChild(Child child)
