@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileKidsIdApp.PhoneContactView">
+  <Grid.RowDefinitions>
+    <RowDefinition />
+    <RowDefinition />
+    <RowDefinition />
+  </Grid.RowDefinitions>
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition />
+    <ColumnDefinition />
+  </Grid.ColumnDefinitions>
+  <Label Text="First Name:" VerticalOptions="Center" HorizontalOptions="Start" />
+  <Label Text="{Binding GivenName}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" />
+  <Label Text="Last Name:" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Start" />
+  <Label Text="{Binding FamilyName}" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Start" />
+</Grid>

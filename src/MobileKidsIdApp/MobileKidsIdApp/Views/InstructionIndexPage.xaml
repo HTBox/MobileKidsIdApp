@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.InstructionIndexPage"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="CONTENT">
+
+    <ScrollView>
+        <StackLayout>
+            <Button Text="Abductions" Command="{Binding AbductionsCommand}" />
+            <Button Text="Amber Alerts" Command="{Binding AmberAlertsCommand}" />
+            <Button Text="Disaster Prep" Command="{Binding DisasterPrepCommand}" />
+            <Button Text="DNA" Command="{Binding DNACommand}" />
+            <Button Text="International" Command="{Binding InternationalCommand}" />
+            <Button Text="Missing" Command="{Binding MissingCommand}" />
+            <Button Text="Runaways" Command="{Binding RunawaysCommand}" />
+            <Button Text="Child Safety" Command="{Binding ChildSafetyCommand}" />
+            <Button Text="About Missing Children Minnesota" Command="{Binding MCMCommand}" />
+            <Button Text="About Humanitarian Toolbox" Command="{Binding HTBoxCommand}" />
+        </StackLayout>
+    </ScrollView>
+
+</app:ContentPageBase>

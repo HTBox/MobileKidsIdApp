@@ -1,56 +1,30 @@
+using System.Threading.Tasks;
+using MobileKidsIdApp.Services;
+using MobileKidsIdApp.Views;
+using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileKidsIdApp
 {
-    public partial class App : Application
+    public partial class App : ApplicationBase
     {
-        public static Page RootPage { private set; get; }
-        public static ViewModels.ChildProfileList CurrentFamily { get; set; }
+        public App() => InitializeComponent();
 
-        public App()
+        protected override void InitializeContainer()
         {
-            InitializeComponent();
+#if DEBUG
+            Container.AddExtension(new Diagnostic());
+#endif
 
-            Csla.ApplicationContext.ContextManager = new Models.ApplicationContextManager();
-
-            if (Csla.ApplicationContext.User == null)
-                Csla.ApplicationContext.User = new Csla.Security.UnauthenticatedPrincipal();
-
-            SetRootPage();
+            Container.RegisterSingleton<AuthenticationService>();
+            Container.RegisterSingleton<FamilyRepository>();
         }
 
-        private void SetRootPage()
-        {
-            if (RootPage is Views.Login page && page.BindingContext is ViewModels.Login vm)
-            {
-                vm.SetRootPage = null;
-            }
+        protected override Task<Page> CreateMainPage()
+            => Task.FromResult<Page>(new MainPage());
 
-            if (!Csla.ApplicationContext.User.Identity.IsAuthenticated)
-            {
-                ViewModels.Login loginViewModel = new ViewModels.Login
-                {
-                    SetRootPage = () => SetRootPage()
-                };
-                RootPage = new Views.Login { BindingContext = loginViewModel };
-            }
-            else
-            {
-                RootPage = new AppShell { BindingContext = new ViewModels.Landing() };
-            }
-
-            MainPage = RootPage;
-        }
-
-        public void Logout()
-        {
-            ViewModels.Login loginViewModel = new ViewModels.Login
-            {
-                SetRootPage = () => SetRootPage()
-            };
-            MainPage = RootPage = new Views.Login { BindingContext = loginViewModel };
-        }
+        // TODO: use onstart/pause/resume to add more security around auth
     }
 }

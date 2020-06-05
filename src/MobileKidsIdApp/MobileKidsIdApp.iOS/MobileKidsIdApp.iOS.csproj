@@ -20,13 +20,15 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;ENABLE_TEST_CLOUD</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -38,6 +40,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,8 +55,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>
-    </CodesignEntitlements>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>
     </CodesignProvision>
     <CodesignExtraArgs />
@@ -99,6 +102,8 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <IpaPackageName></IpaPackageName>
+    <OptimizePNGs></OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -106,9 +111,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Services\ContactPicker.cs" />
-    <Compile Include="Services\PhotoPicker.cs" />
-    <Compile Include="Services\WebViewContentHelper.cs" />
+    <Compile Include="Platform\ContactPicker.cs" />
+    <Compile Include="Platform\PhotoPicker.cs" />
+    <Compile Include="Platform\WebViewContentHelper.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,23 +170,22 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CSLA-XamarinForms">
-      <Version>4.11.2</Version>
-    </PackageReference>
-    <PackageReference Include="PCLCrypto">
-      <Version>2.0.147</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.3.1</Version>
+      <Version>1.5.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Unity">
+      <Version>5.11.7</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>4.7.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.TestCloud.Agent">
+      <Version>0.21.9</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj">
-      <Project>{a6d14000-2f57-46fa-9378-6a2f1a6713e9}</Project>
-      <Name>MobileKidsIdApp.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MobileKidsIdApp\MobileKidsIdApp.csproj">
       <Project>{C16814AE-85B2-4DF5-89AB-957D6D68D946}</Project>
       <Name>MobileKidsIdApp</Name>

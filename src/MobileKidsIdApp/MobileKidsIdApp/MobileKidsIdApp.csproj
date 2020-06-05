@@ -4,38 +4,19 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+      <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
     <ItemGroup>
-      <Compile Remove="MobileKidsIdApp.DataAccess\**" />
-      <Compile Remove="MobileKidsIdApp.Droid\**" />
-      <Compile Remove="MobileKidsIdApp.iOS\**" />
-      <Compile Remove="MobileKidsIdApp.UWP\**" />
-      <Compile Remove="MobileKidsIdApp.WinPhone\**" />
-      <Compile Remove="MobileKidsIdApp\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp.DataAccess\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp.Droid\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp.iOS\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp.UWP\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp.WinPhone\**" />
-      <EmbeddedResource Remove="MobileKidsIdApp\**" />
-      <None Remove="MobileKidsIdApp.DataAccess\**" />
-      <None Remove="MobileKidsIdApp.Droid\**" />
-      <None Remove="MobileKidsIdApp.iOS\**" />
-      <None Remove="MobileKidsIdApp.UWP\**" />
-      <None Remove="MobileKidsIdApp.WinPhone\**" />
-      <None Remove="MobileKidsIdApp\**" />
+        <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+        <PackageReference Include="Unity" Version="5.11.7" />
+        <PackageReference Include="System.Text.Json" Version="4.7.2" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="CSLA-XamarinForms" Version="4.11.2" />
-        <PackageReference Include="PCLCrypto" Version="2.0.147" />
-        <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\MobileKidsIdApp.DataAccess\MobileKidsIdApp.DataAccess.csproj" />
-        <ProjectReference Include="..\..\MobileKidsIdApp.Models\MobileKidsIdApp.Models.csproj" />
-    </ItemGroup>
     <ItemGroup>
       <None Remove="Resources\abduction.html" />
       <None Remove="Resources\amberalert.html" />
@@ -60,17 +41,5 @@
       <EmbeddedResource Include="Resources\abouthtbox.html" />
       <EmbeddedResource Include="Resources\aboutmcm.html" />
     </ItemGroup>
-    <ItemGroup>
-      <Compile Update="Views\DocumentRender.xaml.cs">
-        <DependentUpon>DocumentRender.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Update="AppShell.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\DocumentRender.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-    </ItemGroup>
+
 </Project>

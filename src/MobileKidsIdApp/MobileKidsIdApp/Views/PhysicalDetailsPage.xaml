@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<app:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MobileKidsIdApp.Views.PhysicalDetailsPage"
+
+    xmlns:app="clr-namespace:MobileKidsIdApp"
+    Title="Physical details">
+
+  <TableView Intent="Form">
+    <TableView.Root>
+      <TableSection Title="Size">
+        <EntryCell Label="Height" Text="{Binding Child.Height}" />
+        <EntryCell Label="Weight" Text="{Binding Child.Weight}"/>
+      </TableSection>
+      <TableSection Title="Last Measured">
+        <ViewCell>
+          <DatePicker Date="{Binding Child.MeasurementDate}"/>
+        </ViewCell>
+      </TableSection>
+      <TableSection Title="Sex">
+        <EntryCell Label="Gender" Text="{Binding Child.Gender}" />
+        <EntryCell Label="Gender Identity" Text="{Binding Child.GenderIdentity}" />
+      </TableSection>
+      <TableSection Title="Skin">
+          <EntryCell Label="Skin Tone" Text="{Binding Child.SkinTone}" />
+          <EntryCell Label="Racial / Ethnic Identity" Text="{Binding Child.RacialEthnicIdentity}" />
+      </TableSection>
+      <TableSection Title="Hair">
+        <EntryCell Label="Color" Text="{Binding Child.HairColor}"/>
+        <EntryCell Label="Style" Text="{Binding Child.HairStyle}"/>
+      </TableSection>
+      <TableSection Title="Eyes">
+        <EntryCell Label="Color" Text="{Binding Child.EyeColor}" />
+        <SwitchCell Text="Glasses" On="{Binding Child.EyeGlasses}" />
+        <SwitchCell Text="Contacts" On="{Binding Child.EyeContacts}" />
+      </TableSection>
+    </TableView.Root>
+  </TableView>
+
+</app:ContentPageBase>
