@@ -9,7 +9,7 @@ namespace MobileKidsIdApp.Services
 
         private byte[] Key => new Rfc2898DeriveBytes(Settings.Identity, new byte[] { 0x84, 0x62, 0x43, 0x87, 0x23, 0x72, 0x45, 0x56, 0x68, 0x14 }).GetBytes(16);
 
-        private byte[] Encrypt(byte[] data)
+        private byte[] Encrypt(string data)
         {
             byte[] encryptedData;
 
@@ -22,16 +22,19 @@ namespace MobileKidsIdApp.Services
 
                 using var msEncrypt = new MemoryStream();
                 using var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write);
-                csEncrypt.Write(data, 0, data.Length);
-                encryptedData = msEncrypt.ToArray(); // currently generatoring less bytes than the original data.
+                using (var swEncrypt = new StreamWriter(csEncrypt))
+                {
+                    swEncrypt.Write(data);
+                }
+                encryptedData = msEncrypt.ToArray();
             }
 
             return encryptedData ?? new byte[0];
         }
 
-        private byte[] Decrypt(byte[] data)
+        private string Decrypt(byte[] data)
         {
-            byte[] decryptedData = new byte[data.Length];
+            string decryptedData = null;
 
             using (var aesAlg = AesManaged.Create())
             {
@@ -43,8 +46,8 @@ namespace MobileKidsIdApp.Services
 
                 using var msDecrypt = new MemoryStream(data);
                 using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
-                decryptedData = new byte[data.Length];
-                csDecrypt.Read(decryptedData, 0, decryptedData.Length);
+                using var srDecrypt = new StreamReader(csDecrypt);
+                decryptedData = srDecrypt.ReadToEnd();
             }
 
             return decryptedData;
