@@ -27,7 +27,9 @@ namespace MobileKidsIdApp
         }
 
         protected override Task<Page> CreateMainPage()
-            => CreatePage<LoginPage, LoginViewModel>();
+            => Settings.AllowPasswordSetup
+                ? CreatePage<CreatePasswordPage, CreatePasswordViewModel>()
+                : CreatePage<LoginPage, LoginViewModel>();
 
         // TODO: use onstart/pause/resume to add more security around auth
     }
