@@ -7,26 +7,59 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
 
-    xmlns:app="clr-namespace:MobileKidsIdApp"
-    BackgroundColor="{StaticResource MCM-White-1}">
+    xmlns:app="clr-namespace:MobileKidsIdApp">
 
-    <StackLayout Margin="20, 60, 20, 0">
-        <Image Source="icon.png" />
+    <ScrollView>
+        <Grid RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Entry
-            IsPassword="True"
-            Placeholder="Password"
-            WidthRequest="300"
-            HorizontalOptions="Center"
-            Text="{Binding Password}" />
+            <StackLayout
+                Grid.Row="1"
+                Margin="40,0,40,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
 
-        <Label
-            IsVisible="{Binding InvalidPassword}"
-            Text="Invalid password" />
+                <Image Source="icon.png" />
 
-        <Button
-            Command="{Binding SignInCommand}"
-            Text="Sign in" />
-    </StackLayout>
+                <Label
+                    AutomationId="ReminderLabel"
+                    Margin="0,20,0,20"
+                    FontSize="Small"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="340"
+                    Text="Please enter the password you created when you first starting using the app."
+                    />
+
+                <Entry
+                    AutomationId="PasswordEntry"
+                    IsPassword="True"
+                    Placeholder="Password"
+                    HorizontalOptions="Center"
+                    WidthRequest="340"
+                    Text="{Binding Password}" />
+
+                <Button
+                    AutomationId="SignInButton"
+                    Command="{Binding SignInCommand}"
+                    HeightRequest="36"
+                    Text="Sign in" />
+            </StackLayout>
+
+            <Label
+                Grid.Row="2"
+                AutomationId="PasswordInvalidLabel"
+                IsVisible="{Binding InvalidPassword}"
+                Margin="0,20,0,0"
+                FontSize="Small"
+                HorizontalTextAlignment="Center"
+                Text="Invalid password" />
+
+        </Grid>
+    </ScrollView>
 
 </app:ContentPageBase>

@@ -11,37 +11,54 @@
                 See MCM Brand Inspriation Board for usage guidelines on color palette.
                 https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
             -->
-            <Color x:Key="MCM-White-1">#FFFFFF</Color>
+            <Color x:Key="MCMDarkTeal">#084150</Color>
+            <Color x:Key="MCMDarkTeal04">#04084150</Color>
 
-            <Color x:Key="MCM-DarkTeal-1">#084150</Color>
-            <Color x:Key="MCM-DarkTeal-2">#245e6b</Color>
-            <Color x:Key="MCM-DarkTeal-3">#437985</Color>
-            <Color x:Key="MCM-DarkTeal-4">#437985</Color>
 
-            <Color x:Key="MCM-LightBlue-1">#46b6bc</Color>
-            <Color x:Key="MCM-LightBlue-2">#64c4ca</Color>
-            <Color x:Key="MCM-LightBlue-3">#7cd0d3</Color>
-            <Color x:Key="MCM-LightBlue-4">#94d9da</Color>
+            <!-- Unused -->
+            <Color x:Key="MCMWhite1">#FFFFFF</Color>
 
-            <Color x:Key="MCM-Orange-1">#df8319</Color>
-            <Color x:Key="MCM-Orange-2">#e59c36</Color>
-            <Color x:Key="MCM-Orange-3">#e9ad52</Color>
-            <Color x:Key="MCM-Orange-4">#f0bc70</Color>
+            <Color x:Key="MCMDarkTeal2">#245e6b</Color>
+            <Color x:Key="MCMDarkTeal3">#437985</Color>
+            <Color x:Key="MCMDarkTeal4">#437985</Color>
 
-            <Color x:Key="MCM-Green-1">#31812e</Color>
-            <Color x:Key="MCM-Green-2">#4e9a4a</Color>
-            <Color x:Key="MCM-Green-3">#69ac67</Color>
-            <Color x:Key="MCM-Green-4">#84bc82</Color>
+            <Color x:Key="MCMLightBlue1">#46b6bc</Color>
+            <Color x:Key="MCMLightBlue2">#64c4ca</Color>
+            <Color x:Key="MCMLightBlue3">#7cd0d3</Color>
+            <Color x:Key="MCMLightBlue4">#94d9da</Color>
 
-            <Color x:Key="MCM-Black-1">#212121</Color>
-            <Color x:Key="MCM-Black-2">#404040</Color>
-            <Color x:Key="MCM-Black-3">#5e5e5e</Color>
-            <Color x:Key="MCM-Black-4">#797979</Color>
+            <Color x:Key="MCMOrange1">#df8319</Color>
+            <Color x:Key="MCMOrange2">#e59c36</Color>
+            <Color x:Key="MCMOrange3">#e9ad52</Color>
+            <Color x:Key="MCMOrange4">#f0bc70</Color>
 
-            <Color x:Key="MCM-Yellow-1">#ede493</Color>
-            <Color x:Key="MCM-Yellow-2">#f1e9a6</Color>
-            <Color x:Key="MCM-Yellow-3">#f2ecb5</Color>
-            <Color x:Key="MCM-Yellow-4">#f6efc5</Color>
+            <Color x:Key="MCMGreen1">#31812e</Color>
+            <Color x:Key="MCMGreen2">#4e9a4a</Color>
+            <Color x:Key="MCMGreen3">#69ac67</Color>
+            <Color x:Key="MCMGreen4">#84bc82</Color>
+
+            <Color x:Key="MCMBlack1">#212121</Color>
+            <Color x:Key="MCMBlack2">#404040</Color>
+            <Color x:Key="MCMBlack3">#5e5e5e</Color>
+            <Color x:Key="MCMBlack4">#797979</Color>
+
+            <Color x:Key="MCMYellow1">#ede493</Color>
+            <Color x:Key="MCMYellow2">#f1e9a6</Color>
+            <Color x:Key="MCMYellow3">#f2ecb5</Color>
+            <Color x:Key="MCMYellow4">#f6efc5</Color>
+
+            <!-- Implicit Styles -->
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal04}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="HeightRequest" Value="36" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </app:ApplicationBase>
