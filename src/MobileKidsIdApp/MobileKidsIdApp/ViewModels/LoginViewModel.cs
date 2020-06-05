@@ -80,7 +80,7 @@ namespace MobileKidsIdApp.ViewModels
 
             if (passwordValid)
             {
-                await ReplaceMainPageAsync<ChildProfileListPage, ChildProfileListViewModel>();
+                CurrentApplication.MainPage = new MainPage();
             }
         }
     }
