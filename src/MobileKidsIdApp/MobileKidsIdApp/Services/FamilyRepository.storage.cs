@@ -17,7 +17,7 @@ namespace MobileKidsIdApp.Services
             if (File.Exists(FilePath))
             {
                 byte[] encrypted = File.ReadAllBytes(FilePath);
-                string json = Decrypt(encrypted).TrimEnd((char)0x0e);
+                string json = Decrypt(encrypted).TrimEnd((char)0x0e, (char)0x01);
                 return DeserializeChildren(json);
             }
 
