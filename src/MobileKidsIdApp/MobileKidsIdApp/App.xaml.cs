@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using MobileKidsIdApp.Services;
+using MobileKidsIdApp.ViewModels;
 using MobileKidsIdApp.Views;
 using Unity;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace MobileKidsIdApp
         }
 
         protected override Task<Page> CreateMainPage()
-            => Task.FromResult<Page>(new MainPage());
+            => CreatePage<LoginPage, LoginViewModel>();
 
         // TODO: use onstart/pause/resume to add more security around auth
     }
