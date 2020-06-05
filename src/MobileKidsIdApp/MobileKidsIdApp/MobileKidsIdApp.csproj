@@ -28,6 +28,8 @@
       <None Remove="Resources\safety.html" />
       <None Remove="Resources\abouthtbox.html" />
       <None Remove="Resources\aboutmcm.html" />
+      <None Remove="Resources\Fonts\FontAwesome5Solid900.otf" />
+      <None Remove="Resources\Fonts\FontAwesomeRegular400.otf" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Include="Resources\abduction.html" />
@@ -40,6 +42,11 @@
       <EmbeddedResource Include="Resources\safety.html" />
       <EmbeddedResource Include="Resources\abouthtbox.html" />
       <EmbeddedResource Include="Resources\aboutmcm.html" />
+      <EmbeddedResource Include="Resources\Fonts\FontAwesome5Solid900.otf" />
+      <EmbeddedResource Include="Resources\Fonts\FontAwesome5Regular400.otf" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Resources\Fonts\" />
+    </ItemGroup>
 </Project>
