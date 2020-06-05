@@ -4,6 +4,8 @@ namespace MobileKidsIdApp
 {
     public abstract class ContentPageBase : ContentPage
     {
+        public ContentPageBase() => Visual = VisualMarker.Material;
+
         protected ViewModelBase ViewModel => BindingContext as ViewModelBase;
 
         protected override void OnAppearing() => ViewModel?.OnAppearing();
