@@ -27,6 +27,7 @@ namespace MobileKidsIdApp.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
             var formsApp = new App();
             formsApp.Init(PlatformInitializeContainer);

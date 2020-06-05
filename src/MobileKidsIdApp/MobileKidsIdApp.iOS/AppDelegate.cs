@@ -30,6 +30,7 @@ namespace MobileKidsIdApp.iOS
             SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
  
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
 
             var formsApp = new App();
             formsApp.Init(PlatformInitializeContainer);
