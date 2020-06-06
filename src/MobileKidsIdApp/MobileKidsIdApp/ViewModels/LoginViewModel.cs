@@ -57,6 +57,9 @@ namespace MobileKidsIdApp.ViewModels
 
         private async Task SignIn()
         {
+            // Do nothing if password is blank
+            if (Password == null) return;
+
             bool passwordValid = false;
 
             if (SetPassword && Password == PasswordConfirm)
