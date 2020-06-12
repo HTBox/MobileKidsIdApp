@@ -40,5 +40,7 @@
 	<string>Contact picker picks contacts to display in the app.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
