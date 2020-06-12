@@ -10,7 +10,14 @@
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding AddProviderCommand}"/>
+        <ToolbarItem
+            Command="{Binding AddProviderCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="{x:Static app:SolidGlyphs.Plus}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

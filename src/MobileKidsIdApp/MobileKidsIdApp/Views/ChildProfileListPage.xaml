@@ -10,9 +10,13 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Name="Add child"
-            Command="{Binding AddChildCommand}"
-            Icon="plusbutton.png" />
+            Command="{Binding AddChildCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="{x:Static app:SolidGlyphs.Plus}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <!-- TODO: Replace with collection view -->

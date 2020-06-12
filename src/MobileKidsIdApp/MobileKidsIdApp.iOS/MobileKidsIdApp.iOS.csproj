@@ -202,9 +202,6 @@
     <BundleResource Include="Resources\ameco-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\plusbutton.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\icon.png" />
   </ItemGroup>
 </Project>

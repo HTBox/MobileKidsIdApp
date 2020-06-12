@@ -8,7 +8,13 @@
     Title="Friends">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add" Icon="plusbutton.png" />
+        <ToolbarItem>
+          <ToolbarItem.IconImageSource>
+              <FontImageSource
+                  FontFamily="FASolid"
+                  Glyph="{x:Static app:SolidGlyphs.Plus}" />
+          </ToolbarItem.IconImageSource>
+      </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ListView ItemsSource="{Binding Friends}" SelectedItem="{Binding CurrentItem}">
