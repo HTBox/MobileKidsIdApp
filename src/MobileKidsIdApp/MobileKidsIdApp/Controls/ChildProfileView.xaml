@@ -14,6 +14,7 @@
 
     <Frame
         Margin="10,10,10,5"
+        HasShadow="False"
         HeightRequest="72"
         BackgroundColor="{StaticResource MCMDarkTeal20}">
         <Grid>

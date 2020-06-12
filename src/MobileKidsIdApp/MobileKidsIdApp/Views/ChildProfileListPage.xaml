@@ -3,8 +3,8 @@
     x:Class="MobileKidsIdApp.Views.ChildProfileListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="root"
 
+    x:Name="root"
     xmlns:app="clr-namespace:MobileKidsIdApp"
     Title="My Kids">
 
