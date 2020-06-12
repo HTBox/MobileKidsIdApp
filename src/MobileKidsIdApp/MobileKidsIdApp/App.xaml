@@ -11,14 +11,11 @@
                 See MCM Brand Inspriation Board for usage guidelines on color palette.
                 https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
             -->
-            <Color x:Key="MCMDarkTeal">#084150</Color>
             <Color x:Key="MCMDarkTeal04">#04084150</Color>
-
+            <Color x:Key="MCMDarkTeal2">#245e6b</Color>
 
             <!-- Unused -->
-            <Color x:Key="MCMWhite1">#FFFFFF</Color>
-
-            <Color x:Key="MCMDarkTeal2">#245e6b</Color>
+            <Color x:Key="MCMDarkTeal1">#084150</Color>
             <Color x:Key="MCMDarkTeal3">#437985</Color>
             <Color x:Key="MCMDarkTeal4">#437985</Color>
 
@@ -49,15 +46,15 @@
 
             <!-- Implicit Styles -->
             <Style TargetType="Entry">
-                <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
-                <Setter Property="PlaceholderColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal2}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource MCMDarkTeal2}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal04}" />
             </Style>
 
             <Style TargetType="Button">
                 <Setter Property="HeightRequest" Value="36" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal2}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

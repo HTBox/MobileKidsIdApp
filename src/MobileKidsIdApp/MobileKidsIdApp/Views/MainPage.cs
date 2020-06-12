@@ -1,4 +1,5 @@
 ﻿using MobileKidsIdApp.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
@@ -12,16 +13,20 @@ namespace MobileKidsIdApp.Views
         {
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
-            Xamarin.Forms.Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
-            Xamarin.Forms.Page instructionsPage = CurrentApp.CreatePage<InstructionIndexPage, InstructionIndexViewModel>(true).Result;
+            Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
+            Page instructionsPage = CurrentApp.CreatePage<InstructionIndexPage, InstructionIndexViewModel>(true).Result;
 
-            if (childListPage is Xamarin.Forms.NavigationPage childNavPage)
+            if (childListPage is NavigationPage childNavPage)
             {
                 childNavPage.Title = "My Kids";
+                //childNavPage.IconImageSource = new FontImageSource()
+                //{
+
+                //};
                 // TODO: set icon
             }
 
-            if (instructionsPage is Xamarin.Forms.NavigationPage instructionNavPage)
+            if (instructionsPage is NavigationPage instructionNavPage)
             {
                 instructionNavPage.Title = "Content";
                 // TODO: set icon

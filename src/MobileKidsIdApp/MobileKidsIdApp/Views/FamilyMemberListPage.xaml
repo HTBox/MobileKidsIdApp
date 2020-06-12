@@ -14,7 +14,8 @@
           <ToolbarItem.IconImageSource>
               <FontImageSource
                   FontFamily="FASolid"
-                  Glyph="{x:Static app:SolidGlyphs.Plus}" />
+                  Glyph="{x:Static app:SolidGlyphs.Plus}"
+                  Color="{StaticResource MCMDarkTeal2}" />
           </ToolbarItem.IconImageSource>
       </ToolbarItem>
   </ContentPage.ToolbarItems>
