@@ -6,7 +6,7 @@
     x:Name="root"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="MY KIDS">
+    Title="My Kids">
 
     <ContentPage.Resources>
         <ResourceDictionary>
