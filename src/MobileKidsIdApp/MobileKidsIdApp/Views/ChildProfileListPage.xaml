@@ -8,12 +8,6 @@
     xmlns:app="clr-namespace:MobileKidsIdApp"
     Title="My Kids">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <app:GenderToColorConverter x:Key="genderToColor" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.ToolbarItems>
         <ToolbarItem
             AutomationId="NewChildButton"
@@ -49,57 +43,7 @@
                         </SwipeItem>
                     </SwipeView.RightItems>
                     <ContentView> <!-- Work around for issue https://github.com/xamarin/Xamarin.Forms/issues/4681 -->
-                        <Frame
-                            Margin="10,10,10,5"
-                            HeightRequest="72"
-                            BackgroundColor="{StaticResource MCMDarkTeal20}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="4*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="2*" />
-                                </Grid.RowDefinitions>
-
-                                <Label
-                                    Grid.Column="0"
-                                    Grid.Row="0"
-                                    VerticalTextAlignment="End"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{Binding NickName}" />
-
-                                <Label
-                                    Grid.Column="0"
-                                    Grid.Row="1"
-                                    FontFamily="FASolid"
-                                    FontSize="40"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{x:Static app:SolidGlyphs.Child}"
-                                    TextColor="{Binding Gender, Converter={StaticResource genderToColor}}"/>
-
-                                <Label
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    Grid.RowSpan="2"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding GivenName}" />
-                                            <Span Text=" " />
-                                            <Span Text="{Binding AdditionalName}" />
-                                            <Span Text="&#x0a;" />
-                                            <Span Text="{Binding FamilyName}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <!-- TODO: add photo ? -->
-
-                            </Grid>
-                        </Frame>
+                        <app:ChildProfileView />
                     </ContentView>
                 </SwipeView>
             </DataTemplate>
