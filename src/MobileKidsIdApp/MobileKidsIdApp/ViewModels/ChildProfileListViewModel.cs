@@ -61,9 +61,8 @@ namespace MobileKidsIdApp.ViewModels
             _family.SetCurrentChild(child);
             Kids.Add(child);
 
-            // TODO: bush basic detail first and then instert page before
-            await PushAsync<ChildProfilePage, ChildProfileViewModel>(false);
-            await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
+            Page basicDetailsPage = await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
+            await InsertPageBefore<ChildProfilePage, ChildProfileViewModel>(basicDetailsPage);
         }
 
         private void RemoveChild(Child child)
