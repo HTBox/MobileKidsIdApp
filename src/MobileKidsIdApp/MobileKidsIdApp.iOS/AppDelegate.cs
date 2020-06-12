@@ -28,7 +28,8 @@ namespace MobileKidsIdApp.iOS
 #endif
 
             SecureStorage.DefaultAccessible = SecAccessible.AlwaysThisDeviceOnly;
- 
+
+            global::Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
 

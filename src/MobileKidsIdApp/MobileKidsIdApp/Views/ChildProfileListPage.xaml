@@ -3,52 +3,125 @@
     x:Class="MobileKidsIdApp.Views.ChildProfileListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="childProfileList"
+    x:Name="root"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
     Title="MY KIDS">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <app:GenderToColorConverter x:Key="genderToColor" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem
+            AutomationId="NewChildButton"
             Command="{Binding AddChildCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"
                     Glyph="{x:Static app:SolidGlyphs.Plus}"
-                    Color="{StaticResource MCMDarkTeal2}" />
+                    Color="{StaticResource MCMDarkTeal}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <!-- TODO: Replace with collection view -->
-    <ListView
-        x:Name="childList"
-        ItemTapped="ShowChild"
-        ItemsSource="{Binding Kids}"
-        IsPullToRefreshEnabled="True"
-        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
-        RefreshCommand="{Binding RefreshCommand}">
-        <ListView.ItemTemplate>
+    <CollectionView
+        AutomationId="ChildList"
+        SelectionMode="Single"
+        SelectedItem="{Binding SelectedChild}"
+        ItemsSource="{Binding Kids}">
+        <CollectionView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
-                    <!-- TODO: replace with swipe view -->
-                    <ViewCell.ContextActions>
-                        <MenuItem
-                            Command="{Binding Source={x:Reference childProfileList}, Path=BindingContext.RemoveChildCommand}"
-                            CommandParameter="{Binding .}"
-                            Text="Remove" />
-                    </ViewCell.ContextActions>
-                    <StackLayout Margin="20,0,20,0" Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Margin="3,10,3,10" Text="{Binding GivenName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding NickName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding AdditionalName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding FamilyName}" />
-                        </StackLayout>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItem
+                            BackgroundColor="Red"
+                            Command="{Binding Source={x:Reference root}, Path=BindingContext.RemoveChildCommand}"
+                            CommandParameter="{Binding}">
+                            <SwipeItem.IconImageSource>
+                                <FontImageSource
+                                    FontFamily="FASolid"
+                                    Glyph="{x:Static app:SolidGlyphs.Trash}"
+                                    Color="White" />
+                            </SwipeItem.IconImageSource>
+                        </SwipeItem>
+                    </SwipeView.RightItems>
+                    <ContentView> <!-- Work around for issue https://github.com/xamarin/Xamarin.Forms/issues/4681 -->
+                        <Frame
+                            Margin="10,10,10,5"
+                            HeightRequest="72"
+                            BackgroundColor="{StaticResource MCMDarkTeal20}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*" />
+                                </Grid.RowDefinitions>
 
+                                <Label
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    VerticalTextAlignment="End"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding NickName}" />
+
+                                <Label
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    FontFamily="FASolid"
+                                    FontSize="40"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{x:Static app:SolidGlyphs.Child}"
+                                    TextColor="{Binding Gender, Converter={StaticResource genderToColor}}"/>
+
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding GivenName}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding AdditionalName}" />
+                                            <Span Text="&#x0a;" />
+                                            <Span Text="{Binding FamilyName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- TODO: add photo ? -->
+
+                            </Grid>
+                        </Frame>
+                    </ContentView>
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Press the " />
+                            <Span
+                                FontFamily="FASolid"
+                                Text="{x:Static app:SolidGlyphs.Plus}"
+                                TextColor="{StaticResource MCMDarkTeal}" />
+                            <Span Text=" icon to add a new kid." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </CollectionView.EmptyView>
+    </CollectionView>
 </app:ContentPageBase>

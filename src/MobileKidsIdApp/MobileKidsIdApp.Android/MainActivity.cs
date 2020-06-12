@@ -26,6 +26,7 @@ namespace MobileKidsIdApp.Droid
 
             base.OnCreate(bundle);
 
+            global::Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
 

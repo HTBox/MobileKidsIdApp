@@ -13,7 +13,7 @@
               <FontImageSource
                   FontFamily="FASolid"
                   Glyph="{x:Static app:SolidGlyphs.Plus}"
-                  Color="{StaticResource MCMDarkTeal2}" />
+                  Color="{StaticResource MCMDarkTeal}" />
           </ToolbarItem.IconImageSource>
       </ToolbarItem>
     </ContentPage.ToolbarItems>

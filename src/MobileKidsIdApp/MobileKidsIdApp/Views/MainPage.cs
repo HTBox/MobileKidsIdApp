@@ -14,7 +14,7 @@ namespace MobileKidsIdApp.Views
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
             BarBackgroundColor = Color.White;
-            SelectedTabColor = AppColors.MCMDarkTeal2;
+            SelectedTabColor = AppColors.MCMDarkTeal;
             UnselectedTabColor = AppColors.MCMBlack4;
 
             Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
