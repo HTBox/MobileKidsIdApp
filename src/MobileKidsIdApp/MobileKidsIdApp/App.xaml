@@ -11,8 +11,10 @@
                 See MCM Brand Inspriation Board for usage guidelines on color palette.
                 https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
             -->
-            <Color x:Key="MCMDarkTeal04">#04084150</Color>
             <Color x:Key="MCMDarkTeal2">#245e6b</Color>
+            <Color x:Key="MCMDarkTeal04">#04084150</Color>
+            <Color x:Key="MCMBlack4">#797979</Color>
+
 
             <!-- Unused -->
             <Color x:Key="MCMDarkTeal1">#084150</Color>
@@ -37,7 +39,6 @@
             <Color x:Key="MCMBlack1">#212121</Color>
             <Color x:Key="MCMBlack2">#404040</Color>
             <Color x:Key="MCMBlack3">#5e5e5e</Color>
-            <Color x:Key="MCMBlack4">#797979</Color>
 
             <Color x:Key="MCMYellow1">#ede493</Color>
             <Color x:Key="MCMYellow2">#f1e9a6</Color>

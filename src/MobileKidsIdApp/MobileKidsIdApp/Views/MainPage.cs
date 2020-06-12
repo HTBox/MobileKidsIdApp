@@ -13,23 +13,33 @@ namespace MobileKidsIdApp.Views
         {
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
+            BarBackgroundColor = Color.White;
+            SelectedTabColor = AppColors.MCMDarkTeal2;
+            UnselectedTabColor = AppColors.MCMBlack4;
+
             Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
             Page instructionsPage = CurrentApp.CreatePage<InstructionIndexPage, InstructionIndexViewModel>(true).Result;
 
             if (childListPage is NavigationPage childNavPage)
             {
                 childNavPage.Title = "My Kids";
-                //childNavPage.IconImageSource = new FontImageSource()
-                //{
-
-                //};
-                // TODO: set icon
+                childNavPage.IconImageSource = new FontImageSource()
+                {
+                    FontFamily = "FASolid",
+                    Glyph = SolidGlyphs.IdCard,
+                    Size = 20
+                };
             }
 
             if (instructionsPage is NavigationPage instructionNavPage)
             {
-                instructionNavPage.Title = "Content";
-                // TODO: set icon
+                instructionNavPage.Title = "Information";
+                instructionNavPage.IconImageSource = new FontImageSource()
+                {
+                    FontFamily = "FASolid",
+                    Glyph = SolidGlyphs.BookOpen,
+                    Size = 20
+                };
             }
 
 
