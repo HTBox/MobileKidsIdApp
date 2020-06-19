@@ -9,7 +9,7 @@
 
     <ScrollView>
         <StackLayout
-            Margin="10, 0, 10, 0"
+            Margin="10, 10, 10, 0"
             Spacing="12">
             <Button Text="Abductions" Command="{Binding AbductionsCommand}" />
             <Button Text="Amber Alerts" Command="{Binding AmberAlertsCommand}" />
