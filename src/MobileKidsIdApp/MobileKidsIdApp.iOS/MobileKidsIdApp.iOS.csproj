@@ -113,7 +113,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Platform\ContactPicker.cs" />
     <Compile Include="Platform\PhotoPicker.cs" />
-    <Compile Include="Platform\WebViewContentHelper.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,7 +194,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\default.css" />
     <BundleResource Include="Resources\ht-logo.png" />
     <BundleResource Include="Resources\mcm-logo.jpg" />
     <BundleResource Include="Resources\csmn-logo.png" />

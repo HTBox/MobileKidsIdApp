@@ -87,7 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\ContactPicker.cs" />
     <Compile Include="Platform\PhotoPicker.cs" />
-    <Compile Include="Platform\WebViewContentHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

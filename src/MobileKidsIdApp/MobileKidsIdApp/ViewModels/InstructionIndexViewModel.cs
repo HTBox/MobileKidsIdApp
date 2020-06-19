@@ -20,16 +20,16 @@ namespace MobileKidsIdApp.ViewModels
 
         public InstructionIndexViewModel()
         {
-            AbductionsCommand = new Command(async () => await ShowContent("abduction"));
-            AmberAlertsCommand = new Command(async () => await ShowContent("amberalert"));
-            DisasterPrepCommand = new Command(async () => await ShowContent("disasterprep"));
-            DNACommand = new Command(async () => await ShowContent("dna"));
-            InternationalCommand = new Command(async () => await ShowContent("international"));
-            MissingCommand = new Command(async () => await ShowContent("missing"));
-            RunawaysCommand = new Command(async () => await ShowContent("runaway"));
-            ChildSafetyCommand = new Command(async () => await ShowContent("safety"));
-            HTBoxCommand = new Command(async () => await ShowContent("abouthtbox"));
-            MCMCommand = new Command(async () => await ShowContent("aboutmcm"));
+            AbductionsCommand = new Command(async () => await ShowContent(Documents.Abduction));
+            AmberAlertsCommand = new Command(async () => await ShowContent(Documents.AmberAlert));
+            DisasterPrepCommand = new Command(async () => await ShowContent(Documents.DisasterPrep));
+            DNACommand = new Command(async () => await ShowContent(Documents.DNA));
+            InternationalCommand = new Command(async () => await ShowContent(Documents.International));
+            MissingCommand = new Command(async () => await ShowContent(Documents.Missing));
+            RunawaysCommand = new Command(async () => await ShowContent(Documents.Runaway));
+            ChildSafetyCommand = new Command(async () => await ShowContent(Documents.Safety));
+            HTBoxCommand = new Command(async () => await ShowContent(Documents.AboutHTBox));
+            MCMCommand = new Command(async () => await ShowContent(Documents.AboutMCM));
         }
 
         private async Task ShowContent(string contentLabel)

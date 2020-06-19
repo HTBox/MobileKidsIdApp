@@ -43,7 +43,6 @@ namespace MobileKidsIdApp.iOS
         private void PlatformInitializeContainer(UnityContainer container)
         {
             container.RegisterType<IContactPicker, ContactPicker>();
-            container.RegisterType<IWebViewContentHelper, WebViewContentHelper>();
             container.RegisterType<IPhotoPicker, PhotoPicker>();
         }
     }
