@@ -17,15 +17,9 @@
         HasShadow="False"
         HeightRequest="72"
         BackgroundColor="{StaticResource MCMDarkTeal20}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
+        <Grid
+            ColumnDefinitions="*, 4*"
+            RowDefinitions="*, 2*">
 
             <Label
                 Grid.Column="0"

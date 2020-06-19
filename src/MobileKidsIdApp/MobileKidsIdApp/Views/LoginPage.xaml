@@ -10,12 +10,9 @@
     xmlns:app="clr-namespace:MobileKidsIdApp">
 
     <ScrollView>
-        <Grid RowSpacing="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid
+            RowDefinitions="*, Auto, *"
+            RowSpacing="20">
 
             <StackLayout
                 Grid.Row="1"
