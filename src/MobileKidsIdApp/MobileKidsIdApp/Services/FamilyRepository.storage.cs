@@ -11,8 +11,9 @@ namespace MobileKidsIdApp.Services
         private readonly string FileName = "f.htbox";
         private readonly char[] PaddingChars = new char[]
         {
-            (char)0x0e, (char)0x01, (char)0x02, (char)0x03, (char)0x04,
-            (char)0x05, (char)0x06, (char)0x07, (char)0x08, (char)0x09, (char)0x10
+            (char)0x0B, (char)0x0e,
+            (char)0x01, (char)0x02, (char)0x03, (char)0x04, (char)0x05,
+            (char)0x06, (char)0x07, (char)0x08, (char)0x09, (char)0x10
         };
 
         private string BasePath => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
