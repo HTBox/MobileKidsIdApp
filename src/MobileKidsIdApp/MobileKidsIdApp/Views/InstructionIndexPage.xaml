@@ -5,10 +5,12 @@
     x:Class="MobileKidsIdApp.Views.InstructionIndexPage"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="CONTENT">
+    Title="Information">
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout
+            Margin="10, 0, 10, 0"
+            Spacing="12">
             <Button Text="Abductions" Command="{Binding AbductionsCommand}" />
             <Button Text="Amber Alerts" Command="{Binding AmberAlertsCommand}" />
             <Button Text="Disaster Prep" Command="{Binding DisasterPrepCommand}" />
