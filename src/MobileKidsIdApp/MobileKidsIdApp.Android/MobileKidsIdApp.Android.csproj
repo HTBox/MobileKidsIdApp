@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.847" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.1.0-rc3" />
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
   <PackageReference Include="Xamarin.AndroidX.Browser">
@@ -77,7 +77,7 @@
     <Version>4.7.2</Version>
   </PackageReference>
   <PackageReference Include="Xamarin.Forms.Visual.Material">
-    <Version>4.6.0.847</Version>
+    <Version>4.7.0.968</Version>
   </PackageReference>
 </ItemGroup>
   <ItemGroup>
