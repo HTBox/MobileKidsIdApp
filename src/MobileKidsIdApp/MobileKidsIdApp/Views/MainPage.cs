@@ -1,4 +1,5 @@
 ﻿using MobileKidsIdApp.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
@@ -12,19 +13,33 @@ namespace MobileKidsIdApp.Views
         {
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
-            Xamarin.Forms.Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
-            Xamarin.Forms.Page instructionsPage = CurrentApp.CreatePage<InstructionIndexPage, InstructionIndexViewModel>(true).Result;
+            BarBackgroundColor = Color.White;
+            SelectedTabColor = AppColors.MCMDarkTeal;
+            UnselectedTabColor = AppColors.MCMBlack4;
 
-            if (childListPage is Xamarin.Forms.NavigationPage childNavPage)
+            Page childListPage = CurrentApp.CreatePage<ChildProfileListPage, ChildProfileListViewModel>(true).Result;
+            Page instructionsPage = CurrentApp.CreatePage<InstructionIndexPage, InstructionIndexViewModel>(true).Result;
+
+            if (childListPage is NavigationPage childNavPage)
             {
                 childNavPage.Title = "My Kids";
-                // TODO: set icon
+                childNavPage.IconImageSource = new FontImageSource()
+                {
+                    FontFamily = "FASolid",
+                    Glyph = SolidGlyphs.IdCard,
+                    Size = 20
+                };
             }
 
-            if (instructionsPage is Xamarin.Forms.NavigationPage instructionNavPage)
+            if (instructionsPage is NavigationPage instructionNavPage)
             {
-                instructionNavPage.Title = "Content";
-                // TODO: set icon
+                instructionNavPage.Title = "Information";
+                instructionNavPage.IconImageSource = new FontImageSource()
+                {
+                    FontFamily = "FASolid",
+                    Glyph = SolidGlyphs.BookOpen,
+                    Size = 20
+                };
             }
 
 

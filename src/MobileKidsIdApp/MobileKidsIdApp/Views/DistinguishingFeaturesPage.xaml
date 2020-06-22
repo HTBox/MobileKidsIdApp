@@ -9,7 +9,15 @@
     Title="Features">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding AddFeatureCommand}"/>
+        <ToolbarItem
+            Command="{Binding AddFeatureCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="{x:Static app:SolidGlyphs.Plus}"
+                    Color="{StaticResource MCMDarkTeal}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

@@ -7,6 +7,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+[assembly: ExportFont("FontAwesome5Regular400.otf", Alias = "FARegular")]
+[assembly: ExportFont("FontAwesome5Solid900.otf", Alias = "FASolid")]
+
 namespace MobileKidsIdApp
 {
     public partial class App : ApplicationBase
@@ -24,7 +27,9 @@ namespace MobileKidsIdApp
         }
 
         protected override Task<Page> CreateMainPage()
-            => CreatePage<LoginPage, LoginViewModel>();
+            => Settings.AllowPasswordSetup
+                ? CreatePage<CreatePasswordPage, CreatePasswordViewModel>()
+                : CreatePage<LoginPage, LoginViewModel>();
 
         // TODO: use onstart/pause/resume to add more security around auth
     }

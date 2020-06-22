@@ -19,7 +19,7 @@
         </ViewCell>
       </TableSection>
       <TableSection Title="Sex">
-        <EntryCell Label="Gender" Text="{Binding Child.Gender}" />
+        <EntryCell Label="Gender" />
         <EntryCell Label="Gender Identity" Text="{Binding Child.GenderIdentity}" />
       </TableSection>
       <TableSection Title="Skin">

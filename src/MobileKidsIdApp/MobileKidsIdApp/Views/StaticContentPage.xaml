@@ -7,6 +7,11 @@
     xmlns:app="clr-namespace:MobileKidsIdApp"
     Title="{Binding Title}">
 
-    <WebView Source="{Binding HtmlSource}" />
+    <ScrollView>
+        <Label
+            Margin="20,20,20,10"
+            Text="{Binding HtmlSource}"
+            TextType="Html"/>
+    </ScrollView>
 
 </app:ContentPageBase>

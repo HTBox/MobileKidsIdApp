@@ -1,10 +1,16 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace MobileKidsIdApp
 {
     public abstract class ContentPageBase : ContentPage
     {
-        public ContentPageBase() => Visual = VisualMarker.Material;
+        public ContentPageBase()
+        {
+            Visual = VisualMarker.Material;
+            On<iOS>().SetUseSafeArea(true);
+        }
 
         protected ViewModelBase ViewModel => BindingContext as ViewModelBase;
 

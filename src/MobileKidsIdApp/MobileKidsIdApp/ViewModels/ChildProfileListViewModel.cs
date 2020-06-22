@@ -12,18 +12,24 @@ namespace MobileKidsIdApp.ViewModels
     {
         private readonly FamilyRepository _family;
 
-        private bool _isBusy;
-        public bool IsBusy
+        private Child _selectedChild;
+        public Child SelectedChild
         {
-            get => _isBusy;
-            set => SetProperty(ref _isBusy, value);
+            get => _selectedChild;
+            set
+            {
+                SetProperty(ref _selectedChild, value);
+                if (value != null)
+                {
+                    Device.InvokeOnMainThreadAsync(async () => await ChildTapped(_selectedChild));
+                }
+            }
         }
 
         public ObservableCollection<Child> Kids { get; private set; } = new ObservableCollection<Child>();
 
         public Command AddChildCommand { get; private set; }
         public Command<Child> RemoveChildCommand { get; private set; }
-        public Command RefreshCommand { get; private set; }
 
         public ChildProfileListViewModel(FamilyRepository family)
         {
@@ -31,7 +37,6 @@ namespace MobileKidsIdApp.ViewModels
 
             AddChildCommand = new Command(async () => await AddChild());
             RemoveChildCommand = new Command<Child>(RemoveChild);
-            RefreshCommand = new Command(Refresh);
         }
 
         public override void OnAppearing()
@@ -40,15 +45,14 @@ namespace MobileKidsIdApp.ViewModels
             Refresh();
         }
 
-        private void Refresh()
+        private void Refresh(bool force = false)
         {
-            IsBusy = true;
-
-            List<Child> children = _family.Children;
-            Kids.Clear();
-            children.ForEach((_) => Kids.Add(_));
-
-            IsBusy = false;
+            if (Kids.Count == 0 || force)
+            {
+                List<Child> children = _family.Children;
+                Kids.Clear();
+                children.ForEach((_) => Kids.Add(_));
+            }
         }
 
         private async Task AddChild()
@@ -57,8 +61,8 @@ namespace MobileKidsIdApp.ViewModels
             _family.SetCurrentChild(child);
             Kids.Add(child);
 
-            await PushAsync<ChildProfilePage, ChildProfileViewModel>(false);
-            await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
+            Page basicDetailsPage = await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
+            await InsertPageBefore<ChildProfilePage, ChildProfileViewModel>(basicDetailsPage);
         }
 
         private void RemoveChild(Child child)
@@ -71,6 +75,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             _family.SetCurrentChild(child);
             await PushAsync<ChildProfilePage, ChildProfileViewModel>();
+            SelectedChild = null;
         }
     }
 }

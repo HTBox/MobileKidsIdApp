@@ -26,6 +26,7 @@ namespace MobileKidsIdApp.Droid
 
             base.OnCreate(bundle);
 
+            global::Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
 
@@ -54,7 +55,6 @@ namespace MobileKidsIdApp.Droid
         private void PlatformInitializeContainer(UnityContainer container)
         {
             container.RegisterType<IContactPicker, ContactPicker>();
-            container.RegisterType<IWebViewContentHelper, WebViewContentHelper>();
             container.RegisterType<IPhotoPicker, PhotoPicker>();
         }
     }

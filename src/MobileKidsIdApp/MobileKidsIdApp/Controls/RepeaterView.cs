@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace MobileKidsIdApp
 {
-    // TODO: Replace with Xamarin.Forms Bindable Layouts
+    // TODO: Replace with Xamarin.Forms Bindable Layouts or just use a CollectionView!
     public sealed class RepeaterView<T> : StackLayout
     {
         public RepeaterView()

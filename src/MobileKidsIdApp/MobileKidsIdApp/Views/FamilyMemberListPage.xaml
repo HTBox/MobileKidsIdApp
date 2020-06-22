@@ -9,7 +9,15 @@
     Title="Family">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Add" Icon="plusbutton.png" Command="{Binding NewFamilyMemberCommand}"/>
+      <ToolbarItem
+          Command="{Binding NewFamilyMemberCommand}">
+          <ToolbarItem.IconImageSource>
+              <FontImageSource
+                  FontFamily="FASolid"
+                  Glyph="{x:Static app:SolidGlyphs.Plus}"
+                  Color="{StaticResource MCMDarkTeal}" />
+          </ToolbarItem.IconImageSource>
+      </ToolbarItem>
   </ContentPage.ToolbarItems>
 
   <ScrollView>

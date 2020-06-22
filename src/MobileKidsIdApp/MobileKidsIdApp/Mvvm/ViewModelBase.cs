@@ -41,13 +41,23 @@ namespace MobileKidsIdApp
         public Task PopToRootAsync(bool animated = true) => Navigation.PopToRootAsync(animated);
         public void RemovePage(Page page = null) => Navigation.RemovePage(page ?? Page);
 
-        public async Task InsertPageBefore<TPage, TViewModel>(Dictionary<string, object> navigationParams = null)
+        public Task<Page> InsertPageBefore<TPage, TViewModel>(Dictionary<string, object> navigationParams = null)
+            where TPage : ContentPageBase
+            where TViewModel : ViewModelBase
+            => InsertPageBeforeInternal<TPage, TViewModel>(Page, navigationParams);
+
+        public Task<Page> InsertPageBefore<TPage, TViewModel>(Page before, Dictionary<string, object> navigationParams = null)
+            where TPage : ContentPageBase
+            where TViewModel : ViewModelBase
+            => InsertPageBeforeInternal<TPage, TViewModel>(before, navigationParams);
+
+        private async Task<Page> InsertPageBeforeInternal<TPage, TViewModel>(Page before, Dictionary<string, object> navigationParams = null)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
         {
             Page page = await CurrentApplication.CreatePage<TPage, TViewModel>(navigationParams);
-
-            Navigation.InsertPageBefore(page, Page);
+            Navigation.InsertPageBefore(page, before);
+            return page;
         }
 
         public Task ReplaceMainPageAsync<TPage, TViewModel>(Dictionary<string, object> navigationParams)
@@ -79,40 +89,42 @@ namespace MobileKidsIdApp
                 await PopAsync(navigationParams, animated);
             }
         }
-        public Task PushAsync<TPage, TViewModel>(bool animated = true)
+        public Task<Page> PushAsync<TPage, TViewModel>(bool animated = true)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
             => PushAsyncInternal<TPage, TViewModel>(null, animated);
 
-        public Task PushAsync<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool animated = true)
+        public Task<Page> PushAsync<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool animated = true)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
             => PushAsyncInternal<TPage, TViewModel>(navigationParams, animated);
 
-        public Task PushModalAsync<TPage, TViewModel>(bool wrapInNavigationPage = true, bool animated = true)
+        public Task<Page> PushModalAsync<TPage, TViewModel>(bool wrapInNavigationPage = true, bool animated = true)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
             => PushModalAsyncInternal<TPage, TViewModel>(null, wrapInNavigationPage, animated);
 
-        public Task PushModalAsync<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool wrapInNavigationPage = true, bool animated = true)
+        public Task<Page> PushModalAsync<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool wrapInNavigationPage = true, bool animated = true)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
             => PushModalAsyncInternal<TPage, TViewModel>(navigationParams, wrapInNavigationPage, animated);
 
-        private async Task PushAsyncInternal<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool animated)
+        private async Task<Page> PushAsyncInternal<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool animated)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
         {
             Page page = await CurrentApplication.CreatePage<TPage, TViewModel>(navigationParams);
             await Navigation.PushAsync(page, animated);
+            return page;
         }
 
-        private async Task PushModalAsyncInternal<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool wrapInNavigationPage, bool animated)
+        private async Task<Page> PushModalAsyncInternal<TPage, TViewModel>(Dictionary<string, object> navigationParams, bool wrapInNavigationPage, bool animated)
             where TPage : ContentPageBase
             where TViewModel : ViewModelBase
         {
             Page page = await CurrentApplication.CreatePage<TPage, TViewModel>(wrapInNavigationPage, navigationParams);
             await Navigation.PushModalAsync(page, animated);
+            return page;
         }
 
         private async Task<Page> PopAsyncInternal(Dictionary<string, object> navigationParams = null, bool animated = true)

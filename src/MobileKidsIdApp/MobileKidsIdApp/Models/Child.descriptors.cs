@@ -2,6 +2,16 @@
 
 namespace MobileKidsIdApp.Models
 {
+    // System.Text.Json serializes enums as nunmbers by default.
+    // Using explicit numbers to persist values over order.
+    // https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to
+    public enum Gender : int 
+    {
+        NotSelected = 0,
+        Male = 1,
+        Female = 2
+    }
+
     public partial class Child
     {
         private string _height;
@@ -74,8 +84,8 @@ namespace MobileKidsIdApp.Models
             set => SetProperty(ref _racialEthnicIdentity, value);
         }
 
-        private string _gender;
-        public string Gender
+        private Gender _gender = Gender.NotSelected;
+        public Gender Gender
         {
             get => _gender;
             set => SetProperty(ref _gender, value);

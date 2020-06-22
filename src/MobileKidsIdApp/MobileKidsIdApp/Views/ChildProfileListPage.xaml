@@ -3,47 +3,69 @@
     x:Class="MobileKidsIdApp.Views.ChildProfileListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="childProfileList"
 
+    x:Name="root"
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="MY KIDS">
+    Title="My Kids">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Name="Add child"
-            Command="{Binding AddChildCommand}"
-            Icon="plusbutton.png" />
+            AutomationId="NewChildButton"
+            Command="{Binding AddChildCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="{x:Static app:SolidGlyphs.Plus}"
+                    Color="{StaticResource MCMDarkTeal}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <!-- TODO: Replace with collection view -->
-    <ListView
-        x:Name="childList"
-        ItemTapped="ShowChild"
-        ItemsSource="{Binding Kids}"
-        IsPullToRefreshEnabled="True"
-        IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
-        RefreshCommand="{Binding RefreshCommand}">
-        <ListView.ItemTemplate>
+    <CollectionView
+        AutomationId="ChildList"
+        SelectionMode="Single"
+        SelectedItem="{Binding SelectedChild}"
+        ItemsSource="{Binding Kids}">
+        <CollectionView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
-                    <!-- TODO: replace with swipe view -->
-                    <ViewCell.ContextActions>
-                        <MenuItem
-                            Command="{Binding Source={x:Reference childProfileList}, Path=BindingContext.RemoveChildCommand}"
-                            CommandParameter="{Binding .}"
-                            Text="Remove" />
-                    </ViewCell.ContextActions>
-                    <StackLayout Margin="20,0,20,0" Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Margin="3,10,3,10" Text="{Binding GivenName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding NickName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding AdditionalName}" />
-                            <Label Margin="3,10,3,10" Text="{Binding FamilyName}" />
-                        </StackLayout>
-                    </StackLayout>
-                </ViewCell>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItem
+                            BackgroundColor="Red"
+                            Command="{Binding Source={x:Reference root}, Path=BindingContext.RemoveChildCommand}"
+                            CommandParameter="{Binding}">
+                            <SwipeItem.IconImageSource>
+                                <FontImageSource
+                                    FontFamily="FASolid"
+                                    Glyph="{x:Static app:SolidGlyphs.Trash}"
+                                    Color="White" />
+                            </SwipeItem.IconImageSource>
+                        </SwipeItem>
+                    </SwipeView.RightItems>
+                    <ContentView> <!-- Work around for issue https://github.com/xamarin/Xamarin.Forms/issues/4681 -->
+                        <app:ChildProfileView />
+                    </ContentView>
+                </SwipeView>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Press the " />
+                            <Span
+                                FontFamily="FASolid"
+                                Text="{x:Static app:SolidGlyphs.Plus}"
+                                TextColor="{StaticResource MCMDarkTeal}" />
+                            <Span Text=" icon to add a new kid." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </CollectionView.EmptyView>
+    </CollectionView>
 </app:ContentPageBase>

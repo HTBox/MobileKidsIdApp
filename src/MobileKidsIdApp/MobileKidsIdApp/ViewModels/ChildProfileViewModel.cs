@@ -1,4 +1,5 @@
-﻿using MobileKidsIdApp.Services;
+﻿using MobileKidsIdApp.Models;
+using MobileKidsIdApp.Services;
 using MobileKidsIdApp.Views;
 using Xamarin.Forms;
 
@@ -7,6 +8,13 @@ namespace MobileKidsIdApp.ViewModels
     public class ChildProfileViewModel : ViewModelBase
     {
         private readonly FamilyRepository _family;
+
+        private Child _selectedChild;
+        public Child SelectedChild
+        {
+            get => _selectedChild;
+            set => SetProperty(ref _selectedChild, value);
+        }
 
         public Command EditChildDetailsCommand { get; private set; }
         public Command EditFeaturesCommand { get; private set; }
@@ -23,6 +31,7 @@ namespace MobileKidsIdApp.ViewModels
         public ChildProfileViewModel(FamilyRepository family)
         {
             _family = family;
+            SelectedChild = family.CurrentChild;
 
             EditChildDetailsCommand = new Command(async () =>
                 await PushAsync<BasicDetailsPage, BasicDetailsViewModel>()

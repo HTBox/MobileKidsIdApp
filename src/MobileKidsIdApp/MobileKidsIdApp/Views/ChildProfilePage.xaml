@@ -4,23 +4,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MobileKidsIdApp.Views.ChildProfilePage"
 
-    xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="{Binding Model.ChildDetails.GivenName}">
+    x:Name="root"
+    xmlns:app="clr-namespace:MobileKidsIdApp">
 
-  <ScrollView>
-    <StackLayout>
-      <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}"/>
-      <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
-      <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}"/>
-      <Button Text="Family" Command="{Binding EditFamilyCommand}"/>
-      <Button Text="Friends" Command="{Binding EditFriendsCommand}"/>
-      <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}"/>
-      <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}"/>
-      <Button Text="Documents" Command="{Binding EditDocumentsCommand}"/>
-      <Button Text="Photos" Command="{Binding EditPhotosCommand}"/>
-      <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}"/>
-      <Button Text="Export Child Profile" Command="{Binding ExportChildProdfileCommand}"/>
-   </StackLayout>
+    <!-- TODO: Should we add checklist details to this page ? -->
+
+    <ScrollView>
+        <StackLayout>
+            <app:ChildProfileView BindingContext="{Binding Source={x:Reference root}, Path=BindingContext.SelectedChild}" />
+
+            <StackLayout
+                Margin="10, 0, 10, 0"
+                Spacing="12">
+                <Button Text="Basic info" Command="{Binding EditChildDetailsCommand}"/>
+                <Button Text="Physical details" Command="{Binding EditPhysicalDetailsCommand}"/>
+                <Button Text="Distinguishing features" Command="{Binding EditFeaturesCommand}"/>
+                <Button Text="Family" Command="{Binding EditFamilyCommand}"/>
+                <Button Text="Friends" Command="{Binding EditFriendsCommand}"/>
+                <Button Text="Medical notes" Command="{Binding EditMedicalNotesCommand}"/>
+                <Button Text="Care providers" Command="{Binding EditCareProvidersCommand}"/>
+                <Button Text="Documents" Command="{Binding EditDocumentsCommand}"/>
+                <Button Text="Photos" Command="{Binding EditPhotosCommand}"/>
+                <Button Text="Preparedness checklist" Command="{Binding EditChecklistCommand}"/>
+                <Button Text="Export Child Profile" Command="{Binding ExportChildProdfileCommand}"/>
+            </StackLayout>
+        </StackLayout>
   </ScrollView>
 
 </app:ContentPageBase>
