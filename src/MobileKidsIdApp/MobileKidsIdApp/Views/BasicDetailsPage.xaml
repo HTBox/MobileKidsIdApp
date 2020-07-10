@@ -11,7 +11,6 @@
         Margin="20,20,20,0">
 
         <StackLayout>
-            <Label Text="Name" />
             <Entry
                 Placeholder="Given"
                 Text="{Binding Child.GivenName}" />
