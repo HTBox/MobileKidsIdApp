@@ -4,14 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MobileKidsIdApp.Views.ChildProfilePage"
 
-    x:Name="root"
     xmlns:app="clr-namespace:MobileKidsIdApp">
 
     <!-- TODO: Should we add checklist details to this page ? -->
 
     <ScrollView>
         <StackLayout>
-            <app:ChildProfileView BindingContext="{Binding Source={x:Reference root}, Path=BindingContext.SelectedChild}" />
+            <app:ChildProfileView BindingContext="{Binding Child}" />
 
             <StackLayout
                 Margin="10, 0, 10, 0"

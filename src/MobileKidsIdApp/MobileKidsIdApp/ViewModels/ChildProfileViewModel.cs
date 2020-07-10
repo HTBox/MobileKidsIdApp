@@ -1,19 +1,16 @@
 ﻿using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
 using MobileKidsIdApp.Views;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class ChildProfileViewModel : ViewModelBase
+    public class ChildProfileViewModel : CurrentChildViewModel
     {
-        private readonly FamilyRepository _family;
-
-        private Child _selectedChild;
-        public Child SelectedChild
+        private Child _child;
+        public Child Child
         {
-            get => _selectedChild;
-            set => SetProperty(ref _selectedChild, value);
+            get => _child;
+            set => SetProperty(ref _child, value);
         }
 
         public Command EditChildDetailsCommand { get; private set; }
@@ -28,10 +25,9 @@ namespace MobileKidsIdApp.ViewModels
         public Command EditChecklistCommand { get; private set; }
         public Command ExportChildProdfileCommand { get; private set; }
 
-        public ChildProfileViewModel(FamilyRepository family)
+        public ChildProfileViewModel()
         {
-            _family = family;
-            SelectedChild = family.CurrentChild;
+            Child = CurrentChild;
 
             EditChildDetailsCommand = new Command(async () =>
                 await PushAsync<BasicDetailsPage, BasicDetailsViewModel>()
@@ -40,7 +36,7 @@ namespace MobileKidsIdApp.ViewModels
                 await PushAsync<DistinguishingFeaturesPage, DistinguishingFeaturesViewModel>()
             );
             EditCareProvidersCommand = new Command(async () =>
-                await PushAsync<ProfessionalCareProvidersPage, ProfessionalCareProvidersViewModel>()
+                await PushAsync<CareProvidersPage, CareProvidersViewModel>()
             );
             EditDocumentsCommand = new Command(async () =>
                 await PushAsync<DocumentsPage, DocumentsViewModel>()
@@ -68,6 +64,6 @@ namespace MobileKidsIdApp.ViewModels
             );
         }
 
-        public override void OnAppearing() => _family.SaveChildren();
+        public override void OnAppearing() => Family.SaveChildren();
     }
 }

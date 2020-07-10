@@ -1,10 +1,12 @@
 ﻿namespace MobileKidsIdApp.Models
 {
-    public class FamilyMember
+    public class FamilyMember : Person
     {
-        // TODO: What is the purpose of this? 
-        public string ContactId { get; set; }
-
-        public string Relation { get; set; }
+        private string _relation;
+        public string Relation
+        {
+            get => _relation;
+            set => SetProperty(ref _relation, value);
+        }
     }
 }

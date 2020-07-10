@@ -111,7 +111,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Platform\ContactPicker.cs" />
     <Compile Include="Platform\PhotoPicker.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -169,7 +168,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.5.3.2</Version>
     </PackageReference>
@@ -183,7 +182,7 @@
       <Version>0.21.9</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.7.0.968</Version>
+      <Version>4.7.0.1080</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -2,16 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
 using MobileKidsIdApp.Views;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class ChildProfileListViewModel : ViewModelBase
+    public class ChildProfileListViewModel : CurrentChildViewModel
     {
-        private readonly FamilyRepository _family;
-
         private Child _selectedChild;
         public Child SelectedChild
         {
@@ -31,17 +28,15 @@ namespace MobileKidsIdApp.ViewModels
         public Command AddChildCommand { get; private set; }
         public Command<Child> RemoveChildCommand { get; private set; }
 
-        public ChildProfileListViewModel(FamilyRepository family)
+        public ChildProfileListViewModel()
         {
-            _family = family;
-
             AddChildCommand = new Command(async () => await AddChild());
             RemoveChildCommand = new Command<Child>(RemoveChild);
         }
 
         public override void OnAppearing()
         {
-            _family.ClearCurrentChild();
+            Family.ClearCurrentChild();
             Refresh();
         }
 
@@ -49,7 +44,7 @@ namespace MobileKidsIdApp.ViewModels
         {
             if (Kids.Count == 0 || force)
             {
-                List<Child> children = _family.Children;
+                List<Child> children = Family.Children;
                 Kids.Clear();
                 children.ForEach((_) => Kids.Add(_));
             }
@@ -57,8 +52,8 @@ namespace MobileKidsIdApp.ViewModels
 
         private async Task AddChild()
         {
-            Child child = _family.NewChild();
-            _family.SetCurrentChild(child);
+            Child child = Family.NewChild();
+            Family.SetCurrentChild(child);
             Kids.Add(child);
 
             Page basicDetailsPage = await PushAsync<BasicDetailsPage, BasicDetailsViewModel>();
@@ -68,12 +63,12 @@ namespace MobileKidsIdApp.ViewModels
         private void RemoveChild(Child child)
         {
             Kids.Remove(child);
-            _family.RemoveChild(child);
+            Family.RemoveChild(child);
         }
 
         public async Task ChildTapped(Child child)
         {
-            _family.SetCurrentChild(child);
+            Family.SetCurrentChild(child);
             await PushAsync<ChildProfilePage, ChildProfileViewModel>();
             SelectedChild = null;
         }

@@ -1,9 +1,8 @@
 ﻿using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class MedicalNotesViewModel : ViewModelBase
+    public class MedicalNotesViewModel : CurrentChildViewModel
     {
         private Child _child;
         public Child Child
@@ -12,9 +11,7 @@ namespace MobileKidsIdApp.ViewModels
             set => SetProperty(ref _child, value);
         }
 
-        public MedicalNotesViewModel(FamilyRepository family)
-        {
-            Child = family.CurrentChild;
-        }
+        public MedicalNotesViewModel()
+            => Child = CurrentChild;
     }
 }

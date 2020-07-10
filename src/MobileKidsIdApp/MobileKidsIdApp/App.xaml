@@ -52,12 +52,17 @@
                 <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
                 <Setter Property="PlaceholderColor" Value="{StaticResource MCMDarkTeal}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal04}" />
+                <Setter Property="Keyboard" Value="Plain" />
             </Style>
 
             <Style TargetType="Button">
                 <Setter Property="HeightRequest" Value="36" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal}" />
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

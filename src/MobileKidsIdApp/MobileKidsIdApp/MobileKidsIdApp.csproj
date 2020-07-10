@@ -14,40 +14,21 @@
         <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
         <PackageReference Include="Unity" Version="5.11.7" />
         <PackageReference Include="System.Text.Json" Version="4.7.2" />
-        <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.7.0.968" />
+        <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.7.0.1080" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Resources\Fonts\FontAwesome5Solid900.otf" />
-      <None Remove="Resources\Fonts\FontAwesomeRegular400.otf" />
-      <None Remove="Resources\Docs\abduction.html" />
-      <None Remove="Resources\Docs\abouthtbox.html" />
-      <None Remove="Resources\Docs\aboutmcm.html" />
-      <None Remove="Resources\Docs\amberalert.html" />
-      <None Remove="Resources\Docs\disasterprep.html" />
-      <None Remove="Resources\Docs\dna.html" />
-      <None Remove="Resources\Docs\international.html" />
-      <None Remove="Resources\Docs\missing.html" />
-      <None Remove="Resources\Docs\runaway.html" />
-      <None Remove="Resources\Docs\safety.html" />
+      <None Remove="Resources\Fonts\*.otf" />
+      <None Remove="Resources\Docs\*.html" />
     </ItemGroup>
     <ItemGroup>
-      <EmbeddedResource Include="Resources\Fonts\FontAwesome5Solid900.otf" />
-      <EmbeddedResource Include="Resources\Fonts\FontAwesome5Regular400.otf" />
-      <EmbeddedResource Include="Resources\Docs\abduction.html" />
-      <EmbeddedResource Include="Resources\Docs\abouthtbox.html" />
-      <EmbeddedResource Include="Resources\Docs\aboutmcm.html" />
-      <EmbeddedResource Include="Resources\Docs\amberalert.html" />
-      <EmbeddedResource Include="Resources\Docs\disasterprep.html" />
-      <EmbeddedResource Include="Resources\Docs\dna.html" />
-      <EmbeddedResource Include="Resources\Docs\international.html" />
-      <EmbeddedResource Include="Resources\Docs\missing.html" />
-      <EmbeddedResource Include="Resources\Docs\runaway.html" />
-      <EmbeddedResource Include="Resources\Docs\safety.html" />
+      <EmbeddedResource Include="Resources\Fonts\*.otf" />
+      <EmbeddedResource Include="Resources\Docs\*.html" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Resources\Fonts\" />
       <Folder Include="Resources\Docs\" />
+      <Folder Include="Services\FamilyRepository\" />
     </ItemGroup>
 </Project>

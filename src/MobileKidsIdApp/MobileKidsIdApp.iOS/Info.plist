@@ -36,8 +36,6 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Picker uses the photo library</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Contact picker picks contacts to display in the app.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>UIUserInterfaceStyle</key>
