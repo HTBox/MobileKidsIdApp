@@ -12,20 +12,25 @@
 
         <StackLayout>
             <Entry
-                Placeholder="Given"
+                AutomationId="GivenNameEntry"
+                Placeholder="Given Name"
                 Text="{Binding Child.GivenName}" />
             <Entry
+                AutomationId="NicknameEntry"
                 Placeholder="Nickname"
                 Text="{Binding Child.NickName}" />
             <Entry
-                Placeholder="Middle"
+                AutomationId="MiddleNameEntry"
+                Placeholder="Middle/Additonal Name"
                 Text="{Binding Child.AdditionalName}" />
             <Entry
-                Placeholder="Family"
+                AutomationId="FamilyNameEntry"
+                Placeholder="Family Name"
                 Text="{Binding Child.FamilyName}" />
 
             <!-- TODO: Take DatePicker fixes from BSCI projcet using material renderers -->
             <DatePicker
+                AutomationId="DateOfBirthDatePicker"
                 Date="{Binding Child.Birthday}"/>
 
         </StackLayout>
