@@ -10,18 +10,22 @@
             <!--
                 See MCM Brand Inspriation Board for usage guidelines on color palette.
                 https://github.com/HTBox/MobileKidsIdApp/blob/master/resources/inspiration-board-square-green.jpg
+
+                Colors generated from Material Color Design Tool
+                https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=245e6b
             -->
             <Color x:Key="MCMDarkTeal">#245e6b</Color>
-            <Color x:Key="MCMDarkTeal04">#04245e6b</Color>
-            <Color x:Key="MCMDarkTeal20">#20245e6b</Color>
+            <Color x:Key="MCMDarkTeal04">#f4f9fb</Color>
+            <Color x:Key="MCMDarkTeal10">#e3f2f5</Color>
+            <Color x:Key="MCMDarkTeal20">#c8e5ec</Color>
 
-            <Color x:Key="MCMDarkTeal4">#437985</Color>
             <Color x:Key="MCMBlack4">#797979</Color>
 
 
             <!-- Unused -->
             <Color x:Key="MCMDarkTeal1">#084150</Color>
             <Color x:Key="MCMDarkTeal3">#437985</Color>
+            <Color x:Key="MCMDarkTeal4">#437985</Color>
 
             <Color x:Key="MCMLightBlue1">#46b6bc</Color>
             <Color x:Key="MCMLightBlue2">#64c4ca</Color>
@@ -52,7 +56,13 @@
                 <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
                 <Setter Property="PlaceholderColor" Value="{StaticResource MCMDarkTeal}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal04}" />
-                <Setter Property="Keyboard" Value="Plain" />
+                <Setter Property="ReturnType" Value="Next" />
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="TitleColor" Value="{StaticResource MCMDarkTeal}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MCMDarkTeal04}" />
             </Style>
 
             <Style TargetType="Button">

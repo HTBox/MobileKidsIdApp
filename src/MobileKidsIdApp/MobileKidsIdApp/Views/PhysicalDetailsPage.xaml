@@ -5,37 +5,116 @@
     x:Class="MobileKidsIdApp.Views.PhysicalDetailsPage"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="Physical details">
+    Title="Physical Details">
 
-  <TableView Intent="Form">
-    <TableView.Root>
-      <TableSection Title="Size">
-        <EntryCell Label="Height" Text="{Binding Child.Height}" />
-        <EntryCell Label="Weight" Text="{Binding Child.Weight}"/>
-      </TableSection>
-      <TableSection Title="Last Measured">
-        <ViewCell>
-          <DatePicker Date="{Binding Child.MeasurementDate}"/>
-        </ViewCell>
-      </TableSection>
-      <TableSection Title="Sex">
-        <EntryCell Label="Gender" />
-        <EntryCell Label="Gender Identity" Text="{Binding Child.GenderIdentity}" />
-      </TableSection>
-      <TableSection Title="Skin">
-          <EntryCell Label="Skin Tone" Text="{Binding Child.SkinTone}" />
-          <EntryCell Label="Racial / Ethnic Identity" Text="{Binding Child.RacialEthnicIdentity}" />
-      </TableSection>
-      <TableSection Title="Hair">
-        <EntryCell Label="Color" Text="{Binding Child.HairColor}"/>
-        <EntryCell Label="Style" Text="{Binding Child.HairStyle}"/>
-      </TableSection>
-      <TableSection Title="Eyes">
-        <EntryCell Label="Color" Text="{Binding Child.EyeColor}" />
-        <SwitchCell Text="Glasses" On="{Binding Child.EyeGlasses}" />
-        <SwitchCell Text="Contacts" On="{Binding Child.EyeContacts}" />
-      </TableSection>
-    </TableView.Root>
-  </TableView>
+    <ScrollView>
+
+        <StackLayout
+            Margin="20,20,20,40"
+            Spacing="20">
+            <!-- TODO: Take DatePicker fixes from other project using material renderers -->
+            <DatePicker
+                AutomationId="LastMeasuredDatePicker"
+                Date="{Binding Child.MeasurementDate}" />
+            <Entry
+                AutomationId="HeightEntry"
+                Placeholder="Height"
+                Text="{Binding Child.Height}"/>
+            <Entry
+                AutomationId="WeightEntry"
+                Placeholder="Weight"
+                Text="{Binding Child.Weight}"/>
+            <!-- TODO: Finish bindings -->
+            <Picker
+                AutomationId="GenderPicker"
+                Title="Gender"
+                ItemsSource="{Binding GenderValues}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedGender}"
+                />
+            <Entry
+                AutomationId="GenderIdentityEntry"
+                Placeholder="Gender Identity"
+                Text="{Binding Child.GenderIdentity}"/>
+            <Entry
+                AutomationId="SkinToneEntry"
+                Placeholder="Skin Tone"
+                Text="{Binding Child.SkinTone}"/>
+            <Entry
+                AutomationId="RacialIdentityEntry"
+                Placeholder="Racial/Ethnic Identity"
+                Text="{Binding Child.RacialEthnicIdentity}"/>
+            <Entry
+                AutomationId="HairColorEntry"
+                Placeholder="Hair Color"
+                Text="{Binding Child.HairColor}"/>
+            <Entry
+                AutomationId="HairStyleEntry"
+                Placeholder="Hair Style"
+                Text="{Binding Child.HairStyle}"/>
+            <Entry
+                AutomationId="EyeColorEntry"
+                Placeholder="Eye Color"
+                Text="{Binding Child.EyeColor}"/>
+            <Grid
+                RowDefinitions="60,1"
+                ColumnDefinitions="4*, *"
+                BackgroundColor="{StaticResource MCMDarkTeal04}">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="15,0,0,0"
+                    TextColor="{StaticResource MCMDarkTeal}"
+                    VerticalTextAlignment="Center"
+                    Text="Wears Eye Glasses" />
+
+                <Switch
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    OnColor="{StaticResource MCMDarkTeal}"
+                    IsToggled="{Binding Child.EyeGlasses}" />
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    Color="{StaticResource MCMDarkTeal}" />
+
+            </Grid>
+            <Grid
+                RowDefinitions="60,1"
+                ColumnDefinitions="4*, *"
+                BackgroundColor="{StaticResource MCMDarkTeal04}">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="15,0,0,0"
+                    TextColor="{StaticResource MCMDarkTeal}"
+                    VerticalTextAlignment="Center"
+                    Text="Wears Eye Contacts" />
+
+                <Switch
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    OnColor="{StaticResource MCMDarkTeal}"
+                    IsToggled="{Binding Child.EyeContacts}" />
+
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="1"
+                    Color="{StaticResource MCMDarkTeal}" />
+
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 
 </app:ContentPageBase>

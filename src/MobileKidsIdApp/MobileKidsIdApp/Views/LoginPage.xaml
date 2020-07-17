@@ -38,6 +38,8 @@
                     Placeholder="Password"
                     HorizontalOptions="Center"
                     WidthRequest="340"
+                    ReturnType="Go"
+                    ReturnCommand="{Binding SignInCommand}"
                     Text="{Binding Password}" />
 
                 <Button

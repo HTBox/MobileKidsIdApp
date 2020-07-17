@@ -5,12 +5,12 @@
     x:Class="MobileKidsIdApp.Views.BasicDetailsPage"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="Basic details">
+    Title="Basic Details">
 
-    <ScrollView
-        Margin="20,20,20,0">
+    <ScrollView>
 
-        <StackLayout>
+        <StackLayout
+            Margin="20,20,20,40">
             <Entry
                 AutomationId="GivenNameEntry"
                 Placeholder="Given Name"
@@ -28,7 +28,7 @@
                 Placeholder="Family Name"
                 Text="{Binding Child.FamilyName}" />
 
-            <!-- TODO: Take DatePicker fixes from BSCI projcet using material renderers -->
+            <!-- TODO: Take DatePicker fixes from other project using material renderers -->
             <DatePicker
                 AutomationId="DateOfBirthDatePicker"
                 Date="{Binding Child.Birthday}"/>
