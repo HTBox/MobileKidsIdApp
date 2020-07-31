@@ -54,7 +54,6 @@ namespace MobileKidsIdApp.Droid
 
         private void PlatformInitializeContainer(UnityContainer container)
         {
-            container.RegisterType<IContactPicker, ContactPicker>();
             container.RegisterType<IPhotoPicker, PhotoPicker>();
         }
     }

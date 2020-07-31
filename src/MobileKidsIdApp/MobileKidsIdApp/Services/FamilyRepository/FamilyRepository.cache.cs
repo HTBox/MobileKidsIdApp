@@ -15,9 +15,6 @@ namespace MobileKidsIdApp.Services
         public void ClearCurrentChild() => CurrentChild = null;
         public bool HasCurrentChild => CurrentChild != null;
 
-        public FamilyRepository()
-            => _childCache = new Lazy<List<Child>>(LoadChildren);
-
         public Child NewChild()
         {
             var child = new Child();

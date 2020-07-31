@@ -1,23 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using MobileKidsIdApp.Models;
-using MobileKidsIdApp.Services;
 using Xamarin.Forms;
 
 namespace MobileKidsIdApp.ViewModels
 {
-    public class ProfessionalCareProvidersViewModel : ViewModelBase
+    public class CareProvidersViewModel : CurrentChildViewModel
     {
-        private readonly FamilyRepository _family;
-
         public ObservableCollection<CareProvider> CareProviders { get; private set; } = new ObservableCollection<CareProvider>();
 
         public Command AddProviderCommand { get; private set; }
 
-        public ProfessionalCareProvidersViewModel(FamilyRepository family)
+        public CareProvidersViewModel()
         {
-            _family = family;
-
-            family.CurrentChild.ProfessionalCareProviders.ForEach(_ => CareProviders.Add(_));
+            CurrentChild.ProfessionalCareProviders.ForEach(_ => CareProviders.Add(_));
 
             AddProviderCommand = new Command(AddProvider);
         }
@@ -25,7 +20,7 @@ namespace MobileKidsIdApp.ViewModels
         private void AddProvider()
         {
             var provider = new CareProvider();
-            _family.CurrentChild.ProfessionalCareProviders.Add(provider);
+            CurrentChild.ProfessionalCareProviders.Add(provider);
             CareProviders.Add(provider);
         }
     }

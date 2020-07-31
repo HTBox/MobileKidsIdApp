@@ -5,84 +5,35 @@
     x:Class="MobileKidsIdApp.Views.BasicDetailsPage"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="Basic details">
-   
-    <TableView Intent="Form">
-        <TableView.Root>
-            <TableSection Title="Name">
+    Title="Basic Details">
 
-                <EntryCell Label="Given" Placeholder="Enter Given/First Name" Text="{Binding Child.GivenName}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
-                
-                <EntryCell Label="Nickname" Placeholder="Enter Nickname" Text="{Binding Child.NickName}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
+    <ScrollView>
 
-                <EntryCell Label="Middle" Placeholder="Enter Middle Name" Text="{Binding Child.AdditionalName}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
-                
-                <EntryCell Label="Family" Placeholder="Enter Family/Last/Sur Name" Text="{Binding Child.FamilyName}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
-                
-            </TableSection>
-            <TableSection Title="Birthday">
-                <ViewCell>
-                    <DatePicker Date="{Binding Child.Birthday}"/>
-                </ViewCell>
-            </TableSection>
-            <TableSection Title="Contact">
-                <EntryCell Label="Contact Name (Manual)" Placeholder="Enter Contact Name" Text="{Binding Child.ContactNameManual}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
-                <EntryCell Label="Contact Phone (Manual)" Placeholder="Enter Contact Phone" Text="{Binding Child.ContactPhoneManual}">
-                    <EntryCell.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>None</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </EntryCell.Keyboard>
-                </EntryCell>
-                <ViewCell>
-                    <StackLayout Orientation="Vertical">
-                      <Button Text="Add/Change Contact from Contacts" Command="{Binding ChangeContactCommand}" />
-                      <app:PhoneContactView BindingContext="{Binding Contact}" Margin="3" />
-                    </StackLayout>
-                  </ViewCell>
-            </TableSection>
-        </TableView.Root>
-    </TableView>
+        <StackLayout
+            Margin="20,20,20,40">
+            <Entry
+                AutomationId="GivenNameEntry"
+                Placeholder="Given Name"
+                Text="{Binding Child.GivenName}" />
+            <Entry
+                AutomationId="NicknameEntry"
+                Placeholder="Nickname"
+                Text="{Binding Child.NickName}" />
+            <Entry
+                AutomationId="MiddleNameEntry"
+                Placeholder="Middle/Additonal Name"
+                Text="{Binding Child.AdditionalName}" />
+            <Entry
+                AutomationId="FamilyNameEntry"
+                Placeholder="Family Name"
+                Text="{Binding Child.FamilyName}" />
+
+            <!-- TODO: Take DatePicker fixes from other project using material renderers -->
+            <DatePicker
+                AutomationId="DateOfBirthDatePicker"
+                Date="{Binding Child.Birthday}"/>
+
+        </StackLayout>
+    </ScrollView>
+
 </app:ContentPageBase>

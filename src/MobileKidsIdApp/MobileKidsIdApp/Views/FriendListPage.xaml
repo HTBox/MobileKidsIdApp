@@ -8,7 +8,7 @@
     Title="Friends">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem>
+        <ToolbarItem Command="{Binding NewFriendCommand}">
           <ToolbarItem.IconImageSource>
               <FontImageSource
                   FontFamily="FASolid"
@@ -18,17 +18,20 @@
       </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ListView ItemsSource="{Binding Friends}" SelectedItem="{Binding CurrentItem}">
-        <ListView.ItemTemplate>
+    <CollectionView
+        ItemsSource="{Binding Friends}">
+        <CollectionView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Display}"/>
-                        <Button Text="Change" Command="{Binding ChangeContactCommand}" CommandParameter="{Binding .}" />
-                        <Button Text="Remove" Command="{Binding DeleteContactCommand}" CommandParameter="{Binding .}" />
-                    </StackLayout>
-                </ViewCell>
+                <StackLayout>
+                    <Label Text="FamilyName"/>
+                    <Entry Text="{Binding FamilyName}"/>
+                    <Label Text="GivenName"/>
+                    <Entry Text="{Binding GivenName}"/>
+                    <Label Text="AdditionalName"/>
+                    <Entry Text="{Binding AdditionalName}"/>
+                </StackLayout>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
 </app:ContentPageBase>

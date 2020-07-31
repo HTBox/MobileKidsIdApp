@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="MobileKidsIdApp.Views.DistinguishingFeaturesPage"
 
-    xmlns:models="clr-namespace:MobileKidsIdApp.Models"
     xmlns:app="clr-namespace:MobileKidsIdApp"
     Title="Features">
 
@@ -20,31 +19,20 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
-        <app:RepeaterView
-            x:TypeArguments="models:DistinguishingFeature"
-            Spacing="10"
-            Orientation="Vertical"
-            ItemsSource="{Binding Features}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand">
-            <app:RepeaterView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="Description"/>
-                            <Entry Text="{Binding Description}"/>
-                            <Label Text="Photo"/>
-                            <Image Source="{Binding PhotoReference}" />
-                            <Button
-                                Text="Select photo"
-                                Command="{Binding NewItemCommand}"
-                                CommandParameter="{Binding Id}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </app:RepeaterView.ItemTemplate>
-        </app:RepeaterView>
-    </ScrollView>
+    <CollectionView
+        ItemsSource="{Binding Features}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Label Text="Description"/>
+                    <Entry Text="{Binding Description}"/>
+                    <Label Text="Photo (NYI)"/>
+                    <Image Source="{Binding PhotoReference}" />
+                    <Button
+                        Text="Select photo"/>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 
 </app:ContentPageBase>

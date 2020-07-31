@@ -2,14 +2,14 @@
 <app:ContentPageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="MobileKidsIdApp.Views.FamilyMemberListPage"
+    x:Class="MobileKidsIdApp.Views.CareProvidersPage"
 
     xmlns:app="clr-namespace:MobileKidsIdApp"
-    Title="Family">
+    Title="Care providers">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{Binding NewFamilyMemberCommand}">
+            Command="{Binding AddProviderCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"
@@ -20,18 +20,20 @@
     </ContentPage.ToolbarItems>
 
     <CollectionView
-        ItemsSource="{Binding FamilyMembers}">
+        ItemsSource="{Binding CareProviders}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
-                    <Label Text="FamilyName"/>
-                    <Entry Text="{Binding FamilyName}"/>
-                    <Label Text="GivenName"/>
-                    <Entry Text="{Binding GivenName}"/>
-                    <Label Text="AdditionalName"/>
-                    <Entry Text="{Binding AdditionalName}"/>
-                    <Label Text="Relation"/>
-                    <Entry Text="{Binding Relation}"/>
+                    <Label Text="Provider name"/>
+                    <Entry Text="{Binding ProviderName}" Placeholder="example: Dr. Julia Khan"/>
+                    <Label Text="Role"/>
+                    <Entry Text="{Binding CareRoleDescription}" Placeholder="example: doctor, therapist, ..."/>
+                    <Label Text="Clinic name"/>
+                    <Entry Text="{Binding ClinicName}" Placeholder="example: Southside Clinic"/>
+                    <Label Text="Address"/>
+                    <Entry Text="{Binding Address}"/>
+                    <Label Text="Phone"/>
+                    <Entry Text="{Binding Phone}"/>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
