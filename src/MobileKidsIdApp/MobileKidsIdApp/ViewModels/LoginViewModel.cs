@@ -33,7 +33,8 @@ namespace MobileKidsIdApp.ViewModels
 
         private async Task SignIn()
         {
-            if (await _auth.VerifyAppPassword(Password))
+            // Password is null if password field is blank
+            if (Password != null && await _auth.VerifyAppPassword(Password))
             {
                 CurrentApplication.MainPage = new MainPage();
             }
