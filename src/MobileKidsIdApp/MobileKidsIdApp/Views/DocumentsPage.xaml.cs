@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.IO;
+using Xamarin.Forms;
 
 namespace MobileKidsIdApp.Views
 {
@@ -11,27 +12,9 @@ namespace MobileKidsIdApp.Views
             InitializeComponent();
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), $"{Guid.NewGuid():N}.pdf");
             GenerateDocument(path);
-            webView.Source = path;
+            customWebView.Uri = path;  
         }
-        async void OnBackButtonClicked(object sender, EventArgs e)
-        {
-            if (webView.CanGoBack)
-            {
-                webView.GoBack();
-            }
-            else
-            {
-                await Navigation.PopAsync();
-            }
-        }
-
-        void OnForwardButtonClicked(object sender, EventArgs e)
-        {
-            if (webView.CanGoForward)
-            {
-                webView.GoForward();
-            }
-        }
+     
 
         private void GenerateDocument(string path)
         {

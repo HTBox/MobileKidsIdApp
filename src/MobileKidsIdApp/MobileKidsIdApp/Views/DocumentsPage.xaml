@@ -2,16 +2,11 @@
 <app:ContentPageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:app="clr-namespace:MobileKidsIdApp"
+    xmlns:app="clr-namespace:MobileKidsIdApp" xmlns:views="clr-namespace:MobileKidsIdApp.Views"
     x:Class="MobileKidsIdApp.Views.DocumentsPage">
 
-        <StackLayout Margin="20">
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Back" HorizontalOptions="StartAndExpand" Clicked="OnBackButtonClicked" />
-                <Button Text="Forward" HorizontalOptions="EndAndExpand" Clicked="OnForwardButtonClicked" />
-            </StackLayout>
-            <!-- WebView needs to be given height and width request within layouts to render. -->
-            <WebView x:Name="webView" WidthRequest="1000" HeightRequest="1000" />
-        </StackLayout>
+     <StackLayout Margin="20">
+        <views:CustomWebView x:Name="customWebView" Uri="BookPreview2-Ch18-Rel0417.pdf" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />   
+    </StackLayout>
  
 </app:ContentPageBase>
