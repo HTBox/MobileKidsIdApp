@@ -1,9 +1,16 @@
+Kids ID Kit App
+===============
+**NOTE** The official working repository for this project has moved!
+
+You can find current working activity at https://github.com/missingchildrenmn/KidsIdKit
+
+---
+
 <img src="https://raw.githubusercontent.com/teneresa/MobileKidsIdApp/master/resources/KidsID_icon/Android/Google_Play_store.png" width="150"/>
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0y0b8ctdaesjbomq/branch/master?svg=true)](https://ci.appveyor.com/project/HTBox/mobilekidsidapp-i1cep)
 
-Kids ID Kit App
-===============
+
 The intent of the app is to help parents keep up to date information on their kids, and to provide parents with relevant information to keep their kids safe and what to do if they can’t find their child.
 
 This app is created in collaboration with [Missing Children Minnesota](http://missingchildrenmn.com/).
